@@ -48,6 +48,7 @@ using ML10N::MLocale;
 
 Q_DECLARE_METATYPE(MLocale);
 Q_DECLARE_METATYPE(MLocale::CalendarType);
+Q_DECLARE_METATYPE(QList<MLocale::Comparison>);
 
 class Ft_Locales : public QObject
 {
@@ -104,6 +105,9 @@ private slots:
 
     void testMLocaleIndexBucket_data();
     void testMLocaleIndexBucket();
+
+    void testDifferentStrengthComparison_data();
+    void testDifferentStrengthComparison();
 
     void checkAvailableLocales();
 };
