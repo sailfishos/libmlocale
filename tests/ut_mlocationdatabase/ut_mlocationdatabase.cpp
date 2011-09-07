@@ -28,6 +28,10 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MLocationDatabase;
+using ML10N::MCity;
+using ML10N::MCountry;
+
 class TestLocationDatabase : public MLocationDatabase
 {
 };
@@ -44,7 +48,7 @@ void Ut_MLocationDatabase::initTestCase()
 {
     static int dummyArgc = 1;
     static char *dummyArgv[1] = { (char *) "ut_mlocationdatabase" };
-    qap = new MApplication(dummyArgc, dummyArgv, "test");
+    qap = new QApplication(dummyArgc, dummyArgv, "test");
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 }
 

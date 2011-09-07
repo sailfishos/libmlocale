@@ -26,6 +26,9 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MLocale;
+using ML10N::MCollator;
+
 class TestCollator : public MCollator
 {
 public:

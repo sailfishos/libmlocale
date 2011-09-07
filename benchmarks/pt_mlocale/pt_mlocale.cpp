@@ -21,6 +21,9 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MLocale;
+using ML10N::MCollator;
+
 void Pt_MLocale::initTestCase()
 {
     static int argc = 0;

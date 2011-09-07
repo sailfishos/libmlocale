@@ -19,6 +19,9 @@
 
 #include "pt_mcharsetdetector.h"
 
+using ML10N::MCharsetDetector;
+using ML10N::MCharsetMatch;
+
 void Pt_MCharsetDetector::initTestCase()
 {
     static int argc = 0;

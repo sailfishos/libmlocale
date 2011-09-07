@@ -24,6 +24,8 @@
 #include <QObject>
 #include <MLocale>
 
+using ML10N::MLocale;
+
 Q_DECLARE_METATYPE(MLocale::CalendarType);
 Q_DECLARE_METATYPE(MLocale);
 

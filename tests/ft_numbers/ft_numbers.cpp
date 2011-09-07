@@ -21,6 +21,8 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MLocale;
+
 void Ft_Numbers::initTestCase()
 {
     static int argc = 0;

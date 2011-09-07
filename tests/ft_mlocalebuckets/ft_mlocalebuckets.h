@@ -22,7 +22,11 @@
 
 #include <QObject>
 
-class MLocaleBuckets;
+namespace ML10N {
+    class MLocaleBuckets;
+}
+
+using ML10N::MLocaleBuckets;
 
 class Ft_MLocaleBuckets: public QObject
 {

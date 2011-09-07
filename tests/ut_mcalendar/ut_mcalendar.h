@@ -40,6 +40,8 @@
 #include <unicode/putil.h> // u_setDataDirectory
 #endif
 
+using ML10N::MLocale;
+
 Q_DECLARE_METATYPE(MLocale::TimeFormat24h);
 Q_DECLARE_METATYPE(MLocale::CalendarType);
 Q_DECLARE_METATYPE(MLocale);

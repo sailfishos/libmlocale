@@ -27,6 +27,9 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MLocale;
+using ML10N::MCalendar;
+
 void Ut_MCalendar::initTestCase()
 {
     static int argc = 0;
@@ -43,7 +46,7 @@ void Ut_MCalendar::initTestCase()
     icuPackageVersion.replace("\n", "");
     qDebug() << "libicu44 package version is:" << icuPackageVersion;
 
-    QString fiResourceName = QString(M_ICUEXTRADATA_DIR) + QDir::separator() +  QString(ICUUSRDATA) + QDir::separator() +  QString("fi.res");
+    QString fiResourceName = QString(ML_ICUEXTRADATA_DIR) + QDir::separator() +  QString(ICUUSRDATA) + QDir::separator() +  QString("fi.res");
     qDebug() << "Finnish resource file:" << fiResourceName; //"/usr/share/meegotouch/icu/usrdt44l/fi.res"
 
     QFile fiResource(fiResourceName);
@@ -67,7 +70,8 @@ void Ut_MCalendar::cleanup()
 
 void Ut_MCalendar::testDataPaths()
 {
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/meegotouch/icu"));
+    MLocale locale;
+    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
 }
 
 void Ut_MCalendar::testTimeZones()

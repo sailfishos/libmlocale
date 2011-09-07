@@ -21,6 +21,9 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MLocale;
+using ML10N::MCalendar;
+
 class TestLocale : public MLocale
 {
 };
@@ -29,7 +32,7 @@ void Ft_Locales::initTestCase()
 {
     static int dummyArgc = 1;
     static char *dummyArgv[1] = { (char *) "ft_locales" };
-    qap = new MApplication(dummyArgc, dummyArgv, "test");
+    qap = new QApplication(dummyArgc, dummyArgv, "test");
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
     QProcess process;
     process.start("sh -c \"dpkg -s libqtcore4 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
@@ -257,271 +260,6 @@ void Ft_Locales::testLocaleNameParsingFunctions()
     QCOMPARE(locale.categoryScript(category), localeScript);
     QCOMPARE(locale.categoryCountry(category), localeCountry);
     QCOMPARE(locale.categoryVariant(category), localeVariant);
-}
-
-void Ft_Locales::testCreateSystemLocale_data()
-{
-    QTest::addColumn<QString>("conf");
-    QTest::addColumn<QString>("env");
-    QTest::addColumn<QString>("locale");
-
-    // Test the ultimate fallback to POSIX
-    QTest::newRow("posix") << QString("") << QString("") << QString("en_US_POSIX");
-    // Test the fallback to the LANG environment variable. If the string
-    // found via gconf is empty, the value of LANG is used as a fallback
-    QTest::newRow("fi") << QString("") << QString("fi") << QString("fi");
-    QTest::newRow("fi") << QString("") << QString("fi.UTF-8") << QString("fi");
-    QTest::newRow("fi") << QString("") << QString("fi_FI") << QString("fi_FI");
-    QTest::newRow("fi") << QString("") << QString("fi_FI.UTF-8") << QString("fi_FI");
-    QTest::newRow("snd") << QString("") << QString("snd@Arab") << QString("snd_Arab");
-    QTest::newRow("snd") << QString("") << QString("snd_AF@Arab") << QString("snd_Arab_AF");
-    QTest::newRow("snd") << QString("") << QString("snd_AF.UTF-8@Arab") << QString("snd_Arab_AF");
-    // with bad data
-    QTest::newRow("snd") << QString("") << QString("+2eio") << QString("en_US_POSIX");
-    // Test values found via gconf and check that LANG is ignored:
-    QTest::newRow("ar")
-        << QString("ar")
-        << QString("en")
-        << QString("ar_EG");
-    QTest::newRow("cs")
-        << QString("cs")
-        << QString("en")
-        << QString("cs_CZ");
-    QTest::newRow("da")
-        << QString("da")
-        << QString("en")
-        << QString("da_DK");
-    QTest::newRow("de")
-        << QString("de")
-        << QString("en")
-        << QString("de_DE");
-    QTest::newRow("de_CH")
-        << QString("de_CH")
-        << QString("en")
-        << QString("de_CH");
-    QTest::newRow("en")
-        << QString("en")
-        << QString("ar")
-        << QString("en_GB");
-    QTest::newRow("en_US")
-        << QString("en_US")
-        << QString("ar")
-        << QString("en_US");
-    QTest::newRow("es")
-        << QString("es")
-        << QString("ar")
-        << QString("es_ES");
-    QTest::newRow("es_419")
-        << QString("es_419")
-        << QString("ar")
-        << QString("es_419"); // important to find the translations!
-    QTest::newRow("es_AR")
-        << QString("es_AR")
-        << QString("ar")
-        << QString("es_AR");
-    QTest::newRow("fi")
-        << QString("fi")
-        << QString("en")
-        << QString("fi_FI");
-    QTest::newRow("fr")
-        << QString("fr")
-        << QString("en")
-        << QString("fr_FR");
-    QTest::newRow("fr_CA")
-        << QString("fr_CA")
-        << QString("en")
-        << QString("fr_CA");
-    QTest::newRow("hu")
-        << QString("hu")
-        << QString("en")
-        << QString("hu_HU");
-    QTest::newRow("id")
-        << QString("id")
-        << QString("en")
-        << QString("id_ID");
-    QTest::newRow("it")
-        << QString("it")
-        << QString("en")
-        << QString("it_IT");
-    QTest::newRow("ms")
-        << QString("ms")
-        << QString("en")
-        << QString("ms_MY");
-    QTest::newRow("nl")
-        << QString("nl")
-        << QString("en")
-        << QString("nl_NL");
-    QTest::newRow("no")
-        << QString("no")
-        << QString("en")
-        << QString("no_NO");
-    QTest::newRow("pl")
-        << QString("pl")
-        << QString("en")
-        << QString("pl_PL");
-    QTest::newRow("pt")
-        << QString("pt")
-        << QString("en")
-        << QString("pt_PT");
-    QTest::newRow("pt_BR")
-        << QString("pt_BR")
-        << QString("en")
-        << QString("pt_BR");
-    QTest::newRow("ro")
-        << QString("ro")
-        << QString("en")
-        << QString("ro_RO");
-    QTest::newRow("ru")
-        << QString("ru")
-        << QString("en")
-        << QString("ru_RU");
-    QTest::newRow("sk")
-        << QString("sk")
-        << QString("en")
-        << QString("sk_SK");
-    QTest::newRow("sv")
-        << QString("sv")
-        << QString("en")
-        << QString("sv_SE");
-    QTest::newRow("th")
-        << QString("th")
-        << QString("en")
-        << QString("th_TH");
-    QTest::newRow("tr")
-        << QString("tr")
-        << QString("en")
-        << QString("tr_TR");
-    QTest::newRow("uk")
-        << QString("uk")
-        << QString("en")
-        << QString("uk_UA");
-    QTest::newRow("zh")
-        << QString("zh")
-        << QString("en")
-        << QString("zh_CN");
-    QTest::newRow("zh_HK")
-        << QString("zh_HK")
-        << QString("en")
-        << QString("zh_HK");
-    QTest::newRow("zh_TW")
-        << QString("zh_TW")
-        << QString("en")
-        << QString("zh_TW");
-}
-
-bool confIsDown()
-{
-    MGConfItem languageItem("/meegotouch/i18n/language");
-    QString originalValue = languageItem.value().toString();
-    int skipConf = 0;
-
-    if (originalValue.isEmpty()) {
-        languageItem.set("xx");
-        //GConf is not running here, so skip it
-        if (languageItem.value().toString() != "xx") {
-            skipConf = 1;
-        } else {
-            languageItem.set(originalValue);
-        }
-    }
-
-    return skipConf == 1;
-}
-
-void Ft_Locales::testSettingsChanged()
-{
-    if (confIsDown()) {
-        QSKIP("SettingsChanged is skipped", SkipSingle);
-        return;
-    }
-    MGConfItem languageItem("/meegotouch/i18n/language");
-    QString originalValue = languageItem.value().toString();
-
-    // Test within MLocale
-    MLocale z;
-    QSignalSpy spy(&z, SIGNAL(settingsChanged()));
-    QCOMPARE(spy.count(), 0);
-
-    // Changes in languageItem should not trigger the signal
-    // settingsChanged() as long as the locale settings are
-    // disconnected:
-    languageItem.set(originalValue + "something");
-    QTest::qWait(100);
-    QCOMPARE(spy.count(), 0);
-
-    // After connecting, changes in languageItem should trigger the
-    // signal settingsChanged()
-    z.connectSettings();
-    languageItem.set("fr");
-    for (int i = 0; i < 100; ++i) {
-        QTest::qWait(50);
-        if (spy.count() != 0)
-            break;
-    }
-    QCOMPARE(spy.count(), 1);
-
-    languageItem.set("fi");
-    for (int i = 0; i < 100; ++i) {
-        QTest::qWait(50);
-        if (spy.count() != 1)
-            break;
-    }
-    QCOMPARE(spy.count(), 2);
-
-    // After disconnecting, the signal should not be triggered anymore:
-    z.disconnectSettings();
-    languageItem.set("en");
-    QTest::qWait(100);
-    QCOMPARE(spy.count(), 2);
-
-    // Test the signal localeSettingsChanged in MApplication
-    QSignalSpy spyapp(qap, SIGNAL(localeSettingsChanged()));
-    QCOMPARE(spyapp.count(), 0);
-
-    languageItem.set(originalValue + "something else");
-    for (int i = 0; i < 100; ++i) {
-        QTest::qWait(50);
-        if (spyapp.count() != 0)
-            break;
-    }
-    QCOMPARE(spyapp.count(), 1);
-
-    languageItem.set("fi");
-    for (int i = 0; i < 100; ++i) {
-        QTest::qWait(50);
-        if (spyapp.count() != 1)
-            break;
-    }
-    QCOMPARE(spyapp.count(), 2);
-
-    languageItem.set(originalValue);
-}
-
-void Ft_Locales::testCreateSystemLocale()
-{
-    MGConfItem languageItem("/meegotouch/i18n/language");
-    QString originalValue = languageItem.value().toString();
-
-    QFETCH(QString, conf);
-    QFETCH(QString, env);
-    QFETCH(QString, locale);
-
-    setenv("LANG", env.toAscii().data(), 1);
-
-    languageItem.set(conf);
-    MLocale *z = MLocale::createSystemMLocale();
-
-    if (!originalValue.isEmpty()) {
-        languageItem.set(originalValue);
-    }
-
-    if (confIsDown() && ! conf.isEmpty()) {
-        QSKIP("CreateSystemLocale is skipped", SkipSingle);
-    } else {
-        QCOMPARE(z->name(), locale);
-    }
-
-    delete z;
 }
 
 void Ft_Locales::testMLocaleLanguage_data()
@@ -4058,8 +3796,11 @@ void Ft_Locales::testMLocaleIndexBucket()
     QFETCH(QStringList, stringsSorted);
     QFETCH(QStringList, expectedBuckets);
 
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/meegotouch/icu"));
+    // we need to instantiate a MLocale before dataPaths returns
+    // a valid result.
     MLocale locale(localeName);
+    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
+
     MLocale localeEn("en_US");
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     QStringList stringsSortedCopy = stringsSorted;
@@ -4437,7 +4178,7 @@ void Ft_Locales::checkAvailableLocales()
     QString ft_localesTestOutput = "";
     foreach(QString supportedLocaleName, supportedLocaleNames) {
         MLocale locale(supportedLocaleName);
-        QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/meegotouch/icu"));
+        QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
         QCOMPARE(locale.timeFormat24h(), MLocale::LocaleDefaultTimeFormat24h);
         qSort(sortingTestList.begin(), sortingTestList.end(), locale.collator());
@@ -4783,4 +4524,3 @@ void Ft_Locales::checkAvailableLocales()
 }
 
 QTEST_APPLESS_MAIN(Ft_Locales);
-

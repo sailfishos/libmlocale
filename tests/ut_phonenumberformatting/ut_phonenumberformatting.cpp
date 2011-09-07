@@ -19,7 +19,8 @@
 #include "ut_phonenumberformatting.h"
 
 #include "mlocale.h"
-#include "mgconfitem.h"
+
+using ML10N::MLocale;
 
 void Ut_PhoneNumberFormatting::initTestCase()
 {
@@ -352,28 +353,7 @@ void Ut_PhoneNumberFormatting::testDefaultFormatting()
     // formatted phone numbers for different phone
     // locales.
 
-    MGConfItem lcPhoneItem( "/meegotouch/i18n/lc_telephone" );
-
-    lcPhoneItem.set( phoneLocale );
-
-    // wait until the change to the gconf item
-    // is propagated to the locale:MLocale::MLcTelephone
-    for (int i = 0; i < 100; ++i) {
-        QTest::qWait(50);
-        if (m_pLocale->categoryName(MLocale::MLcTelephone)
-            == phoneLocale
-            || (phoneLocale == ""
-                && m_pLocale->categoryName(MLocale::MLcTelephone)
-                == m_pLocale->name()))
-            break;
-    }
-    // Check if the change was really propagated or the timeout
-    // of the loop was reached:
-    if (phoneLocale == "")
-        QCOMPARE(m_pLocale->categoryName(MLocale::MLcTelephone),
-                 m_pLocale->name());
-    else
-        QCOMPARE(m_pLocale->categoryName(MLocale::MLcTelephone), phoneLocale);
+    m_pLocale->setCategoryLocale( MLocale::MLcTelephone, phoneLocale );
 
     QString myGroupedPhoneNumber = m_pLocale->formatPhoneNumber(
         rawPhoneNumber, MLocale::DefaultPhoneNumberGrouping );

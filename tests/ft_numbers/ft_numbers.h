@@ -30,6 +30,8 @@
 #include <unicode/numfmt.h>
 #endif
 
+using ML10N::MLocale;
+
 Q_DECLARE_METATYPE(MLocale);
 Q_DECLARE_METATYPE(qlonglong);
 

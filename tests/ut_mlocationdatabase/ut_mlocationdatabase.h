@@ -25,7 +25,7 @@
 #if QT_VERSION >= 0x040700
 #include <QElapsedTimer>
 #endif
-#include <MApplication>
+#include <QApplication>
 #include <MLocale>
 
 class Ut_MLocationDatabase : public QObject
@@ -33,7 +33,7 @@ class Ut_MLocationDatabase : public QObject
     Q_OBJECT
 
 private:
-    MApplication *qap;
+    QApplication *qap;
 
 private slots:
     void initTestCase();

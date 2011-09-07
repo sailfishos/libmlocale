@@ -23,7 +23,11 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
-class MLocale;
+namespace ML10N {
+    class MLocale;
+}
+
+using ML10N::MLocale;
 
 class Ut_PhoneNumberFormatting : public QObject
 {

@@ -23,6 +23,9 @@
 #include "mcity.h"
 #include "mcountry.h"
 
+using ML10N::MCity;
+using ML10N::MLocationDatabase;
+
 void Pt_MLocationDatabase::initTestCase()
 {
     static int argc = 0;

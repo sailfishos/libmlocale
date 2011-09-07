@@ -25,7 +25,8 @@
 #include <QDebug>
 #include <iostream>
 
-#include "mapplication.h"
+#include <QApplication>
+
 #include "mlocale.h"
 #include "mlocalebuckets.h"
 
@@ -34,7 +35,10 @@ using std::endl;
 
 #define VERBOSE 1
 
-MApplication *app = 0;
+using ML10N::MLocale;
+using ML10N::MLocaleBuckets;
+
+QApplication *app = 0;
 QStringList inputItems;
 
 
@@ -42,7 +46,7 @@ void Ft_MLocaleBuckets::initTestCase()
 {
     static char *argv[] = { (char *) "./ft_mlocalebuckets" };
     static int argc = 1;
-    app = new MApplication(argc, argv);
+    app = new QApplication(argc, argv);
 
     // This is important for string constants with non-ASCII characters:
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));

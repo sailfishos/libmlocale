@@ -27,6 +27,8 @@
 #include <MLocale>
 #undef private
 
+using ML10N::MLocale;
+
 Q_DECLARE_METATYPE(MLocale::Category);
 Q_DECLARE_METATYPE(MLocale);
 
@@ -58,8 +60,6 @@ private slots:
     void testQtTrIdMultipleVariable();
     void testQtTrIdMultipleVariableWithPlural_data();
     void testQtTrIdMultipleVariableWithPlural();
-    void testGettingTheDefaultLocaleFromTheEnvironment_data();
-    void testGettingTheDefaultLocaleFromTheEnvironment();
     void testCreatingAndDestroyingLocales();
     void testInstallTrCatalogMultipleTimes();
     void benchmarkMLocaleConstructorAndDelete();
@@ -75,6 +75,5 @@ private slots:
     void benchmarkQLocaleCopyConstructorAndDelete();
     void benchmarkQLocaleCopyConstructorAndDeleteStack();
 };
-
 
 #endif

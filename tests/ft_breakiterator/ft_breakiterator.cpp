@@ -25,6 +25,9 @@
 
 #include "ft_breakiterator.h"
 
+using ML10N::MLocale;
+using ML10N::MBreakIterator;
+
 class TestBreakIterator : public MBreakIterator
 {
 public:

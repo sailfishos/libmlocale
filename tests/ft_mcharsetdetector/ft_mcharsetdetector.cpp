@@ -21,11 +21,14 @@
 
 #define VERBOSE_OUTPUT
 
+using ML10N::MCharsetMatch;
+using ML10N::MCharsetDetector;
+
 void Ft_MCharsetDetector::initTestCase()
 {
     static int dummyArgc = 1;
     static char *dummyArgv[1] = { (char *) "ft_mcharsetdetector" };
-    qap = new MApplication(dummyArgc, dummyArgv, "test");
+    qap = new QApplication(dummyArgc, dummyArgv, "test");
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 }
 
@@ -1931,4 +1934,3 @@ void Ft_MCharsetDetector::testDetection()
 }
 
 QTEST_APPLESS_MAIN(Ft_MCharsetDetector);
-

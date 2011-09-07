@@ -18,33 +18,16 @@
 ****************************************************************************/
 
 #include "ut_translations.h"
-#include <MGConfItem>
-#include <MApplication>
 
-bool confIsDown()
-{
-    MGConfItem languageItem("/meegotouch/i18n/language");
-    QString originalValue = languageItem.value().toString();
-    int skipConf = 0;
+#include <QApplication>
 
-    if (originalValue.isEmpty()) {
-        languageItem.set("xx");
-        //GConf is not running here, so skip it
-        if (languageItem.value().toString() != "xx") {
-            skipConf = 1;
-        } else {
-            languageItem.set(originalValue);
-        }
-    }
-
-    return skipConf == 1;
-}
+using ML10N::MLocale;
 
 void Ut_Translations::initTestCase()
 {
     static int argc = 0;
     static char *argv[1] = { (char *) "ut_translations" };
-    qap = new MApplication(argc, argv, "test");
+    qap = new QApplication(argc, argv, "test");
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 }
 
@@ -766,50 +749,6 @@ void Ut_Translations::testQtTrIdMultipleVariableWithPlural()
              messageIdNumberReplaced.arg(variable));
 }
 
-void Ut_Translations::testGettingTheDefaultLocaleFromTheEnvironment_data()
-{
-    QTest::addColumn<QString>("localeName");
-
-    QTest::newRow("en_GB") << "en_GB";
-    QTest::newRow("fi_FI") << "fi_FI";
-    QTest::newRow("ru_RU") << "ru_RU";
-}
-
-void Ut_Translations::testGettingTheDefaultLocaleFromTheEnvironment()
-{
-    QFETCH(QString, localeName);
-
-    MLocale::s_systemDefault = NULL;
-    qputenv("LANG", qPrintable(localeName));
-    QCOMPARE(QString(qgetenv("LANG")), QString(localeName));
-
-    QString languageItemOriginalValue("");
-    MLocale *locale;
-    if (confIsDown()) {
-        // gconf is not available. Therefore,
-        // MLocale::createSystemMLocale() will get the language
-        // from the LANG variable.
-        locale = new MLocale();
-    } else {
-        // gconf is available. Therefore,
-        // MLocale::createSystemMLocale() would get the language
-        // from gconf. But if the language string it gets from gconf
-        // is empty, it falls back to getting the language from the
-        // LANG variable, as in the case when gconf is not available
-        // at all. Therefore, we set the language in gconf to the
-        // empty string temporarily to test whether getting the locale
-        // from the LANG variable works:
-        MGConfItem languageItem("/meegotouch/i18n/language");
-        QString languageItemOriginalValue = languageItem.value().toString();
-        languageItem.set("");
-        QCOMPARE(languageItem.value().toString(), QString(""));
-        locale = new MLocale();
-        languageItem.set(languageItemOriginalValue);
-    }
-
-    QCOMPARE(locale->name(), localeName);
-}
-
 void Ut_Translations::testCreatingAndDestroyingLocales()
 {
     MLocale locale1;
@@ -968,4 +907,3 @@ void Ut_Translations::benchmarkQLocaleCopyConstructorAndDeleteStack()
 }
 
 QTEST_APPLESS_MAIN(Ut_Translations);
-

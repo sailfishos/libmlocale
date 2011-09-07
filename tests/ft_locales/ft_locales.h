@@ -27,8 +27,8 @@
 #include <MLocale>
 #include <MCollator>
 #include <MCalendar>
-#include <MApplication>
-#include <MGConfItem>
+
+#include <QApplication>
 
 #ifdef HAVE_ICU
 #include <unicode/unistr.h>
@@ -44,6 +44,8 @@
 #include <unicode/putil.h> // u_setDataDirectory
 #endif
 
+using ML10N::MLocale;
+
 Q_DECLARE_METATYPE(MLocale);
 Q_DECLARE_METATYPE(MLocale::CalendarType);
 
@@ -52,7 +54,7 @@ class Ft_Locales : public QObject
     Q_OBJECT
 
 private:
-    MApplication *qap;
+    QApplication *qap;
     QString libqtcore4PackageVersion;
 
 private slots:
@@ -63,7 +65,6 @@ private slots:
 
     void testBug210881();
     void testBug169305();
-    void testSettingsChanged();
     void testMLocaleConstructor();
     void testCreateCLocale();
 
@@ -76,8 +77,6 @@ private slots:
     void testMLocaleConstructorAndCategoryWithParams_data();
     void testMLocaleConstructorAndCategoryWithParams();
 
-    void testCreateSystemLocale_data();
-    void testCreateSystemLocale();
     void testMLocaleLanguage_data();
     void testMLocaleLanguage();
     void testMLocaleCountry_data();

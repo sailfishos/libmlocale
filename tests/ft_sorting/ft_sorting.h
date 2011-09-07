@@ -26,6 +26,8 @@
 #include <QCoreApplication>
 #include <MLocale>
 
+using ML10N::MLocale;
+
 Q_DECLARE_METATYPE(MLocale);
 Q_DECLARE_METATYPE(MLocale::Collation);
 Q_DECLARE_METATYPE(MLocale::Comparison);

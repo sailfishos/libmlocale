@@ -24,6 +24,9 @@
 
 #include "pt_mcalendar.h"
 
+using ML10N::MLocale;
+using ML10N::MCalendar;
+
 void Pt_MCalendar::initTestCase()
 {
     static int argc = 0;

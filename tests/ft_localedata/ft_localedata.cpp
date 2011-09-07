@@ -19,6 +19,8 @@
 
 #include "ft_localedata.h"
 
+using ML10N::MLocale;
+
 void Ft_LocaleData::initTestCase()
 {
     static int argc = 0;
