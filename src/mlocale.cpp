@@ -958,27 +958,15 @@ MLocalePrivate::MLocalePrivate()
 #endif
       q_ptr(0)
 {
-    if ( ! g_pConfigItemFactory )
-    {
-	MLocaleNullConfigItemFactory factory;
-	pCurrentLanguage        = factory.createConfigItem( SettingsLanguage );
-	pCurrentLcTime          = factory.createConfigItem( SettingsLcTime );
-	pCurrentLcTimeFormat24h = factory.createConfigItem( SettingsLcTimeFormat24h );
-	pCurrentLcCollate       = factory.createConfigItem( SettingsLcCollate );
-	pCurrentLcNumeric       = factory.createConfigItem( SettingsLcNumeric );
-	pCurrentLcMonetary      = factory.createConfigItem( SettingsLcMonetary );
-	pCurrentLcTelephone     = factory.createConfigItem( SettingsLcTelephone );
-    }
-    else
-    {
-	pCurrentLanguage = g_pConfigItemFactory->createConfigItem( SettingsLanguage );
-	pCurrentLcTime = g_pConfigItemFactory->createConfigItem( SettingsLcTime );
-	pCurrentLcTimeFormat24h = g_pConfigItemFactory->createConfigItem( SettingsLcTimeFormat24h );
-	pCurrentLcCollate = g_pConfigItemFactory->createConfigItem( SettingsLcCollate );
-	pCurrentLcNumeric = g_pConfigItemFactory->createConfigItem( SettingsLcNumeric );
-	pCurrentLcMonetary = g_pConfigItemFactory->createConfigItem( SettingsLcMonetary );
-	pCurrentLcTelephone = g_pConfigItemFactory->createConfigItem( SettingsLcTelephone );
-    }
+    const MLocaleAbstractConfigItemFactory *factory = MLocale::configItemFactory();
+
+    pCurrentLanguage        = factory->createConfigItem( SettingsLanguage );
+    pCurrentLcTime          = factory->createConfigItem( SettingsLcTime );
+    pCurrentLcTimeFormat24h = factory->createConfigItem( SettingsLcTimeFormat24h );
+    pCurrentLcCollate       = factory->createConfigItem( SettingsLcCollate );
+    pCurrentLcNumeric       = factory->createConfigItem( SettingsLcNumeric );
+    pCurrentLcMonetary      = factory->createConfigItem( SettingsLcMonetary );
+    pCurrentLcTelephone     = factory->createConfigItem( SettingsLcTelephone );
 
     if (translationPaths.isEmpty())
     {
@@ -1036,27 +1024,15 @@ MLocalePrivate::MLocalePrivate(const MLocalePrivate &other)
 #endif
       q_ptr(0)
 {
-    if ( ! g_pConfigItemFactory )
-    {
-	MLocaleNullConfigItemFactory factory;
-	pCurrentLanguage        = factory.createConfigItem( SettingsLanguage );
-	pCurrentLcTime          = factory.createConfigItem( SettingsLcTime );
-	pCurrentLcTimeFormat24h = factory.createConfigItem( SettingsLcTimeFormat24h );
-	pCurrentLcCollate       = factory.createConfigItem( SettingsLcCollate );
-	pCurrentLcNumeric       = factory.createConfigItem( SettingsLcNumeric );
-	pCurrentLcMonetary      = factory.createConfigItem( SettingsLcMonetary );
-	pCurrentLcTelephone     = factory.createConfigItem( SettingsLcTelephone );
-    }
-    else
-    {
-	pCurrentLanguage = g_pConfigItemFactory->createConfigItem( SettingsLanguage );
-	pCurrentLcTime = g_pConfigItemFactory->createConfigItem( SettingsLcTime );
-	pCurrentLcTimeFormat24h = g_pConfigItemFactory->createConfigItem( SettingsLcTimeFormat24h );
-	pCurrentLcCollate = g_pConfigItemFactory->createConfigItem( SettingsLcCollate );
-	pCurrentLcNumeric = g_pConfigItemFactory->createConfigItem( SettingsLcNumeric );
-	pCurrentLcMonetary = g_pConfigItemFactory->createConfigItem( SettingsLcMonetary );
-	pCurrentLcTelephone = g_pConfigItemFactory->createConfigItem( SettingsLcTelephone );
-    }
+    const MLocaleAbstractConfigItemFactory *factory = MLocale::configItemFactory();
+
+    pCurrentLanguage        = factory->createConfigItem( SettingsLanguage );
+    pCurrentLcTime          = factory->createConfigItem( SettingsLcTime );
+    pCurrentLcTimeFormat24h = factory->createConfigItem( SettingsLcTimeFormat24h );
+    pCurrentLcCollate       = factory->createConfigItem( SettingsLcCollate );
+    pCurrentLcNumeric       = factory->createConfigItem( SettingsLcNumeric );
+    pCurrentLcMonetary      = factory->createConfigItem( SettingsLcMonetary );
+    pCurrentLcTelephone     = factory->createConfigItem( SettingsLcTelephone );
 
 #ifdef HAVE_ICU
     if (other._numberFormat != 0) {
@@ -1756,69 +1732,62 @@ void MLocale::setConfigItemFactory( const MLocaleAbstractConfigItemFactory* fact
   g_pConfigItemFactory = factory;
 }
 
+const MLocaleAbstractConfigItemFactory * MLocale::configItemFactory()
+{
+    if ( ! g_pConfigItemFactory )
+    {
+        g_pConfigItemFactory = new MLocaleNullConfigItemFactory;
+    }
+
+    return g_pConfigItemFactory;
+}
+
 MLocale *
 MLocale::createSystemMLocale()
 {
-    MLocaleAbstractConfigItem *pCurrentLanguage;
-    MLocaleAbstractConfigItem *pCurrentLcTime;
-    MLocaleAbstractConfigItem *pCurrentLcTimeFormat24h;
-    MLocaleAbstractConfigItem *pCurrentLcCollate;
-    MLocaleAbstractConfigItem *pCurrentLcNumeric;
-    MLocaleAbstractConfigItem *pCurrentLcMonetary;
-    MLocaleAbstractConfigItem *pCurrentLcTelephone;
+    QString language;
+    QString lcTime;
+    QString lcTimeFormat24h;
+    QString lcCollate;
+    QString lcNumeric;
+    QString lcMonetary;
+    QString lcTelephone;
 
-    if ( ! g_pConfigItemFactory )
     {
-	MLocaleNullConfigItemFactory factory;
-	pCurrentLanguage        = factory.createConfigItem( SettingsLanguage );
-	pCurrentLcTime          = factory.createConfigItem( SettingsLcTime );
-	pCurrentLcTimeFormat24h = factory.createConfigItem( SettingsLcTimeFormat24h );
-	pCurrentLcCollate       = factory.createConfigItem( SettingsLcCollate );
-	pCurrentLcNumeric       = factory.createConfigItem( SettingsLcNumeric );
-	pCurrentLcMonetary      = factory.createConfigItem( SettingsLcMonetary );
-	pCurrentLcTelephone     = factory.createConfigItem( SettingsLcTelephone );
+        const MLocaleAbstractConfigItemFactory *factory = MLocale::configItemFactory();
+
+        MLocaleAbstractConfigItem *pCurrentLanguage        = factory->createConfigItem( SettingsLanguage );
+        MLocaleAbstractConfigItem *pCurrentLcTime          = factory->createConfigItem( SettingsLcTime );
+        MLocaleAbstractConfigItem *pCurrentLcTimeFormat24h = factory->createConfigItem( SettingsLcTimeFormat24h );
+        MLocaleAbstractConfigItem *pCurrentLcCollate       = factory->createConfigItem( SettingsLcCollate );
+        MLocaleAbstractConfigItem *pCurrentLcNumeric       = factory->createConfigItem( SettingsLcNumeric );
+        MLocaleAbstractConfigItem *pCurrentLcMonetary      = factory->createConfigItem( SettingsLcMonetary );
+        MLocaleAbstractConfigItem *pCurrentLcTelephone     = factory->createConfigItem( SettingsLcTelephone );
+
+        language        = pCurrentLanguage->value();
+        lcTime          = pCurrentLcTime->value();
+        lcTimeFormat24h = pCurrentLcTimeFormat24h->value();
+        lcCollate       = pCurrentLcCollate->value();
+        lcNumeric       = pCurrentLcNumeric->value();
+        lcMonetary      = pCurrentLcMonetary->value();
+        lcTelephone     = pCurrentLcTelephone->value();
+
+        if ( !pCurrentLanguage->isValid() )        language = "en_GB";
+        if ( !pCurrentLcTime->isValid() )          lcTime = "en_GB";
+        if ( !pCurrentLcTimeFormat24h->isValid() ) lcTimeFormat24h = "12";
+        if ( !pCurrentLcCollate->isValid() )       lcCollate = "en_GB";
+        if ( !pCurrentLcNumeric->isValid() )       lcNumeric = "en_GB";
+        if ( !pCurrentLcMonetary->isValid() )      lcMonetary = "en_GB";
+        // no default for lcTelephone
+
+        delete pCurrentLanguage;
+        delete pCurrentLcTime;
+        delete pCurrentLcTimeFormat24h;
+        delete pCurrentLcCollate;
+        delete pCurrentLcNumeric;
+        delete pCurrentLcMonetary;
+        delete pCurrentLcTelephone;
     }
-    else
-    {
-	pCurrentLanguage        = g_pConfigItemFactory->createConfigItem( SettingsLanguage );
-	pCurrentLcTime          = g_pConfigItemFactory->createConfigItem( SettingsLcTime );
-	pCurrentLcTimeFormat24h = g_pConfigItemFactory->createConfigItem( SettingsLcTimeFormat24h );
-	pCurrentLcCollate       = g_pConfigItemFactory->createConfigItem( SettingsLcCollate );
-	pCurrentLcNumeric       = g_pConfigItemFactory->createConfigItem( SettingsLcNumeric );
-	pCurrentLcMonetary      = g_pConfigItemFactory->createConfigItem( SettingsLcMonetary );
-	pCurrentLcTelephone     = g_pConfigItemFactory->createConfigItem( SettingsLcTelephone );
-    }
-
-    QString language        = pCurrentLanguage->value();
-    QString lcTime          = pCurrentLcTime->value();
-    QString lcTimeFormat24h = pCurrentLcTimeFormat24h->value();
-    QString lcCollate       = pCurrentLcCollate->value();
-    QString lcNumeric       = pCurrentLcNumeric->value();
-    QString lcMonetary      = pCurrentLcMonetary->value();
-    QString lcTelephone     = pCurrentLcTelephone->value();
-
-    if ( !pCurrentLanguage->isValid() )        language = "en_GB";
-    if ( !pCurrentLcTime->isValid() )          lcTime = "en_GB";
-    if ( !pCurrentLcTimeFormat24h->isValid() ) lcTimeFormat24h = "12";
-    if ( !pCurrentLcCollate->isValid() )       lcCollate = "en_GB";
-    if ( !pCurrentLcNumeric->isValid() )       lcNumeric = "en_GB";
-    if ( !pCurrentLcMonetary->isValid() )      lcMonetary = "en_GB";
-    // no default for lcTelephone
-
-    delete pCurrentLanguage;
-    pCurrentLanguage = 0;
-    delete pCurrentLcTime;
-    pCurrentLcTime = 0;
-    delete pCurrentLcTimeFormat24h;
-    pCurrentLcTimeFormat24h = 0;
-    delete pCurrentLcCollate;
-    pCurrentLcCollate = 0;
-    delete pCurrentLcNumeric;
-    pCurrentLcNumeric = 0;
-    delete pCurrentLcMonetary;
-    pCurrentLcMonetary = 0;
-    delete pCurrentLcTelephone;
-    pCurrentLcTelephone = 0;
 
     MLocale *systemLocale;
 
@@ -2072,14 +2041,7 @@ void MLocale::setDefault(const MLocale &locale)
         return;
     } else {
         s_systemDefault->disconnectSettings();
-
-        if ( qApp->metaObject()->className() == QString( "MApplication" ) )
-        {
-            QObject::disconnect(s_systemDefault, SIGNAL(settingsChanged()),
-                                qApp, SIGNAL(localeSettingsChanged()));
-        }
-        QObject::disconnect(s_systemDefault, SIGNAL(settingsChanged()),
-                            s_systemDefault, SIGNAL(localeSettingsChanged()));
+        disconnect(s_systemDefault, SIGNAL(settingsChanged()), 0, 0 );
 
         // remove the previous tr translations
         (s_systemDefault->d_ptr)->removeTrFromQCoreApp();
@@ -4352,13 +4314,6 @@ void MLocale::refreshSettings()
     Q_D(MLocale);
 
     bool settingsHaveReallyChanged = false;
-    // QString localeName = d->currentLanguageItem.value("en_GB").toString();
-    // QString lcTime = d->currentLcTimeItem.value("en_GB").toString();
-    // QString lcTimeFormat24h = d->currentLcTimeFormat24hItem.value("12").toString();
-    // QString lcCollate = d->currentLcCollateItem.value("en_GB").toString();
-    // QString lcNumeric = d->currentLcNumericItem.value("en_GB").toString();
-    // QString lcMonetary = d->currentLcMonetaryItem.value("en_GB").toString();
-    // QString lcTelephone = d->currentLcTelephoneItem.value().toString();
 
     QString localeName      = d->pCurrentLanguage->value();
     QString lcTime          = d->pCurrentLcTime->value();

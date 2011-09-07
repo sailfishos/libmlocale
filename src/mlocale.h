@@ -112,6 +112,15 @@ public:
     static void setConfigItemFactory( const MLocaleAbstractConfigItemFactory* factory );
 
     /*!
+     * \brief Returns the factory that is used to create config items.
+     *
+     * If there was no factory previously set or the factory is 0, a default
+     * MLocaleNullConfigItemFactory is created upon the first call to this
+     * function.
+     */
+    static const MLocaleAbstractConfigItemFactory* configItemFactory();
+
+    /*!
      * \brief enum for Date formatting.
      *
      * This correlates closely with the <a
