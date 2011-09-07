@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=com.nokia.widgetsgallery.AccessManager
-Exec=@M_INSTALL_BIN@/widgetsgallery_accessmanager

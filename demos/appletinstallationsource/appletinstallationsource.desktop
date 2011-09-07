@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=X-MeeGoApplicationExtension
-Name=FakeInstallationSource
-
-[X-MeeGoApplicationExtension]
-Interface=com.meego.core.MAppletInstallationSourceInterface/1.0
-Extension=libappletinventory-fakeinstallationsource.so

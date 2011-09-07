@@ -1,4 +1,0 @@
-include(meegotouch_common.prf)
-
-LIBS += $$mAddLibrary(meegotouchcore) \
-        $$mAddLibrary(meegotouchsettings)

@@ -1,4 +1,0 @@
-[D-BUS Service]
-Interface=com.nokia.TextProcessorInterface
-Name=com.nokia.TextProcessor
-Exec=@M_INSTALL_BIN@/com.nokia.textprocessor

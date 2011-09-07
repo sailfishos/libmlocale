@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Lifecycle Demo
-Icon=icon-l-video
-Exec=lifecycle
-X-Maemo-Service=com.nokia.lifecycle
-OnlyShowIn=X-MeeGo;
