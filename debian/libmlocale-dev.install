@@ -1,0 +1,4 @@
+usr/lib/libmlocale*.so
+usr/include/mlocale/*
+usr/lib/pkgconfig/*
+usr/share/qt4/mkspecs/features/mlocale*

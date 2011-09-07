@@ -1,4 +1,4 @@
-This source tree contains the MeeGo Touch library
+This source tree contains the MLocale library
 
 Building
 ========
@@ -12,37 +12,16 @@ see ./configure -help for options.
 The reference documentation can be built with "make doc",
 if doxygen is available.
 
-Running
-=======
-The library ships with a demo application called "widgetsgallery"
-
-The duitheme package must be installed before running any MeeGo Touch
-applications.
-
-meegotouch-theme is available separately from
-http://meego.gitorious.org/meegotouch/meegotouch-theme/ and can
-be installed with the following commands:
-  cd meegotouch-theme
-  qmake
-  sudo make install
-
-
 Build dependencies
 ==================
 - Development headers:
   - Qt 4.7
-  - X11
-  - Mesa or vendor specific OpenGL libraries
 - pkg-config
 
 Optional dependencies
 =====================
 
 If found, the following libraries will enable additional
-features in the MeeGo Touch library:
+features in the MLocale library:
 
 - ICU: I18N and L10N extensions
-- GConf2: C++ abstraction layer for gconf settings system
-- ContextKit context subscriber: Automatic rotation on supported hardware
-- GStreamer 0.10: Media widgets
-- DBus: Out of process applet support, out of process theme server support

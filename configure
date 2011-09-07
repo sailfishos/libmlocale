@@ -33,9 +33,9 @@ UNAME_VERSION=`(uname -v) 2>/dev/null` || UNAME_VERSION=unknown
 # M version detection
 #-----------------------------------------------------------------------------
 cd "$relpath"
-M_MAJOR_VERSION=`grep -m1 M_MAJOR_VERSION mkspecs/features/meegotouch_defines.prf.in |cut -f2 -d'='|sed 's/ //g'`
-M_MINOR_VERSION=`grep -m1 M_MINOR_VERSION mkspecs/features/meegotouch_defines.prf.in |cut -f2 -d'='|sed 's/ //g'`
-M_PATCH_VERSION=`grep -m1 M_PATCH_VERSION mkspecs/features/meegotouch_defines.prf.in |cut -f2 -d'='|sed 's/ //g'`
+M_MAJOR_VERSION=`grep -m1 ML_MAJOR_VERSION mkspecs/features/mlocale_defines.prf.in |cut -f2 -d'='|sed 's/ //g'`
+M_MINOR_VERSION=`grep -m1 ML_MINOR_VERSION mkspecs/features/mlocale_defines.prf.in |cut -f2 -d'='|sed 's/ //g'`
+M_PATCH_VERSION=`grep -m1 ML_PATCH_VERSION mkspecs/features/mlocale_defines.prf.in |cut -f2 -d'='|sed 's/ //g'`
 M_VERSION=$M_MAJOR_VERSION.$M_MINOR_VERSION.$M_PATCH_VERSION
 
 if [ -z "$M_MAJOR_VERSION" ]; then
@@ -54,42 +54,17 @@ M_DOC_VERSION_STRING=`sh doc/versionString.sh .`
 # initalize internal variables
 CFG_DEBUG=yes
 CFG_RELEASE=no
-CFG_OPENGL=yes
 CFG_TESTABLE=no
 CFG_COVERAGE=no
-CFG_TIMESTAMPS=no
-CFG_PCH=no
-CFG_NO_WERROR=no
-CFG_DEV=no
-CFG_MINIMAL=no
 CFG_BUILD_TESTS=no
 CFG_BUILD_BENCHMARKS=no
-CFG_BUILD_EXAMPLES=no
-CFG_BUILD_SHORTCUTS=no
 
-M_DEFAULT_BUILD_PARTS="libs demos"
+M_DEFAULT_BUILD_PARTS="libs"
 CFG_BUILD_PARTS=""
-CFG_NOBUILD_PARTS=""
-CFG_DBUS=auto
 CFG_ICU=auto
-CFG_GCONF=auto
-CFG_MEEGOGRAPHICSSYSTEM=auto
 
 HAVE_LINUX=no
 HAVE_ICU=no
-HAVE_CONTEXTSUBSCRIBER=no
-HAVE_GCONF=no
-HAVE_DBUS=no
-HAVE_CONTENTACTION=no
-HAVE_XDAMAGE=no
-HAVE_XFIXES=no
-HAVE_XCOMPOSITE=no
-HAVE_QTM_SERVICEFRAMEWORK=no
-IS_MAEMO5=no
-HAVE_MEEGOGRAPHICSSYSTEM=no
-HAVE_LIBNGF=no
-HAVE_QMSYSTEM2=no
-HAVE_MALIIT=no
 
 OPT_SHADOW=maybe
 
@@ -157,16 +132,6 @@ while [ "$#" -gt 0 ]; do
         VAL=`echo $1 | sed "s,^-\([^-]*\)-.*,\1,"`
         ;;
     #Options that cannot be generalized
-    -opengl)
-        VAR=opengl
-        # this option may or may not be followed by an argument
-        if [ -z "$2" ] || echo "$2" | grep '^-' >/dev/null 2>&1; then
-            VAL=yes
-        else
-            shift;
-            VAL=$1
-        fi
-	;;
     -*)
         VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
         VAL="unknown"
@@ -201,15 +166,6 @@ while [ "$#" -gt 0 ]; do
     make)
 	CFG_BUILD_PARTS="$CFG_BUILD_PARTS $VAL"
         ;;
-    opengl)
-        if  [ "$VAL" = "auto" ] || [ "$VAL" = "desktop" ] ||
-            [ "$VAL" = "yes" ] || [ "$VAL" = "no" ] ||
-            [ "$VAL" = "es1cl" ] || [ "$VAL" = "es1" ] || [ "$VAL" = "es2" ]; then
-            CFG_OPENGL="$VAL"
-        else
-            UNKNOWN_OPT=yes
-        fi
-        ;;
     release)
         CFG_RELEASE="$VAL"
 	;;
@@ -225,64 +181,15 @@ while [ "$#" -gt 0 ]; do
     coverage)
         CFG_COVERAGE="$VAL"
         ;;
-    timestamps)
-        CFG_TIMESTAMPS="$VAL"
-        ;;
-    pch)
-        CFG_PCH="$VAL"
-        ;;
-    dev)
-        CFG_DEV="yes"
-        CFG_BUILD_TESTS="yes"
-        CFG_BUILD_EXAMPLES="yes"
-        CFG_BUILD_BENCHMARKS="yes"
-        ;;
-    minimal)
-        CFG_MINIMAL="yes"
-        ;;
     tests)
         CFG_BUILD_TESTS="yes"
-        ;;
-    examples)
-        CFG_BUILD_EXAMPLES="yes"
         ;;
     benchmarks)
         CFG_BUILD_BENCHMARKS="yes"
         ;;
-    maemo5)
-        IS_MAEMO5="yes"
-        ;;
-    shortcuts)
-	if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
-            CFG_BUILD_SHORTCUTS="$VAL"
-        else
-            UNKNOWN_OPT=yes
-        fi
-        ;;
-    dbus)
-        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
-            CFG_DBUS="$VAL"
-        else
-            UNKNOWN_OPT=yes
-        fi
-        ;;
     icu)
         if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
             CFG_ICU="$VAL"
-        else
-            UNKNOWN_OPT=yes
-        fi
-        ;;
-    gconf)
-        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
-            CFG_GCONF="$VAL"
-        else
-            UNKNOWN_OPT=yes
-        fi
-        ;;
-    meegographicssystem)
-        if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
-            CFG_MEEGOGRAPHICSSYSTEM="$VAL"
         else
             UNKNOWN_OPT=yes
         fi
@@ -365,14 +272,6 @@ else
   fi
 fi
 
-if [ "$CFG_BUILD_EXAMPLES" = "yes" ]; then
-    CFG_BUILD_PARTS="$CFG_BUILD_PARTS examples"
-else
-  if echo $CFG_BUILD_PARTS | grep examples >/dev/null 2>&1; then
-    CFG_BUILD_EXAMPLES="yes"
-  fi
-fi
-
 # is this a shadow build?
 if [ "$OPT_SHADOW" = "maybe" ]; then
     OPT_SHADOW=no
@@ -406,109 +305,6 @@ if [ "$CFG_ICU" != "no" ]; then
     fi
 fi
 
-# Test for pkg-config enabled dependencies
-which pkg-config > /dev/null
-if [ $? -eq 0 ]; then
-
-    pkg-config --atleast-version=0.5.25 contextsubscriber-1.0
-    if [ $? -eq 0 ]; then
-        HAVE_CONTEXTSUBSCRIBER=yes
-    fi
-
-    if [ "$CFG_GCONF" != "no" ]; then
-        pkg-config --exists gconf-2.0
-        if [ $? -eq 0 ]; then
-            HAVE_GCONF=yes
-        else
-            if [ "$CFG_GCONF" = "yes" ]; then
-                echo "You specified  -gconf  but gconf was not found."
-                echo "Please install the libgconf2-dev package."
-                exit 1
-            fi
-        fi
-    fi
-
-    # Test for DBus
-    if [ "$CFG_DBUS" != "no" ]; then
-        pkg-config --exists QtDBus
-        if [ $? -eq 0 ]; then
-	    HAVE_DBUS=yes
-        fi
-        if [ "$CFG_DBUS" = "yes" -a "$HAVE_DBUS" = "no" ]; then
-            echo "You specified  -dbus  but dbus was not found."
-            echo "Please install the DBus and QtDBus packages."
-            exit 1
-        fi
-    fi
-
-    pkg-config --exists contentaction-0.1
-    if [ $? -eq 0 ]; then
-	#HAVE_CONTENTACTION=yes DISABLED FOR NOW
-	HAVE_CONTENTACTION=no
-    fi
-
-    # use xdamage, xfixes and xcomposite only on Linux platform
-    if [ "$HAVE_LINUX" != "no" ]; then
-        pkg-config --exists xdamage
-        if [ $? -eq 0 ]; then
-            HAVE_XDAMAGE=yes
-        fi
-
-        pkg-config --exists xfixes
-        if [ $? -eq 0 ]; then
-            HAVE_XFIXES=yes
-        fi
-
-        pkg-config --exists xcomposite
-        if [ $? -eq 0 ]; then
-            HAVE_XCOMPOSITE=yes
-        fi
-    fi
-
-    # For Scratchbox and  For OBS/MeeGo
-    if [ ! -z "`uname -m | grep arm`" ]; then   
-    	IS_ARMEL=yes  
-    fi      
-
-    if [ "$CFG_MEEGOGRAPHICSSYSTEM" != "no" ]; then
-        if  [ "$IS_ARMEL" = "yes" ]; then
-            HAVE_MEEGOGRAPHICSSYSTEM=yes
-            CFG_MEEGOGRAPHICSSYSTEM=yes
-        else
-            if [ "$CFG_MEEGOGRAPHICSSYSTEM" = "yes" ]; then
-                #we need this for intel devices but not for scratchbox
-                echo "WARNING: MeeGo graphicssystem is enabled for x86"
-                HAVE_MEEGOGRAPHICSSYSTEM=yes
-            fi
-        fi
-    fi
-
-    # For Non-graphical feedback framework (NGF) client
-    pkg-config --exists libngf0
-    if [ $? -eq 0 ]; then
-        HAVE_LIBNGF=yes
-    fi
-
-    # libqmsystem2 is needed so that we can be notified about time zone changes from the system.
-    pkg-config --exists qmsystem2
-    if [ $? -eq 0 ]; then
-        HAVE_QMSYSTEM2=yes
-    fi
-
-    # For communicating with the input method
-    pkg-config --exists maliit-1.0
-    if [ $? -eq 0 ]; then
-        HAVE_MALIIT=yes
-    fi
-fi
-
-# Test for qt service framework
-which servicexmlgen > /dev/null
-if [ $? -eq 0 ]; then
-    HAVE_QTM_SERVICEFRAMEWORK=yes
-fi
-
-
 #-------------------------------------------------------------------------------
 # help - interactive parts of the script _after_ this section please
 #-------------------------------------------------------------------------------
@@ -539,9 +335,7 @@ Configure options:
  *  -debug ................... Compile and link libmeegotouch with debugging turned on
 
     -testable ................ Enable the testability plugin interface in libmeegotouch
-    -timestamps .............. Enable time debug measurements in the code
     -coverage ................ Enable code coverage calculation
-    -pch ..................... Enable pre-compiled header
     -no-werror ............... Disable warnings as errors gcc flag
 
 Additional options:
@@ -550,28 +344,12 @@ Additional options:
                                (*libs *demos tests benchmarks)
     -nomake <part> ........... Exclude part from the list of parts to be built
 
-    -dev ..................... Compile and link with default developer options.
-                               This enables the benchmarks and tests parts.
-
     -tests ................... Build the tests.
     -benchmarks .............. Build the benchmarks.
-    -examples ................ Build the examples.
-
-    -maemo5 .................. Build libmeegotouch for the N900 device with maemo5.
-
-    -no-dbus ................. Do not compile with DBus support.
- +  -dbus .................... Compile with DBus support.
-
-    -no-gconf ................ Do not compile with gconf support.
- +  -gconf ................... Compile with gconf support.
 
     -no-icu .................. Do not compile with ICU support.
  +  -icu ..................... Compile with ICU support.
 
-    -no-meegographicssystem .. Do not compile with meego graphicssystem support.
- +  -meegographicssystem ..... Compile with meego graphicssystem support.
-
-    -shortcuts................ Enables the keyboard's shortcut to debug the UI (margins, names, etc)
 EOF
 
 exit 0
@@ -579,11 +357,11 @@ exit 0
 fi
 
 #-------------------------------------------------------------------------------
-# save configuration into meegotouchconfig.pri
+# save configuration into mlocaleconfig.pri
 #-------------------------------------------------------------------------------
 
 if [ "$OPT_SHADOW" = "yes" ]; then
-    if [ -f "$relpath/mkspecs/meegotouchconfig.pri" ]; then
+    if [ -f "$relpath/mkspecs/mlocaleconfig.pri" ]; then
         echo >&2 "You cannot make a shadow build from a source tree containing a previous build."
         echo >&2 "Cannot proceed."
         echo >&2 ""
@@ -599,28 +377,20 @@ if [ "$OPT_SHADOW" = "yes" ]; then
 fi
 
 
-MEEGOTOUCHCONFIG="$outpath/mkspecs/meegotouchconfig.pri"
-[ -f "$MEEGOTOUCHCONFIG.tmp" ] && rm -f "$MEEGOTOUCHCONFIG.tmp"
+MLOCALECONFIG="$outpath/mkspecs/mlocaleconfig.pri"
+[ -f "$MLOCALECONFIG.tmp" ] && rm -f "$MLOCALECONFIG.tmp"
 
 if [ "$CFG_DEBUG" = "yes" ]; then
-    MEEGOTOUCHCONFIG_CONFIG="$MEEGOTOUCHCONFIG_CONFIG debug"
+    MLOCALECONFIG_CONFIG="$MLOCALECONFIG_CONFIG debug"
 fi
 
 if [ "$CFG_RELEASE" = "yes" ]; then
-    MEEGOTOUCHCONFIG_CONFIG="$MEEGOTOUCHCONFIG_CONFIG release"
+    MLOCALECONFIG_CONFIG="$MLOCALECONFIG_CONFIG release"
 fi
 
 
 if [ "$CFG_TESTABLE" = "yes" ]; then
     MEEGOTOUCHCONFIG_FEATURES="$MEEGOTOUCHCONFIG_FEATURES testable"
-fi
-
-if [ "$CFG_NO_WERROR" = "yes" ]; then
-    MEEGOTOUCHCONFIG_FEATURES="$MEEGOTOUCHCONFIG_FEATURES no-werror" 	
-fi
-
-if [ "$CFG_TIMESTAMPS" = "yes" ]; then
-    MEEGOTOUCHCONFIG_FEATURES="$MEEGOTOUCHCONFIG_FEATURES timestamps"
 fi
 
 if [ "$CFG_COVERAGE" = "yes" ]; then
@@ -641,83 +411,20 @@ if [ "$CFG_COVERAGE" = "yes" ]; then
         exit 1
     fi
 
-    MEEGOTOUCHCONFIG_CONFIG="$MEEGOTOUCHCONFIG_CONFIG coverage"
-fi
-
-if [ "$CFG_PCH" = "yes" ]; then
-    MEEGOTOUCHCONFIG_FEATURES="$MEEGOTOUCHCONFIG_FEATURES pch"
-fi
-
-if [ "$CFG_MINIMAL" = "yes" ]; then
-    MEEGOTOUCHCONFIG_FEATURES="$MEEGOTOUCHCONFIG_FEATURES minimal"
+    MLOCALECONFIG_CONFIG="$MLOCALECONFIG_CONFIG coverage"
 fi
 
 
 if [ "$HAVE_ICU" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_ICU"
-fi
-
-if [ "$CFG_BUILD_SHORTCUTS" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_SHORTCUTS"
-fi
-
-if [ "$HAVE_CONTENTACTION" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_CONTENTACTION"
-fi
-
-if [ "$HAVE_XDAMAGE" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_XDAMAGE"
-fi
-
-if [ "$HAVE_XFIXES" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_XFIXES"
-fi
-
-if [ "$HAVE_XCOMPOSITE" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_XCOMPOSITE"
-fi
-
-if [ "$HAVE_CONTEXTSUBSCRIBER" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_CONTEXTSUBSCRIBER"
-fi
-
-if [ "$HAVE_GCONF" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_GCONF"
-fi
-
-if [ "$HAVE_DBUS" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_DBUS"
-fi
-
-if [ "$HAVE_QTM_SERVICEFRAMEWORK" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_QTM_SERVICEFRAMEWORK"
-fi
-
-if [ "$IS_MAEMO5" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS M_OS_MAEMO5"
-fi
-
-if [ "$HAVE_MEEGOGRAPHICSSYSTEM" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_MEEGOGRAPHICSSYSTEM"
+    MLOCALECONFIG_DEPS="$MLOCALECONFIG_DEPS HAVE_ICU"
 fi
 
 if [ "$IS_ARMEL" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS IS_ARMEL"
+    MLOCALECONFIG_DEPS="$MLOCALECONFIG_DEPS IS_ARMEL"
 fi                               
 
-if [ "$HAVE_LIBNGF" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_LIBNGF"
-fi
 
-if [ "$HAVE_QMSYSTEM2" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_QMSYSTEM2"
-fi
-
-if [ "$HAVE_MALIIT" = "yes" ]; then
-    MEEGOTOUCHCONFIG_DEPS="$MEEGOTOUCHCONFIG_DEPS HAVE_MALIIT"
-fi
-
-cat >>"$MEEGOTOUCHCONFIG.tmp" <<EOF
+cat >>"$MLOCALECONFIG.tmp" <<EOF
 # Autogenerated by configure script
 
 #cleaning in CONFIG to get right configuration
@@ -725,35 +432,35 @@ CONFIG -=release
 CONFIG -=debug
 
 #build configuration
-CONFIG += $MEEGOTOUCHCONFIG_CONFIG
+CONFIG += $MLOCALECONFIG_CONFIG
 
-M_BUILD_PARTS += $CFG_BUILD_PARTS
+ML_BUILD_PARTS += $CFG_BUILD_PARTS
 
-M_BUILD_FEATURES += $MEEGOTOUCHCONFIG_FEATURES
+ML_BUILD_FEATURES += $MEEGOTOUCHCONFIG_FEATURES
 
 #versioning
-M_VERSION = $M_VERSION
-M_MAJOR_VERSION = $M_MAJOR_VERSION
-M_MINOR_VERSION = $M_MINOR_VERSION
-M_PATCH_VERSION = $M_PATCH_VERSION
+ML_VERSION = $M_VERSION
+ML_MAJOR_VERSION = $M_MAJOR_VERSION
+ML_MINOR_VERSION = $M_MINOR_VERSION
+ML_PATCH_VERSION = $M_PATCH_VERSION
 
-M_DOC_VERSION_STRING = $M_DOC_VERSION_STRING
+ML_DOC_VERSION_STRING = $M_DOC_VERSION_STRING
 
 #paths
-M_INSTALL_PREFIX = $M_INSTALL_PREFIX
-M_INSTALL_SYSCONFDIR = $M_INSTALL_SYSCONFDIR
-M_INSTALL_LIBDIR = $M_INSTALL_LIBDIR
+ML_INSTALL_PREFIX = $M_INSTALL_PREFIX
+ML_INSTALL_SYSCONFDIR = $M_INSTALL_SYSCONFDIR
+ML_INSTALL_LIBDIR = $M_INSTALL_LIBDIR
 
 #dependencies
-DEFINES += BUILD_M $MEEGOTOUCHCONFIG_DEPS
+DEFINES += $MLOCALECONFIG_DEPS
 
 EOF
 
 # replace meegotouchconfig.pri if it differs from the newly created temp file
-if cmp -s "$MEEGOTOUCHCONFIG.tmp" "$MEEGOTOUCHCONFIG"; then
-    rm -f "$MEEGOTOUCHCONFIG.tmp"
+if cmp -s "$MLOCALECONFIG.tmp" "$MLOCALECONFIG"; then
+    rm -f "$MLOCALECONFIG.tmp"
 else
-    mv -f "$MEEGOTOUCHCONFIG.tmp" "$MEEGOTOUCHCONFIG"
+    mv -f "$MLOCALECONFIG.tmp" "$MLOCALECONFIG"
 fi
 
 # now try to create a .qmake.cache file to be able to find the build root
@@ -774,31 +481,27 @@ else
     mv -f "$M_QMAKE_CACHE.tmp" "$M_QMAKE_CACHE"
 fi
 
-MEEGOTOUCH_DEFINES_PRF="$outpath/mkspecs/features/meegotouch_defines.prf"
+MLOCALE_DEFINES_PRF="$outpath/mkspecs/features/mlocale_defines.prf"
 
-# and now we generate a meegotouch_defines.prf that will contain the right
+# and now we generate a mlocale_defines.prf that will contain the right
 # install prefix
-cat "$relpath/mkspecs/features/meegotouch_defines.prf.in" \
-| sed -e "s,@@M_UNIX_INSTALL_PREFIX@@,$M_INSTALL_PREFIX,g" \
-| sed -e "s,@@M_UNIX_INSTALL_SYSCONFDIR@@,$M_INSTALL_SYSCONFDIR,g" \
-| sed -e "s,@@M_UNIX_INSTALL_LIBDIR@@,$M_INSTALL_LIBDIR,g" \
-| sed -e "s,@@MEEGOTOUCHCONFIG_DEPS@@,$MEEGOTOUCHCONFIG_DEPS,g" \
-> "$MEEGOTOUCH_DEFINES_PRF.tmp"
+cat "$relpath/mkspecs/features/mlocale_defines.prf.in" \
+| sed -e "s,@@ML_UNIX_INSTALL_PREFIX@@,$M_INSTALL_PREFIX,g" \
+| sed -e "s,@@ML_UNIX_INSTALL_SYSCONFDIR@@,$M_INSTALL_SYSCONFDIR,g" \
+| sed -e "s,@@ML_UNIX_INSTALL_LIBDIR@@,$M_INSTALL_LIBDIR,g" \
+| sed -e "s,@@MLOCALECONFIG_DEPS@@,$MLOCALECONFIG_DEPS,g" \
+> "$MLOCALE_DEFINES_PRF.tmp"
 
 # replace meegotouch_defines.prf if it differs from the newly created temp file
-if cmp -s "$MEEGOTOUCH_DEFINES_PRF.tmp" "$MEEGOTOUCH_DEFINES_PRF"; then
-    rm -f "$MEEGOTOUCH_DEFINES_PRF.tmp"
+if cmp -s "$MLOCALE_DEFINES_PRF.tmp" "$MLOCALE_DEFINES_PRF"; then
+    rm -f "$MLOCALE_DEFINES_PRF.tmp"
 else
-    mv -f "$MEEGOTOUCH_DEFINES_PRF.tmp" "$MEEGOTOUCH_DEFINES_PRF"
+    mv -f "$MLOCALE_DEFINES_PRF.tmp" "$MLOCALE_DEFINES_PRF"
 fi
 
 # substitute prefix in .pc files
 MEEGOTOUCH_PC_DIR="$outpath/src/data"
-MEEGOTOUCH_PC_FILES="meegotouch
-meegotouchcore
-meegotouchsettings
-meegotouch-boostable
-"
+MEEGOTOUCH_PC_FILES="mlocale"
 
 # make sure the directory exists
 if [ ! -d $MEEGOTOUCH_PC_DIR ]; then
@@ -827,13 +530,6 @@ done
 #-------------------------------------------------------------------------------
 # build makefiles based on the configuration
 #-------------------------------------------------------------------------------
-
-#echo "Finding project files. Please wait..."
-#"qmake" -r "${relpath}/projects.pro"
-#if [ -f "${relpath}/projects.pro" ]; then
-#    mkfile="${outpath}/Makefile"
-#    [ -f "$mkfile" ] && chmod +w "$mkfile"
-#fi
 
 if [ -z "$QTDIR" ]; then
     which qmake > /dev/null
@@ -908,28 +604,6 @@ echo ""
 echo "Optional build dependencies found:"
 
 echo "ICU ............................. $HAVE_ICU"
-echo "Context Subscriber 1.0 .......... $HAVE_CONTEXTSUBSCRIBER"
-echo "Content Action 0.1 .............. $HAVE_CONTENTACTION"
-echo "GConf 2.0 ....................... $HAVE_GCONF"
-echo "DBus (incl. QtDBus) ............. $HAVE_DBUS"
-echo "XDamage ......................... $HAVE_XDAMAGE"
-echo "XFixes .......................... $HAVE_XFIXES"
-echo "XComposite....................... $HAVE_XCOMPOSITE"
-echo "Qt Mobility Service Framework ... $HAVE_QTM_SERVICEFRAMEWORK"
-echo "MeeGo graphicssystem ............ $HAVE_MEEGOGRAPHICSSYSTEM"
-echo "Non-graphical feedback client ... $HAVE_LIBNGF"
-echo "QmSystem ........................ $HAVE_QMSYSTEM2"
-echo "Maliit .......................... $HAVE_MALIIT"
-
-if [ "$CFG_DEV" = "yes" ]; then
-    echo ""
-    echo ""
-    echo "Enabling MeeGo Touch UI developer's build"
-    echo ""
-else
-    echo ""
-    echo ""
-fi
 
 echo "MeeGo Touch UI framework build configuration:"
 echo "Version ............. $M_VERSION"
@@ -941,22 +615,15 @@ echo "Debug ............... $CFG_DEBUG"
 echo
 echo "Benchmarks .......... $CFG_BUILD_BENCHMARKS"
 echo "Tests ............... $CFG_BUILD_TESTS"
-echo "Examples ............ $CFG_BUILD_EXAMPLES"
-echo "Shortcuts.............$CFG_BUILD_SHORTCUTS"
-
-if [ "$IS_MAEMO5" = "yes" ]; then
-    echo ""
-    echo "Building for Maemo 5"
-fi
 
 echo ""
-echo libmeegotouch is now configured for building. Just run \'make\'.
+echo libmlocale is now configured for building. Just run \'make\'.
 if [ "$relpath" = "$M_INSTALL_PREFIX" ]; then
-    echo Once everything is built, libmeegotouch is installed.
+    echo Once everything is built, libmlocale is installed.
     echo You should not run \'make install\'.
 else
     echo Once everything is built, you can run \'make install\'.
-    echo libmeegotouch will be installed into $M_INSTALL_PREFIX
+    echo libmlocale will be installed into $M_INSTALL_PREFIX
 fi
 
 echo ""

@@ -1,0 +1,3 @@
+include(mlocale_common.prf)
+
+LIBS += $$mAddLibrary(mlocale)

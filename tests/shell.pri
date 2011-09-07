@@ -4,7 +4,7 @@ shell_scripts.CONFIG += no_check_exist
 
 include(../mkspecs/common.pri)
 
-shell_scripts.path += $$M_INSTALL_DATA/libmeegotouch-tests
+shell_scripts.path += $$ML_INSTALL_DATA/libmlocale-tests
 shell_scripts.depends = FORCE
 
 INSTALLS    += \

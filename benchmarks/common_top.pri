@@ -7,13 +7,7 @@ INCLUDEPATH += \
     . \
     ../common \
     $$MSRCDIR/include \
-    $$MSRCDIR/corelib/core \
-    $$MSRCDIR/corelib/widgets \
-    $$MSRCDIR/corelib/workspace \
-    $$MSRCDIR/corelib/style \
-    $$MSRCDIR/views \
-    $$MSRCDIR/views/style \
-    ../memorybenchmark/
+    $$MSRCDIR \
 
 DEPENDPATH = $$INCLUDEPATH
 QMAKE_LIBDIR += ../../lib
@@ -22,13 +16,13 @@ QT += testlib dbus svg
 TEMPLATE = app
 # DEFINES += QT_NO_DEBUG_OUTPUT
 DEFINES += UNIT_TEST
-target.path = $$[QT_INSTALL_LIBS]/libmeegotouch-benchmarks
+target.path = $$[QT_INSTALL_LIBS]/libmlocale-benchmarks
 INSTALLS += target
 
-LIBS += $$mAddLibrary(meegotouchcore)
+LIBS += $$mAddLibrary(mlocale)
 
 support_files.files =
-support_files.path = $$[QT_INSTALL_LIBS]/libmeegotouch-benchmarks
+support_files.path = $$[QT_INSTALL_LIBS]/libmlocale-benchmarks
 INSTALLS += support_files
 
 CONFIG-=app_bundle

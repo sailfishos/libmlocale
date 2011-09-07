@@ -1,0 +1,72 @@
+##################################################################
+# MDefinesFeature
+#
+# Global MeeGo Touch definitions
+######################################################################
+
+ML_MAJOR_VERSION = 0
+ML_MINOR_VERSION = 1
+ML_PATCH_VERSION = 1
+ML_VERSION=$${ML_MAJOR_VERSION}.$${ML_MINOR_VERSION}.$${ML_PATCH_VERSION}
+
+# first set default value for meegotouch prefix
+# the @@...@@ variable is filled from the libmlocale/configure script.
+
+#info how the libmeegotouch was configured
+MLOCALECONFIG_DEPS = @@MLOCALECONFIG_DEPS@@
+
+unix {
+    ML_PREFIX = @@ML_UNIX_INSTALL_PREFIX@@
+    ML_SYSCONFDIR = @@ML_UNIX_INSTALL_SYSCONFDIR@@
+    ML_LIBDIR = @@ML_UNIX_INSTALL_LIBDIR@@
+}
+
+mac {
+    ML_PREFIX = @@ML_UNIX_INSTALL_PREFIX@@
+    ML_SYSCONFDIR = @@ML_UNIX_INSTALL_SYSCONFDIR@@
+    ML_LIBDIR = @@ML_UNIX_INSTALL_LIBDIR@@
+}
+
+win32 {
+    ML_PREFIX = /
+}
+
+# Directories
+unix|win32 {
+    ML_INSTALL_BIN = $$ML_PREFIX/bin
+    ML_INSTALL_LIBS = $$ML_LIBDIR
+    ML_INSTALL_DATA = $$ML_PREFIX/share
+    ML_INSTALL_HEADERS = $$ML_PREFIX/include/mlocale
+
+    ML_TRANSLATION_DIR = $$ML_INSTALL_DATA/l10n/mlocale
+    ML_ICUEXTRADATA_DIR = $$ML_INSTALL_DATA/mlocale/icu
+}
+
+mac {
+    ML_INSTALL_BIN = $$ML_PREFIX/bin
+    ML_INSTALL_LIBS = $$ML_LIBDIR
+    ML_INSTALL_DATA = $$ML_PREFIX/share
+    ML_INSTALL_HEADERS = $$ML_PREFIX/include/mlocale
+
+    ML_TRANSLATION_DIR = $$ML_INSTALL_DATA/l10n/mlocale
+}
+
+win32 {
+    # only override defines, that are different from the unix ones above here...
+
+    ML_INSTALL_LIBS = $$ML_PREFIX/bin
+}
+
+defineReplace(mAddLibrary) {
+    LIBRARY_NAME = $$1
+    win32 {
+#        CONFIG(debug, debug|release) {
+#            return ("-l"$${LIBRARY_NAME}d$${ML_MAJOR_VERSION})
+#        } else {
+#            return ("-l"$${LIBRARY_NAME}$${ML_MAJOR_VERSION})
+#        }
+         return ("-l"$${LIBRARY_NAME}$${ML_MAJOR_VERSION})
+    }
+
+    return (-l$$LIBRARY_NAME)
+}

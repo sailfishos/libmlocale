@@ -1,0 +1,13 @@
+include(mlocale_defines.prf)
+
+macx {
+    INCLUDEPATH += /Library/Frameworks/mlocale.framework/Headers
+}
+
+M_INC_DIR = $$M_PREFIX/include/mlocale
+M_LIB_DIR = $$M_LIBDIR
+
+INCLUDEPATH += $${M_INC_DIR}
+DEPENDPATH += $${M_INC_DIR}
+
+LIBS += -L$${M_LIB_DIR}

@@ -46,15 +46,14 @@ WARN_LOGFILE          = "doxygen.log"
 
 FILE_VERSION_FILTER   = "echo @M_DOC_VERSION_STRING@"
 INPUT                 = @M_SRC_DIR@/../src/ \
-                        @M_SRC_DIR@/src/ \
-                        @M_SRC_DIR@/../examples
+                        @M_SRC_DIR@/src/
 FILE_PATTERNS         = *.cpp *.h *.dox
 RECURSIVE             = YES
 EXCLUDE               = 
-EXCLUDE_PATTERNS      = moc_*.cpp *_p.h *_p.cpp */demo/* */.gen/* */.qm/* */examples/*.cpp */examples/*.h
+EXCLUDE_PATTERNS      = moc_*.cpp *_p.h *_p.cpp */demo/* */.gen/* */.qm/*
 IMAGE_PATH            = @M_SRC_DIR@/src/images
 INPUT_FILTER          = "sed -f @M_SRC_DIR@/aliases.sed <"
-EXAMPLE_PATH          = @M_BUILD_DIR@/doc @M_SRC_DIR@/../examples
+EXAMPLE_PATH          = @M_BUILD_DIR@/doc
 
 #---------------------------------------------------------------------------
 # configuration options related to the alphabetical class index
@@ -115,10 +114,7 @@ ENABLE_PREPROCESSING  = YES
 MACRO_EXPANSION       = YES
 SEARCH_INCLUDES       = YES
 INCLUDE_PATH          = 
-PREDEFINED            = DOXYGEN_SHOULD_SKIP_THIS \
-                        "M_STYLE_ATTRIBUTE(TYPE, NAME, CAMELNAME) = Q_PROPERTY(TYPE NAME READ NAME WRITE set##CAMELNAME)" \
-                        "M_STYLE_MODE(MODE) = public: void setMode##MODE();" \
-                        "M_MODEL_PROPERTY(TYPE, NAME, CAMELNAME, GENERATEMETHODS, INITIALVALUE) = Q_PROPERTY(TYPE NAME READ NAME WRITE set##CAMELNAME)"
+PREDEFINED            = DOXYGEN_SHOULD_SKIP_THIS
 
 EXPAND_ONLY_PREDEF    = YES
 
@@ -158,4 +154,4 @@ SEARCHENGINE          = NO
 EXCLUDE_SYMBOLS += *Private *Draft *Daemon*
 
 # DEPRECATED CLASSES
-EXCLUDE_SYMBOLS += MCombined* MPathLayout*
+EXCLUDE_SYMBOLS +=

@@ -3,11 +3,6 @@ include(check.pri)
 # for defines
 include(../mkspecs/common.pri)
 
-# for mmoc and mgen settings
-include(../src/predeps.pri)
-include(../mkspecs/features/meegotouch_mmoc.prf)
-include(../mkspecs/features/meegotouch_mgen.prf)
-
 MSRCDIR = $${M_SOURCE_TREE}/src
 STUBSDIR = ../stubs
 INCLUDEPATH += \
@@ -15,7 +10,6 @@ INCLUDEPATH += \
     $$MSRCDIR \
     $$STUBSDIR \
     $$MSRCDIR/include \
-    $$MSRCDIR/views/style \
 
 DEPENDPATH = $$INCLUDEPATH
 QMAKE_LIBDIR += ../../lib /usr/local/lib
@@ -25,12 +19,11 @@ QT += testlib dbus svg network
 TEMPLATE = app
 # DEFINES += QT_NO_DEBUG_OUTPUT
 DEFINES += UNIT_TEST
-target.path = $$[QT_INSTALL_LIBS]/libmeegotouch-tests
+target.path = $$[QT_INSTALL_LIBS]/libmlocale-tests
 INSTALLS += target
 
-LIBS += $$mAddLibrary(meegotouchcore) \
-        $$mAddLibrary(meegotouchviews)
+LIBS += $$mAddLibrary(mlocale)
 
 support_files.files =
-support_files.path = $$[QT_INSTALL_LIBS]/libmeegotouch-tests
+support_files.path = $$[QT_INSTALL_LIBS]/libmlocale-tests
 INSTALLS += support_files

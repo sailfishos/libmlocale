@@ -17,12 +17,11 @@ isEmpty(DOXYGEN_BIN) {
     doc.commands+= ( $${DOXYGEN_BIN} doc/mdoxy.cfg );
     doc.commands+= ( cp $${IN_PWD}/src/images/* doc/html );
     doc.commands+= ( cd doc ; $${IN_PWD}/xmlize.pl );
-    doc.commands+= ( $${IN_PWD}/generateSettingsLanguageDocs.sh $${OUT_PWD}/doc );
 
     # Install rules
     htmldocs.files = $${OUT_PWD}/doc/html/
 
-    htmldocs.path = $$M_INSTALL_DATA/doc/libmeegotouch
+    htmldocs.path = $$ML_INSTALL_DATA/doc/libmlocale
     htmldocs.CONFIG += no_check_exist
     INSTALLS += htmldocs
 }
