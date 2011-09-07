@@ -1,26 +1,21 @@
 # this file contains the parts that are common to all libs
 
 MOC_DIR = .moc
-M_MGEN_OUTDIR = .gen
-!win32:OBJECTS_DIR = .obj
+OBJECTS_DIR = .obj
 DESTDIR = $$M_BUILD_TREE/lib
 TEMPLATE = lib
 
 include(../mkspecs/common.pri)
-include(predeps.pri)
-include(../mkspecs/features/meegotouch_mmoc.prf)
-include(../mkspecs/features/meegotouch_mgen.prf)
 
-VERSION = $${M_VERSION}
+VERSION = $${ML_VERSION}
 DEFINES += M_VERSION=\\\"$${M_VERSION}\\\"
 
-DEFINES += M_MAJOR_VERSION=$${M_MAJOR_VERSION}
-DEFINES += M_MINOR_VERSION=$${M_MINOR_VERSION}
-DEFINES += M_PATCH_VERSION=$${M_PATCH_VERSION}
+DEFINES += M_MAJOR_VERSION=$${ML_MAJOR_VERSION}
+DEFINES += M_MINOR_VERSION=$${ML_MINOR_VERSION}
+DEFINES += M_PATCH_VERSION=$${ML_PATCH_VERSION}
 
 INCLUDEPATH += $${M_SOURCE_TREE}/src/include
 INCLUDEPATH += $${OUT_PWD}/.moc
-INCLUDEPATH += $${OUT_PWD}/.gen
 
 QMAKE_STRIP = echo
 
@@ -49,70 +44,16 @@ DEFINES += QT_STRICT_ITERATORS
 
 ## Features
 
-contains(M_BUILD_FEATURES, timestamps) {
-  DEFINES += M_TIMESTAMP
-}
-
 contains(M_BUILD_FEATURES, testable) {
   DEFINES += TESTABLE
   HEADERS += ../corelib/core/testabilityinterface.h
 }
 
-contains(M_BUILD_FEATURES, pch) {
-  DEFINES += USING_PCH
-  PRECOMPILED_HEADER = pch/stable_pch.h
-  HEADERS += pch/stable_pch.h
-  CONFIG += precompile_header
-}
-
-contains(M_PROFILE_PARTS, theme) {
-  DEFINES += M_THEMESYSTEM_PROFILING_SUPPORT
-}
-
 
 ## Dependencies
 
-# list pkg-config dependencies here
-contains(DEFINES, HAVE_XDAMAGE) {
-    PKGCONFIG += xdamage
-}
-
-# list pkg-config dependencies here
-contains(DEFINES, HAVE_XFIXES) {
-    PKGCONFIG += xfixes
-}
-
-contains(DEFINES, HAVE_XCOMPOSITE) {
-    PKGCONFIG += xcomposite
-}
-
 contains(DEFINES, HAVE_ICU) {
     LIBS += -licui18n -licuuc -licudata
-}
-
-contains(DEFINES, HAVE_CONTEXTSUBSCRIBER) {
-    PKGCONFIG += contextsubscriber-1.0
-}
-
-contains(DEFINES, HAVE_CONTENTACTION) {
-    PKGCONFIG += contentaction-0.1
-}
-
-contains(DEFINES, HAVE_GCONF) {
-    PKGCONFIG += gconf-2.0
-macx:PKGCONFIG += gobject-2.0
-    # TODO: Why is this necessary? 
-    # The PKGCONFIG call above usually causes qmake to link to the correct libraries
-    # automatically, but that does not happen if we remove these explicit mentions.
-    LIBS += -lgconf-2
-}
-
-contains(DEFINES, HAVE_DBUS) {
-    QT += dbus
-}
-
-contains(DEFINES, HAVE_GLIB) {
-    LIBS += -lglib-2.0
 }
 
 QT += \
@@ -121,18 +62,6 @@ QT += \
     core \
     gui \
     xml
-
-contains(DEFINES, HAVE_MEEGOGRAPHICSSYSTEM) {
-    QT += meegographicssystemhelper
-}
-
-contains(DEFINES, HAVE_MALIIT) {
-    PKGCONFIG += maliit-1.0
-}
-
-contains(QT_CONFIG, opengles2) {
-    DEFINES += M_USE_OPENGL
-}
 
 !simulator: QT += opengl
 
@@ -143,9 +72,5 @@ check.commands = $$system(true)
 QMAKE_EXTRA_TARGETS += check-xml
 check-xml.depends = $$DESTDIR/lib$${TARGET}.so.$$VERSION
 check-xml.commands = $$system(true)
-QMAKE_CLEAN += \
-    *.gcov \
-    $$OBJECTS_DIR/*.gcno \
-    $$OBJECTS_DIR/*.gcda \
 
-target.path = $$M_INSTALL_LIBS
+target.path = $$ML_INSTALL_LIBS

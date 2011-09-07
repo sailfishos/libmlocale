@@ -1,4 +1,4 @@
-include($${M_BUILD_TREE}/mkspecs/features/meegotouch_defines.prf)
+include($${M_BUILD_TREE}/mkspecs/features/mlocale_defines.prf)
 
 ICUBINDIR = $$system(icu-config --bindir)
 ICUVERSION = $$system(icu-config --version)
@@ -122,7 +122,7 @@ greaterThan(ICUVERSION, 4.4) {
     REGIONTXT =  # empty, do nothing
     dummy.files = dummy-icu42-workaround-this-file-never-exists
     dummy.CONFIG += no_check_exist
-    dummy.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA
+    dummy.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA
     INSTALLS += dummy
 }
 
@@ -205,30 +205,30 @@ QMAKE_EXTRA_COMPILERS += region
 
 localesres.files = $$LOCALESRES
 localesres.CONFIG += no_check_exist
-localesres.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA
+localesres.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA
 INSTALLS += localesres
 
 langres.files = $$LANGRES
 langres.CONFIG += no_check_exist
-langres.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA/lang
+langres.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA/lang
 INSTALLS += langres
 
 collres.files = $$COLLRES
 collres.CONFIG += no_check_exist
-collres.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA/coll
+collres.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA/coll
 INSTALLS += collres
 
 currres.files = $$CURRRES
 currres.CONFIG += no_check_exist
-currres.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA/curr
+currres.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA/curr
 INSTALLS += currres
 
 zoneres.files = $$ZONERES
 zoneres.CONFIG += no_check_exist
-zoneres.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA/zone
+zoneres.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA/zone
 INSTALLS += zoneres
 
 regionres.files = $$REGIONRES
 regionres.CONFIG += no_check_exist
-regionres.path = $$M_ICUEXTRADATA_DIR/$$ICUUSRDATA/region
+regionres.path = $$ML_ICUEXTRADATA_DIR/$$ICUUSRDATA/region
 INSTALLS += regionres
