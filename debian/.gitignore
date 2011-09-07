@@ -1,0 +1,12 @@
+*.debhelper.log
+*.debhelper
+*.substvars
+files
+libmlocale-benchmarks-dbg/
+libmlocale-benchmarks/
+libmlocale-dev/
+libmlocale-tests-dbg/
+libmlocale-tests/
+libmlocale0-dbg/
+libmlocale0/
+tmp/

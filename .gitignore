@@ -1,0 +1,5 @@
+build-armel/*
+build-i386/*
+configure-stamp
+build-stamp
+
