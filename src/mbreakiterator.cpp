@@ -29,6 +29,8 @@
 #include "mnullbreakiterator.h"
 #endif
 
+namespace ML10N {
+
 class MBreakIteratorPrivate
 {
 public:
@@ -254,4 +256,6 @@ bool MBreakIterator::isBoundary(int index)
 {
     Q_D(MBreakIterator);
     return d->impl->isBoundary(index);
+}
+
 }

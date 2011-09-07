@@ -17,13 +17,15 @@
 **
 ****************************************************************************/
 
-#ifndef MBREAKITERATORIF_H
-#define MBREAKITERATORIF_H
+#ifndef ML10N_MBREAKITERATORIF_H
+#define ML10N_MBREAKITERATORIF_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 #include "mlocale.h"
 
 #include <QString>
+
+namespace ML10N {
 
 /*! \internal
  * This class describes the interface that both MIcuIterator
@@ -31,7 +33,7 @@
  * to choose one of both backend implementations at compile time
  * and to keep the number of needed "#ifdef" small.
  */
-class M_CORE_EXPORT MBreakIteratorIf
+class MLOCALE_EXPORT MBreakIteratorIf
 {
 public:
     virtual ~MBreakIteratorIf() {};
@@ -55,5 +57,7 @@ public:
     virtual bool isBoundary(int index) = 0;
 };
 //! \internal_end
+
+}
 
 #endif

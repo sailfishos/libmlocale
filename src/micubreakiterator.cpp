@@ -26,6 +26,8 @@
 #include "mlocale_p.h"
 #endif
 
+namespace ML10N {
+
 /*
  *  internally used by MBreakIterator
  */
@@ -301,4 +303,6 @@ bool MIcuBreakIterator::isBoundary(int index)
 {
     Q_D(MIcuBreakIterator);
     return d->icuIterator->isBoundary(index);
+}
+
 }

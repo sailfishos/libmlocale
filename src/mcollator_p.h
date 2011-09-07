@@ -17,10 +17,12 @@
 **
 ****************************************************************************/
 
-#ifndef MCOLLATOR_P_H
-#define MCOLLATOR_P_H
+#ifndef ML10N_MCOLLATOR_P_H
+#define ML10N_MCOLLATOR_P_H
 
 #include <unicode/coll.h>
+
+namespace ML10N {
 
 class MCollatorPrivate
 {
@@ -35,5 +37,7 @@ public:
 private:
     MCollatorPrivate(const MCollatorPrivate &other);
 };
+
+}
 
 #endif

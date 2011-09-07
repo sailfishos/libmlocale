@@ -17,11 +17,13 @@
 **
 ****************************************************************************/
 
-#ifndef MLOCALEBUCKETS_H
-#define MLOCALEBUCKETS_H
+#ifndef ML10N_MLOCALEBUCKETS_H
+#define ML10N_MLOCALEBUCKETS_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 #include <QStringList>
+
+namespace ML10N {
 
 class MLocaleBucketsPrivate;
 
@@ -103,7 +105,7 @@ class MLocaleBucketsPrivate;
  * \sa MLocale::indexBucket()
  */
 
-class M_CORE_EXPORT MLocaleBuckets
+class MLOCALE_EXPORT MLocaleBuckets
 {
 public:
     /*!
@@ -266,5 +268,7 @@ private:
 
     MLocaleBucketsPrivate *const d_ptr;
 };
+
+}
 
 #endif // MLOCALEBUCKETS_H

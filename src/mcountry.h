@@ -17,16 +17,18 @@
 **
 ****************************************************************************/
 
-#ifndef MCOUNTRY_H
-#define MCOUNTRY_H
+#ifndef ML10N_MCOUNTRY_H
+#define ML10N_MCOUNTRY_H
 
 #include <QString>
 
-#include "mexport.h"
+#include "mlocaleexport.h"
+
+namespace ML10N {
 
 class MCountryPrivate;
 
-class M_CORE_EXPORT MCountry
+class MLOCALE_EXPORT MCountry
 {
   public:
     MCountry();
@@ -74,5 +76,7 @@ class M_CORE_EXPORT MCountry
     MCountryPrivate *const d_ptr;
     Q_DECLARE_PRIVATE(MCountry)
 };
+
+}
 
 #endif

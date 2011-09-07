@@ -24,6 +24,8 @@
 #include "micuconversions.h"
 #endif
 
+namespace ML10N {
+
 class MCityPrivate
 {
 public:
@@ -234,4 +236,6 @@ void MCity::setCountry( const MCountry& val )
 {
     Q_D( MCity );
     d->country = val;
+}
+
 }

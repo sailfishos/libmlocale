@@ -17,13 +17,15 @@
 **
 ****************************************************************************/
 
-#ifndef MCHARSETDETECTOR_H
-#define MCHARSETDETECTOR_H
+#ifndef ML10N_MCHARSETDETECTOR_H
+#define ML10N_MCHARSETDETECTOR_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 
 #include <QList>
 #include <QStringList>
+
+namespace ML10N {
 
 class MCharsetMatch;
 class MCharsetDetectorPrivate;
@@ -101,7 +103,7 @@ class MCharsetDetectorPrivate;
  * \endcode
  */
 
-class M_CORE_EXPORT MCharsetDetector
+class MLOCALE_EXPORT MCharsetDetector
 {
 public:
     /*!
@@ -297,5 +299,7 @@ private:
     MCharsetDetectorPrivate *const d_ptr;
     Q_DECLARE_PRIVATE(MCharsetDetector)
 };
+
+}
 
 #endif

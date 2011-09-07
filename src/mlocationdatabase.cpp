@@ -30,6 +30,8 @@
 #include <unicode/timezone.h>
 #endif
 
+namespace ML10N {
+
 static const QString path = "/usr/share/meegotouch/locationdatabase/";
 static const QString zoneAliasFile = "/usr/share/tzdata-timed/zone.alias";
 static const QString zoneAliasFileFallback = ":/zone.alias.fallback";
@@ -431,4 +433,6 @@ MCity MLocationDatabase::nearestCity(qreal latitude, qreal longitude)
         }
     }
     return bestCity;
+}
+
 }

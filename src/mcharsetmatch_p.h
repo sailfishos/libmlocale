@@ -17,10 +17,12 @@
 **
 ****************************************************************************/
 
-#ifndef MCHARSETMATCH_P_H
-#define MCHARSETMATCH_P_H
+#ifndef ML10N_MCHARSETMATCH_P_H
+#define ML10N_MCHARSETMATCH_P_H
 
 #include <QString>
+
+namespace ML10N {
 
 class MCharsetMatchPrivate
 {
@@ -40,5 +42,7 @@ public:
 
     MCharsetMatch *q_ptr;
 };
+
+}
 
 #endif

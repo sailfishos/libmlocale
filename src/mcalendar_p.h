@@ -17,8 +17,8 @@
 **
 ****************************************************************************/
 
-#ifndef MCALENDAR_P_H
-#define MCALENDAR_P_H
+#ifndef ML10N_MCALENDAR_P_H
+#define ML10N_MCALENDAR_P_H
 
 #include <unicode/calendar.h>
 
@@ -29,8 +29,9 @@
 #include <qmtime.h>
 #endif
 
-class MTimeZoneWatcher;
+namespace ML10N {
 
+class MTimeZoneWatcher;
 
 class MCalendarPrivate
 {
@@ -69,5 +70,7 @@ private:
     MeeGo::QmTime *_qmtime;
 #endif
 };
+
+}
 
 #endif

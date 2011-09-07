@@ -19,6 +19,8 @@
 
 #include "mcountry.h"
 
+namespace ML10N {
+
 class MCountryPrivate
 {
 public:
@@ -94,4 +96,6 @@ void MCountry::setLocalName( const QString& val )
 {
     Q_D( MCountry );
     d->localName = val;
+}
+
 }

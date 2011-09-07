@@ -17,19 +17,21 @@
 **
 ****************************************************************************/
 
-#ifndef MLOCATIONDATABASE_H
-#define MLOCATIONDATABASE_H
+#ifndef ML10N_MLOCATIONDATABASE_H
+#define ML10N_MLOCATIONDATABASE_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 
 #include <QList>
 
 #include "mcity.h"
 #include "mcountry.h"
 
+namespace ML10N {
+
 class MLocationDatabasePrivate;
 
-class M_CORE_EXPORT MLocationDatabase
+class MLOCALE_EXPORT MLocationDatabase
 {
   public:
     MLocationDatabase();
@@ -87,5 +89,7 @@ class M_CORE_EXPORT MLocationDatabase
     Q_DECLARE_PRIVATE(MLocationDatabase)
 
 };
+
+}
 
 #endif

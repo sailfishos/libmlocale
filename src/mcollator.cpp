@@ -29,6 +29,8 @@
 
 #include <QDebug>
 
+namespace ML10N {
+
 /////////////////////
 // MCollatorPrivate
 
@@ -235,4 +237,6 @@ MCollator &MCollator::operator =(const MCollator &other)
     delete d->_coll;
     d->_coll = other.d_ptr->_coll->safeClone();
     return *this;
+}
+
 }

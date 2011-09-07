@@ -17,12 +17,14 @@
 **
 ****************************************************************************/
 
-#ifndef MCHARSETMATCH_H
-#define MCHARSETMATCH_H
+#ifndef ML10N_MCHARSETMATCH_H
+#define ML10N_MCHARSETMATCH_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 
 #include <QString>
+
+namespace ML10N {
 
 class MCharsetMatchPrivate;
 
@@ -33,7 +35,7 @@ class MCharsetMatchPrivate;
  *
  */
 
-class M_CORE_EXPORT MCharsetMatch
+class MLOCALE_EXPORT MCharsetMatch
 {
 public:
     /*!
@@ -170,5 +172,7 @@ private:
     MCharsetMatchPrivate *const d_ptr;
     Q_DECLARE_PRIVATE(MCharsetMatch)
 };
+
+}
 
 #endif

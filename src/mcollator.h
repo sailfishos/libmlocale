@@ -17,16 +17,19 @@
 **
 ****************************************************************************/
 
-#ifndef MCOLLATOR_H
-#define MCOLLATOR_H
+#ifndef ML10N_MCOLLATOR_H
+#define ML10N_MCOLLATOR_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 #include "mlocale.h"
 
 class QString;
+
+namespace ML10N {
+
 class MCollatorPrivate;
 
-class M_CORE_EXPORT MCollator
+class MLOCALE_EXPORT MCollator
 {
 public:
     MCollator();
@@ -68,5 +71,6 @@ private:
     friend class MLocale;
 };
 
+}
 
 #endif

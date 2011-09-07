@@ -17,14 +17,16 @@
 **
 ****************************************************************************/
 
-#ifndef MCHARSETDETECTOR_P_H
-#define MCHARSETDETECTR_P_H
+#ifndef ML10N_MCHARSETDETECTOR_P_H
+#define ML10N_MCHARSETDETECTR_P_H
 
 #include <unicode/utypes.h>
 
 #include <QByteArray>
 
 class UCharsetDetector;
+
+namespace ML10N {
 
 class MCharsetDetectorPrivate
 {
@@ -54,5 +56,7 @@ public:
 private:
     Q_DISABLE_COPY(MCharsetDetectorPrivate)
 };
+
+}
 
 #endif

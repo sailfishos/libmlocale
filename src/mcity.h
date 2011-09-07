@@ -17,17 +17,19 @@
 **
 ****************************************************************************/
 
-#ifndef MCITY_H
-#define MCITY_H
+#ifndef ML10N_MCITY_H
+#define ML10N_MCITY_H
 
 #include <QDateTime>
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 #include "mcountry.h"
+
+namespace ML10N {
 
 class MCityPrivate;
 
-class M_CORE_EXPORT MCity
+class MLOCALE_EXPORT MCity
 {
   public:
     MCity();
@@ -140,5 +142,7 @@ class M_CORE_EXPORT MCity
     MCityPrivate *const d_ptr;
     Q_DECLARE_PRIVATE(MCity)
 };
+
+}
 
 #endif

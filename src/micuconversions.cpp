@@ -26,6 +26,8 @@
 
 #include "mlocale_p.h"
 
+namespace ML10N {
+
 icu::UnicodeString MIcuConversions::qStringToUnicodeString(const QString &sourceStr)
 {
     return UnicodeString(static_cast<const UChar *>(sourceStr.utf16()));
@@ -402,4 +404,6 @@ QString MIcuConversions::setCollationOption(const QString &localeName, MLocale::
     return MIcuConversions::setOption(
         localeName, "collation",
         MIcuConversions::collationToString(collation));
+}
+
 }

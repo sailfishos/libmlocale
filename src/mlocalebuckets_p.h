@@ -17,8 +17,8 @@
 **
 ****************************************************************************/
 
-#ifndef MLOCALEBUCKETS_P_H
-#define MLOCALEBUCKETS_P_H
+#ifndef ML10N_MLOCALEBUCKETS_P_H
+#define ML10N_MLOCALEBUCKETS_P_H
 
 #include <QStringList>
 #include <QVector>
@@ -27,6 +27,8 @@
 #ifdef HAVE_ICU
 #  include "mcollator.h"
 #endif
+
+namespace ML10N {
 
 class MLocaleBuckets;
 
@@ -108,5 +110,6 @@ private:
     Qt::SortOrder sortOrder;
 };
 
+}
 
 #endif // MLOCALEBUCKETS_P_H

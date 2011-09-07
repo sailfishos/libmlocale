@@ -17,15 +17,16 @@
 **
 ****************************************************************************/
 
-#ifndef MICUBREAKITERATOR_H
-#define MICUBREAKITERATOR_H
+#ifndef ML10N_MICUBREAKITERATOR_H
+#define ML10N_MICUBREAKITERATOR_H
 
-#include "mexport.h"
 #include "mlocale.h"
 #include "mbreakiterator.h"
 #include "mbreakiteratorif.h"
 
 #include <QString>
+
+namespace ML10N {
 
 class MIcuBreakIteratorPrivate;
 
@@ -64,5 +65,7 @@ private:
     MIcuBreakIteratorPrivate *const d_ptr;
 };
 //! \internal_end
+
+}
 
 #endif

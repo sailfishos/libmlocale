@@ -17,17 +17,19 @@
 **
 ****************************************************************************/
 
-#ifndef MBREAKITERATOR_H
-#define MBREAKITERATOR_H
+#ifndef ML10N_MBREAKITERATOR_H
+#define ML10N_MBREAKITERATOR_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 #include "mlocale.h"
 
 #include <QString>
 
+namespace ML10N {
+
 class MBreakIteratorPrivate;
 
-class M_CORE_EXPORT MBreakIterator
+class MLOCALE_EXPORT MBreakIterator
 {
 public:
     enum Type {LineIterator, WordIterator}; // would also be supported: character, sentence, title
@@ -60,5 +62,6 @@ private:
     MBreakIteratorPrivate *const d_ptr;
 };
 
+}
 
 #endif

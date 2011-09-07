@@ -17,19 +17,20 @@
 **
 ****************************************************************************/
 
-#ifndef MNULLBREAKITERATOR_H
-#define MNULLBREAKITERATOR_H
+#ifndef ML10N_MNULLBREAKITERATOR_H
+#define ML10N_MNULLBREAKITERATOR_H
 
-#include "mexport.h"
 #include "mbreakiterator.h"
 #include "mbreakiteratorif.h"
 
 #include <QString>
 
+namespace ML10N {
+
 class MNullBreakIteratorPrivate;
 
 //! \internal Used by MBreakIterator
-class M_CORE_EXPORT MNullBreakIterator : public MBreakIteratorIf
+class MNullBreakIterator : public MBreakIteratorIf
 {
 public:
     MNullBreakIterator(const MLocale &locale,
@@ -63,5 +64,7 @@ private:
     MNullBreakIteratorPrivate *const d_ptr;
 };
 //! \internal_end
+
+}
 
 #endif

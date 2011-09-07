@@ -17,8 +17,8 @@
 **
 ****************************************************************************/
 
-#ifndef MICUCONVERSIONS_H
-#define MICUCONVERSIONS_H
+#ifndef ML10N_MICUCONVERSIONS_H
+#define ML10N_MICUCONVERSIONS_H
 
 #include <unicode/unistr.h>
 #include <unicode/datefmt.h>
@@ -27,6 +27,8 @@
 #include "mlocale.h"
 
 class QString;
+
+namespace ML10N {
 
 //! \internal
 
@@ -182,5 +184,7 @@ namespace MIcuConversions
 }
 
 //! \internal_end
+
+}
 
 #endif

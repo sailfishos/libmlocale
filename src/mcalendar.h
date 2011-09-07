@@ -17,19 +17,22 @@
 **
 ****************************************************************************/
 
-#ifndef MCALENDAR_H
-#define MCALENDAR_H
+#ifndef ML10N_MCALENDAR_H
+#define ML10N_MCALENDAR_H
 
 #include <QDateTime>
 
 #include "mlocale.h"
-#include "mexport.h"
+#include "mlocaleexport.h"
 
-class MCalendarPrivate;
 class QDateTime;
 class QDate;
 
-class M_CORE_EXPORT MCalendar
+namespace ML10N {
+
+class MCalendarPrivate;
+
+class MLOCALE_EXPORT MCalendar
 {
 public:
     explicit MCalendar(MLocale::CalendarType calendarType = MLocale::DefaultCalendar,
@@ -180,5 +183,7 @@ private:
 
     friend class MLocale;
 };
+
+}
 
 #endif

@@ -19,6 +19,8 @@
 
 #include "mnullbreakiterator.h"
 
+namespace ML10N {
+
 /*! \internal
  *  internally used by MBreakIterator
  */
@@ -203,3 +205,5 @@ bool MNullBreakIterator::isBoundary(int index)
     return true;
 }
 /*! \internal_end */
+
+}

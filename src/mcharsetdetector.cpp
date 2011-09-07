@@ -35,6 +35,8 @@
 #include <QTextCodec>
 #include <QDebug>
 
+namespace ML10N {
+
 MCharsetDetectorPrivate::MCharsetDetectorPrivate()
     : _status(U_ZERO_ERROR),
       _uCharsetDetector(0),
@@ -654,4 +656,6 @@ bool MCharsetDetector::isInputFilterEnabled()
     Q_D(MCharsetDetector);
     clearError();
     return bool(ucsdet_isInputFilterEnabled(d->_uCharsetDetector));
+}
+
 }

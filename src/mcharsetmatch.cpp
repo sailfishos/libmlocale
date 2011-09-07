@@ -20,6 +20,8 @@
 #include "mcharsetmatch.h"
 #include "mcharsetmatch_p.h"
 
+namespace ML10N {
+
 MCharsetMatchPrivate::MCharsetMatchPrivate()
     : _confidence(0),
       q_ptr(0)
@@ -142,4 +144,6 @@ void MCharsetMatch::setConfidence(qint32 confidence)
 {
     Q_D(MCharsetMatch);
     d->_confidence = confidence;
+}
+
 }

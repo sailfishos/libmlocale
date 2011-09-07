@@ -20,6 +20,7 @@
 #include "mlocalebuckets.h"
 #include "mlocalebuckets_p.h"
 
+namespace ML10N {
 
 MLocaleBucketsPrivate::MLocaleBucketsPrivate() :
     locale(),
@@ -281,4 +282,6 @@ void MLocaleBuckets::removeEmptyBucket(int bucketIndex)
     Q_D(MLocaleBuckets);
 
     return d->removeEmptyBucket(bucketIndex);
+}
+
 }

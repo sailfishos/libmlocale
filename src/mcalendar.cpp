@@ -29,6 +29,8 @@
 
 #include "mdebug.h"
 
+namespace ML10N {
+
 MCalendarPrivate::MCalendarPrivate(MLocale::CalendarType calendarType)
     : _calendar(0), _calendarType(calendarType), _valid(true)
 {
@@ -888,4 +890,6 @@ QStringList MCalendar::supportedTimeZones(const QString &country)
     delete strEnum;
 
     return result;
+}
+
 }

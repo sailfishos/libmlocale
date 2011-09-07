@@ -17,8 +17,8 @@
 **
 ****************************************************************************/
 
-#ifndef MDEBUG_H
-#define MDEBUG_H
+#ifndef ML10N_MDEBUG_H
+#define ML10N_MDEBUG_H
 
 #include <QDebug>
 
