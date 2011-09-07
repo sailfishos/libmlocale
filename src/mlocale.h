@@ -17,10 +17,10 @@
 **
 ****************************************************************************/
 
-#ifndef MLOCALE_H
-#define MLOCALE_H
+#ifndef ML10N_MLOCALE_H
+#define ML10N_MLOCALE_H
 
-#include "mexport.h"
+#include "mlocaleexport.h"
 
 #include <float.h>
 #include <QtGlobal>
@@ -32,12 +32,16 @@ class QStringList;
 class QDateTime;
 class QTranslator;
 
+namespace ML10N {
+
 class MCollator;
 class MAbstractName;
 class MCalendar;
 class MBreakIteratorPrivate;
 
 class MLocalePrivate;
+class MLocaleAbstractConfigItemFactory;
+
 struct MStaticLocaleDestroyer;
 
 /*!
@@ -89,11 +93,23 @@ struct MStaticLocaleDestroyer;
  * \note The methods are not thread-safe. For number/string formatting etc. the class is re-entrant. If one needs to have formatting in multiple threads it is suggested to create separate locales.
  */
 
-
-class M_CORE_EXPORT MLocale : public QObject
+class MLOCALE_EXPORT MLocale : public QObject
 {
     Q_OBJECT
 public:
+    static void clearSystemDefault();
+
+    /*!
+     * Tells MLocale to use this factory to create config items
+     *
+     * A MLocaleAbstractConfigItem is an abstraction from the way
+     * how MLocale gets and sets config values of the system.
+     * These can be for example the current language or region of
+     * the system. Users of the MLocale library can implement
+     * a factory if needed. for an example look at the
+     * MLocaleGConfConfigItemFactory.
+     */
+    static void setConfigItemFactory( const MLocaleAbstractConfigItemFactory* factory );
 
     /*!
      * \brief enum for Date formatting.
@@ -2091,5 +2107,7 @@ private:
 private Q_SLOTS:
     void refreshSettings();
 };
+
+}
 
 #endif

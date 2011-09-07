@@ -42,7 +42,6 @@
 #include <QMutex>
 #include <QDateTime>
 #include <QPointer>
-#include <MApplication>
 
 #ifdef HAVE_ICU
 #include "mcollator.h"
@@ -51,8 +50,26 @@
 #include "micuconversions.h"
 #endif
 
+#include "mlocaleabstractconfigitem.h"
+#include "mlocaleabstractconfigitemfactory.h"
+#include "mlocalenullconfigitemfactory.h"
+
+namespace ML10N {
+
+void MLocale::clearSystemDefault()
+{
+    if ( MLocale::s_systemDefault )
+    {
+        delete MLocale::s_systemDefault;
+        MLocale::s_systemDefault = 0;
+    }
+}
+
+
 static QPointer<QTranslator> s_ltrTranslator = 0;
 static QPointer<QTranslator> s_rtlTranslator = 0;
+
+static const MLocaleAbstractConfigItemFactory* g_pConfigItemFactory = 0;
 
 namespace
 {
@@ -929,20 +946,40 @@ MLocalePrivate::MLocalePrivate()
       _numberFormat(0),
       _numberFormatLcTime(0),
 #endif
-#ifdef HAVE_GCONF
-      currentLanguageItem(SettingsLanguage),
-      currentLcTimeItem(SettingsLcTime),
-      currentLcTimeFormat24hItem(SettingsLcTimeFormat24h),
-      currentLcCollateItem(SettingsLcCollate),
-      currentLcNumericItem(SettingsLcNumeric),
-      currentLcMonetaryItem(SettingsLcMonetary),
-      currentLcTelephoneItem(SettingsLcTelephone),
-#endif
+      pCurrentLanguage(0),
+      pCurrentLcTime(0),
+      pCurrentLcTimeFormat24h(0),
+      pCurrentLcCollate(0),
+      pCurrentLcNumeric(0),
+      pCurrentLcMonetary(0),
+      pCurrentLcTelephone(0),
 #ifdef HAVE_ICU
       _pDateTimeCalendar(0),
 #endif
       q_ptr(0)
 {
+    if ( ! g_pConfigItemFactory )
+    {
+	MLocaleNullConfigItemFactory factory;
+	pCurrentLanguage        = factory.createConfigItem( SettingsLanguage );
+	pCurrentLcTime          = factory.createConfigItem( SettingsLcTime );
+	pCurrentLcTimeFormat24h = factory.createConfigItem( SettingsLcTimeFormat24h );
+	pCurrentLcCollate       = factory.createConfigItem( SettingsLcCollate );
+	pCurrentLcNumeric       = factory.createConfigItem( SettingsLcNumeric );
+	pCurrentLcMonetary      = factory.createConfigItem( SettingsLcMonetary );
+	pCurrentLcTelephone     = factory.createConfigItem( SettingsLcTelephone );
+    }
+    else
+    {
+	pCurrentLanguage = g_pConfigItemFactory->createConfigItem( SettingsLanguage );
+	pCurrentLcTime = g_pConfigItemFactory->createConfigItem( SettingsLcTime );
+	pCurrentLcTimeFormat24h = g_pConfigItemFactory->createConfigItem( SettingsLcTimeFormat24h );
+	pCurrentLcCollate = g_pConfigItemFactory->createConfigItem( SettingsLcCollate );
+	pCurrentLcNumeric = g_pConfigItemFactory->createConfigItem( SettingsLcNumeric );
+	pCurrentLcMonetary = g_pConfigItemFactory->createConfigItem( SettingsLcMonetary );
+	pCurrentLcTelephone = g_pConfigItemFactory->createConfigItem( SettingsLcTelephone );
+    }
+
     if (translationPaths.isEmpty())
     {
 #ifdef Q_OS_WIN
@@ -961,7 +998,7 @@ MLocalePrivate::MLocalePrivate()
     }
 
     if (dataPaths.isEmpty())
-        MLocale::setDataPath(M_ICUEXTRADATA_DIR);
+        MLocale::setDataPath(ML_ICUEXTRADATA_DIR);
 }
 
 // copy constructor
@@ -985,20 +1022,42 @@ MLocalePrivate::MLocalePrivate(const MLocalePrivate &other)
       _messageTranslations(other._messageTranslations),
       _timeTranslations(other._timeTranslations),
       _trTranslations(other._trTranslations),
-#ifdef HAVE_GCONF
-      currentLanguageItem(SettingsLanguage),
-      currentLcTimeItem(SettingsLcTime),
-      currentLcTimeFormat24hItem(SettingsLcTimeFormat24h),
-      currentLcCollateItem(SettingsLcCollate),
-      currentLcNumericItem(SettingsLcNumeric),
-      currentLcMonetaryItem(SettingsLcMonetary),
-      currentLcTelephoneItem(SettingsLcTelephone),
-#endif
+
+      pCurrentLanguage(0),
+      pCurrentLcTime(0),
+      pCurrentLcTimeFormat24h(0),
+      pCurrentLcCollate(0),
+      pCurrentLcNumeric(0),
+      pCurrentLcMonetary(0),
+      pCurrentLcTelephone(0),
+
 #ifdef HAVE_ICU
       _pDateTimeCalendar(0),
 #endif
       q_ptr(0)
 {
+    if ( ! g_pConfigItemFactory )
+    {
+	MLocaleNullConfigItemFactory factory;
+	pCurrentLanguage        = factory.createConfigItem( SettingsLanguage );
+	pCurrentLcTime          = factory.createConfigItem( SettingsLcTime );
+	pCurrentLcTimeFormat24h = factory.createConfigItem( SettingsLcTimeFormat24h );
+	pCurrentLcCollate       = factory.createConfigItem( SettingsLcCollate );
+	pCurrentLcNumeric       = factory.createConfigItem( SettingsLcNumeric );
+	pCurrentLcMonetary      = factory.createConfigItem( SettingsLcMonetary );
+	pCurrentLcTelephone     = factory.createConfigItem( SettingsLcTelephone );
+    }
+    else
+    {
+	pCurrentLanguage = g_pConfigItemFactory->createConfigItem( SettingsLanguage );
+	pCurrentLcTime = g_pConfigItemFactory->createConfigItem( SettingsLcTime );
+	pCurrentLcTimeFormat24h = g_pConfigItemFactory->createConfigItem( SettingsLcTimeFormat24h );
+	pCurrentLcCollate = g_pConfigItemFactory->createConfigItem( SettingsLcCollate );
+	pCurrentLcNumeric = g_pConfigItemFactory->createConfigItem( SettingsLcNumeric );
+	pCurrentLcMonetary = g_pConfigItemFactory->createConfigItem( SettingsLcMonetary );
+	pCurrentLcTelephone = g_pConfigItemFactory->createConfigItem( SettingsLcTelephone );
+    }
+
 #ifdef HAVE_ICU
     if (other._numberFormat != 0) {
         _numberFormat = static_cast<icu::NumberFormat *>((other._numberFormat)->clone());
@@ -1687,25 +1746,79 @@ cleanLanguageCountryPosix(QString &localeString)
     }
 }
 
+void MLocale::setConfigItemFactory( const MLocaleAbstractConfigItemFactory* factory )
+{
+  if ( g_pConfigItemFactory )
+    {
+      delete g_pConfigItemFactory;
+    }
+
+  g_pConfigItemFactory = factory;
+}
+
 MLocale *
 MLocale::createSystemMLocale()
 {
-#ifdef HAVE_GCONF
-    MGConfItem languageItem(SettingsLanguage);
-    MGConfItem lcTimeItem(SettingsLcTime);
-    MGConfItem lcTimeFormat24hItem(SettingsLcTimeFormat24h);
-    MGConfItem lcCollateItem(SettingsLcCollate);
-    MGConfItem lcNumericItem(SettingsLcNumeric);
-    MGConfItem lcMonetaryItem(SettingsLcMonetary);
-    MGConfItem lcTelephoneItem(SettingsLcTelephone);
+    MLocaleAbstractConfigItem *pCurrentLanguage;
+    MLocaleAbstractConfigItem *pCurrentLcTime;
+    MLocaleAbstractConfigItem *pCurrentLcTimeFormat24h;
+    MLocaleAbstractConfigItem *pCurrentLcCollate;
+    MLocaleAbstractConfigItem *pCurrentLcNumeric;
+    MLocaleAbstractConfigItem *pCurrentLcMonetary;
+    MLocaleAbstractConfigItem *pCurrentLcTelephone;
 
-    QString language = languageItem.value("en_GB").toString();
-    QString lcTime = lcTimeItem.value("en_GB").toString();
-    QString lcTimeFormat24h = lcTimeFormat24hItem.value("12").toString();
-    QString lcCollate = lcCollateItem.value("en_GB").toString();
-    QString lcNumeric = lcNumericItem.value("en_GB").toString();
-    QString lcMonetary = lcMonetaryItem.value("en_GB").toString();
-    QString lcTelephone = lcTelephoneItem.value().toString();
+    if ( ! g_pConfigItemFactory )
+    {
+	MLocaleNullConfigItemFactory factory;
+	pCurrentLanguage        = factory.createConfigItem( SettingsLanguage );
+	pCurrentLcTime          = factory.createConfigItem( SettingsLcTime );
+	pCurrentLcTimeFormat24h = factory.createConfigItem( SettingsLcTimeFormat24h );
+	pCurrentLcCollate       = factory.createConfigItem( SettingsLcCollate );
+	pCurrentLcNumeric       = factory.createConfigItem( SettingsLcNumeric );
+	pCurrentLcMonetary      = factory.createConfigItem( SettingsLcMonetary );
+	pCurrentLcTelephone     = factory.createConfigItem( SettingsLcTelephone );
+    }
+    else
+    {
+	pCurrentLanguage        = g_pConfigItemFactory->createConfigItem( SettingsLanguage );
+	pCurrentLcTime          = g_pConfigItemFactory->createConfigItem( SettingsLcTime );
+	pCurrentLcTimeFormat24h = g_pConfigItemFactory->createConfigItem( SettingsLcTimeFormat24h );
+	pCurrentLcCollate       = g_pConfigItemFactory->createConfigItem( SettingsLcCollate );
+	pCurrentLcNumeric       = g_pConfigItemFactory->createConfigItem( SettingsLcNumeric );
+	pCurrentLcMonetary      = g_pConfigItemFactory->createConfigItem( SettingsLcMonetary );
+	pCurrentLcTelephone     = g_pConfigItemFactory->createConfigItem( SettingsLcTelephone );
+    }
+
+    QString language        = pCurrentLanguage->value();
+    QString lcTime          = pCurrentLcTime->value();
+    QString lcTimeFormat24h = pCurrentLcTimeFormat24h->value();
+    QString lcCollate       = pCurrentLcCollate->value();
+    QString lcNumeric       = pCurrentLcNumeric->value();
+    QString lcMonetary      = pCurrentLcMonetary->value();
+    QString lcTelephone     = pCurrentLcTelephone->value();
+
+    if ( !pCurrentLanguage->isValid() )        language = "en_GB";
+    if ( !pCurrentLcTime->isValid() )          lcTime = "en_GB";
+    if ( !pCurrentLcTimeFormat24h->isValid() ) lcTimeFormat24h = "12";
+    if ( !pCurrentLcCollate->isValid() )       lcCollate = "en_GB";
+    if ( !pCurrentLcNumeric->isValid() )       lcNumeric = "en_GB";
+    if ( !pCurrentLcMonetary->isValid() )      lcMonetary = "en_GB";
+    // no default for lcTelephone
+
+    delete pCurrentLanguage;
+    pCurrentLanguage = 0;
+    delete pCurrentLcTime;
+    pCurrentLcTime = 0;
+    delete pCurrentLcTimeFormat24h;
+    pCurrentLcTimeFormat24h = 0;
+    delete pCurrentLcCollate;
+    pCurrentLcCollate = 0;
+    delete pCurrentLcNumeric;
+    pCurrentLcNumeric = 0;
+    delete pCurrentLcMonetary;
+    pCurrentLcMonetary = 0;
+    delete pCurrentLcTelephone;
+    pCurrentLcTelephone = 0;
 
     MLocale *systemLocale;
 
@@ -1761,6 +1874,7 @@ MLocale::createSystemMLocale()
             gconfLanguageMap["uk"] = "uk_UA";
             gconfLanguageMap["zh"] = "zh_CN";
         }
+
         if (gconfLanguageMap.contains(language))
             language = gconfLanguageMap.value(language);
         systemLocale = new MLocale(language);
@@ -1784,14 +1898,6 @@ MLocale::createSystemMLocale()
         systemLocale->setCategoryLocale(MLocale::MLcTelephone, lcTelephone);
 
     return systemLocale;
-#else
-    QString language = qgetenv("LANG");
-    QString locale = cleanLanguageCountryPosix(language);
-    if (language.isEmpty())
-        language = PosixStr;
-
-    return new MLocale(locale);
-#endif
 }
 
 MLocale MLocale::createCLocale()
@@ -1802,47 +1908,47 @@ MLocale MLocale::createCLocale()
 void
 MLocale::connectSettings()
 {
-#ifdef HAVE_GCONF
     Q_D(MLocale);
 
-    QObject::connect(&d->currentLanguageItem, SIGNAL(valueChanged()),
+    // TODO: we can optimize this to have different slots for
+    // the different settings, and we can also directly receive
+    // the new setting from the signal here.
+
+    QObject::connect(d->pCurrentLanguage, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-    QObject::connect(&d->currentLcTimeItem, SIGNAL(valueChanged()),
+    QObject::connect(d->pCurrentLcTime, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-    QObject::connect(&d->currentLcTimeFormat24hItem, SIGNAL(valueChanged()),
+    QObject::connect(d->pCurrentLcTimeFormat24h, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-    QObject::connect(&d->currentLcCollateItem, SIGNAL(valueChanged()),
+    QObject::connect(d->pCurrentLcCollate, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-    QObject::connect(&d->currentLcNumericItem, SIGNAL(valueChanged()),
+    QObject::connect(d->pCurrentLcNumeric, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-    QObject::connect(&d->currentLcMonetaryItem, SIGNAL(valueChanged()),
+    QObject::connect(d->pCurrentLcMonetary, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-    QObject::connect(&d->currentLcTelephoneItem, SIGNAL(valueChanged()),
+    QObject::connect(d->pCurrentLcTelephone, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
-#endif
 }
 
 void
 MLocale::disconnectSettings()
 {
-#ifdef HAVE_GCONF
     Q_D(MLocale);
 
-    QObject::disconnect(&d->currentLanguageItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-    QObject::disconnect(&d->currentLcTimeItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-    QObject::disconnect(&d->currentLcTimeFormat24hItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-    QObject::disconnect(&d->currentLcCollateItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-    QObject::disconnect(&d->currentLcNumericItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-    QObject::disconnect(&d->currentLcMonetaryItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-    QObject::disconnect(&d->currentLcTelephoneItem, SIGNAL(valueChanged()),
-                        this, SLOT(refreshSettings()));
-#endif
+    QObject::disconnect(d->pCurrentLanguage, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
+    QObject::disconnect(d->pCurrentLcTime, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
+    QObject::disconnect(d->pCurrentLcTimeFormat24h, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
+    QObject::disconnect(d->pCurrentLcCollate, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
+    QObject::disconnect(d->pCurrentLcNumeric, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
+    QObject::disconnect(d->pCurrentLcMonetary, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
+    QObject::disconnect(d->pCurrentLcTelephone, SIGNAL(valueChanged(QString)),
+			this, SLOT(refreshSettings()));
 }
 
 ///// Constructors  /////
@@ -1966,9 +2072,15 @@ void MLocale::setDefault(const MLocale &locale)
         return;
     } else {
         s_systemDefault->disconnectSettings();
-        if (qobject_cast<MApplication *> (qApp))
+
+        if ( qApp->metaObject()->className() == QString( "MApplication" ) )
+        {
             QObject::disconnect(s_systemDefault, SIGNAL(settingsChanged()),
                                 qApp, SIGNAL(localeSettingsChanged()));
+        }
+        QObject::disconnect(s_systemDefault, SIGNAL(settingsChanged()),
+                            s_systemDefault, SIGNAL(localeSettingsChanged()));
+
         // remove the previous tr translations
         (s_systemDefault->d_ptr)->removeTrFromQCoreApp();
         *s_systemDefault = locale;
@@ -1999,9 +2111,15 @@ void MLocale::setDefault(const MLocale &locale)
     _defaultLayoutDirection = Qt::LeftToRight;
 #endif
 
-    if (qobject_cast<MApplication *> (qApp))
+    if ( qApp->metaObject()->className() == QString( "MApplication" ) )
+    {
         QObject::connect(s_systemDefault, SIGNAL(settingsChanged()),
                          qApp, SIGNAL(localeSettingsChanged()));
+    }
+
+    QObject::connect(s_systemDefault, SIGNAL(settingsChanged()),
+                     s_systemDefault, SIGNAL(localeSettingsChanged()));
+
     emit s_systemDefault->settingsChanged();
     s_systemDefault->connectSettings();
 }
@@ -4231,17 +4349,32 @@ Qt::LayoutDirection MLocale::directionForText(const QString & text)
 
 void MLocale::refreshSettings()
 {
-#ifdef HAVE_GCONF
     Q_D(MLocale);
 
     bool settingsHaveReallyChanged = false;
-    QString localeName = d->currentLanguageItem.value("en_GB").toString();
-    QString lcTime = d->currentLcTimeItem.value("en_GB").toString();
-    QString lcTimeFormat24h = d->currentLcTimeFormat24hItem.value("12").toString();
-    QString lcCollate = d->currentLcCollateItem.value("en_GB").toString();
-    QString lcNumeric = d->currentLcNumericItem.value("en_GB").toString();
-    QString lcMonetary = d->currentLcMonetaryItem.value("en_GB").toString();
-    QString lcTelephone = d->currentLcTelephoneItem.value().toString();
+    // QString localeName = d->currentLanguageItem.value("en_GB").toString();
+    // QString lcTime = d->currentLcTimeItem.value("en_GB").toString();
+    // QString lcTimeFormat24h = d->currentLcTimeFormat24hItem.value("12").toString();
+    // QString lcCollate = d->currentLcCollateItem.value("en_GB").toString();
+    // QString lcNumeric = d->currentLcNumericItem.value("en_GB").toString();
+    // QString lcMonetary = d->currentLcMonetaryItem.value("en_GB").toString();
+    // QString lcTelephone = d->currentLcTelephoneItem.value().toString();
+
+    QString localeName      = d->pCurrentLanguage->value();
+    QString lcTime          = d->pCurrentLcTime->value();
+    QString lcTimeFormat24h = d->pCurrentLcTimeFormat24h->value();
+    QString lcCollate       = d->pCurrentLcCollate->value();
+    QString lcNumeric       = d->pCurrentLcNumeric->value();
+    QString lcMonetary      = d->pCurrentLcMonetary->value();
+    QString lcTelephone     = d->pCurrentLcTelephone->value();
+
+    if ( localeName.isEmpty() )      localeName = "en_GB";
+    if ( lcTime.isEmpty() )          lcTime = "en_GB";
+    if ( lcTimeFormat24h.isEmpty() ) lcTimeFormat24h = "12";
+    if ( lcCollate.isEmpty() )       lcCollate = "en_GB";
+    if ( lcNumeric.isEmpty() )       lcNumeric = "en_GB";
+    if ( lcMonetary.isEmpty() )      lcMonetary = "en_GB";
+    // no default for lcTelephone
 
     if (localeName != d->_defaultLocale) {
         settingsHaveReallyChanged = true;
@@ -4303,11 +4436,11 @@ void MLocale::refreshSettings()
         else {
             d->loadTrCatalogs();
         }
+
         emit settingsChanged();
     }
 
     d->dropCaches();
-#endif
 }
 
 QString MLocale::formatPhoneNumber( const QString& phoneNumber,
@@ -4608,4 +4741,6 @@ QString MLocalePrivate::formatPhoneNumber( const QString& phoneNumber,
       return result;
     }
   }
+}
+
 }

@@ -17,8 +17,8 @@
 **
 ****************************************************************************/
 
-#ifndef MLOCALE_P_H
-#define MLOCALE_P_H
+#ifndef ML10N_MLOCALE_P_H
+#define ML10N_MLOCALE_P_H
 
 #include <QSet>
 #include <QList>
@@ -36,14 +36,14 @@
 #include <unicode/dtfmtsym.h>
 #endif
 
-#ifdef HAVE_GCONF
-#include "mgconfitem.h"
-#endif
-
 #include "mlocale.h"
 
 class QString;
+
+namespace ML10N {
+
 class MTranslationCatalog;
+class MLocaleAbstractConfigItem;
 
 class MLocalePrivate
 {
@@ -220,15 +220,13 @@ public:
     static QStringList dataPaths;
     static QStringList translationPaths;
 
-#ifdef HAVE_GCONF
-    MGConfItem currentLanguageItem;
-    MGConfItem currentLcTimeItem;
-    MGConfItem currentLcTimeFormat24hItem;
-    MGConfItem currentLcCollateItem;
-    MGConfItem currentLcNumericItem;
-    MGConfItem currentLcMonetaryItem;
-    MGConfItem currentLcTelephoneItem;
-#endif
+    MLocaleAbstractConfigItem *pCurrentLanguage;
+    MLocaleAbstractConfigItem *pCurrentLcTime;
+    MLocaleAbstractConfigItem *pCurrentLcTimeFormat24h;
+    MLocaleAbstractConfigItem *pCurrentLcCollate;
+    MLocaleAbstractConfigItem *pCurrentLcNumeric;
+    MLocaleAbstractConfigItem *pCurrentLcMonetary;
+    MLocaleAbstractConfigItem *pCurrentLcTelephone;
 
     // calendar instance used formatDateTimeICU()
 #ifdef HAVE_ICU
@@ -237,5 +235,7 @@ public:
 
     MLocale *q_ptr;
 };
+
+}
 
 #endif
