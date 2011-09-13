@@ -772,7 +772,7 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
     debugStream.setCodec("UTF-8");
 
     QStringList olsonIds;
-#if 1
+#if 0
     // full test, test almost all Olson IDs:
     foreach(MCity city, cities) {
         if(!olsonIds.contains(city.timeZone()))
