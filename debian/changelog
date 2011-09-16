@@ -1,3 +1,13 @@
+libmlocale (0.3.1-1) unstable; urgency=low
+
+  * cherry-picked MLocale changes until:
+    commit e6ea0a4a1307737e60cedbb1f9dd413ed661be1b
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Tue Sep 13 18:48:48 2011 +0200
+    Fixes: NB#282307 - The api toDouble() does not support scientific notation in regional format Sweden.
+
+ -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Fri, 16 Sep 2011 16:07:39 +0300
+
 libmlocale (0.3.0-1) unstable; urgency=low
 
   * branched away from libmeegotouch again,
