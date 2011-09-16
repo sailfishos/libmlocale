@@ -31,6 +31,7 @@
 using ML10N::MLocationDatabase;
 using ML10N::MCity;
 using ML10N::MCountry;
+using ML10N::MLocale;
 
 class TestLocationDatabase : public MLocationDatabase
 {
