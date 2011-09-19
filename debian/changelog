@@ -1,3 +1,13 @@
+libmlocale (0.3.2-1) unstable; urgency=low
+
+  * cherry-picked MLocale changes until:
+    commit 89dffaafe2ffeb84da0f4d46607cae838f89454d
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Mon Sep 19 17:10:13 2011 +0200
+    Fixes: NB#277314 - Regional format; Translation improvement for "stroke" in Hong Kong Chinese.
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Mon, 19 Sep 2011 20:25:35 +0300
+
 libmlocale (0.3.1-1) unstable; urgency=low
 
   * cherry-picked MLocale changes until:
