@@ -1,3 +1,13 @@
+libmlocale (0.3.3-1) unstable; urgency=low
+
+  * cherry-picked MLocale changes until:
+    commit e979e8b06a12cb0b52c6c8ca0eb0eced2035f478
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Tue Sep 20 11:06:24 2011 +0200
+    Fixes: NB#282713 - H Language - 'Dtpickers' - Truncation for §qtn_dtpi_month_and_year§
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Mon, 20 Sep 2011 15:53:45 +0300
+
 libmlocale (0.3.2-1) unstable; urgency=low
 
   * cherry-picked MLocale changes until:
