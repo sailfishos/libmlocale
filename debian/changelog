@@ -1,3 +1,13 @@
+libmlocale (0.3.5-1) unstable; urgency=low
+
+  * cherry-picked MLocale changes until:
+    commit 7b404577a9f2fa0c391d68664817de2f99e3a954
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Fri Sep 23 19:49:58 2011 +0200
+    Changes: adapt benchmark pt_mlocale.cpp  to the changes in Arabic number formatting
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Fri, 23 Sep 2011 20:59:15 +0300
+
 libmlocale (0.3.4-1) unstable; urgency=low
 
   * cherry-picked MLocale changes until:
