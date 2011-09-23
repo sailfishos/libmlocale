@@ -1,3 +1,13 @@
+libmlocale (0.3.4-1) unstable; urgency=low
+
+  * cherry-picked MLocale changes until:
+    commit 5b92e6f34de8826971376b923a20b938d4ef2d25
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Sat Aug 27 01:03:59 2011 +0200
+    Changes: different order for pre- and postfixes for Latin numbers and Eastern Arabic numbers
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Fri, 23 Sep 2011 13:17:50 +0300
+
 libmlocale (0.3.3-1) unstable; urgency=low
 
   * cherry-picked MLocale changes until:
