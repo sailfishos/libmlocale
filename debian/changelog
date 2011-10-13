@@ -1,3 +1,13 @@
+libmlocale (0.3.7-1) unstable; urgency=low
+
+  * cherry-picked MLocale changes until:
+    commit 368134d7c9139c103433f31085328aebc2d36387
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Wed Oct 12 17:03:34 2011 +0200
+    Fixes: NB#286096 - [TASK] Cyrillic contact names should appear first in Contacts list in Cyrillic languages
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Thu, 13 Oct 2011 12:18:06 +0300
+
 libmlocale (0.3.6-1) unstable; urgency=low
 
   * cherry-picked MLocale changes until:
