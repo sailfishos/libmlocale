@@ -1,3 +1,10 @@
+libmlocale (0.3.9-1) unstable; urgency=low
+
+  * fixed problems that showed up in libmeegotouch
+    unit tests
+
+ -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Wed, 26 Oct 2011 16:47:39 +0300
+
 libmlocale (0.3.8-1) unstable; urgency=low
 
   * cherry-picked MLocale changes until:
