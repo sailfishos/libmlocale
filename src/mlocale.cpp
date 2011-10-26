@@ -2075,7 +2075,7 @@ void MLocale::setDefault(const MLocale &locale)
     _defaultLayoutDirection = Qt::LeftToRight;
 #endif
 
-    if ( qApp->metaObject()->className() == QString( "MApplication" ) )
+    if ( qApp && qApp->metaObject() && qApp->metaObject()->className() == QString( "MApplication" ) )
     {
         QObject::connect(s_systemDefault, SIGNAL(settingsChanged()),
                          qApp, SIGNAL(localeSettingsChanged()));
