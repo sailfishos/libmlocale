@@ -23,6 +23,7 @@ SUBDIRS += \
     ft_numbers \
     ft_sorting \
     ft_mcharsetdetector \
+    ft_mstringsearch \
     ut_mcalendar
 }
 

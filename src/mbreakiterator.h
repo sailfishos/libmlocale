@@ -32,7 +32,7 @@ class MBreakIteratorPrivate;
 class MLOCALE_EXPORT MBreakIterator
 {
 public:
-    enum Type {LineIterator, WordIterator}; // would also be supported: character, sentence, title
+    enum Type {LineIterator, WordIterator, CharacterIterator, SentenceIterator, TitleIterator};
 
     MBreakIterator(const MLocale &locale, const QString &text, Type type = WordIterator);
     explicit MBreakIterator(const QString &text, Type type = WordIterator);

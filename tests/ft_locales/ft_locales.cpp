@@ -23,6 +23,7 @@
 
 using ML10N::MLocale;
 using ML10N::MCalendar;
+using ML10N::MCollator;
 
 class TestLocale : public MLocale
 {

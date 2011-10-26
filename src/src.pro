@@ -44,6 +44,7 @@ contains(DEFINES, HAVE_ICU) {
         mcollator.h \
         mcharsetdetector.h \
         mcharsetmatch.h \
+        mstringsearch.h \
 
     PRIVATE_HEADERS += \
         micubreakiterator.h \
@@ -56,6 +57,7 @@ contains(DEFINES, HAVE_ICU) {
         micuconversions.cpp \
         mcharsetdetector.cpp \
         mcharsetmatch.cpp \
+        mstringsearch.cpp \
 
 } else {
     PRIVATE_HEADERS += \
