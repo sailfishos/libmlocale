@@ -37,7 +37,7 @@ include($${M_BUILD_TREE}/mkspecs/features/mlocale_defines.prf)
 # Defines for directories, for use in source code.
 {
     # TRANSLATION_DIR determines the default translation path
-    DEFINES += TRANSLATION_DIR=\\\"\"$$M_TRANSLATION_DIR\"\\\"
+    DEFINES += TRANSLATION_DIR=\\\"\"$$ML_TRANSLATION_DIR\"\\\"
 
     # extra data for libicu to be used be default
     DEFINES += ML_ICUEXTRADATA_DIR=\\\"\"$$ML_ICUEXTRADATA_DIR\"\\\"
