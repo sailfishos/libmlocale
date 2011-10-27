@@ -104,7 +104,7 @@ class MStringSearchPrivate;
  * will <b>not</b> match “liu 柳”.
  */
 
-class M_CORE_EXPORT MStringSearch
+class MLOCALE_EXPORT MStringSearch
 {
 public:
     /*!
