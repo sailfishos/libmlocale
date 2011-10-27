@@ -1,9 +1,17 @@
+libmlocale (0.3.10-1) unstable; urgency=low
+
+  * Changes: bump version to 0.3.10-1
+  * include recent MLocale changes, including the new MStringSearch implementation
+    Fixes: NB#274054 - [TASK] Cannot use English word for Chinese name search.
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Wed, 26 Oct 2011 16:47:39 +0300
+
 libmlocale (0.3.9-1) unstable; urgency=low
 
   * fixed problems that showed up in libmeegotouch
     unit tests
 
- -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Wed, 26 Oct 2011 16:47:39 +0300
+ -- Holger Schröder <holger.schroeder.ext@basyskom.de>  Wed, 26 Oct 2011 16:47:39 +0300
 
 libmlocale (0.3.8-1) unstable; urgency=low
 
@@ -83,7 +91,7 @@ libmlocale (0.3.1-1) unstable; urgency=low
     Date:   Tue Sep 13 18:48:48 2011 +0200
     Fixes: NB#282307 - The api toDouble() does not support scientific notation in regional format Sweden.
 
- -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Fri, 16 Sep 2011 16:07:39 +0300
+ -- Holger Schröder <holger.schroeder.ext@basyskom.de>  Fri, 16 Sep 2011 16:07:39 +0300
 
 libmlocale (0.3.0-1) unstable; urgency=low
 
@@ -94,16 +102,16 @@ libmlocale (0.3.0-1) unstable; urgency=low
     Author:	John Tapsell <john.tapsell.ext@basyskom.de>
     Date:	2011-09-06 21:38:50
 
- -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Wed, 7 Sep 2011 16:07:39 +0300
+ -- Holger Schröder <holger.schroeder.ext@basyskom.de>  Wed, 7 Sep 2011 16:07:39 +0300
 
 libmlocale (0.2.0-1) unstable; urgency=low
 
   * initial working release
 
- -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Mon, 5 Sep 2011 16:07:39 +0300
+ -- Holger Schröder <holger.schroeder.ext@basyskom.de>  Mon, 5 Sep 2011 16:07:39 +0300
 
 libmlocale (0.1.1~1) unstable; urgency=low
 
   * [unreleased]
 
- -- Holger Schröder <holger-schroeder.ext@basyskom.de>  Mon, 11 Jul 2011 15:07:39 +0300
+ -- Holger Schröder <holger.schroeder.ext@basyskom.de>  Mon, 11 Jul 2011 15:07:39 +0300
