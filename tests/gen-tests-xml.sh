@@ -22,7 +22,7 @@ for TEST in `ls -d ?t_*`; do
 		fi
 
 TESTCASE_TEMPLATE="<case name=\"$TEST\" description=\"$TEST\" requirement=\"\" timeout=\"300\" insignificant=\"$INSIGNIFICANT\">
-        <step expected_result=\"0\">/usr/lib/libmeegotouch-tests/$TEST</step>
+        <step expected_result=\"0\">/usr/lib/libmlocale-tests/$TEST</step>
       </case>
       "
 
@@ -41,7 +41,7 @@ done
 
 TESTSUITE_TEMPLATE="<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>
 <testdefinition version=\"0.1\">
-  <suite name=\"libmeegotouch-tests\" domain=\"$DOMAIN\" type=\"$TYPE\" level=\"$LEVEL\">
+  <suite name=\"libmlocale-tests\" domain=\"$DOMAIN\" type=\"$TYPE\" level=\"$LEVEL\">
     <set name=\"unit_tests\" description=\"Unit Tests\" feature=\"$FEATURE\">
 
       $UT_TESTCASES

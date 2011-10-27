@@ -3976,7 +3976,7 @@ void Ft_Locales::testDifferentStrengthComparison()
     QFETCH(QString, string2);
     QFETCH(QList<MLocale::Comparison>, comparisonExpectedResults);
 
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/meegotouch/icu"));
+    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
     MLocale locale(localeName);
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     MCollator collator = locale.collator();
