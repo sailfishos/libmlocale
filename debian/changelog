@@ -1,3 +1,14 @@
+libmlocale (0.3.11-1) unstable; urgency=low
+
+  * Changes: bump version to 0.3.11-1
+  * cherry-picked MLocale changes until:
+    commit f5667ea67ff335d030c0815de02f5093486e0ff1
+    Author: Mike FABIAN <mike.fabian@basyskom.de>
+    Date:   Thu Oct 27 19:45:03 2011 +0200
+    Fixes: NB#288168 - Error pop-up shows up when trying to paste decimal numbers in calculator
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Thu, 27 Oct 2011 20:05:19 +0300
+
 libmlocale (0.3.10-1) unstable; urgency=low
 
   * Changes: bump version to 0.3.10-1
