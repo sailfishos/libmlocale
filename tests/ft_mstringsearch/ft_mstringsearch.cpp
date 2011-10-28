@@ -528,7 +528,7 @@ void Ft_MStringSearch::testSearch()
         << " collatorStrength: " << collatorStrengthDescription << "\n";
     debugStream.flush();
 #endif
-    stringSearch.toFront();
+    stringSearch.setIndex(0);
     QCOMPARE(stringSearch.index(), 0);
     int matchCount = 0;
     int matchStart = -1;
@@ -582,7 +582,7 @@ void Ft_MStringSearch::testSearch()
         << " collatorStrength: " << collatorStrengthDescription << "\n";
     debugStream.flush();
 #endif
-    stringSearch.toBack();
+    stringSearch.setIndex(text.size());
     QCOMPARE(stringSearch.index(), text.size());
     matchCount = matchTexts.size()-1;
     matchStart = -1;

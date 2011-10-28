@@ -400,7 +400,7 @@ int MStringSearch::first()
                    << errorString();
     if (first == USEARCH_DONE) {
         first = -1;
-        toBack();
+        d->_currentIndex = d->_text.size();
     }
     else {
         d->_currentIndex = first;
@@ -419,7 +419,7 @@ int MStringSearch::last()
                    << errorString();
     if (last == USEARCH_DONE) {
         last = -1;
-        toFront();
+        d->_currentIndex = 0;
     }
     else {
         d->_currentIndex = last;
@@ -447,7 +447,7 @@ int MStringSearch::next()
                    << errorString();
     if (next == USEARCH_DONE) {
         next = -1;
-        toBack();
+        d->_currentIndex = d->_text.size();
     }
     else {
         d->_currentIndex = next;
@@ -468,26 +468,12 @@ int MStringSearch::previous()
                    << errorString();
     if (previous == USEARCH_DONE) {
         previous = -1;
-        toFront();
+        d->_currentIndex = 0;
     }
     else {
         d->_currentIndex = previous;
     }
     return previous;
-}
-
-void MStringSearch::toBack()
-{
-    Q_D(MStringSearch);
-    d->clearError();
-    d->_currentIndex = d->_text.size();
-}
-
-void MStringSearch::toFront()
-{
-    Q_D(MStringSearch);
-    d->clearError();
-    d->_currentIndex = 0;
 }
 
 int MStringSearch::index() const
@@ -499,7 +485,12 @@ int MStringSearch::index() const
 void MStringSearch::setIndex(int index)
 {
     Q_D(MStringSearch);
-    d->_currentIndex = index;
+    if(index < 0)
+        d->_currentIndex = 0;
+    else if (index > d->_text.size())
+        d->_currentIndex = d->_text.size();
+    else
+        d->_currentIndex = index;
 }
 
 int MStringSearch::matchedStart()
