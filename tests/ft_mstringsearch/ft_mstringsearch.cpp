@@ -52,14 +52,14 @@ void Ft_MStringSearch::testConstructors_data()
     QTest::addColumn<QString>("lcCollate");
     QTest::addColumn<QString>("pattern");
     QTest::addColumn<QString>("text");
-    QTest::addColumn<bool>("hasError");
+    QTest::addColumn<QString>("errorString");
 
     QTest::newRow("foo")
         << "en_US"
         << "en_US"
         << "World"
         << "Hello World!"
-        << false;
+        << "";
 
 }
 
@@ -69,7 +69,7 @@ void Ft_MStringSearch::testConstructors()
     QFETCH(QString, lcCollate);
     QFETCH(QString, pattern);
     QFETCH(QString, text);
-    QFETCH(bool, hasError);
+    QFETCH(QString, errorString);
 
     MLocale locale(language);
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
@@ -84,14 +84,13 @@ void Ft_MStringSearch::testConstructors()
                 << " stringSearch.pattern(): " << stringSearch.pattern() << "\n"
                 << " text               : " << text << "\n"
                 << " stringSearch.text(): " << stringSearch.text() << "\n"
-                << " hasError               : " << hasError << "\n"
-                << " stringSearch.hasError(): " << stringSearch.hasError() << "\n"
+                << " errorString               : " << errorString << "\n"
                 << " stringSearch.errorString(): " << stringSearch.errorString() << "\n";
 #endif
 
     QCOMPARE(stringSearch.pattern(), pattern);
     QCOMPARE(stringSearch.text(), text);
-    QCOMPARE(stringSearch.hasError(), hasError);
+    QCOMPARE(stringSearch.errorString(), QString());
 }
 
 void Ft_MStringSearch::testSearch_data()
