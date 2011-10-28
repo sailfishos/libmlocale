@@ -1,3 +1,10 @@
+libmlocale (0.3.13-1) unstable; urgency=low
+
+  * Changes: bump version to 0.3.13-1
+  * Fixes: NB#285936 - The name of the days in month view are corrupt and unrecognizable.
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Fri, 28 Oct 2011 22:15:17 +0300
+
 libmlocale (0.3.12-1) unstable; urgency=low
 
   * Changes: bump version to 0.3.12-1
