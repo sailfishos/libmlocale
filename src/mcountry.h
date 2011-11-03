@@ -67,10 +67,19 @@ class MLOCALE_EXPORT MCountry
      */
     QString localName() const;
 
+    /**
+     * \brief returns the country code in ISO 3166-1 format
+     *
+     * Example
+     * returns "FI" in case of Finland
+     */
+    QString countryCode() const;
+
     // the setters
     void setKey( const QString& val );
     void setEnglishName( const QString& val );
     void setLocalName( const QString& val );
+    void setCountryCode( const QString& val );
 
   private:
     MCountryPrivate *const d_ptr;
