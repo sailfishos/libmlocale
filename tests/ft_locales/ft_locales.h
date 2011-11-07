@@ -103,6 +103,9 @@ private slots:
     void testMLocaleToUpper_data();
     void testMLocaleToUpper();
 
+    void testMLocaleJoinStringList_data();
+    void testMLocaleJoinStringList();
+
     void testMLocaleIndexBucket_data();
     void testMLocaleIndexBucket();
 
