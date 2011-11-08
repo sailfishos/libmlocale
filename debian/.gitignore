@@ -5,6 +5,7 @@ files
 libmlocale-benchmarks-dbg/
 libmlocale-benchmarks/
 libmlocale-dev/
+libmlocale-doc/
 libmlocale-tests-dbg/
 libmlocale-tests/
 libmlocale0-dbg/
