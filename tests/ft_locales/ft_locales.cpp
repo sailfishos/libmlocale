@@ -4177,6 +4177,8 @@ void Ft_Locales::checkAvailableLocales()
     requiredLocaleNames << "es_US";       // "Spanish (United States)"
     requiredLocaleNames << "es_UY";       // "Spanish (Uruguay)"
     requiredLocaleNames << "es_VE";       // "Spanish (Venezuela)"
+    requiredLocaleNames << "et";          // "Estonian"
+    requiredLocaleNames << "et_EE";       // "Estonian (Estonia)"
     requiredLocaleNames << "eu";          // "Basque"
     requiredLocaleNames << "eu_ES";       // "Basque (Spain)"
     requiredLocaleNames << "fa";          // "Persian"

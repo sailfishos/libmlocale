@@ -1,0 +1,2669 @@
+supplementalData{
+    CurrencyMap{
+        AD{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966583, 1332542048 } 
+                id { "ESP" }
+                to:intvector { 235, 2858805440 } 
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+            {
+                from:intvector { 4294967046, 740284000 } 
+                id { "ADP" }
+                to:intvector { 228, 1647376512 } 
+            }
+        }
+        AE{
+            {
+                from:intvector { 22, 1760619488 } 
+                id { "AED" }
+            }
+        }
+        AF{
+            {
+                from:intvector { 235, 1044885440 } 
+                id { "AFN" }
+            }
+            {
+                from:intvector { 4294966980, 1334645536 } 
+                id { "AFA" }
+                to:intvector { 235, 3118605440 } 
+            }
+        }
+        AG{
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+            }
+        }
+        AI{
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+            }
+        }
+        AL{
+            {
+                from:intvector { 4294967259, 2443869952 } 
+                id { "ALL" }
+            }
+            {
+                from:intvector { 4294967119, 2827471392 } 
+                id { "ALK" }
+                to:intvector { 4294967259, 2443869952 } 
+            }
+        }
+        AM{
+            {
+                from:intvector { 169, 1811986976 } 
+                id { "AMD" }
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 169, 1811986976 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        AN{
+            {
+                from:intvector { 4294967075, 3194472416 } 
+                id { "ANG" }
+            }
+        }
+        AO{
+            {
+                from:intvector { 213, 1358285952 } 
+                id { "AOA" }
+            }
+            {
+                from:intvector { 183, 2939804832 } 
+                id { "AOR" }
+                to:intvector { 220, 1792114880 } 
+            }
+            {
+                from:intvector { 147, 1865947488 } 
+                id { "AON" }
+                to:intvector { 220, 1792114880 } 
+            }
+            {
+                from:intvector { 51, 2486327904 } 
+                id { "AOK" }
+                to:intvector { 154, 1263216416 } 
+            }
+        }
+        AQ{
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XXX" }
+            }
+        }
+        AR{
+            {
+                from:intvector { 161, 2734325344 } 
+                id { "ARS" }
+            }
+            {
+                from:intvector { 110, 2062757440 } 
+                id { "ARA" }
+                to:intvector { 161, 2734325344 } 
+            }
+            {
+                from:intvector { 95, 2205666880 } 
+                id { "ARP" }
+                to:intvector { 110, 2062757440 } 
+            }
+            {
+                from:intvector { 0, 60000 } 
+                id { "ARL" }
+                to:intvector { 95, 2205666880 } 
+            }
+            {
+                from:intvector { 4294966642, 736471584 } 
+                id { "ARM" }
+                to:intvector { 0, 60000 } 
+            }
+        }
+        AS{
+            {
+                from:intvector { 4294966811, 1510758560 } 
+                id { "USD" }
+            }
+        }
+        AT{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967127, 262993024 } 
+                id { "ATS" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        AU{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        AW{
+            {
+                from:intvector { 117, 2410486368 } 
+                id { "AWG" }
+            }
+            {
+                from:intvector { 4294967075, 3194472416 } 
+                id { "ANG" }
+                to:intvector { 117, 2410486368 } 
+            }
+        }
+        AX{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+        }
+        AZ{
+            {
+                from:intvector { 264, 2202293856 } 
+                id { "AZN" }
+            }
+            {
+                from:intvector { 169, 1811986976 } 
+                id { "AZM" }
+                to:intvector { 265, 499986560 } 
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 176, 1468215904 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        BA{
+            {
+                from:intvector { 183, 2939444832 } 
+                id { "BAM" }
+            }
+            {
+                from:intvector { 176, 2678235904 } 
+                id { "BAN" }
+                to:intvector { 198, 1673695392 } 
+            }
+            {
+                from:intvector { 161, 2734685344 } 
+                id { "BAD" }
+                to:intvector { 176, 2678235904 } 
+            }
+            {
+                from:intvector { 161, 2734685344 } 
+                id { "YUR" }
+                to:intvector { 168, 4292494272 } 
+            }
+            {
+                from:intvector { 146, 4086834784 } 
+                id { "YUN" }
+                to:intvector { 161, 2734685344 } 
+            }
+            {
+                from:intvector { 4294967266, 2618678880 } 
+                id { "YUD" }
+                to:intvector { 146, 4086834784 } 
+            }
+        }
+        BB{
+            {
+                from:intvector { 22, 378639488 } 
+                id { "BBD" }
+            }
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+                to:intvector { 22, 378639488 } 
+            }
+        }
+        BD{
+            {
+                from:intvector { 14, 2942517856 } 
+                id { "BDT" }
+            }
+            {
+                from:intvector { 4294967134, 1474541952 } 
+                id { "PKR" }
+                to:intvector { 14, 2942517856 } 
+            }
+            {
+                from:intvector { 4294966304, 1779237632 } 
+                id { "INR" }
+                to:intvector { 4294967134, 1474541952 } 
+            }
+        }
+        BE{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966274, 3533496512 } 
+                id { "BEF" }
+                to:intvector { 235, 2858805440 } 
+            }
+            {
+                from:intvector { 4294966164, 3286099072 } 
+                id { "NLG" }
+                to:intvector { 4294966274, 3533496512 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "BEL" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "BEC" }
+            }
+        }
+        BF{
+            {
+                from:intvector { 102, 3936215808 } 
+                id { "XOF" }
+            }
+        }
+        BG{
+            {
+                from:intvector { 213, 666785952 } 
+                id { "BGN" }
+            }
+            {
+                from:intvector { 4294967237, 942330464 } 
+                id { "BGL" }
+                to:intvector { 213, 666785952 } 
+            }
+            {
+                from:intvector { 4294967163, 4101350368 } 
+                id { "BGM" }
+                to:intvector { 4294967237, 942330464 } 
+            }
+            {
+                from:intvector { 4294966627, 2261541024 } 
+                id { "BGO" }
+                to:intvector { 4294967163, 4101350368 } 
+            }
+        }
+        BH{
+            {
+                from:intvector { 4294967259, 2443989952 } 
+                id { "BHD" }
+            }
+        }
+        BI{
+            {
+                from:intvector { 4294967252, 1145261024 } 
+                id { "BIF" }
+            }
+        }
+        BJ{
+            {
+                from:intvector { 37, 1358870048 } 
+                id { "XOF" }
+            }
+        }
+        BL{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        BM{
+            {
+                from:intvector { 0, 432120000 } 
+                id { "BMD" }
+            }
+        }
+        BN{
+            {
+                from:intvector { 4294967274, 745640512 } 
+                id { "BND" }
+            }
+            {
+                from:intvector { 4294967244, 3710039392 } 
+                id { "MYR" }
+                to:intvector { 4294967274, 745640512 } 
+            }
+        }
+        BO{
+            {
+                from:intvector { 124, 3881715296 } 
+                id { "BOB" }
+            }
+            {
+                from:intvector { 4294967244, 2413559392 } 
+                id { "BOP" }
+                to:intvector { 118, 708179072 } 
+            }
+            {
+                from:intvector { 4294966510, 1147054656 } 
+                id { "BOL" }
+                to:intvector { 4294967244, 2413559392 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "BOV" }
+            }
+        }
+        BR{
+            {
+                from:intvector { 176, 1468575904 } 
+                id { "BRL" }
+            }
+            {
+                from:intvector { 168, 4292374272 } 
+                id { "BRR" }
+                to:intvector { 176, 1468575904 } 
+            }
+            {
+                from:intvector { 147, 1087987488 } 
+                id { "BRE" }
+                to:intvector { 168, 4292374272 } 
+            }
+            {
+                from:intvector { 139, 3825205856 } 
+                id { "BRN" }
+                to:intvector { 147, 1087987488 } 
+            }
+            {
+                from:intvector { 118, 448379072 } 
+                id { "BRC" }
+                to:intvector { 139, 3825205856 } 
+            }
+            {
+                from:intvector { 4294967274, 831800512 } 
+                id { "BRB" }
+                to:intvector { 118, 448379072 } 
+            }
+            {
+                from:intvector { 4294967090, 1151122976 } 
+                id { "BRZ" }
+                to:intvector { 4294967274, 831800512 } 
+            }
+        }
+        BS{
+            {
+                from:intvector { 4294967267, 397551584 } 
+                id { "BSD" }
+            }
+        }
+        BT{
+            {
+                from:intvector { 29, 2972588416 } 
+                id { "BTN" }
+            }
+            {
+                from:intvector { 4294966833, 419518048 } 
+                id { "INR" }
+                to:intvector { 29, 2972588416 } 
+            }
+        }
+        BU{
+            {
+                from:intvector { 4294967163, 3151070368 } 
+                id { "BUK" }
+                to:intvector { 139, 4084705856 } 
+            }
+        }
+        BV{
+            {
+                from:intvector { 4294966818, 2290727488 } 
+                id { "NOK" }
+            }
+        }
+        BW{
+            {
+                from:intvector { 44, 2225118976 } 
+                id { "BWP" }
+            }
+            {
+                from:intvector { 4294967230, 594361536 } 
+                id { "ZAR" }
+                to:intvector { 44, 2225118976 } 
+            }
+        }
+        BY{
+            {
+                from:intvector { 220, 1792054880 } 
+                id { "BYR" }
+            }
+            {
+                from:intvector { 176, 1468635904 } 
+                id { "BYB" }
+                to:intvector { 221, 89747584 } 
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 176, 2073615904 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        BZ{
+            {
+                from:intvector { 29, 1676408416 } 
+                id { "BZD" }
+            }
+        }
+        CA{
+            {
+                from:intvector { 4294966473, 393344608 } 
+                id { "CAD" }
+            }
+        }
+        CC{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        CD{
+            {
+                from:intvector { 205, 3144924320 } 
+                id { "CDF" }
+            }
+            {
+                from:intvector { 168, 4292554272 } 
+                id { "ZRN" }
+                to:intvector { 205, 3144924320 } 
+            }
+            {
+                from:intvector { 7, 3718228928 } 
+                id { "ZRZ" }
+                to:intvector { 168, 4292554272 } 
+            }
+        }
+        CF{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "XAF" }
+            }
+        }
+        CG{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "XAF" }
+            }
+        }
+        CH{
+            {
+                from:intvector { 4294966039, 3958071072 } 
+                id { "CHF" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "CHE" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "CHW" }
+            }
+        }
+        CI{
+            {
+                from:intvector { 4294967207, 3820809344 } 
+                id { "XOF" }
+            }
+        }
+        CK{
+            {
+                from:intvector { 4294967274, 572900512 } 
+                id { "NZD" }
+            }
+        }
+        CL{
+            {
+                from:intvector { 37, 1272350048 } 
+                id { "CLP" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "CLE" }
+                to:intvector { 37, 1272350048 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "CLF" }
+            }
+        }
+        CM{
+            {
+                from:intvector { 22, 205359488 } 
+                id { "XAF" }
+            }
+        }
+        CN{
+            {
+                from:intvector { 4294967171, 413492000 } 
+                id { "CNY" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "CNX" }
+            }
+        }
+        CO{
+            {
+                from:intvector { 4294966818, 1772027488 } 
+                id { "COP" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "COU" }
+            }
+        }
+        CR{
+            {
+                from:intvector { 4294966752, 3403609024 } 
+                id { "CRC" }
+            }
+        }
+        CS{
+            {
+                from:intvector { 235, 1735785440 } 
+                id { "CSD" }
+                to:intvector { 264, 2375393856 } 
+            }
+            {
+                from:intvector { 242, 2256434368 } 
+                id { "EUR" }
+                to:intvector { 264, 2375393856 } 
+            }
+            {
+                from:intvector { 176, 3455415904 } 
+                id { "YUM" }
+                to:intvector { 235, 1735785440 } 
+            }
+        }
+        CU{
+            {
+                from:intvector { 176, 1468215904 } 
+                id { "CUC" }
+            }
+            {
+                from:intvector { 4294966480, 1864573536 } 
+                id { "CUP" }
+            }
+            {
+                from:intvector { 4294966774, 1448188512 } 
+                id { "USD" }
+                to:intvector { 4294967215, 737210976 } 
+            }
+        }
+        CV{
+            {
+                from:intvector { 4294966884, 2300985952 } 
+                id { "CVE" }
+            }
+            {
+                from:intvector { 4294966862, 3910506464 } 
+                id { "PTE" }
+                to:intvector { 36, 3493597344 } 
+            }
+        }
+        CX{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        CY{
+            {
+                from:intvector { 279, 849784416 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966884, 3079065952 } 
+                id { "CYP" }
+                to:intvector { 279, 3441784416 } 
+            }
+        }
+        CZ{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "CZK" }
+            }
+            {
+                from:intvector { 4294967171, 413672000 } 
+                id { "CSK" }
+                to:intvector { 168, 4292074272 } 
+            }
+        }
+        DD{
+            {
+                from:intvector { 4294967134, 3116321952 } 
+                id { "DDM" }
+                to:intvector { 146, 4173774784 } 
+            }
+        }
+        DE{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967134, 3116261952 } 
+                id { "DEM" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        DJ{
+            {
+                from:intvector { 51, 4128227904 } 
+                id { "DJF" }
+            }
+        }
+        DK{
+            {
+                from:intvector { 4294966583, 3579182048 } 
+                id { "DKK" }
+            }
+        }
+        DM{
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+            }
+        }
+        DO{
+            {
+                from:intvector { 4294967127, 3673024 } 
+                id { "DOP" }
+            }
+            {
+                from:intvector { 4294966818, 3500327488 } 
+                id { "USD" }
+                to:intvector { 4294967127, 3673024 } 
+            }
+        }
+        DZ{
+            {
+                from:intvector { 4294967251, 3884968320 } 
+                id { "DZD" }
+            }
+        }
+        EC{
+            {
+                from:intvector { 220, 1878994880 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294966664, 509171072 } 
+                id { "ECS" }
+                to:intvector { 220, 1878994880 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "ECV" }
+            }
+        }
+        EE{
+            {
+                from:intvector { 301, 1054903904 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 162, 167658048 } 
+                id { "EEK" }
+                to:intvector { 294, 2176334976 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 162, 81258048 } 
+            }
+        }
+        EG{
+            {
+                from:intvector { 4294966671, 3190420000 } 
+                id { "EGP" }
+            }
+        }
+        EH{
+            {
+                from:intvector { 44, 2483958976 } 
+                id { "MAD" }
+            }
+        }
+        ER{
+            {
+                from:intvector { 198, 2278735392 } 
+                id { "ERN" }
+            }
+            {
+                from:intvector { 169, 1984426976 } 
+                id { "ETB" }
+                to:intvector { 198, 2278735392 } 
+            }
+        }
+        ES{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966546, 3949272000 } 
+                id { "ESP" }
+                to:intvector { 235, 2858805440 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "ESA" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "ESB" }
+            }
+        }
+        ET{
+            {
+                from:intvector { 44, 1533978976 } 
+                id { "ETB" }
+            }
+        }
+        EU{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+        }
+        FI{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967244, 2413559392 } 
+                id { "FIM" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        FJ{
+            {
+                from:intvector { 4294967288, 3860598368 } 
+                id { "FJD" }
+            }
+        }
+        FK{
+            {
+                from:intvector { 4294966789, 95679072 } 
+                id { "FKP" }
+            }
+        }
+        FM{
+            {
+                from:intvector { 4294967104, 4092980832 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294966884, 2474325952 } 
+                id { "JPY" }
+                to:intvector { 4294967104, 4092980832 } 
+            }
+        }
+        FO{
+            {
+                from:intvector { 4294967134, 1474361952 } 
+                id { "DKK" }
+            }
+        }
+        FR{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        GA{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "XAF" }
+            }
+        }
+        GB{
+            {
+                from:intvector { 4294965268, 2802096288 } 
+                id { "GBP" }
+            }
+        }
+        GD{
+            {
+                from:intvector { 4294967274, 2041400512 } 
+                id { "XCD" }
+            }
+        }
+        GE{
+            {
+                from:intvector { 184, 545757536 } 
+                id { "GEL" }
+            }
+            {
+                from:intvector { 169, 342766976 } 
+                id { "GEK" }
+                to:intvector { 184, 718557536 } 
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 169, 861286976 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        GF{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        GG{
+            {
+                from:intvector { 4294966267, 1543807584 } 
+                id { "GBP" }
+            }
+        }
+        GH{
+            {
+                from:intvector { 271, 3846682784 } 
+                id { "GHS" }
+            }
+            {
+                from:intvector { 66, 1220338464 } 
+                id { "GHC" }
+                to:intvector { 272, 1971215488 } 
+            }
+        }
+        GI{
+            {
+                from:intvector { 4294965407, 3084482144 } 
+                id { "GIP" }
+            }
+        }
+        GL{
+            {
+                from:intvector { 4294966583, 3579182048 } 
+                id { "DKK" }
+            }
+        }
+        GM{
+            {
+                from:intvector { 7, 1471648928 } 
+                id { "GMD" }
+            }
+        }
+        GN{
+            {
+                from:intvector { 117, 2842486368 } 
+                id { "GNF" }
+            }
+            {
+                from:intvector { 14, 3029457856 } 
+                id { "GNS" }
+                to:intvector { 117, 2842486368 } 
+            }
+        }
+        GP{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        GQ{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "XAF" }
+            }
+            {
+                from:intvector { 36, 3666397344 } 
+                id { "GQE" }
+                to:intvector { 117, 2410786368 } 
+            }
+        }
+        GR{
+            {
+                from:intvector { 227, 3349683808 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967178, 1884840928 } 
+                id { "GRD" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        GS{
+            {
+                from:intvector { 4294966840, 1890746976 } 
+                id { "GBP" }
+            }
+        }
+        GT{
+            {
+                from:intvector { 4294966965, 3810474976 } 
+                id { "GTQ" }
+            }
+        }
+        GU{
+            {
+                from:intvector { 4294967105, 1526433536 } 
+                id { "USD" }
+            }
+        }
+        GW{
+            {
+                from:intvector { 198, 4265455392 } 
+                id { "XOF" }
+            }
+            {
+                from:intvector { 44, 2656758976 } 
+                id { "GWP" }
+                to:intvector { 198, 4265455392 } 
+            }
+            {
+                from:intvector { 4294966884, 2300985952 } 
+                id { "GWE" }
+                to:intvector { 44, 2656758976 } 
+            }
+        }
+        GY{
+            {
+                from:intvector { 4294967267, 483951584 } 
+                id { "GYD" }
+            }
+        }
+        HK{
+            {
+                from:intvector { 4294966744, 4153267392 } 
+                id { "HKD" }
+            }
+        }
+        HM{
+            {
+                from:intvector { 4294967274, 1091000512 } 
+                id { "AUD" }
+            }
+        }
+        HN{
+            {
+                from:intvector { 4294966972, 3208043904 } 
+                id { "HNL" }
+            }
+        }
+        HR{
+            {
+                from:intvector { 176, 3974055904 } 
+                id { "HRK" }
+            }
+            {
+                from:intvector { 154, 3164556416 } 
+                id { "HRD" }
+                to:intvector { 183, 2939444832 } 
+            }
+            {
+                from:intvector { 146, 4086834784 } 
+                id { "YUN" }
+                to:intvector { 154, 3164556416 } 
+            }
+            {
+                from:intvector { 4294967266, 2618678880 } 
+                id { "YUD" }
+                to:intvector { 146, 4086834784 } 
+            }
+        }
+        HT{
+            {
+                from:intvector { 4294966576, 1935333120 } 
+                id { "HTG" }
+            }
+            {
+                from:intvector { 4294966891, 3772154880 } 
+                id { "USD" }
+            }
+        }
+        HU{
+            {
+                from:intvector { 4294967120, 433064096 } 
+                id { "HUF" }
+            }
+        }
+        ID{
+            {
+                from:intvector { 4294967259, 2184909952 } 
+                id { "IDR" }
+            }
+        }
+        IE{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966943, 1358715488 } 
+                id { "IEP" }
+                to:intvector { 235, 1217205440 } 
+            }
+            {
+                from:intvector { 4294966046, 4046780000 } 
+                id { "GBP" }
+                to:intvector { 4294966943, 1358715488 } 
+            }
+        }
+        IL{
+            {
+                from:intvector { 110, 1198937440 } 
+                id { "ILS" }
+            }
+            {
+                from:intvector { 73, 3814707392 } 
+                id { "ILR" }
+                to:intvector { 110, 1198937440 } 
+            }
+            {
+                from:intvector { 4294967134, 2770781952 } 
+                id { "ILP" }
+                to:intvector { 73, 3814707392 } 
+            }
+        }
+        IM{
+            {
+                from:intvector { 4294966340, 3716794976 } 
+                id { "GBP" }
+            }
+        }
+        IN{
+            {
+                from:intvector { 4294966304, 1779237632 } 
+                id { "INR" }
+            }
+        }
+        IO{
+            {
+                from:intvector { 4294967259, 1752849952 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294967259, 1752849952 } 
+                id { "GBP" }
+            }
+        }
+        IQ{
+            {
+                from:intvector { 4294967009, 3443053952 } 
+                id { "IQD" }
+            }
+            {
+                from:intvector { 4294966928, 3489424928 } 
+                id { "EGP" }
+                to:intvector { 4294967009, 3443053952 } 
+            }
+            {
+                from:intvector { 4294966928, 3489424928 } 
+                id { "INR" }
+                to:intvector { 4294967009, 3443053952 } 
+            }
+        }
+        IR{
+            {
+                from:intvector { 4294967017, 100975584 } 
+                id { "IRR" }
+            }
+        }
+        IS{
+            {
+                from:intvector { 80, 3557876320 } 
+                id { "ISK" }
+            }
+            {
+                from:intvector { 4294966913, 3977994368 } 
+                id { "ISJ" }
+                to:intvector { 80, 3557876320 } 
+            }
+            {
+                from:intvector { 4294966583, 3579182048 } 
+                id { "DKK" }
+                to:intvector { 4294966913, 3977994368 } 
+            }
+        }
+        IT{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966502, 4057313024 } 
+                id { "ITL" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        JE{
+            {
+                from:intvector { 4294966318, 3425275488 } 
+                id { "GBP" }
+            }
+        }
+        JM{
+            {
+                from:intvector { 4294967288, 3429078368 } 
+                id { "JMD" }
+            }
+        }
+        JO{
+            {
+                from:intvector { 4294967149, 208612512 } 
+                id { "JOD" }
+            }
+        }
+        JP{
+            {
+                from:intvector { 4294966568, 2598951488 } 
+                id { "JPY" }
+            }
+        }
+        KE{
+            {
+                from:intvector { 4294967266, 3742358880 } 
+                id { "KES" }
+            }
+        }
+        KG{
+            {
+                from:intvector { 169, 774826976 } 
+                id { "KGS" }
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 169, 774826976 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        KH{
+            {
+                from:intvector { 73, 3641967392 } 
+                id { "KHR" }
+            }
+        }
+        KI{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        KM{
+            {
+                from:intvector { 36, 3579997344 } 
+                id { "KMF" }
+            }
+        }
+        KN{
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+            }
+        }
+        KP{
+            {
+                from:intvector { 4294967215, 2119790976 } 
+                id { "KPW" }
+            }
+        }
+        KR{
+            {
+                from:intvector { 4294967237, 1720230464 } 
+                id { "KRW" }
+            }
+            {
+                from:intvector { 4294967171, 1623032000 } 
+                id { "KRH" }
+                to:intvector { 4294967237, 1720230464 } 
+            }
+            {
+                from:intvector { 4294967112, 2565662464 } 
+                id { "KRO" }
+                to:intvector { 4294967171, 1623032000 } 
+            }
+        }
+        KW{
+            {
+                from:intvector { 4294967229, 3766248832 } 
+                id { "KWD" }
+            }
+        }
+        KY{
+            {
+                from:intvector { 7, 1471288928 } 
+                id { "KYD" }
+            }
+            {
+                from:intvector { 4294967288, 3429078368 } 
+                id { "JMD" }
+                to:intvector { 7, 1471288928 } 
+            }
+        }
+        KZ{
+            {
+                from:intvector { 169, 343186976 } 
+                id { "KZT" }
+            }
+        }
+        LA{
+            {
+                from:intvector { 66, 1307278464 } 
+                id { "LAK" }
+            }
+        }
+        LB{
+            {
+                from:intvector { 4294967134, 1560821952 } 
+                id { "LBP" }
+            }
+        }
+        LC{
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+            }
+        }
+        LI{
+            {
+                from:intvector { 4294966935, 4182513856 } 
+                id { "CHF" }
+            }
+        }
+        LK{
+            {
+                from:intvector { 59, 872429536 } 
+                id { "LKR" }
+            }
+        }
+        LR{
+            {
+                from:intvector { 4294967104, 4092980832 } 
+                id { "LRD" }
+            }
+        }
+        LS{
+            {
+                from:intvector { 4294967230, 594361536 } 
+                id { "ZAR" }
+            }
+            {
+                from:intvector { 73, 3814647392 } 
+                id { "LSL" }
+            }
+        }
+        LT{
+            {
+                from:intvector { 169, 2070886976 } 
+                id { "LTL" }
+            }
+            {
+                from:intvector { 161, 2734865344 } 
+                id { "LTT" }
+                to:intvector { 169, 2070886976 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 161, 2734865344 } 
+            }
+        }
+        LU{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967105, 57693536 } 
+                id { "LUF" }
+                to:intvector { 235, 2858805440 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "LUC" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "LUL" }
+            }
+        }
+        LV{
+            {
+                from:intvector { 169, 2330086976 } 
+                id { "LVL" }
+            }
+            {
+                from:intvector { 161, 3252965344 } 
+                id { "LVR" }
+                to:intvector { 169, 1379926976 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 162, 81318048 } 
+            }
+        }
+        LY{
+            {
+                from:intvector { 7, 1471768928 } 
+                id { "LYD" }
+            }
+        }
+        MA{
+            {
+                from:intvector { 4294967215, 2120150976 } 
+                id { "MAD" }
+            }
+            {
+                from:intvector { 4294966642, 390271584 } 
+                id { "MAF" }
+                to:intvector { 4294967215, 2120150976 } 
+            }
+        }
+        MC{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "MCF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        MD{
+            {
+                from:intvector { 169, 2416786976 } 
+                id { "MDL" }
+            }
+            {
+                from:intvector { 161, 2734625344 } 
+                id { "MDC" }
+                to:intvector { 169, 2416786976 } 
+            }
+        }
+        ME{
+            {
+                from:intvector { 235, 525945440 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 213, 407765952 } 
+                id { "DEM" }
+                to:intvector { 235, 1735785440 } 
+            }
+            {
+                from:intvector { 176, 3455415904 } 
+                id { "YUM" }
+                to:intvector { 235, 1735785440 } 
+            }
+        }
+        MF{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        MG{
+            {
+                from:intvector { 95, 2205966880 } 
+                id { "MGA" }
+            }
+            {
+                from:intvector { 4294967244, 2413919392 } 
+                id { "MGF" }
+                to:intvector { 250, 1766096000 } 
+            }
+        }
+        MH{
+            {
+                from:intvector { 4294967104, 4092980832 } 
+                id { "USD" }
+            }
+        }
+        MK{
+            {
+                from:intvector { 169, 1638826976 } 
+                id { "MKD" }
+            }
+            {
+                from:intvector { 162, 599538048 } 
+                id { "MKN" }
+                to:intvector { 169, 1638826976 } 
+            }
+        }
+        ML{
+            {
+                from:intvector { 102, 3676895808 } 
+                id { "XOF" }
+            }
+            {
+                from:intvector { 4294967237, 1029090464 } 
+                id { "MLF" }
+                to:intvector { 103, 1974048512 } 
+            }
+            {
+                from:intvector { 4294967208, 1253782048 } 
+                id { "XOF" }
+                to:intvector { 4294967237, 1029090464 } 
+            }
+        }
+        MM{
+            {
+                from:intvector { 139, 4084705856 } 
+                id { "MMK" }
+            }
+            {
+                from:intvector { 4294967163, 3151070368 } 
+                id { "BUK" }
+                to:intvector { 139, 4084705856 } 
+            }
+        }
+        MN{
+            {
+                from:intvector { 4294966891, 3772334880 } 
+                id { "MNT" }
+            }
+        }
+        MO{
+            {
+                from:intvector { 4294966789, 95679072 } 
+                id { "MOP" }
+            }
+        }
+        MP{
+            {
+                from:intvector { 4294967104, 4092980832 } 
+                id { "USD" }
+            }
+        }
+        MQ{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967222, 2208439904 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        MR{
+            {
+                from:intvector { 22, 2624679488 } 
+                id { "MRO" }
+            }
+            {
+                from:intvector { 4294967208, 1599382048 } 
+                id { "XOF" }
+                to:intvector { 22, 2624679488 } 
+            }
+        }
+        MS{
+            {
+                from:intvector { 4294967274, 2041400512 } 
+                id { "XCD" }
+            }
+        }
+        MT{
+            {
+                from:intvector { 279, 849784416 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967281, 1784869440 } 
+                id { "MTL" }
+                to:intvector { 279, 3441784416 } 
+            }
+            {
+                from:intvector { 4294966884, 3338205952 } 
+                id { "MTP" }
+                to:intvector { 4294967281, 1784869440 } 
+            }
+        }
+        MU{
+            {
+                from:intvector { 4294967031, 2092973440 } 
+                id { "MUR" }
+            }
+        }
+        MV{
+            {
+                from:intvector { 80, 3558236320 } 
+                id { "MVR" }
+            }
+            {
+                from:intvector { 4294967127, 3133024 } 
+                id { "MVP" }
+                to:intvector { 80, 3558236320 } 
+            }
+        }
+        MW{
+            {
+                from:intvector { 7, 2680948928 } 
+                id { "MWK" }
+            }
+        }
+        MX{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "MXN" }
+            }
+            {
+                from:intvector { 4294966208, 2486078048 } 
+                id { "MXP" }
+                to:intvector { 162, 1032018048 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "MXV" }
+            }
+        }
+        MY{
+            {
+                from:intvector { 4294967244, 3710039392 } 
+                id { "MYR" }
+            }
+        }
+        MZ{
+            {
+                from:intvector { 264, 2202653856 } 
+                id { "MZN" }
+            }
+            {
+                from:intvector { 73, 3296547392 } 
+                id { "MZM" }
+                to:intvector { 265, 499986560 } 
+            }
+            {
+                from:intvector { 37, 926570048 } 
+                id { "MZE" }
+                to:intvector { 73, 3296547392 } 
+            }
+        }
+        NA{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "NAD" }
+            }
+            {
+                from:intvector { 4294967230, 594361536 } 
+                id { "ZAR" }
+                to:intvector { 168, 4291954272 } 
+            }
+        }
+        NC{
+            {
+                from:intvector { 110, 939257440 } 
+                id { "XPF" }
+            }
+        }
+        NE{
+            {
+                from:intvector { 4294967208, 821842048 } 
+                id { "XOF" }
+            }
+        }
+        NF{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        NG{
+            {
+                from:intvector { 22, 205179488 } 
+                id { "NGN" }
+            }
+        }
+        NI{
+            {
+                from:intvector { 154, 3768876416 } 
+                id { "NIO" }
+            }
+            {
+                from:intvector { 132, 2267636928 } 
+                id { "NIC" }
+                to:intvector { 154, 3768876416 } 
+            }
+        }
+        NL{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966142, 1957119584 } 
+                id { "NLG" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        NO{
+            {
+                from:intvector { 4294966818, 2290727488 } 
+                id { "NOK" }
+            }
+            {
+                from:intvector { 4294966583, 3579182048 } 
+                id { "SEK" }
+                to:intvector { 4294966818, 2290727488 } 
+            }
+        }
+        NP{
+            {
+                from:intvector { 4294967024, 621564512 } 
+                id { "NPR" }
+            }
+            {
+                from:intvector { 4294966561, 1127422560 } 
+                id { "INR" }
+                to:intvector { 4294967266, 4001618880 } 
+            }
+        }
+        NR{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        NU{
+            {
+                from:intvector { 4294967274, 572900512 } 
+                id { "NZD" }
+            }
+        }
+        NZ{
+            {
+                from:intvector { 4294967274, 572900512 } 
+                id { "NZD" }
+            }
+        }
+        OM{
+            {
+                from:intvector { 14, 3807117856 } 
+                id { "OMR" }
+            }
+        }
+        PA{
+            {
+                from:intvector { 4294966803, 3297936928 } 
+                id { "PAB" }
+            }
+            {
+                from:intvector { 4294966804, 212569632 } 
+                id { "USD" }
+            }
+        }
+        PE{
+            {
+                from:intvector { 154, 1263456416 } 
+                id { "PEN" }
+            }
+            {
+                from:intvector { 110, 939317440 } 
+                id { "PEI" }
+                to:intvector { 154, 1263456416 } 
+            }
+            {
+                from:intvector { 4294966510, 369214656 } 
+                id { "PES" }
+                to:intvector { 110, 939317440 } 
+            }
+        }
+        PF{
+            {
+                from:intvector { 4294967112, 3516302464 } 
+                id { "XPF" }
+            }
+        }
+        PG{
+            {
+                from:intvector { 37, 149150048 } 
+                id { "PGK" }
+            }
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+                to:intvector { 37, 149150048 } 
+            }
+        }
+        PH{
+            {
+                from:intvector { 4294967119, 3086431392 } 
+                id { "PHP" }
+            }
+        }
+        PK{
+            {
+                from:intvector { 4294967134, 1474541952 } 
+                id { "PKR" }
+            }
+            {
+                from:intvector { 4294966304, 1779237632 } 
+                id { "INR" }
+                to:intvector { 4294967127, 1213153024 } 
+            }
+        }
+        PL{
+            {
+                from:intvector { 183, 2939444832 } 
+                id { "PLN" }
+            }
+            {
+                from:intvector { 4294967149, 2541592512 } 
+                id { "PLZ" }
+                to:intvector { 176, 4060875904 } 
+            }
+        }
+        PM{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 15, 376210560 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        PN{
+            {
+                from:intvector { 4294967288, 3860598368 } 
+                id { "NZD" }
+            }
+        }
+        PR{
+            {
+                from:intvector { 4294966767, 755219584 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294966046, 4046780000 } 
+                id { "ESP" }
+                to:intvector { 4294966767, 755219584 } 
+            }
+        }
+        PS{
+            {
+                from:intvector { 191, 1066166464 } 
+                id { "JOD" }
+            }
+            {
+                from:intvector { 110, 1198937440 } 
+                id { "ILS" }
+            }
+            {
+                from:intvector { 4294967273, 4090207808 } 
+                id { "ILP" }
+                to:intvector { 73, 3814707392 } 
+            }
+            {
+                from:intvector { 4294967149, 208612512 } 
+                id { "JOD" }
+                to:intvector { 4294967273, 4090207808 } 
+            }
+        }
+        PT{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966862, 3910506464 } 
+                id { "PTE" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        PW{
+            {
+                from:intvector { 4294967104, 4092980832 } 
+                id { "USD" }
+            }
+        }
+        PY{
+            {
+                from:intvector { 4294967097, 2622351904 } 
+                id { "PYG" }
+            }
+        }
+        QA{
+            {
+                from:intvector { 22, 1760619488 } 
+                id { "QAR" }
+            }
+        }
+        RE{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 36, 3147637344 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        RO{
+            {
+                from:intvector { 257, 731424928 } 
+                id { "RON" }
+            }
+            {
+                from:intvector { 4294967164, 1188543072 } 
+                id { "ROL" }
+                to:intvector { 265, 499986560 } 
+            }
+        }
+        RS{
+            {
+                from:intvector { 264, 4276433856 } 
+                id { "RSD" }
+            }
+            {
+                from:intvector { 235, 1735785440 } 
+                id { "CSD" }
+                to:intvector { 264, 4276433856 } 
+            }
+            {
+                from:intvector { 176, 3455415904 } 
+                id { "YUM" }
+                to:intvector { 235, 1735785440 } 
+            }
+        }
+        RU{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "RUB" }
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 206, 1442257024 } 
+            }
+        }
+        RW{
+            {
+                from:intvector { 4294967252, 1145261024 } 
+                id { "RWF" }
+            }
+        }
+        SA{
+            {
+                from:intvector { 4294967164, 670683072 } 
+                id { "SAR" }
+            }
+        }
+        SB{
+            {
+                from:intvector { 51, 3869267904 } 
+                id { "SBD" }
+            }
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+                to:intvector { 59, 1563689536 } 
+            }
+        }
+        SC{
+            {
+                from:intvector { 4294966803, 3038736928 } 
+                id { "SCR" }
+            }
+        }
+        SD{
+            {
+                from:intvector { 272, 156155488 } 
+                id { "SDG" }
+            }
+            {
+                from:intvector { 161, 3339425344 } 
+                id { "SDD" }
+                to:intvector { 272, 1884455488 } 
+            }
+            {
+                from:intvector { 4294967200, 2694700416 } 
+                id { "SDP" }
+                to:intvector { 205, 3144864320 } 
+            }
+            {
+                from:intvector { 4294966701, 1003201120 } 
+                id { "EGP" }
+                to:intvector { 4294967207, 3560949344 } 
+            }
+            {
+                from:intvector { 4294966701, 1003201120 } 
+                id { "GBP" }
+                to:intvector { 4294967207, 3560949344 } 
+            }
+        }
+        SE{
+            {
+                from:intvector { 4294966583, 3579182048 } 
+                id { "SEK" }
+            }
+        }
+        SG{
+            {
+                from:intvector { 4294967274, 745640512 } 
+                id { "SGD" }
+            }
+            {
+                from:intvector { 4294967244, 3710039392 } 
+                id { "MYR" }
+                to:intvector { 4294967274, 745640512 } 
+            }
+        }
+        SH{
+            {
+                from:intvector { 4294966906, 3715765440 } 
+                id { "SHP" }
+            }
+        }
+        SI{
+            {
+                from:intvector { 271, 3673522784 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 161, 3253265344 } 
+                id { "SIT" }
+                to:intvector { 272, 501755488 } 
+            }
+        }
+        SJ{
+            {
+                from:intvector { 4294966818, 2290727488 } 
+                id { "NOK" }
+            }
+        }
+        SK{
+            {
+                from:intvector { 286, 2407413344 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 162, 1032018048 } 
+                id { "SKK" }
+                to:intvector { 286, 2407413344 } 
+            }
+            {
+                from:intvector { 4294967171, 413672000 } 
+                id { "CSK" }
+                to:intvector { 162, 1032018048 } 
+            }
+        }
+        SL{
+            {
+                from:intvector { 4294967251, 4144408320 } 
+                id { "SLL" }
+            }
+            {
+                from:intvector { 4294966106, 1229342240 } 
+                id { "GBP" }
+                to:intvector { 4294967266, 2877938880 } 
+            }
+        }
+        SM{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966524, 4176272512 } 
+                id { "ITL" }
+                to:intvector { 228, 1387576512 } 
+            }
+        }
+        SN{
+            {
+                from:intvector { 4294967215, 996590976 } 
+                id { "XOF" }
+            }
+        }
+        SO{
+            {
+                from:intvector { 4294967222, 2208799904 } 
+                id { "SOS" }
+            }
+        }
+        SR{
+            {
+                from:intvector { 249, 3468403296 } 
+                id { "SRD" }
+            }
+            {
+                from:intvector { 4294967075, 3194472416 } 
+                id { "SRG" }
+                to:intvector { 243, 294867072 } 
+            }
+            {
+                from:intvector { 4294966157, 2246810144 } 
+                id { "NLG" }
+                to:intvector { 4294967075, 3194472416 } 
+            }
+        }
+        ST{
+            {
+                from:intvector { 51, 2486807904 } 
+                id { "STD" }
+            }
+        }
+        SU{
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        SV{
+            {
+                from:intvector { 227, 3349683808 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294966921, 2018196000 } 
+                id { "SVC" }
+                to:intvector { 227, 3349683808 } 
+            }
+        }
+        SY{
+            {
+                from:intvector { 4294967134, 1474361952 } 
+                id { "SYP" }
+            }
+        }
+        SZ{
+            {
+                from:intvector { 29, 2108888416 } 
+                id { "SZL" }
+            }
+        }
+        TC{
+            {
+                from:intvector { 4294967288, 3429078368 } 
+                id { "USD" }
+            }
+        }
+        TD{
+            {
+                from:intvector { 168, 4291954272 } 
+                id { "XAF" }
+            }
+        }
+        TF{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294967215, 737210976 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+        }
+        TG{
+            {
+                from:intvector { 4294967208, 1599382048 } 
+                id { "XOF" }
+            }
+        }
+        TH{
+            {
+                from:intvector { 4294966987, 2892334464 } 
+                id { "THB" }
+            }
+        }
+        TJ{
+            {
+                from:intvector { 220, 3952594880 } 
+                id { "TJS" }
+            }
+            {
+                from:intvector { 183, 3717284832 } 
+                id { "TJR" }
+                to:intvector { 220, 3866194880 } 
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 183, 3717284832 } 
+            }
+        }
+        TK{
+            {
+                from:intvector { 4294967274, 572900512 } 
+                id { "NZD" }
+            }
+        }
+        TL{
+            {
+                from:intvector { 213, 1962965952 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294967215, 823610976 } 
+                id { "TPE" }
+                to:intvector { 235, 2167785440 } 
+            }
+            {
+                from:intvector { 36, 3666697344 } 
+                id { "IDR" }
+                to:intvector { 235, 2167785440 } 
+            }
+        }
+        TM{
+            {
+                from:intvector { 286, 2407413344 } 
+                id { "TMT" }
+            }
+            {
+                from:intvector { 168, 4292554272 } 
+                id { "TMM" }
+                to:intvector { 286, 2407413344 } 
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 168, 4292554272 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        TN{
+            {
+                from:intvector { 4294967207, 3561549344 } 
+                id { "TND" }
+            }
+        }
+        TO{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "TOP" }
+            }
+        }
+        TP{
+            {
+                from:intvector { 4294967215, 823610976 } 
+                id { "TPE" }
+                to:intvector { 235, 2167785440 } 
+            }
+            {
+                from:intvector { 36, 3666697344 } 
+                id { "IDR" }
+                to:intvector { 235, 2167785440 } 
+            }
+        }
+        TR{
+            {
+                from:intvector { 257, 731064928 } 
+                id { "TRY" }
+            }
+            {
+                from:intvector { 4294966943, 1359315488 } 
+                id { "TRL" }
+                to:intvector { 257, 3323724928 } 
+            }
+        }
+        TT{
+            {
+                from:intvector { 4294967251, 3884788320 } 
+                id { "TTD" }
+            }
+        }
+        TV{
+            {
+                from:intvector { 4294967266, 3741938880 } 
+                id { "AUD" }
+            }
+        }
+        TW{
+            {
+                from:intvector { 4294967141, 4241890880 } 
+                id { "TWD" }
+            }
+        }
+        TZ{
+            {
+                from:intvector { 4294967266, 3742178880 } 
+                id { "TZS" }
+            }
+        }
+        UA{
+            {
+                from:intvector { 191, 202586464 } 
+                id { "UAH" }
+            }
+            {
+                from:intvector { 161, 3771725344 } 
+                id { "UAK" }
+                to:intvector { 169, 1379926976 } 
+            }
+            {
+                from:intvector { 154, 3337356416 } 
+                id { "RUR" }
+                to:intvector { 161, 3771725344 } 
+            }
+            {
+                from:intvector { 4294967229, 3766068832 } 
+                id { "SUR" }
+                to:intvector { 154, 3337356416 } 
+            }
+        }
+        UG{
+            {
+                from:intvector { 125, 796588000 } 
+                id { "UGX" }
+            }
+            {
+                from:intvector { 4294967266, 3828698880 } 
+                id { "UGS" }
+                to:intvector { 125, 796588000 } 
+            }
+        }
+        UM{
+            {
+                from:intvector { 4294967104, 4092980832 } 
+                id { "USD" }
+            }
+        }
+        US{
+            {
+                from:intvector { 4294965988, 694083168 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "USN" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "USS" }
+            }
+        }
+        UY{
+            {
+                from:intvector { 168, 4292074272 } 
+                id { "UYU" }
+            }
+            {
+                from:intvector { 36, 3147997344 } 
+                id { "UYP" }
+                to:intvector { 168, 4292074272 } 
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "UYI" }
+            }
+        }
+        UZ{
+            {
+                from:intvector { 176, 1468575904 } 
+                id { "UZS" }
+            }
+        }
+        VA{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 4294966561, 2683162560 } 
+                id { "ITL" }
+                to:intvector { 235, 2858805440 } 
+            }
+        }
+        VC{
+            {
+                from:intvector { 4294967259, 1579989952 } 
+                id { "XCD" }
+            }
+        }
+        VE{
+            {
+                from:intvector { 279, 849784416 } 
+                id { "VEF" }
+            }
+            {
+                from:intvector { 4294966568, 3462891488 } 
+                id { "VEB" }
+                to:intvector { 279, 3355684416 } 
+            }
+        }
+        VG{
+            {
+                from:intvector { 4294966289, 1748927072 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 4294966289, 1748927072 } 
+                id { "GBP" }
+                to:intvector { 4294967215, 737210976 } 
+            }
+        }
+        VI{
+            {
+                from:intvector { 4294966318, 3425275488 } 
+                id { "USD" }
+            }
+        }
+        VN{
+            {
+                from:intvector { 110, 2062937440 } 
+                id { "VND" }
+            }
+            {
+                from:intvector { 58, 3525796832 } 
+                id { "VNN" }
+                to:intvector { 110, 2062937440 } 
+            }
+        }
+        VU{
+            {
+                from:intvector { 80, 3557876320 } 
+                id { "VUV" }
+            }
+        }
+        WF{
+            {
+                from:intvector { 4294967230, 1977061536 } 
+                id { "XPF" }
+            }
+        }
+        WS{
+            {
+                from:intvector { 4294967274, 572900512 } 
+                id { "WST" }
+            }
+        }
+        YD{
+            {
+                from:intvector { 4294967259, 1147629952 } 
+                id { "YDD" }
+                to:intvector { 191, 115706464 } 
+            }
+        }
+        YE{
+            {
+                from:intvector { 147, 1606507488 } 
+                id { "YER" }
+            }
+        }
+        YT{
+            {
+                from:intvector { 213, 320825952 } 
+                id { "EUR" }
+            }
+            {
+                from:intvector { 44, 2224758976 } 
+                id { "FRF" }
+                to:intvector { 235, 1908405440 } 
+            }
+            {
+                from:intvector { 36, 3147637344 } 
+                id { "KMF" }
+                to:intvector { 44, 2224758976 } 
+            }
+        }
+        YU{
+            {
+                from:intvector { 176, 3455415904 } 
+                id { "YUM" }
+                to:intvector { 235, 1735785440 } 
+            }
+            {
+                from:intvector { 146, 4086834784 } 
+                id { "YUN" }
+                to:intvector { 162, 426918048 } 
+            }
+            {
+                from:intvector { 4294967266, 2618678880 } 
+                id { "YUD" }
+                to:intvector { 146, 4086834784 } 
+            }
+        }
+        ZA{
+            {
+                from:intvector { 4294967230, 594361536 } 
+                id { "ZAR" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "ZAL" }
+            }
+        }
+        ZM{
+            {
+                from:intvector { 4294967281, 2562169440 } 
+                id { "ZMK" }
+            }
+        }
+        ZR{
+            {
+                from:intvector { 168, 4292554272 } 
+                id { "ZRN" }
+                to:intvector { 205, 3144924320 } 
+            }
+            {
+                from:intvector { 7, 3718228928 } 
+                id { "ZRZ" }
+                to:intvector { 168, 4292554272 } 
+            }
+        }
+        ZW{
+            {
+                from:intvector { 286, 3357993344 } 
+                id { "USD" }
+            }
+            {
+                from:intvector { 286, 2493873344 } 
+                id { "ZWL" }
+                to:intvector { 286, 3357993344 } 
+            }
+            {
+                from:intvector { 279, 850204416 } 
+                id { "ZWR" }
+                to:intvector { 286, 2493873344 } 
+            }
+            {
+                from:intvector { 73, 3469227392 } 
+                id { "ZWD" }
+                to:intvector { 279, 850204416 } 
+            }
+            {
+                from:intvector { 0, 1382520000 } 
+                id { "RHD" }
+                to:intvector { 73, 3469227392 } 
+            }
+        }
+        ZZ{
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XAG" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XAU" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XBA" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XBB" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XBC" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XBD" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XDR" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XEU" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XFO" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XFU" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XPD" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XPT" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XRE" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XTS" }
+            }
+            {
+                from:intvector { 58993, 351827072 } 
+                id { "XXX" }
+            }
+        }
+    }
+    CurrencyMeta{
+        ADP:intvector { 0, 0 } 
+        AFN:intvector { 0, 0 } 
+        ALL:intvector { 0, 0 } 
+        AMD:intvector { 0, 0 } 
+        BHD:intvector { 3, 0 } 
+        BIF:intvector { 0, 0 } 
+        BYR:intvector { 0, 0 } 
+        CHF:intvector { 2, 5 } 
+        CLF:intvector { 0, 0 } 
+        CLP:intvector { 0, 0 } 
+        COP:intvector { 0, 0 } 
+        CRC:intvector { 0, 0 } 
+        DEFAULT:intvector { 2, 0 } 
+        DJF:intvector { 0, 0 } 
+        ESP:intvector { 0, 0 } 
+        GNF:intvector { 0, 0 } 
+        GYD:intvector { 0, 0 } 
+        HUF:intvector { 0, 0 } 
+        IDR:intvector { 0, 0 } 
+        IQD:intvector { 0, 0 } 
+        IRR:intvector { 0, 0 } 
+        ISK:intvector { 0, 0 } 
+        ITL:intvector { 0, 0 } 
+        JOD:intvector { 3, 0 } 
+        JPY:intvector { 0, 0 } 
+        KMF:intvector { 0, 0 } 
+        KPW:intvector { 0, 0 } 
+        KRW:intvector { 0, 0 } 
+        KWD:intvector { 3, 0 } 
+        LAK:intvector { 0, 0 } 
+        LBP:intvector { 0, 0 } 
+        LUF:intvector { 0, 0 } 
+        LYD:intvector { 3, 0 } 
+        MGA:intvector { 0, 0 } 
+        MGF:intvector { 0, 0 } 
+        MMK:intvector { 0, 0 } 
+        MNT:intvector { 0, 0 } 
+        MRO:intvector { 0, 0 } 
+        MUR:intvector { 0, 0 } 
+        OMR:intvector { 3, 0 } 
+        PKR:intvector { 0, 0 } 
+        PYG:intvector { 0, 0 } 
+        RSD:intvector { 0, 0 } 
+        RWF:intvector { 0, 0 } 
+        SLL:intvector { 0, 0 } 
+        SOS:intvector { 0, 0 } 
+        STD:intvector { 0, 0 } 
+        SYP:intvector { 0, 0 } 
+        TMM:intvector { 0, 0 } 
+        TND:intvector { 3, 0 } 
+        TRL:intvector { 0, 0 } 
+        TZS:intvector { 0, 0 } 
+        UGX:intvector { 0, 0 } 
+        UZS:intvector { 0, 0 } 
+        VND:intvector { 0, 0 } 
+        VUV:intvector { 0, 0 } 
+        XAF:intvector { 0, 0 } 
+        XOF:intvector { 0, 0 } 
+        XPF:intvector { 0, 0 } 
+        YER:intvector { 0, 0 } 
+        ZMK:intvector { 0, 0 } 
+        ZWD:intvector { 0, 0 } 
+    }
+}

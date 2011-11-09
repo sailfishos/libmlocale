@@ -118,7 +118,8 @@ greaterThan(ICUVERSION, 4.4) {
                  data/curr/en_HK.txt \
                  data/curr/zh_HK.txt \
                  data/curr/zh_Hans_HK.txt \
-                 data/curr/zh_Hant_HK.txt
+                 data/curr/zh_Hant_HK.txt \
+                 data/curr/supplementalData.txt
     ZONETXT    = data/zone/bg.txt \
                  data/zone/sk.txt \
                  data/zone/sr.txt \
