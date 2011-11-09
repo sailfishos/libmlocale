@@ -64,6 +64,8 @@ ifneq (,$(findstring nodocs,$(DEB_BUILD_OPTIONS)))
      EXCLUSIONS += --no-package=libmlocale-doc
 endif
 
+# enable debug logging in development versions
+export LOGDEBUG = $(shell head -n 1 debian/changelog | grep '~' > /dev/null 2> /dev/null && echo yes || echo no)
 
 BUILD_DIR = build-$(DEB_BUILD_ARCH)
 

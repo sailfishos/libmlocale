@@ -20,6 +20,8 @@
 #include "mlocale.h"
 #include "mlocale_p.h"
 
+#include "debug.h"
+
 #ifdef HAVE_ICU
 #include <unicode/unistr.h>
 #include <unicode/ucal.h>
@@ -960,15 +962,7 @@ MLocalePrivate::MLocalePrivate()
 #endif
       q_ptr(0)
 {
-    const MLocaleAbstractConfigItemFactory *factory = MLocale::configItemFactory();
-
-    pCurrentLanguage        = factory->createConfigItem( SettingsLanguage );
-    pCurrentLcTime          = factory->createConfigItem( SettingsLcTime );
-    pCurrentLcTimeFormat24h = factory->createConfigItem( SettingsLcTimeFormat24h );
-    pCurrentLcCollate       = factory->createConfigItem( SettingsLcCollate );
-    pCurrentLcNumeric       = factory->createConfigItem( SettingsLcNumeric );
-    pCurrentLcMonetary      = factory->createConfigItem( SettingsLcMonetary );
-    pCurrentLcTelephone     = factory->createConfigItem( SettingsLcTelephone );
+    lmlDebug( "MLocalePrivate ctor called" );
 
     if (translationPaths.isEmpty())
     {
@@ -1026,16 +1020,6 @@ MLocalePrivate::MLocalePrivate(const MLocalePrivate &other)
 #endif
       q_ptr(0)
 {
-    const MLocaleAbstractConfigItemFactory *factory = MLocale::configItemFactory();
-
-    pCurrentLanguage        = factory->createConfigItem( SettingsLanguage );
-    pCurrentLcTime          = factory->createConfigItem( SettingsLcTime );
-    pCurrentLcTimeFormat24h = factory->createConfigItem( SettingsLcTimeFormat24h );
-    pCurrentLcCollate       = factory->createConfigItem( SettingsLcCollate );
-    pCurrentLcNumeric       = factory->createConfigItem( SettingsLcNumeric );
-    pCurrentLcMonetary      = factory->createConfigItem( SettingsLcMonetary );
-    pCurrentLcTelephone     = factory->createConfigItem( SettingsLcTelephone );
-
 #ifdef HAVE_ICU
     if (other._numberFormat != 0) {
         _numberFormat = static_cast<icu::NumberFormat *>((other._numberFormat)->clone());
@@ -1057,6 +1041,14 @@ MLocalePrivate::~MLocalePrivate()
     delete _pDateTimeCalendar;
     _pDateTimeCalendar = 0;
 #endif
+
+    delete pCurrentLanguage;
+    delete pCurrentLcTime;
+    delete pCurrentLcTimeFormat24h;
+    delete pCurrentLcCollate;
+    delete pCurrentLcNumeric;
+    delete pCurrentLcMonetary;
+    delete pCurrentLcTelephone;
 }
 
 MLocalePrivate &MLocalePrivate::operator=(const MLocalePrivate &other)
@@ -1881,9 +1873,22 @@ MLocale::connectSettings()
 {
     Q_D(MLocale);
 
-    // TODO: we can optimize this to have different slots for
-    // the different settings, and we can also directly receive
-    // the new setting from the signal here.
+    const MLocaleAbstractConfigItemFactory *factory = MLocale::configItemFactory();
+
+    if ( !d->pCurrentLanguage )
+        d->pCurrentLanguage        = factory->createConfigItem( SettingsLanguage );
+    if ( !d->pCurrentLcTime )
+        d->pCurrentLcTime          = factory->createConfigItem( SettingsLcTime );
+    if ( !d->pCurrentLcTimeFormat24h )
+        d->pCurrentLcTimeFormat24h = factory->createConfigItem( SettingsLcTimeFormat24h );
+    if ( !d->pCurrentLcCollate )
+        d->pCurrentLcCollate       = factory->createConfigItem( SettingsLcCollate );
+    if ( !d->pCurrentLcNumeric )
+        d->pCurrentLcNumeric       = factory->createConfigItem( SettingsLcNumeric );
+    if ( !d->pCurrentLcMonetary )
+        d->pCurrentLcMonetary      = factory->createConfigItem( SettingsLcMonetary );
+    if ( !d->pCurrentLcTelephone )
+        d->pCurrentLcTelephone     = factory->createConfigItem( SettingsLcTelephone );
 
     QObject::connect(d->pCurrentLanguage, SIGNAL(valueChanged(QString)),
                      this, SLOT(refreshSettings()));
@@ -2914,10 +2919,10 @@ QString MLocale::formatDateTime(const QDateTime &dateTime, DateType dateType,
 QString MLocale::formatDateTime(const MCalendar &mcalendar,
                                   DateType datetype, TimeType timetype) const
 {
+    Q_D(const MLocale);
+
     if (datetype == DateNone && timetype == TimeNone)
         return QString("");
-
-    Q_D(const MLocale);
 
     icu::FieldPosition pos;
     icu::UnicodeString resString;
@@ -4478,12 +4483,12 @@ void MLocale::refreshSettings()
     QString lcMonetary      = d->pCurrentLcMonetary->value();
     QString lcTelephone     = d->pCurrentLcTelephone->value();
 
-    if ( localeName.isEmpty() )      localeName = "en_GB";
-    if ( lcTime.isEmpty() )          lcTime = "en_GB";
-    if ( lcTimeFormat24h.isEmpty() ) lcTimeFormat24h = "12";
-    if ( lcCollate.isEmpty() )       lcCollate = "en_GB";
-    if ( lcNumeric.isEmpty() )       lcNumeric = "en_GB";
-    if ( lcMonetary.isEmpty() )      lcMonetary = "en_GB";
+    if ( !d->pCurrentLanguage->isValid() )        localeName = "en_GB";
+    if ( !d->pCurrentLcTime->isValid() )          lcTime = "en_GB";
+    if ( !d->pCurrentLcTimeFormat24h->isValid() ) lcTimeFormat24h = "12";
+    if ( !d->pCurrentLcCollate->isValid() )       lcCollate = "en_GB";
+    if ( !d->pCurrentLcNumeric->isValid() )       lcNumeric = "en_GB";
+    if ( !d->pCurrentLcMonetary->isValid() )      lcMonetary = "en_GB";
     // no default for lcTelephone
 
     if (localeName != d->_defaultLocale) {
@@ -4505,6 +4510,7 @@ void MLocale::refreshSettings()
         timeFormat24h = MLocale::TwelveHourTimeFormat24h;
     else
         timeFormat24h = MLocale::LocaleDefaultTimeFormat24h;
+
     if (timeFormat24h != d->_timeFormat24h) {
         settingsHaveReallyChanged = true;
         d->_timeFormat24h = timeFormat24h;

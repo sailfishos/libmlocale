@@ -25,6 +25,7 @@ PUBLIC_HEADERS += \
 
 PRIVATE_HEADERS += \
     mcalendar_p.h \
+    debug.h \
 
 SOURCES += \
     mbreakiterator.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
     mlocaleabstractconfigitem.cpp \
     mlocalenullconfigitem.cpp \
     mlocalenullconfigitemfactory.cpp \
+    debug.cpp \
 
 contains(DEFINES, HAVE_ICU) {
     PUBLIC_HEADERS += \

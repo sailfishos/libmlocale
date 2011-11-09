@@ -14,6 +14,15 @@ DEFINES += M_MAJOR_VERSION=$${ML_MAJOR_VERSION}
 DEFINES += M_MINOR_VERSION=$${ML_MINOR_VERSION}
 DEFINES += M_PATCH_VERSION=$${ML_PATCH_VERSION}
 
+# enable debug log if needed
+LOGDEBUG=$$(LOGDEBUG)
+contains(LOGDEBUG, yes){
+    DEFINES += LOGDEBUG
+}
+
+# make debug.cpp build
+DEFINES += NO_COLOR
+
 INCLUDEPATH += $${M_SOURCE_TREE}/src/include
 INCLUDEPATH += $${OUT_PWD}/.moc
 
