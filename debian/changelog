@@ -1,3 +1,14 @@
+libmlocale (0.3.15-1) unstable; urgency=low
+
+  * Changes: bump version to 0.3.15-1
+  * Fixes: NB#289292 - <MemLeak> Memory leak when opening and closing statusbar
+  * Fixes: NB#289265 - Time is displayed in 12 hour format in SUW (default option is in
+  * Fixes: NB#289683 - Calendar: The translation of 'weekdays' is not correct grammatically in Kazakh
+  * Fixes: NB#289026 - Regional format; AM/PM (enne keskpäeva/pärast keskpäeva) is clipped in some applications for Estonia.
+  * Fixes: NB#289008 - Regional format; Currency sign is wrong.
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Wed, 09 Nov 2011 15:56:57 +0300
+
 libmlocale (0.3.14-1) unstable; urgency=low
 
   * Changes: bump version to 0.3.14-1
