@@ -5802,7 +5802,7 @@ fa_IR	Name of weekday 05 (Islamic calendar), format, narrow	ج
 fa_IR	Name of weekday 06 (Islamic calendar), format, narrow	ش
 fa_IR	Name of weekday 07 (Islamic calendar), format, narrow	ی
 fa_IR	Collation sample	/ # % ∮ ☺ ♨ 01 ٠١ ०१ 02 ٠٢ ०२ 04 ٠٤ ٠۴ ०४ 05 ٠٥ ٠۵ ०५ 06 ٠٦ ٠۶ ०६ 1 ١ १ 11 ١١ ११ 12 ١٢ १२ 14 ١٤ ١۴ १४ 15 ١٥ ١۵ १५ 16 ١٦ ١۶ १६ 2 ٢ २ 21 ٢١ २१ 22 ٢٢ २२ 24 ٢٤ ٢۴ २४ 25 ٢٥ ٢۵ २५ 26 ٢٦ ٢۶ २६ 4 ٤ ۴ ४ 5 ٥ ۵ ५ 6 ٦ ۶ ६ a A á Á ă Ă å Å ä Ä b c č ca ča čc ch cH Ch CH cote COTE coté COTÉ côte CÔTE côté CÔTÉ cz čz d ď da ďa dz ďz e ě ea ěa ez ěz h H i I n N ň ň Ň na ňa nz ňz o O ö Ö oegh öfgh r ř ra řa rz řz s š sa ša sz šz t ť ta ťa tz ťz U ú ů Ů z ž za ža zz žz α Α β Β ω Ω а А б Б в В г Г Ѐ я Я א ב ג ש ת ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ک ك گ ل م ن و ه ي あ うちやま か こなか さ さき ジョン た ティロー な なかむら ナターシャ は はとやま ヘンリー ま マイケル まつした や やまだ ヤングマン ら ラースロ らくたに わ わかやま ワトソン 一 三 中 中村 二 俄 内山 小中 山田 得 播 攀 松下 楽谷 正 此 沙紀 爱 竹山 竹山 若山 鳩山
-fa_IR	Exemplar characters index	[ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ي]
+fa_IR	Exemplar characters index	[آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی]
 fa_IR	Scripts used	Arab
 fa_IR	%r (locale specific 12 hour “TimeShort”)	‫۲:۳۱‬ ب.ظ
 fa_IR	%R (locale specific 24 hour “TimeShort”)	‫۱۴:۳۱‬
@@ -6150,7 +6150,7 @@ fa_IR@numbers=arabext	Name of weekday 05 (Islamic calendar), format, narrow	ج
 fa_IR@numbers=arabext	Name of weekday 06 (Islamic calendar), format, narrow	ش
 fa_IR@numbers=arabext	Name of weekday 07 (Islamic calendar), format, narrow	ی
 fa_IR@numbers=arabext	Collation sample	/ # % ∮ ☺ ♨ 01 ٠١ ०१ 02 ٠٢ ०२ 04 ٠٤ ٠۴ ०४ 05 ٠٥ ٠۵ ०५ 06 ٠٦ ٠۶ ०६ 1 ١ १ 11 ١١ ११ 12 ١٢ १२ 14 ١٤ ١۴ १४ 15 ١٥ ١۵ १५ 16 ١٦ ١۶ १६ 2 ٢ २ 21 ٢١ २१ 22 ٢٢ २२ 24 ٢٤ ٢۴ २४ 25 ٢٥ ٢۵ २५ 26 ٢٦ ٢۶ २६ 4 ٤ ۴ ४ 5 ٥ ۵ ५ 6 ٦ ۶ ६ a A á Á ă Ă å Å ä Ä b c č ca ča čc ch cH Ch CH cote COTE coté COTÉ côte CÔTE côté CÔTÉ cz čz d ď da ďa dz ďz e ě ea ěa ez ěz h H i I n N ň ň Ň na ňa nz ňz o O ö Ö oegh öfgh r ř ra řa rz řz s š sa ša sz šz t ť ta ťa tz ťz U ú ů Ů z ž za ža zz žz α Α β Β ω Ω а А б Б в В г Г Ѐ я Я א ב ג ש ת ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ک ك گ ل م ن و ه ي あ うちやま か こなか さ さき ジョン た ティロー な なかむら ナターシャ は はとやま ヘンリー ま マイケル まつした や やまだ ヤングマン ら ラースロ らくたに わ わかやま ワトソン 一 三 中 中村 二 俄 内山 小中 山田 得 播 攀 松下 楽谷 正 此 沙紀 爱 竹山 竹山 若山 鳩山
-fa_IR@numbers=arabext	Exemplar characters index	[ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ي]
+fa_IR@numbers=arabext	Exemplar characters index	[آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی]
 fa_IR@numbers=arabext	Scripts used	Arab
 fa_IR@numbers=arabext	%r (locale specific 12 hour “TimeShort”)	‫۲:۳۱‬ ب.ظ
 fa_IR@numbers=arabext	%R (locale specific 24 hour “TimeShort”)	‫۱۴:۳۱‬
@@ -6498,7 +6498,7 @@ fa_IR@numbers=latn	Name of weekday 05 (Islamic calendar), format, narrow	ج
 fa_IR@numbers=latn	Name of weekday 06 (Islamic calendar), format, narrow	ش
 fa_IR@numbers=latn	Name of weekday 07 (Islamic calendar), format, narrow	ی
 fa_IR@numbers=latn	Collation sample	/ # % ∮ ☺ ♨ 01 ٠١ ०१ 02 ٠٢ ०२ 04 ٠٤ ٠۴ ०४ 05 ٠٥ ٠۵ ०५ 06 ٠٦ ٠۶ ०६ 1 ١ १ 11 ١١ ११ 12 ١٢ १२ 14 ١٤ ١۴ १४ 15 ١٥ ١۵ १५ 16 ١٦ ١۶ १६ 2 ٢ २ 21 ٢١ २१ 22 ٢٢ २२ 24 ٢٤ ٢۴ २४ 25 ٢٥ ٢۵ २५ 26 ٢٦ ٢۶ २६ 4 ٤ ۴ ४ 5 ٥ ۵ ५ 6 ٦ ۶ ६ a A á Á ă Ă å Å ä Ä b c č ca ča čc ch cH Ch CH cote COTE coté COTÉ côte CÔTE côté CÔTÉ cz čz d ď da ďa dz ďz e ě ea ěa ez ěz h H i I n N ň ň Ň na ňa nz ňz o O ö Ö oegh öfgh r ř ra řa rz řz s š sa ša sz šz t ť ta ťa tz ťz U ú ů Ů z ž za ža zz žz α Α β Β ω Ω а А б Б в В г Г Ѐ я Я א ב ג ש ת ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ک ك گ ل م ن و ه ي あ うちやま か こなか さ さき ジョン た ティロー な なかむら ナターシャ は はとやま ヘンリー ま マイケル まつした や やまだ ヤングマン ら ラースロ らくたに わ わかやま ワトソン 一 三 中 中村 二 俄 内山 小中 山田 得 播 攀 松下 楽谷 正 此 沙紀 爱 竹山 竹山 若山 鳩山
-fa_IR@numbers=latn	Exemplar characters index	[ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ي]
+fa_IR@numbers=latn	Exemplar characters index	[آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی]
 fa_IR@numbers=latn	Scripts used	Arab
 fa_IR@numbers=latn	%r (locale specific 12 hour “TimeShort”)	‫2:31‬ ب.ظ
 fa_IR@numbers=latn	%R (locale specific 24 hour “TimeShort”)	‫14:31‬
