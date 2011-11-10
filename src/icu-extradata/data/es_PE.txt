@@ -1,0 +1,21 @@
+es_PE{
+    calendar{
+        gregorian{
+            DateTimePatterns{
+                "HH'H'mm''ss'' zzzz",
+                "HH:mm:ss z",
+                "HH:mm:ss",
+                "HH:mm",
+                "EEEE, d 'de' MMMM 'de' y",
+                "d 'de' MMMM 'de' y",
+                "dd/MM/yyyy",
+                "d/MM/yy",
+                "{1} {0}",
+                "{1} {0}",
+                "{1} {0}",
+                "{1} {0}",
+                "{1} {0}",
+            }
+        }
+    }
+}

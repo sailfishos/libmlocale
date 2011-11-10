@@ -34,6 +34,15 @@ greaterThan(ICUVERSION, 4.4) {
                  data/te_IN.txt \                 
                  data/en_SG.txt \
                  data/es_AR.txt \
+                 data/es_CL.txt \
+                 data/es_CO.txt \
+                 data/es_EC.txt \
+                 data/es_GT.txt \
+                 data/es_HN.txt \
+                 data/es_PA.txt \
+                 data/es_PE.txt \
+                 data/es_PR.txt \
+                 data/es_US.txt \
                  data/fi.txt \
                  data/fr_CA.txt \
                  data/gl.txt \
