@@ -1,3 +1,10 @@
+libmlocale (0.3.16-1) unstable; urgency=low
+
+  * NB#289894 - Display - The logical name §qtn_comm_local_comma§ (,) is missing in Latin Spanish and EU Spanish.
+  * NB#288989 - Wrong short and medium date format for Poland
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Fri, 11 Nov 2011 11:11:11 +0300
+
 libmlocale (0.3.15-1) unstable; urgency=low
 
   * Changes: bump version to 0.3.15-1
