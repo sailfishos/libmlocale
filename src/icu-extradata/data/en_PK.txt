@@ -1,7 +1,6 @@
-en_IN{
+en_PK{
     calendar{
         gregorian{
-            DateTimeElements:intvector { 1, 4 }
             DateTimePatterns{
                 "h:mm:ss a zzzz",
                 "h:mm:ss a z",
@@ -17,7 +16,6 @@ en_IN{
                 "{1} {0}",
                 "{1} {0}",
             }
-            weekend:intvector { 7, 0, 1, 86400000 }
         }
     }
 }

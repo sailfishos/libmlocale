@@ -15,6 +15,7 @@ greaterThan(ICUVERSION, 4.4) {
                  data/de.txt \
                  data/en_GB.txt \
                  data/en_IE.txt \
+                 data/en_PK.txt \
                  data/et.txt \
                  data/as_IN.txt \
                  data/bn_IN.txt \
