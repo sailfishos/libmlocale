@@ -5571,8 +5571,8 @@ fa_IR	Country endonym	ایران
 fa_IR	Decimal point	٫
 fa_IR	Floating Point Number	‪۱۲۳٬۴۵۶٬۷۸۹٫۰۱۲−‬
 fa_IR	Percent value	‪٪۱٬۲۳۴٫۵۶۷۹−‬
-fa_IR	Currency value	‪‪۱٬۲۳۵ ﷼‬‫‬‬
-fa_IR	Negative Currency value	‪‪۱٬۲۳۵− ﷼‬‫‬‬
+fa_IR	Currency value	‪‪۱٬۲۳۵‬‫ ریال‬‬
+fa_IR	Negative Currency value	‪‪۱٬۲۳۵−‬‫ ریال‬‬
 fa_IR	Name of month 01 (Gregorian calendar), stand-alone, wide	ژانویه
 fa_IR	Name of month 02 (Gregorian calendar), stand-alone, wide	فوریه
 fa_IR	Name of month 03 (Gregorian calendar), stand-alone, wide	مارس
@@ -5919,8 +5919,8 @@ fa_IR@numbers=arabext	Country endonym	ایران
 fa_IR@numbers=arabext	Decimal point	٫
 fa_IR@numbers=arabext	Floating Point Number	‪۱۲۳٬۴۵۶٬۷۸۹٫۰۱۲−‬
 fa_IR@numbers=arabext	Percent value	‪٪۱٬۲۳۴٫۵۶۷۹−‬
-fa_IR@numbers=arabext	Currency value	‪‪۱٬۲۳۵ ﷼‬‫‬‬
-fa_IR@numbers=arabext	Negative Currency value	‪‪۱٬۲۳۵− ﷼‬‫‬‬
+fa_IR@numbers=arabext	Currency value	‪‪۱٬۲۳۵‬‫ ریال‬‬
+fa_IR@numbers=arabext	Negative Currency value	‪‪۱٬۲۳۵−‬‫ ریال‬‬
 fa_IR@numbers=arabext	Name of month 01 (Gregorian calendar), stand-alone, wide	ژانویه
 fa_IR@numbers=arabext	Name of month 02 (Gregorian calendar), stand-alone, wide	فوریه
 fa_IR@numbers=arabext	Name of month 03 (Gregorian calendar), stand-alone, wide	مارس
@@ -6267,8 +6267,8 @@ fa_IR@numbers=latn	Country endonym	ایران
 fa_IR@numbers=latn	Decimal point	.
 fa_IR@numbers=latn	Floating Point Number	‪−123,456,789.012‬
 fa_IR@numbers=latn	Percent value	‪−1,234.5679%‬
-fa_IR@numbers=latn	Currency value	‪‫‬‪﷼ 1,235‬‬
-fa_IR@numbers=latn	Negative Currency value	‪‫‬‪﷼ −1,235‬‬
+fa_IR@numbers=latn	Currency value	‪‫ریال ‬‪1,235‬‬
+fa_IR@numbers=latn	Negative Currency value	‪‫ریال ‬‪−1,235‬‬
 fa_IR@numbers=latn	Name of month 01 (Gregorian calendar), stand-alone, wide	ژانویه
 fa_IR@numbers=latn	Name of month 02 (Gregorian calendar), stand-alone, wide	فوریه
 fa_IR@numbers=latn	Name of month 03 (Gregorian calendar), stand-alone, wide	مارس
