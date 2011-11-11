@@ -4243,6 +4243,8 @@ void Ft_Locales::checkAvailableLocales()
     requiredLocaleNames << "sr_Cyrl_RS";  // "Serbian Cyrl (Serbia)"
     requiredLocaleNames << "sk";          // "Slovak"
     requiredLocaleNames << "sk_SK";       // "Slovak (Slovakia)"
+    requiredLocaleNames << "sl";          // "Slovenian"
+    requiredLocaleNames << "sl_SI";       // "Slovenian (Slovenia)"
     requiredLocaleNames << "sv";          // "Swedish"
     requiredLocaleNames << "sv_FI";       // "Swedish (Finland)"
     requiredLocaleNames << "sv_SE";       // "Swedish (Sweden)"
