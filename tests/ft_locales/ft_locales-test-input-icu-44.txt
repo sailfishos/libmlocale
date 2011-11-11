@@ -5148,22 +5148,22 @@ es_419	dateLong, timeLong, Gregorian calendar, 24/12 hour mode: 12          	d '
 es_419	dateLong, timeLong, Gregorian calendar, 24/12 hour mode: 24 (default)	d 'de' MMMM 'de' y HH:mm:ss z -> 21 de julio de 2008 14:31:00 GMT+00:00
 es_419	dateLong, timeFull, Gregorian calendar, 24/12 hour mode: 12          	d 'de' MMMM 'de' y hh:mm:ss a zzzz -> 21 de julio de 2008 02:31:00 PM GMT+00:00
 es_419	dateLong, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	d 'de' MMMM 'de' y HH:mm:ss zzzz -> 21 de julio de 2008 14:31:00 GMT+00:00
-es_419	dateFull, timeNone, Gregorian calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y -> lunes 21 de julio de 2008
-es_419	dateFull, timeNone, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y -> lunes 21 de julio de 2008
-es_419	dateFull, timeShort, Gregorian calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm a -> lunes 21 de julio de 2008 02:31 PM
-es_419	dateFull, timeShort, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm -> lunes 21 de julio de 2008 14:31
-es_419	dateFull, timeMedium, Gregorian calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm:ss a -> lunes 21 de julio de 2008 02:31:00 PM
-es_419	dateFull, timeMedium, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm:ss -> lunes 21 de julio de 2008 14:31:00
-es_419	dateFull, timeLong, Gregorian calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm:ss a z -> lunes 21 de julio de 2008 02:31:00 PM GMT+00:00
-es_419	dateFull, timeLong, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm:ss z -> lunes 21 de julio de 2008 14:31:00 GMT+00:00
-es_419	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm:ss a zzzz -> lunes 21 de julio de 2008 02:31:00 PM GMT+00:00
-es_419	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm:ss zzzz -> lunes 21 de julio de 2008 14:31:00 GMT+00:00
-es_419 & fi_FI	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	cccc d LLLL y hh:mm:ss a zzzz -> Maanantai 21 Heinäkuu 2008 02:31:00 PM UTC+0.00
-es_419 & fi_FI	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	cccc d LLLL y HH:mm:ss zzzz -> Maanantai 21 Heinäkuu 2008 14:31:00 UTC+0.00
-es_419 & de_DE	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	cccc d LLLL y hh:mm:ss a zzzz -> Montag 21 Juli 2008 02:31:00 PM GMT+00:00
-es_419 & de_DE	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	cccc d LLLL y HH:mm:ss zzzz -> Montag 21 Juli 2008 14:31:00 GMT+00:00
-es_419 & en_US	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	cccc d LLLL y hh:mm:ss a zzzz -> Monday 21 July 2008 02:31:00 PM GMT+00:00
-es_419 & en_US	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	cccc d LLLL y HH:mm:ss zzzz -> Monday 21 July 2008 14:31:00 GMT+00:00
+es_419	dateFull, timeNone, Gregorian calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y -> lunes, 21 de julio de 2008
+es_419	dateFull, timeNone, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y -> lunes, 21 de julio de 2008
+es_419	dateFull, timeShort, Gregorian calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm a -> lunes, 21 de julio de 2008 02:31 PM
+es_419	dateFull, timeShort, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm -> lunes, 21 de julio de 2008 14:31
+es_419	dateFull, timeMedium, Gregorian calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm:ss a -> lunes, 21 de julio de 2008 02:31:00 PM
+es_419	dateFull, timeMedium, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm:ss -> lunes, 21 de julio de 2008 14:31:00
+es_419	dateFull, timeLong, Gregorian calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm:ss a z -> lunes, 21 de julio de 2008 02:31:00 PM GMT+00:00
+es_419	dateFull, timeLong, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm:ss z -> lunes, 21 de julio de 2008 14:31:00 GMT+00:00
+es_419	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm:ss a zzzz -> lunes, 21 de julio de 2008 02:31:00 PM GMT+00:00
+es_419	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm:ss zzzz -> lunes, 21 de julio de 2008 14:31:00 GMT+00:00
+es_419 & fi_FI	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	cccc, d LLLL y hh:mm:ss a zzzz -> Maanantai, 21 Heinäkuu 2008 02:31:00 PM UTC+0.00
+es_419 & fi_FI	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	cccc, d LLLL y HH:mm:ss zzzz -> Maanantai, 21 Heinäkuu 2008 14:31:00 UTC+0.00
+es_419 & de_DE	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	cccc, d LLLL y hh:mm:ss a zzzz -> Montag, 21 Juli 2008 02:31:00 PM GMT+00:00
+es_419 & de_DE	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	cccc, d LLLL y HH:mm:ss zzzz -> Montag, 21 Juli 2008 14:31:00 GMT+00:00
+es_419 & en_US	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 12          	cccc, d LLLL y hh:mm:ss a zzzz -> Monday, 21 July 2008 02:31:00 PM GMT+00:00
+es_419 & en_US	dateFull, timeFull, Gregorian calendar, 24/12 hour mode: 24 (default)	cccc, d LLLL y HH:mm:ss zzzz -> Monday, 21 July 2008 14:31:00 GMT+00:00
 es_419	dateNone, timeShort, Islamic calendar, 24/12 hour mode: 12          	hh:mm a -> 02:31 PM
 es_419	dateNone, timeShort, Islamic calendar, 24/12 hour mode: 24 (default)	HH:mm -> 14:31
 es_419	dateNone, timeMedium, Islamic calendar, 24/12 hour mode: 12          	hh:mm:ss a -> 02:31:00 PM
@@ -5202,22 +5202,22 @@ es_419	dateLong, timeLong, Islamic calendar, 24/12 hour mode: 12          	d 'de
 es_419	dateLong, timeLong, Islamic calendar, 24/12 hour mode: 24 (default)	d 'de' MMMM 'de' y HH:mm:ss z -> 18 de Rajab de 1429 14:31:00 GMT+00:00
 es_419	dateLong, timeFull, Islamic calendar, 24/12 hour mode: 12          	d 'de' MMMM 'de' y hh:mm:ss a zzzz -> 18 de Rajab de 1429 02:31:00 PM GMT+00:00
 es_419	dateLong, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	d 'de' MMMM 'de' y HH:mm:ss zzzz -> 18 de Rajab de 1429 14:31:00 GMT+00:00
-es_419	dateFull, timeNone, Islamic calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y -> lunes 18 de Rajab de 1429
-es_419	dateFull, timeNone, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y -> lunes 18 de Rajab de 1429
-es_419	dateFull, timeShort, Islamic calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm a -> lunes 18 de Rajab de 1429 02:31 PM
-es_419	dateFull, timeShort, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm -> lunes 18 de Rajab de 1429 14:31
-es_419	dateFull, timeMedium, Islamic calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm:ss a -> lunes 18 de Rajab de 1429 02:31:00 PM
-es_419	dateFull, timeMedium, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm:ss -> lunes 18 de Rajab de 1429 14:31:00
-es_419	dateFull, timeLong, Islamic calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm:ss a z -> lunes 18 de Rajab de 1429 02:31:00 PM GMT+00:00
-es_419	dateFull, timeLong, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm:ss z -> lunes 18 de Rajab de 1429 14:31:00 GMT+00:00
-es_419	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	EEEE d 'de' MMMM 'de' y hh:mm:ss a zzzz -> lunes 18 de Rajab de 1429 02:31:00 PM GMT+00:00
-es_419	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE d 'de' MMMM 'de' y HH:mm:ss zzzz -> lunes 18 de Rajab de 1429 14:31:00 GMT+00:00
-es_419 & fi_FI	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	cccc d LLLL y hh:mm:ss a zzzz -> Maanantai 18 radžab 1429 02:31:00 PM UTC+0.00
-es_419 & fi_FI	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	cccc d LLLL y HH:mm:ss zzzz -> Maanantai 18 radžab 1429 14:31:00 UTC+0.00
-es_419 & de_DE	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	cccc d LLLL y hh:mm:ss a zzzz -> Montag 18 Rajab 1429 02:31:00 PM GMT+00:00
-es_419 & de_DE	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	cccc d LLLL y HH:mm:ss zzzz -> Montag 18 Rajab 1429 14:31:00 GMT+00:00
-es_419 & en_US	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	cccc d LLLL y hh:mm:ss a zzzz -> Monday 18 Rajab 1429 02:31:00 PM GMT+00:00
-es_419 & en_US	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	cccc d LLLL y HH:mm:ss zzzz -> Monday 18 Rajab 1429 14:31:00 GMT+00:00
+es_419	dateFull, timeNone, Islamic calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y -> lunes, 18 de Rajab de 1429
+es_419	dateFull, timeNone, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y -> lunes, 18 de Rajab de 1429
+es_419	dateFull, timeShort, Islamic calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm a -> lunes, 18 de Rajab de 1429 02:31 PM
+es_419	dateFull, timeShort, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm -> lunes, 18 de Rajab de 1429 14:31
+es_419	dateFull, timeMedium, Islamic calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm:ss a -> lunes, 18 de Rajab de 1429 02:31:00 PM
+es_419	dateFull, timeMedium, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm:ss -> lunes, 18 de Rajab de 1429 14:31:00
+es_419	dateFull, timeLong, Islamic calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm:ss a z -> lunes, 18 de Rajab de 1429 02:31:00 PM GMT+00:00
+es_419	dateFull, timeLong, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm:ss z -> lunes, 18 de Rajab de 1429 14:31:00 GMT+00:00
+es_419	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	EEEE, d 'de' MMMM 'de' y hh:mm:ss a zzzz -> lunes, 18 de Rajab de 1429 02:31:00 PM GMT+00:00
+es_419	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	EEEE, d 'de' MMMM 'de' y HH:mm:ss zzzz -> lunes, 18 de Rajab de 1429 14:31:00 GMT+00:00
+es_419 & fi_FI	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	cccc, d LLLL y hh:mm:ss a zzzz -> Maanantai, 18 radžab 1429 02:31:00 PM UTC+0.00
+es_419 & fi_FI	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	cccc, d LLLL y HH:mm:ss zzzz -> Maanantai, 18 radžab 1429 14:31:00 UTC+0.00
+es_419 & de_DE	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	cccc, d LLLL y hh:mm:ss a zzzz -> Montag, 18 Rajab 1429 02:31:00 PM GMT+00:00
+es_419 & de_DE	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	cccc, d LLLL y HH:mm:ss zzzz -> Montag, 18 Rajab 1429 14:31:00 GMT+00:00
+es_419 & en_US	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 12          	cccc, d LLLL y hh:mm:ss a zzzz -> Monday, 18 Rajab 1429 02:31:00 PM GMT+00:00
+es_419 & en_US	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24 (default)	cccc, d LLLL y HH:mm:ss zzzz -> Monday, 18 Rajab 1429 14:31:00 GMT+00:00
 eu_ES	Language endonym	euskara
 eu_ES	Country endonym	Espainia
 eu_ES	Decimal point	,
