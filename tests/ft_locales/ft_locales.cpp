@@ -4211,6 +4211,8 @@ void Ft_Locales::checkAvailableLocales()
     requiredLocaleNames << "ja_JP";       // "Japanese (Japan)"
     requiredLocaleNames << "kk";          // "Kazakh"
     requiredLocaleNames << "kk_Cyrl_KZ";  // "Kazakh (Kazakhstan)"
+    requiredLocaleNames << "lt";          // "Lithuanian"
+    requiredLocaleNames << "lt_LT";       // "Lithuanian (Lithuania)"
     requiredLocaleNames << "km";          // "Khmer"
     requiredLocaleNames << "km_KH";       // "Khmer (Cambodia)"
     requiredLocaleNames << "ms";          // "Malay"

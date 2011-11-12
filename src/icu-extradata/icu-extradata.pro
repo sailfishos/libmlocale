@@ -25,6 +25,7 @@ greaterThan(ICUVERSION, 4.4) {
                  data/hi_IN.txt \
                  data/kn_IN.txt \
                  data/kok_IN.txt \
+                 data/lt.txt \
                  data/ml_IN.txt \
                  data/mr_IN.txt \
                  data/ne_IN.txt \
