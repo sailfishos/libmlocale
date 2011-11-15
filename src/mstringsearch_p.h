@@ -57,6 +57,7 @@ public:
 
     UErrorCode _status;
     icu::Collator *_icuCollator;
+    icu::BreakIterator *_icuBreakIterator;
     icu::StringSearch *_icuStringSearch;
 
     MStringSearch *q_ptr;

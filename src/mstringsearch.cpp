@@ -43,6 +43,7 @@ MStringSearchPrivate::MStringSearchPrivate()
       _alternateHandlingShifted(true),
       _status(U_ZERO_ERROR),
       _icuCollator(0),
+      _icuBreakIterator(0),
       _icuStringSearch(0),
       q_ptr(0)
 {
@@ -51,6 +52,7 @@ MStringSearchPrivate::MStringSearchPrivate()
 MStringSearchPrivate::~MStringSearchPrivate()
 {
     delete _icuCollator;
+    delete _icuBreakIterator;
     delete _icuStringSearch;
 }
 
@@ -249,31 +251,30 @@ MStringSearch::MStringSearch(const QString &pattern, const QString &text, const 
     d->_pattern = pattern;
     d->_text = text;
     d->updateOrInitIcuCollator();
-    icu::BreakIterator *icuBreakIterator = NULL;
     switch(breakIteratorType) {
     case MBreakIterator::SentenceIterator:
-        icuBreakIterator = icu::BreakIterator::createSentenceInstance(
+        d->_icuBreakIterator = icu::BreakIterator::createSentenceInstance(
             icu::Locale(qPrintable(d->_searchCollatorLocaleName)),
             d->_status);
         break;
     case MBreakIterator::TitleIterator:
-        icuBreakIterator = icu::BreakIterator::createTitleInstance(
+        d->_icuBreakIterator = icu::BreakIterator::createTitleInstance(
             icu::Locale(qPrintable(d->_searchCollatorLocaleName)),
             d->_status);
         break;
     case MBreakIterator::LineIterator:
-    icuBreakIterator = icu::BreakIterator::createLineInstance(
+        d->_icuBreakIterator = icu::BreakIterator::createLineInstance(
         icu::Locale(qPrintable(d->_searchCollatorLocaleName)),
         d->_status);
         break;
     case MBreakIterator::WordIterator:
-        icuBreakIterator = icu::BreakIterator::createWordInstance(
+        d->_icuBreakIterator = icu::BreakIterator::createWordInstance(
             icu::Locale(qPrintable(d->_searchCollatorLocaleName)),
             d->_status);
         break;
     case MBreakIterator::CharacterIterator:
     default:
-        icuBreakIterator = icu::BreakIterator::createCharacterInstance(
+        d->_icuBreakIterator = icu::BreakIterator::createCharacterInstance(
             icu::Locale(qPrintable(d->_searchCollatorLocaleName)),
             d->_status);
         break;
@@ -288,7 +289,7 @@ MStringSearch::MStringSearch(const QString &pattern, const QString &text, const 
         MIcuConversions::qStringToUnicodeString(d->_pattern),
         MIcuConversions::qStringToUnicodeString(d->_text),
         static_cast<RuleBasedCollator *>(d->_icuCollator),
-        icuBreakIterator,
+        d->_icuBreakIterator,
         d->_status);
     if(d->hasError())
         qWarning() << __PRETTY_FUNCTION__
