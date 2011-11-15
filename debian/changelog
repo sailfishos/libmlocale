@@ -1,7 +1,18 @@
+libmlocale (0.3.17-1) unstable; urgency=low
+
+  * Fixes: NB#288453 - The regional date format for Slovenia is not right.
+  * Fixes: NB#288808 - Regional: inconsistencies in presentation date format of HK regional setting, language NOT Chinese
+  * Fixes: NB#288692 - The date format in the regional settings and lock screen views is not according to the POSIX.
+  * Fixes: NB#288837 - Regional: inconsistencies in pakistan eng regional settings date format
+  * Fixes: NB#288488 - Region format - Wrong date format when language set to Finnish and region into Chile
+  * Fixes: NB#289694 - The currency format is not specified and a square appears in between the numbers and incorrect separator for numbers
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Tue, 15 Nov 2011 11:43:44 +0300
+
 libmlocale (0.3.16-1) unstable; urgency=low
 
-  * NB#289894 - Display - The logical name §qtn_comm_local_comma§ (,) is missing in Latin Spanish and EU Spanish.
-  * NB#288989 - Wrong short and medium date format for Poland
+  * Fixes: NB#289894 - Display - The logical name §qtn_comm_local_comma§ (,) is missing in Latin Spanish and EU Spanish.
+  * Fixes: NB#288989 - Wrong short and medium date format for Poland
 
  -- Mike FABIAN <mike.fabian@basyskom.de>  Fri, 11 Nov 2011 11:11:11 +0300
 
