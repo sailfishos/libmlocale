@@ -4,10 +4,10 @@ macx {
     INCLUDEPATH += /Library/Frameworks/mlocale.framework/Headers
 }
 
-M_INC_DIR = $$M_PREFIX/include/mlocale
-M_LIB_DIR = $$M_LIBDIR
+ML_INC_DIR = $$ML_PREFIX/include/mlocale
+ML_LIB_DIR = $$ML_LIBDIR
 
-INCLUDEPATH += $${M_INC_DIR}
-DEPENDPATH += $${M_INC_DIR}
+INCLUDEPATH += $${ML_INC_DIR}
+DEPENDPATH += $${ML_INC_DIR}
 
-LIBS += -L$${M_LIB_DIR}
+LIBS += -L$${ML_LIB_DIR}
