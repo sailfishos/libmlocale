@@ -308,6 +308,72 @@ void Ft_MStringSearch::testSearch_data()
         << (QList<int> () << 2 << 3 << 4)
         << (QStringList() << "e " << "e, " << "e.  ");
 #endif
+    QTest::newRow("Danish da_DK")
+        << "da_DK"
+        << "da_DK"
+        << "aa"
+        << "å"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 0)
+        << (QList<int> () << 1)
+        << (QStringList() << "å");
+    QTest::newRow("German de_DE")
+        << "de_DE"
+        << "de_DE"
+        << "ss"
+        << "ß"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 0)
+        << (QList<int> () << 1)
+        << (QStringList() << "ß");
+    QTest::newRow("sChinese zh_CN: fuzzy pinyin match")
+        << "zh_CN"
+        << "zh_CN"
+        << "li"
+        << "one 劉liu two líuliuthree 刘劉 four líu刘"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 5 << 13 << 16 << 33)
+        << (QList<int> () << 2 << 2  << 2  << 2)
+        << (QStringList() << "li" << "lí" << "li" << "lí");
+    QTest::newRow("English en_GB")
+        << "en_GB"
+        << "en_GB"
+        << "ffl"
+        << "ﬄ"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 0)
+        << (QList<int> () << 1)
+        << (QStringList() << "ﬄ");
+    QTest::newRow("Arabic ar_SA")
+        << "ar_SA"
+        << "ar_SA"
+        << "لا"
+        << "ﻻ"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 0)
+        << (QList<int> () << 1)
+        << (QStringList() << "ﻻ");
+    QTest::newRow("en_US")
+        << "en_US"
+        << "en_US"
+        << "ae"
+        << "æ"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 0)
+        << (QList<int> () << 1)
+        << (QStringList() << "æ");
 }
 
 void Ft_MStringSearch::testSearch()
