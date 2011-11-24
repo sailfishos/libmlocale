@@ -2689,14 +2689,14 @@ void Ft_Numbers::testCurrencies_data()
         << QString("fa_IR")
         << 1234.56
         << "USD"
-        << QString("۱٬۲۳۴٫۵۶ $US");
+        << QString("$US ۱٬۲۳۴٫۵۶");
     QTest::newRow("fa_IR")
         << QString("de_DE")
         << QString("fa_IR")
         << QString("en_US")
         << 1234.56
         << "USD"
-        << QString("US$ 1,234.56");
+        << QString("1,234.56 US$");
     QTest::newRow("hi_IN")
         << QString("de_DE")
         << QString("hi_IN")
