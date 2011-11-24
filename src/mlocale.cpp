@@ -2104,6 +2104,7 @@ MLocale &MLocale::getDefault()
         if (s_systemDefault == 0) {
             // we won the race
             s_systemDefault = createSystemMLocale();
+            s_systemDefault->connectSettings();
         }
 
         defaultLocaleMutex.unlock();
