@@ -48,7 +48,6 @@ greaterThan(ICUVERSION, 4.4) {
                  data/fi.txt \
                  data/fr_CA.txt \
                  data/gl.txt \
-                 data/he.txt \
                  data/hi.txt \
                  data/hu.txt \
                  data/id.txt \
@@ -85,6 +84,7 @@ greaterThan(ICUVERSION, 4.4) {
                       data46/es_419.txt \
                       data46/fa.txt \
                       data46/fa_AF.txt \
+                      data46/he.txt \
                       data46/pt.txt \
                       data46/pt_BR.txt \
                       data46/pt_PT.txt \
@@ -102,6 +102,7 @@ greaterThan(ICUVERSION, 4.4) {
                       data/es_419.txt \
                       data/fa.txt \
                       data/fa_AF.txt \
+                      data/he.txt \
                       data/pt.txt \
                       data/pt_BR.txt \
                       data/pt_PT.txt \
