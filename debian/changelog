@@ -1,3 +1,12 @@
+libmlocale (0.3.18-1) unstable; urgency=low
+
+  * Fixes: NB#289734 - Israeli currency symbol mispositioned
+  * Fixes: NB#291055 - Regression: Qt.openUrlExternally() to browser pops up warnings in console mode.
+  * Fixes: NB#290438 - Can't compile an application against the standalone mlocale
+  * Fixes: NB#288467 - BackUp_Locales - Regions settings wrong format of dates in Danish when set to Belize qtn_clk_country_belize en_BZ
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Thu, 24 Nov 2011 19:16:10 +0300
+
 libmlocale (0.3.17-1) unstable; urgency=low
 
   * Fixes: NB#288453 - The regional date format for Slovenia is not right.
