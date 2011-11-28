@@ -2634,6 +2634,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"把" // bǎ
          <<"坝" // bà
          <<"罷" // ba (bà ba pí according to http://www.zdic.net/zd/zi/ZdicE7ZdicBDZdicB7.htm !)
+         <<"卜" // bǔ (not "bo")
+         <<"长" // cháng, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
          <<"驰" // chi2, 6 strokes, 1st stroke bending, kHanyuPinlu chi2 U+9A70 kBigFive - kGB0 1959 kRSUnicode 187'.3
          <<"馳" // chi2, 13 strokes, 1st stroke vertical, kHanyuPinlu chi2    U+99B3 kBigFive B9A3 kGB0    - kRSUnicode 187.3
          <<"东" // dong1, 5 strokes, 1st stroke horizontal, simplified of 東 U+4E1C
@@ -2663,11 +2665,15 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"硐" // dong4, 11 strokes, 1st stroke horizontal U+7850 kRSUnicode 112.6
          <<"棟" // dong4, 12 strokes, 1st stroke horizontal, traditional of 栋 kRSUnicode 75.8
          <<"働" // dong4, 13 strokes (Japanese only!) kRSUnicode 9.11
+         <<"葛" // gě, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
          <<"峠" // quia3??? ９ strokes, 1st stroke vertical, (Japanese only! variant of 卡) U+5CE0 kBigFive - kGB0 - kRSUnicode 46.6
          <<"蘅" // 20 strokes, 1st stroke horizontal, kHanyuPinlu heng2 U+8605 kBigFive F4C1 kGB0 6231 kRSUnicode 140.16
          <<"ｊｏｈｎ"
          <<"Ｊｏｈｎ"
+         <<"贾" // jǐa, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
+         <<"賈" // jǐa, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
          <<"叫" // jiào 5 strokes, 1st stroke vertical, kHanyuPinlu jiao4 U+53EB kBigFive A573 kGB0 2948 kRSUnicode 30.2
+         <<"筠" // jūn, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
          <<"君" // jūn 7 strokes, 1st stroke bending, kHanyuPinlu jun1 U+541B kBigFive A767 kGB0 3093 kRSUnicode 30.4
          <<"卡" // 5 strokes, 1st stroke vertical, kHanyuPinlu ka3 U+5361 kBigFive A564 kGB0 3108 kRSUnicode 25.3
          <<"李" // 7 strokes, 1st stroke horizontal, kHanyuPinlu li5 U+674E kBigFive A7F5 kGB0 3278 kRSUnicode 75.3
@@ -2691,7 +2697,11 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"宁" // kHanyuPinlu ning2   U+5B81 kBigFive C972 kGB0 3694 kRSUnicode 40.2"
          <<"ｓａｋｉ"
          <<"Ｓａｋｉ"
+         <<"沈" // shěn, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
+         <<"峙" // shì, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
          <<"威" // 9 strokes, 1st stroke horizontal, kHanyuPinlu wei1 U+5A01 kBigFive ABC2 kGB0 4594 kRSUnicode 38.6"
+         <<"莘" // xīn, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
+         <<"曾" // zēng, http://unicode.org/cldr/trac/browser/trunk/common/transforms/Han-Latin-Names.xml
          <<"张" // 7 strokes, 1st stroke bending, kHanyuPinlu zhang1  U+5F20 kBigFive    - kGB0 5337 kRSUnicode 57.4"
          <<"張" // 11 strokes, 1st stroke bending, kHanyuPinlu zhang1  U+5F35 kBigFive B169 kGB0    - kRSUnicode 57.8"
          <<"Á"
@@ -2730,6 +2740,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"ｂ"
          <<"ｂ"
          <<"ｂ"
+         <<"ｂ"
+         <<"ｃ"
          <<"ｃ"
          <<"ｃ"
          <<"ｄ"
@@ -2760,7 +2772,11 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"ｄ"
          <<"ｄ"
          <<"ｇ"
+         <<"ｇ"
          <<"ｈ"
+         <<"ｊ"
+         <<"ｊ"
+         <<"ｊ"
          <<"ｊ"
          <<"ｊ"
          <<"ｊ"
@@ -2787,7 +2803,11 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"ｎ"
          <<"ｓ"
          <<"ｓ"
+         <<"ｓ"
+         <<"ｓ"
          <<"ｗ"
+         <<"ｘ"
+         <<"ｚ"
          <<"ｚ"
          <<"ｚ"
          <<"A"
