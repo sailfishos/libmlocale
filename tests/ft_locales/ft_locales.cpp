@@ -2419,6 +2419,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"刘利军" // liu2 li4 jun1
          <<"刘Lucy" // liu2
          <<"动" // dong4, 6 strokes, 1st stroke horizontal, simplified of 動 U+52A8
+         <<"汲" // 6 strokes, NB#279399
          <<"羊" // 6 strokes U+7F8A
          <<"驰" // chi2, 6 strokes, 1st stroke bending, simplified of 馳, kHanyuPinlu chi2 U+9A70 kBigFive - kGB0 1959 kRSUnicode 187'.3
          <<"串" // 7 strokes, 1st stroke vertical U+4E32
@@ -2428,13 +2429,16 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"张" // 7 strokes, 1st stroke bending, kHanyuPinlu zhang1  U+5F20 kBigFive    - kGB0 5337 kRSUnicode 57.4"
          <<"李" // 7 strokes, 1st stroke horizontal, kHanyuPinlu li5 U+674E kBigFive A7F5 kGB0 3278 kRSUnicode 75.3
          <<"沙紀" // 7 strokes, 1st stroke down to right, 1st character U+6C99
+         <<"阿" // 7 strokes, NB#279399 (a1, 8 strokes, 1st stroke bending, kHanyuPinlu a1 U+963F kBigFive AAFC kGB0 1602 kRSUnicode 170.5)
+         <<"陈" // 7 strokes, NB#279399
          <<"並" // 8 strokes, 1st stroke down to right U+4E26
          <<"亟" // 8 strokes! (libicu 44 counts 9 strokes, which looks like an ERROR), 1st stroke horizontal U+4E9F
          <<"侗" // dong4, 8 strokes, 1st stroke down to left U+4F97
          <<"咚" // dong1, 8 strokes, 1st stroke vertical U+549A
          <<"岽" // dong1, 8 strokes, 1st stroke vertical, simplified of 崠 U+5CBD
          <<"東" // dong1, 8 strokes, 1st stroke horizontal, traditional of 东 U+6771
-         <<"阿" // a1, 8 strokes, 1st stroke bending, kHanyuPinlu a1 U+963F kBigFive AAFC kGB0 1602 kRSUnicode 170.5
+         <<"范" // 8 strokes, NB#279399
+         <<"苳" // dong1, 8 strokes, 1st stroke horizontal, (CLDR trunk 20110909: 9 strokes (old, 2 part kusakanmuri gives 9 strokes)) U+82F3
          <<"威" // 9 strokes, 1st stroke horizontal U+5A01
          <<"峠" // quia3??? ９ strokes, 1st stroke vertical, (Japanese only! variant of 卡) U+5CE0 kBigFive - kGB0 - kRSUnicode 46.6
          <<"恫" // dong4, 9 strokes, 1st stroke vertical U+606B
@@ -2448,7 +2452,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"栋" // dong4, 9 strokes, 1st stroke horizontal, simplified of 棟 U+680B
          <<"氡" // dong1, 9 strokes, 1st stroke down to left U+6C21
          <<"洞" // dong4, 9 strokes, 1st stroke down to right U+6D1E
-         <<"苳" // dong1, 8 strokes, 1st stroke horizontal, (CLDR trunk 20110909: 9 strokes (old, 2 part kusakanmuri gives 9 strokes)) U+82F3
+         <<"荣" // 9 strokes, NB#279399
          <<"乘" // 10 strokes, 1st stroke down to left U+4E58
          <<"凍" // dong4, 10 strokes, 1st stroke down to right, traditional of 冻 U+51CD
          <<"胴" // dong4, 10 strokes, 1st stroke down to left U+80F4
@@ -2461,38 +2465,41 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"涷" // dong1, 11 strokes, 1st stroke down to right U+6DB7
          <<"硐" // dong4, 11 strokes, 1st stroke horizontal U+7850
          <<"雪" // 11 strokes, 1st stroke horizontal U+96EA
+         <<"黄" // 11 strokes, NB#279399
          <<"傢" // 12 strokes, 1st stroke down to left U+50A2
          <<"棟" // dong4, 12 strokes, 1st stroke horizontal, traditional of 栋 U+68DF
          <<"㺃" // U+3E83
+         <<"董" // dong3, 12 strokes (CLDR trunk 20110909: 13 strokes, seems to count kusakanmuri as 4) U+8463
          <<"亂" // 13 strokes, 1st stroke down to left U+4E82
          <<"働" // dong4, 13 strokes (Japanese only!) U+50CD
          <<"罪" // 13 strokes, 1st stroke vertical, 2nd stroke bending U+7F6A
-         <<"董" // dong3, 12 strokes (CLDR trunk 20110909: 13 strokes, seems to count kusakanmuri as 4) U+8463
+         <<"鄢" // 13 strokes, NB#279399
          <<"馳" // chi2, 13 strokes, 1st stroke vertical, 2nd stroke horizontal, kHanyuPinlu chi2    U+99B3 kBigFive B9A3 kGB0    - kRSUnicode 187.3
          <<"僧" // 14 strokes, 1st stroke down to left U+50E7
          <<"蜻" // 14 strokes, 1st stroke vertical U+873B
          <<"蝀" // dong1, 14 strokes, 1st stroke vertical U+8740
+         <<"蔡" // 14 strokes, NB#279399
          <<"億" // 15 strokes, 1st stroke down to left U+5104
          <<"劉" // liu2; 15 strokes, 1st stroke bending, traditional of 刘 U+5289
          <<"劉 Lucy" // liu2; traditional
          <<"劉利" // liu2 li4; traditional
          <<"劉利軍" // liu2 li4 jun1; traditional
          <<"劉Lucy" // liu2; traditional
+         <<"懂" // dong3, 15 strokes (CLDR trunk 20110909: 17 strokes. If kusakanmuri counts as 4, then 16, but why 17?) U+61C2
          <<"蝙" // 15 strokes, 1st stroke vertical U+8759
          <<"儒" // 16 U+5112
          <<"頻" // 16 U+FA6A
          <<"優" // 17 U+512A
-         <<"懂" // dong3, 15 strokes (CLDR trunk 20110909: 17 strokes. If kusakanmuri counts as 4, then 16, but why 17?) U+61C2
          <<"曙" // 17 U+66D9
          <<"叢" // 18 strokes, 1st stroke U+53E2
          <<"鮹" // 18 strokes, 1st stroke down to left U+9BB9
          <<"鼕" // dong1, 18 strokes, 1st stroke horizontal U+9F15
          <<"勸" // 19 strokes, 1st stroke horizontal U+52F8
          <<"嚥" // 19 strokes, 1st stroke vertical U+56A5
+         <<"蘅" // 19 strokes (when kusakanmuri counts as 4, else 18), 1st stroke horizontal, kHanyuPinlu heng2 U+8605 kBigFive F4C1 kGB0 6231 kRSUnicode 140.16
          <<"鶇" // dong1, 19 strokes, 1st stroke horizontal, traditional of 鸫 U+9D87
          <<"䵷" // U+4D77
          <<"嚷" // 20 strokes, 1st stroke vertical
-         <<"蘅" // 19 strokes (when kusakanmuri counts as 4, else 18), 1st stroke horizontal, kHanyuPinlu heng2 U+8605 kBigFive F4C1 kGB0 6231 kRSUnicode 140.16
          <<"儷" // 21
          <<"儼" // 22
          <<"囌" // 23
@@ -2540,6 +2547,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"6劃"
          <<"6劃"
          <<"6劃"
+         <<"6劃"
          <<"7劃"
          <<"7劃"
          <<"7劃"
@@ -2547,6 +2555,9 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"7劃"
          <<"7劃"
          <<"7劃"
+         <<"7劃"
+         <<"7劃"
+         <<"8劃"
          <<"8劃"
          <<"8劃"
          <<"8劃"
@@ -2580,6 +2591,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"11劃"
          <<"11劃"
          <<"11劃"
+         <<"11劃"
+         <<"12劃"
          <<"12劃"
          <<"12劃"
          <<"12劃"
@@ -2591,6 +2604,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"14劃"
          <<"14劃"
          <<"14劃"
+         <<"14劃"
+         <<"15劃"
          <<"15劃"
          <<"15劃"
          <<"15劃"
@@ -2602,7 +2617,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"16劃"
          <<"17劃"
          <<"17劃"
-         <<"17劃"
          <<"18劃"
          <<"18劃"
          <<"18劃"
@@ -2610,11 +2624,11 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"19劃"
          <<"19劃"
          <<"19劃"
-         <<"20劃"
+         <<"19劃"
          <<"20劃"
          <<"21劃"
+         <<"21劃"
          <<"22劃"
-         <<"23劃"
          <<"24劃"
          <<"25劃"
          <<"25劃"
