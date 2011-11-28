@@ -1272,6 +1272,7 @@ my %zhuyinPinyin = (
     "ㄊㄚˇ" => "tǎ",
     "ㄊㄚˋ" => "tà",
     "ㄊㄚ˙" => "ta",
+    "ㄊㄚㄜ˙" => "tae", # 襨 U+8968 seems to have the pinyin “tae” according to http://www.zdic.net/zd/zi/ZdicE8ZdicA5ZdicA8.htm
     "ㄊㄞˉ" => "tāi",
     "ㄊㄞˊ" => "tái",
     "ㄊㄞˇ" => "tǎi",
