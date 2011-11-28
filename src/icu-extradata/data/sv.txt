@@ -127,18 +127,18 @@ sv{
                 }
                 stand-alone{
                     abbreviated{
-                        "jan",
-                        "feb",
-                        "mar",
-                        "apr",
-                        "maj",
-                        "jun",
-                        "jul",
-                        "aug",
-                        "sep",
-                        "okt",
-                        "nov",
-                        "dec",
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "Maj",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Okt",
+                        "Nov",
+                        "Dec",
                     }
                     narrow{
                         "J",
@@ -155,18 +155,18 @@ sv{
                         "D",
                     }
                     wide{
-                        "januari",
-                        "februari",
-                        "mars",
-                        "april",
-                        "maj",
-                        "juni",
-                        "juli",
-                        "augusti",
-                        "september",
-                        "oktober",
-                        "november",
-                        "december",
+                        "Januari",
+                        "Februari",
+                        "Mars",
+                        "April",
+                        "Maj",
+                        "Juni",
+                        "Juli",
+                        "Augusti",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "December",
                     }
                 }
             }
