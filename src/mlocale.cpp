@@ -746,6 +746,46 @@ void MLocalePrivate::simplifyDateFormatForMixing(icu::DateFormat *df) const
 }
 #endif
 
+
+#ifdef HAVE_ICU
+void MLocalePrivate::maybeEmbedDateFormat(icu::DateFormat *df, const QString &categoryNameMessages, const QString &categoryNameTime) const
+{
+    // If the message locale and the time locale have different script directions,
+    // it may happen that the date format gets reordered in an unexpected way if
+    // it is not used on its own but together with text from the message
+    // locale. Protect the date format against such unexpected reordering by
+    // wrapping it in RLE...PDF or LRE...PDF.
+    if (df) {
+        QString categoryScriptTime = MLocale::localeScript(categoryNameTime);
+        QString categoryScriptMessages = MLocale::localeScript(categoryNameMessages);
+        bool timeIsRtl = (categoryScriptTime == QLatin1String("Arab")
+                          || categoryScriptTime == QLatin1String("Hebr"));
+        bool messagesIsRtl = (categoryScriptMessages == QLatin1String("Arab")
+                              || categoryScriptMessages == QLatin1String("Hebr"));
+        if (timeIsRtl != messagesIsRtl) {
+            icu::UnicodeString icuFormatString;
+            QString icuFormatQString;
+            static_cast<SimpleDateFormat *>(df)->toPattern(icuFormatString);
+            icuFormatQString
+                = MIcuConversions::unicodeStringToQString(icuFormatString);
+            if(!icuFormatQString.isEmpty()) {
+                if (timeIsRtl && !messagesIsRtl) {
+                    icuFormatQString.prepend(QChar(0x202B)); // RIGHT-TO-LEFT EMBEDDING
+                    icuFormatQString.append(QChar(0x202C));  // POP DIRECTIONAL FORMATTING
+                }
+                else if (!timeIsRtl && messagesIsRtl) {
+                    icuFormatQString.prepend(QChar(0x202A)); // LEFT-TO-RIGHT EMBEDDING
+                    icuFormatQString.append(QChar(0x202C));  // POP DIRECTIONAL FORMATTING
+                }
+                icuFormatString
+                    = MIcuConversions::qStringToUnicodeString(icuFormatQString);
+                static_cast<SimpleDateFormat *>(df)->applyPattern(icuFormatString);
+            }
+        }
+    }
+}
+#endif
+
 QString MLocalePrivate::fixCategoryNameForNumbers(const QString &categoryName) const
 {
 #ifdef HAVE_ICU
@@ -935,6 +975,7 @@ icu::DateFormat *MLocalePrivate::createDateFormat(MLocale::DateType dateType,
         // symbols with the public API
         static_cast<SimpleDateFormat *>(df)->adoptDateFormatSymbols(dfs);
     }
+    MLocalePrivate::maybeEmbedDateFormat(df, categoryNameMessages, categoryNameTime);
     _dateFormatCache.insert(key, df);
     return df;
 }

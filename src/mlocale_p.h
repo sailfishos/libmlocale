@@ -137,6 +137,9 @@ public:
     // mixing in the month names and weekday names from a different
     // language less bad
     void simplifyDateFormatForMixing(icu::DateFormat *df) const;
+    // wrap an ICU date format in LRE...PDF or RLE...PDF
+    // according to to the direction given as a parameter
+    void maybeEmbedDateFormat(icu::DateFormat *df, const QString &categoryNameMessages, const QString &categoryNameTime) const;
 
     bool mixingSymbolsWanted(const QString &categoryNameMessages, const QString &categoryNameTime) const;
     /*!

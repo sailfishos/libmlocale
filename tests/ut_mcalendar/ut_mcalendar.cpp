@@ -30,6 +30,28 @@
 using ML10N::MLocale;
 using ML10N::MCalendar;
 
+static QString maybeEmbedDateTimeString(const QString &dateTimeString, const MLocale &locale)
+{
+    if (dateTimeString.isEmpty())
+        return dateTimeString;
+    QString embeddedDateTimeString = dateTimeString;
+    QString categoryScriptTime = MLocale::localeScript(locale.categoryName(MLocale::MLcTime));
+    QString categoryScriptMessages = MLocale::localeScript(locale.categoryName(MLocale::MLcMessages));
+    bool timeIsRtl = (categoryScriptTime == QLatin1String("Arab")
+                      || categoryScriptTime == QLatin1String("Hebr"));
+    bool messagesIsRtl = (categoryScriptMessages == QLatin1String("Arab")
+                          || categoryScriptMessages == QLatin1String("Hebr"));
+    if (timeIsRtl && !messagesIsRtl) {
+        embeddedDateTimeString.prepend(QChar(0x202B)); // RIGHT-TO-LEFT EMBEDDING
+        embeddedDateTimeString.append(QChar(0x202C));  // POP DIRECTIONAL FORMATTING
+    }
+    else if (!timeIsRtl && messagesIsRtl) {
+        embeddedDateTimeString.prepend(QChar(0x202A)); // LEFT-TO-RIGHT EMBEDDING
+        embeddedDateTimeString.append(QChar(0x202C));  // POP DIRECTIONAL FORMATTING
+    }
+    return embeddedDateTimeString;
+}
+
 void Ut_MCalendar::initTestCase()
 {
     static int argc = 0;
@@ -889,6 +911,7 @@ void Ut_MCalendar::testIcuFormatString()
                 expectedResult = dateResults[dateType] + ", " + timeResults[timeType];
             else
                 expectedResult = dateResults[dateType] + ' ' + timeResults[timeType];
+            expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
             QString result = locale.icuFormatString(
                 static_cast<MLocale::DateType>(dateType),
                 static_cast<MLocale::TimeType>(timeType),
@@ -901,7 +924,7 @@ void Ut_MCalendar::testIcuFormatString()
                         << " expectedResult: " << expectedResult
                         << " result: " << result
                         << "\n";
-            if (expectedResult != "irrelevant")
+            if (!expectedResult.contains("irrelevant"))
                 QCOMPARE(result, expectedResult);
         }
     }
@@ -1538,6 +1561,7 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromLocaltimeQDateTime()
                 expectedResult = dateResults[dateType];
             else
                 expectedResult = dateResults[dateType] + ' ' + timeResults[timeType];
+            expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
 #if defined(VERBOSE_OUTPUT)
             QTextStream debugStream(stdout);
             debugStream.setCodec("UTF-8");
@@ -2651,6 +2675,7 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromMCalendar()
             }
             else
                 expectedResult = dateResults[dateType] + ' ' + timeResults[timeType];
+            expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
 #if defined(VERBOSE_OUTPUT)
             QTextStream debugStream(stdout);
             debugStream.setCodec("UTF-8");
