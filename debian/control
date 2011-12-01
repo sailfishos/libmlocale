@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Holger Schröder <holger.schroeder.ext@basyskom.de>
 Build-Depends: debhelper (>= 5),
  libqt4-dev (>= 4.7.4~git20110728-0maemo1+0m6),
- libicu-dev,
+ libicu-dev (>= 4.4.2-0maemo9),
  doxygen (>=1.5.9),
  pkg-config (>= 0.22)
 Standards-Version: 3.7.2
@@ -14,7 +14,8 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends},
  ${launcher:Depends},
- ${shlibs:Depends}
+ ${shlibs:Depends},
+ libicu44 (>= 4.4.2-0maemo9)
 Description: MeeGo Touch core library
  MeeGo Touch core framework library
 
