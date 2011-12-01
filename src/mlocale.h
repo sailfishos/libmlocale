@@ -1941,7 +1941,7 @@ public:
      * which is normally set to
      *
      * \code
-     *     /usr/share/meegotouch/icu/
+     *     /usr/share/mlocale/icu/
      * \endcode
      *
      * usually one should not change this.
@@ -1952,14 +1952,14 @@ public:
      * in
      *
      * \code
-     *     /usr/share/meegotouch/icu/usrdt42l/fi.res
+     *     /usr/share/mlocale/icu/usrdt42l/fi.res
      * \endcode
      *
      * and a user override file for the lang data of the Finnish
      * locale should be in
      *
      * \code
-     *     /usr/share/meegotouch/icu/usrdt42l/lang/fi.res
+     *     /usr/share/mlocale/icu/usrdt42l/lang/fi.res
      * \endcode
      *
      * etc.
