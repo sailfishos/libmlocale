@@ -1,10 +1,10 @@
 ar_SA	Language endonym	العربية
 ar_SA	Country endonym	المملكة العربية السعودية
 ar_SA	Decimal point	٫
-ar_SA	Floating Point Number	‪١٢٣٤٥٦٧٨٩٫٠١٢-‬
+ar_SA	Floating Point Number	‪١٢٣٬٤٥٦٬٧٨٩٫٠١٢-‬
 ar_SA	Percent value	‪٪١٬٢٣٤٫٥٦٧٩-‬
-ar_SA	Currency value	‪‫ر.س.‬‪١٢٣٤٫٥٦‬‬
-ar_SA	Negative Currency value	‪‫ر.س.‬‪١٢٣٤٫٥٦-‬‬
+ar_SA	Currency value	‪‫ر.س. ‬‪١٬٢٣٤٫٥٦‬‬
+ar_SA	Negative Currency value	‪‫ر.س. ‬‪١٬٢٣٤٫٥٦-‬‬
 ar_SA	Name of month 01 (Gregorian calendar), stand-alone, wide	يناير
 ar_SA	Name of month 02 (Gregorian calendar), stand-alone, wide	فبراير
 ar_SA	Name of month 03 (Gregorian calendar), stand-alone, wide	مارس
@@ -349,10 +349,10 @@ ar_SA & en_US	dateFull, timeFull, Islamic calendar, 24/12 hour mode: 24         
 ar_SA@numbers=arab	Language endonym	العربية
 ar_SA@numbers=arab	Country endonym	المملكة العربية السعودية
 ar_SA@numbers=arab	Decimal point	٫
-ar_SA@numbers=arab	Floating Point Number	‪١٢٣٤٥٦٧٨٩٫٠١٢-‬
+ar_SA@numbers=arab	Floating Point Number	‪١٢٣٬٤٥٦٬٧٨٩٫٠١٢-‬
 ar_SA@numbers=arab	Percent value	‪٪١٬٢٣٤٫٥٦٧٩-‬
-ar_SA@numbers=arab	Currency value	‪‫ر.س.‬‪١٢٣٤٫٥٦‬‬
-ar_SA@numbers=arab	Negative Currency value	‪‫ر.س.‬‪١٢٣٤٫٥٦-‬‬
+ar_SA@numbers=arab	Currency value	‪‫ر.س. ‬‪١٬٢٣٤٫٥٦‬‬
+ar_SA@numbers=arab	Negative Currency value	‪‫ر.س. ‬‪١٬٢٣٤٫٥٦-‬‬
 ar_SA@numbers=arab	Name of month 01 (Gregorian calendar), stand-alone, wide	يناير
 ar_SA@numbers=arab	Name of month 02 (Gregorian calendar), stand-alone, wide	فبراير
 ar_SA@numbers=arab	Name of month 03 (Gregorian calendar), stand-alone, wide	مارس
@@ -697,10 +697,10 @@ ar_SA@numbers=arab & en_US	dateFull, timeFull, Islamic calendar, 24/12 hour mode
 ar_SA@numbers=latn	Language endonym	العربية
 ar_SA@numbers=latn	Country endonym	المملكة العربية السعودية
 ar_SA@numbers=latn	Decimal point	.
-ar_SA@numbers=latn	Floating Point Number	‪-123456789.012‬
+ar_SA@numbers=latn	Floating Point Number	‪-123,456,789.012‬
 ar_SA@numbers=latn	Percent value	‪-1,234.5679%‬
-ar_SA@numbers=latn	Currency value	‪‪1234.56‬‫ر.س.‬‬
-ar_SA@numbers=latn	Negative Currency value	‪‪-1234.56‬‫ر.س.‬‬
+ar_SA@numbers=latn	Currency value	‪‪1,234.56‬‫ ر.س.‬‬
+ar_SA@numbers=latn	Negative Currency value	‪‪-1,234.56‬‫ ر.س.‬‬
 ar_SA@numbers=latn	Name of month 01 (Gregorian calendar), stand-alone, wide	يناير
 ar_SA@numbers=latn	Name of month 02 (Gregorian calendar), stand-alone, wide	فبراير
 ar_SA@numbers=latn	Name of month 03 (Gregorian calendar), stand-alone, wide	مارس
