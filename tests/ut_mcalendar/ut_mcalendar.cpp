@@ -5835,6 +5835,111 @@ void Ut_MCalendar::testWeekdayType_data()
        << 7
        <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
        << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("sw_KE")
+       << "sw_KE"
+       << "sw_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("dav_KE")
+       << "dav_KE"
+       << "dav_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("ebu_KE")
+       << "ebu_KE"
+       << "ebu_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("guz_KE")
+       << "guz_KE"
+       << "guz_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("kam_KE")
+       << "kam_KE"
+       << "kam_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("ki_KE")
+       << "ki_KE"
+       << "ki_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("kln_KE")
+       << "kln_KE"
+       << "kln_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("luo_KE")
+       << "luo_KE"
+       << "luo_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("luy_KE")
+       << "luy_KE"
+       << "luy_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("mas_KE")
+       << "mas_KE"
+       << "mas_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("mer_KE")
+       << "mer_KE"
+       << "mer_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("om_KE")
+       << "om_KE"
+       << "om_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("saq_KE")
+       << "saq_KE"
+       << "saq_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("so_KE")
+       << "so_KE"
+       << "so_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("teo_KE")
+       << "teo_KE"
+       << "teo_KE"
+       << MLocale::GregorianCalendar
+       << 7
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 <<        3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
 }
 
 void Ut_MCalendar::testWeekdayType()

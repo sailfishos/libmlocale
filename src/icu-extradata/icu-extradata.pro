@@ -71,7 +71,22 @@ greaterThan(ICUVERSION, 4.4) {
                  data/zh_TW.txt \
                  data/zh_Hant_TW.txt \
                  data/ar_LB.txt \
-                 data/ar_IQ.txt
+                 data/ar_IQ.txt \
+                 data/dav_KE.txt \
+                 data/ebu_KE.txt \
+                 data/guz_KE.txt \
+                 data/kam_KE.txt \
+                 data/ki_KE.txt \
+                 data/kln_KE.txt \
+                 data/luo_KE.txt \
+                 data/luy_KE.txt \
+                 data/mas_KE.txt \
+                 data/mer_KE.txt \
+                 data/om_KE.txt \
+                 data/saq_KE.txt \
+                 data/so_KE.txt \
+                 data/sw_KE.txt \
+                 data/teo_KE.txt
 
     greaterThan(ICUVERSION, 4.5) {
         LOCALESTXT += data46/ar.txt \

@@ -4282,6 +4282,7 @@ void Ft_Locales::checkAvailableLocales()
     requiredLocaleNames << "sv";          // "Swedish"
     requiredLocaleNames << "sv_FI";       // "Swedish (Finland)"
     requiredLocaleNames << "sv_SE";       // "Swedish (Sweden)"
+    requiredLocaleNames << "sw_KE";       // "Swahili (Kenya)"
     requiredLocaleNames << "th";          // "Thai"
     requiredLocaleNames << "th_TH";       // "Thai (Thailand)"
     requiredLocaleNames << "tr";          // "Turkish"
@@ -4354,7 +4355,7 @@ void Ft_Locales::checkAvailableLocales()
     supportedLocaleNames << "zh_CN@collation=stroke";
     supportedLocaleNames << "ko_KR";
     supportedLocaleNames << "kk_KZ";
-    bool runFullTest = false;
+    bool runFullTest = true;
     if (!runFullTest) {
         supportedLocaleNames.clear();
         supportedLocaleNames << "ar_SA";       // "Arabic (Saudi Arabia)"
