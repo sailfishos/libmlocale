@@ -2692,14 +2692,14 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"卡" // 5 strokes, 1st stroke vertical, kHanyuPinlu ka3 U+5361 kBigFive A564 kGB0 3108 kRSUnicode 25.3
          <<"李" // 7 strokes, 1st stroke horizontal, kHanyuPinlu li5 U+674E kBigFive A7F5 kGB0 3278 kRSUnicode 75.3
          <<"刘" // liú 6 strokes, 1st stroke vertical, kMandarin liu2 U+5218 kBigFive - kGB0 3385 kRSUnicode 18.4
+         <<"刘 Lucy" //liú
          <<"刘利" //liú lì
          <<"刘利军" //liú lì jūn
-         <<"刘 Lucy" //liú
          <<"刘Lucy" //liú
          <<"劉" //liú; 15 strokes, 1st stroke bending, traditional of 刘 kRSUnicode 18.13
+         <<"劉 Lucy" //liú ; traditional
          <<"劉利" // liú lì; traditional
          <<"劉利軍" // liú lì jūn; traditional
-         <<"劉 Lucy" //liú ; traditional
          <<"劉Lucy" //liú ; traditional
          <<"柳" // liǔ; 9 strokes, 1st stroke horizontal, kHanyuPinlu liu3 U+67F3 kBigFive AC68 kGB0 3388 kRSUnicode 75.5"
          <<"柳东" // liǔ dōng; 2nd character 5 strokes, initial stroke horizontal, 2nd character U+4E1C
@@ -2911,6 +2911,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"刘" // liú 6 strokes, 1st stroke vertical, kMandarin liu2 U+5218 kBigFive - kGB0 3385 kRSUnicode 18.4
          <<"劉" //liú; 15 strokes, 1st stroke bending, traditional of 刘 kRSUnicode 18.13
          <<"柳" // liǔ; 9 strokes, 1st stroke horizontal, kHanyuPinlu liu3 U+67F3 kBigFive AC68 kGB0 3388 kRSUnicode 75.5"
+         <<"刘 Lucy" //liú
+         <<"劉 Lucy" //liú ; traditional
          <<"柳东" // liǔ dōng; 2nd character 5 strokes, initial stroke horizontal, 2nd character U+4E1C
          <<"柳冬" // liǔ dōng; 2nd character 5 strokes, initial stroke down to left, 2nd character U+51AC
          <<"柳咚" // liǔ dōng; 2nd character 8 strokes, initial stroke vertical, 2nd character U+549A
@@ -2921,9 +2923,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"劉利軍" // liú lì jūn; traditional
          <<"柳利军" // liǔ lì jūn; 3rd character 5 strokes, initial stroke vertical, 3rd character U+519B
          <<"柳利軍" // liǔ lì jūn; 3rd character traditional, 9 strokes, initial stroke vertical, 3rd character U+8ECD
-         <<"刘 Lucy" //liú
          <<"刘Lucy" //liú
-         <<"劉 Lucy" //liú ; traditional
          <<"劉Lucy" //liú ; traditional
          <<"宁" // kHanyuPinlu ning2   U+5B81 kBigFive C972 kGB0 3694 kRSUnicode 40.2"
          <<"saki"
@@ -4041,7 +4041,7 @@ void Ft_Locales::testDifferentStrengthComparison_data()
         <<"刘利" // liúlì
         <<"liu li"
         << (QList<MLocale::Comparison>()
-            << MLocale::Equal
+            << MLocale::GreaterThan
             << MLocale::GreaterThan
             << MLocale::GreaterThan
             << MLocale::GreaterThan
@@ -4052,10 +4052,32 @@ void Ft_Locales::testDifferentStrengthComparison_data()
         <<"刘 利" // liúlì
         <<"liuli"
         << (QList<MLocale::Comparison>()
-            << MLocale::Equal
-            << MLocale::GreaterThan
-            << MLocale::GreaterThan
-            << MLocale::GreaterThan
+            << MLocale::LessThan
+            << MLocale::LessThan
+            << MLocale::LessThan
+            << MLocale::LessThan
+            );
+    QTest::newRow("en_US")
+        <<"ja_JP"
+        <<"en_US"
+        <<"a%20b"
+        <<"a20b"
+        << (QList<MLocale::Comparison>()
+            << MLocale::LessThan
+            << MLocale::LessThan
+            << MLocale::LessThan
+            << MLocale::LessThan
+            );
+    QTest::newRow("zh_CN")
+        <<"ja_JP"
+        <<"zh_CN"
+        <<"a%20b"
+        <<"a20b"
+        << (QList<MLocale::Comparison>()
+            << MLocale::LessThan
+            << MLocale::LessThan
+            << MLocale::LessThan
+            << MLocale::LessThan
             );
 }
 

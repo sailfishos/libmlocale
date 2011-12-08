@@ -2126,12 +2126,14 @@ while (<CLDR>) {
         if($currentCollType eq "pinyin") {
             $collTypeCollationOutput{"pinyinsearch"} .= "Sequence { \"";
         }
-        if ($currentCollType eq "pinyin") {
-            # Ignore variable code points on the primary level,
-            # i.e. ignore spaces when sorting pinyin:
-            $collTypeCollationOutput{"pinyin"} .= "[alternate shifted]";
-            $collTypeCollationOutput{"pinyinsearch"} .= "[alternate shifted]";
-        }
+        # don’t use [alternate shifted], see NB#290973:
+        # Bug 290973 - Cannot share the default video “Dolby Soundscapes” when device language is Chinese.
+        # if ($currentCollType eq "pinyin") {
+        #     # Ignore variable code points on the primary level,
+        #     # i.e. ignore spaces when sorting pinyin:
+        #     $collTypeCollationOutput{"pinyin"} .= "[alternate shifted]";
+        #     $collTypeCollationOutput{"pinyinsearch"} .= "[alternate shifted]";
+        # }
         next;
     }
     if ($ARG =~ /<\/rules>/) {
