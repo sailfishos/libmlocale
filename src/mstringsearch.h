@@ -239,7 +239,7 @@ public:
      * The default is true.
      *
      * “true”, i.e. “shifted” basically means that white space
-     * and punctuation is ignore when matching.
+     * and punctuation is ignored when matching.
      *
      * \sa alternateHandlingShifted()
      */
