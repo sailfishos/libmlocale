@@ -8,7 +8,7 @@ ICUUSRDATA = $$replace(ICUDATA, icudt, usrdt) # for example “usrdt44l”
 greaterThan(ICUVERSION, 4.4) {
     # the contents of the compiled resource files can be dumped
     # with commands like:
-    # derb -c -i /usr/share/meegotouch/icu/usrdt44l/ lang/en_GB.res
+    # derb -c -i /usr/share/mlocale/icu/usrdt44l/ lang/en_GB.res
     LOCALESTXT = data/ca.txt \
                  data/cs.txt \
                  data/da.txt \
