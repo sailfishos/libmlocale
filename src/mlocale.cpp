@@ -4224,6 +4224,7 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
 #else
     if(true){
 #endif
+        bool ok = true;
         icu::NumberingSystem * targetNumSys =
             NumberingSystem::createInstanceByName(
                 targetNumberingSystem.toAscii().constData(), status);
@@ -4232,7 +4233,7 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
                               << "Error NumberingSystem::createInstanceByName()"
                               << targetNumberingSystem
                               << u_errorName(status);
-            return text;
+            ok = false;
         }
         else {
             if(!targetNumSys->isAlgorithmic() && targetNumSys->getRadix() == 10) {
@@ -4243,7 +4244,7 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
                         << __PRETTY_FUNCTION__
                         << targetNumberingSystem
                         << "number of digits is not 10, should not happen";
-                    return text;
+                    ok = false;
                 }
             }
             else {
@@ -4251,9 +4252,12 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
                     << __PRETTY_FUNCTION__
                     << targetNumberingSystem
                     << "not algorithmic or radix not 10, should not happen";
-                return text;
+                ok = false;
             }
         }
+        delete targetNumSys;
+        if (!ok)
+            return text;
     }
 #else
     if(targetNumberingSystem == "arab")
