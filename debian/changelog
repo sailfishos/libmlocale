@@ -1,3 +1,13 @@
+libmlocale (0.4.0-1) unstable; urgency=low
+
+  * Fixes: NB#295025 - MLocale::toLocalizedNumbers() leaks memory
+  * Fixes: NB#290973 - Cannot share the default video “Dolby Soundscapes” when device language is Chinese.
+  * Fixes: NB#288618 - Calendar, Weekdays has wrong order according to KE countries calendar
+  * Fixes: NB#289425 - Calculator: Thousands separator is missing when the region sets to Yemen or Qatar.
+  * Fixes: NB#288840 - Song properties, Date format is wrong according to wikipedia KW date format
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Thu, 15 Dec 2011 16:13:08 +0300
+
 libmlocale (0.3.20-1) unstable; urgency=low
 
   * Fixes: NB#279399 - Some simplified Chinese characters are shown wrong stroke counts in Contacts when changing Regional format to Hong Kong(stroke no. sort).
