@@ -266,6 +266,8 @@ bool MLocationDatabasePrivate::loadCapitals()
         = QLatin1String("qtn_clk_country_switzerland");
     capitals[QLatin1String("qtn_clk_city_usa_washington")]
         = QLatin1String("qtn_clk_country_usa");
+    capitals[QLatin1String("qtn_clk_city_israel_jerusalem")]
+        = QLatin1String("qtn_clk_country_israel");
     return true;
 }
 
