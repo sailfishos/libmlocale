@@ -3153,6 +3153,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"ｓａｋｉ"
          <<"Saki"
          <<"Ｓａｋｉ"
+         <<"내"
          <<"あ"
          <<"𠮩" // 5 strokes, 1st stroke vertical, kHanyuPinlu - U+20BA9 kBigFive - kGB0- kRSUnicode 30.2"
             );
@@ -3267,6 +3268,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"S"
          <<"S"
          <<"S"
+         <<"ᄂ"
          <<"あ"
          <<"𠮩"
             );

@@ -791,6 +791,9 @@ void Ft_MLocaleBuckets::sortTestFiles_data()
     QTest::newRow("sr_Latn_YU")
         << "sr_Latn_YU"
         << "ft_mlocalebuckets_test-input.txt";
+    QTest::newRow("ko_KR")
+        << "ko_KR"
+        << "ft_mlocalebuckets_test-input.txt";
 }
 
 void Ft_MLocaleBuckets::sortTestFiles()
