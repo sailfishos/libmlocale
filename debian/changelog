@@ -1,3 +1,9 @@
+libmlocale (0.3.21-1) unstable; urgency=low
+
+  * Fixes: NB#295025 - MLocale::toLocalizedNumbers() leaks memory
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Fri, 23 Dec 2011 15:16:20 +0300
+
 libmlocale (0.3.20-1) unstable; urgency=low
 
   * Fixes: NB#279399 - Some simplified Chinese characters are shown wrong stroke counts in Contacts when changing Regional format to Hong Kong(stroke no. sort).
