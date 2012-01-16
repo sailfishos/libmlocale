@@ -1,3 +1,9 @@
+libmlocale (0.4.1-1) unstable; urgency=low
+
+  * Fixes: NB#287717 - [TASK] MCountry requires ISO 3166-1 country codes
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Mon, 16 Jan 2012 18:19:01 +0300
+
 libmlocale (0.4.0-1) unstable; urgency=low
 
   * Fixes: NB#295025 - MLocale::toLocalizedNumbers() leaks memory
