@@ -8,6 +8,7 @@ TARGET = ut_mlocationdatabase
 
 HEADERS += ut_mlocationdatabase.h
 SOURCES += ut_mlocationdatabase.cpp
+LIBS += -licui18n -licuuc
 
 support_files.files += \
     *.txt

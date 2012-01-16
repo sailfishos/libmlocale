@@ -11,6 +11,7 @@ TEST_SOURCES =  \
 # Input
 HEADERS += ft_locales.h
 SOURCES += ft_locales.cpp
+LIBS += -licuuc
 
 support_files.files += \
     *.txt

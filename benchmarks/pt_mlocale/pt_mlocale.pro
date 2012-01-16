@@ -5,3 +5,4 @@ TARGET = pt_mlocale
 
 HEADERS += pt_mlocale.h
 SOURCES += pt_mlocale.cpp
+LIBS += -licuuc
