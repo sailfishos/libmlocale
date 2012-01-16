@@ -53,6 +53,9 @@ private slots:
     void testCitiesInTimeZone_data();
     void testCitiesInTimeZone();
 
+    void testCountryCodes_data();
+    void testCountryCodes();
+
     void dumpCitiesInTimeZoneIds();
 
     void testCities_data();
