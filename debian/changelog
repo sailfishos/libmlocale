@@ -1,3 +1,9 @@
+libmlocale (0.3.21-2) unstable; urgency=low
+
+  * Changes: bump version number for preverifying
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Wed, 18 Jan 2012 17:37:26 +0300
+
 libmlocale (0.3.21-1) unstable; urgency=low
 
   * Fixes: NB#295025 - MLocale::toLocalizedNumbers() leaks memory
