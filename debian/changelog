@@ -1,3 +1,9 @@
+libmlocale (0.5.0-1) unstable; urgency=low
+
+  * Fixes: NB#297804 - Calendar; Weekdays for Afghanistan region are clipped in monthly view
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Thu, 02 Feb 2012 13:17:01 +0300
+
 libmlocale (0.4.1-1) unstable; urgency=low
 
   * Fixes: NB#287717 - [TASK] MCountry requires ISO 3166-1 country codes
