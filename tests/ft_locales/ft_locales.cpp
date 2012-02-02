@@ -4285,6 +4285,8 @@ void Ft_Locales::checkAvailableLocales()
     requiredLocaleNames << "nn_NO";       // "Norwegian Nynorsk (Norway)"
     requiredLocaleNames << "pl";          // "Polish"
     requiredLocaleNames << "pl_PL";       // "Polish (Poland)"
+    requiredLocaleNames << "ps";          // "Pashto"
+    requiredLocaleNames << "ps_AF";       // "Pashto (Afghanistan)"
     requiredLocaleNames << "pt";          // "Portuguese"
     requiredLocaleNames << "pt_BR";       // "Portuguese (Brazil)"
     requiredLocaleNames << "pt_PT";       // "Portuguese (Portugal)"
@@ -4379,7 +4381,7 @@ void Ft_Locales::checkAvailableLocales()
     supportedLocaleNames << "zh_CN@collation=stroke";
     supportedLocaleNames << "ko_KR";
     supportedLocaleNames << "kk_KZ";
-    bool runFullTest = true;
+    bool runFullTest = false;
     if (!runFullTest) {
         supportedLocaleNames.clear();
         supportedLocaleNames << "ar_SA";       // "Arabic (Saudi Arabia)"

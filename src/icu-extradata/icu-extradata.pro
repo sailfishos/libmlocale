@@ -57,6 +57,7 @@ greaterThan(ICUVERSION, 4.4) {
                  data/ms_BN.txt \
                  data/nn.txt \
                  data/pl.txt \
+                 data/ps.txt \
                  data/sk.txt \
                  data/sl.txt \
                  data/sr.txt \
