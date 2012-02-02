@@ -31,7 +31,7 @@
 #define MAX_PARAMS 10
 
 Q_DECLARE_METATYPE(QList<int>);
-
+Q_DECLARE_METATYPE(ML10N::MBreakIterator::Type);
 
 class Ft_BreakIterator : public QObject
 {

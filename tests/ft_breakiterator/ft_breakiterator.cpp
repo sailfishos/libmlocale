@@ -58,17 +58,20 @@ void Ft_BreakIterator::cleanup()
 void defaultData()
 {
     QTest::addColumn<QString>("locale_name");
+    QTest::addColumn<MBreakIterator::Type>("breakIteratorType");
     QTest::addColumn<QString>("sourceString");
     QTest::addColumn<QList<int> >("correctBoundaries");
 
     // an empty locale_name should be equivalent to the locale_name "en_US_POSIX"
     QTest::newRow("")
             << QString("")
+            << MBreakIterator::WordIterator
             << "This is a simple sentence. Täst."
             << (QList<int> ()<< 0 << 4 << 5 << 7 << 8 << 9 << 10 << 16 << 17 << 25 << 26  << 27 << 31 << 32);
 
     QTest::newRow("fi_FI")
             << QString("fi_FI")
+            << MBreakIterator::WordIterator
             << "fiksusta boksista esiin astui despootti ges ces"
             << (QList<int> () << 0 << 8 << 9 << 17 << 18 << 23 << 24 << 29 << 30 << 39 << 40 << 43 << 44 << 47);
 
@@ -77,18 +80,21 @@ void defaultData()
     // But that is better than nothing.
     QTest::newRow("ja_JP")
             << QString("ja_JP")
+            << MBreakIterator::WordIterator
             << "睡眠不足はいい仕事の敵だ。"
             << (QList<int> () << 0 << 4 << 7 << 9 << 10 << 11 << 12 << 13);
 
     // For Thai, ICU does a "GraphemeClusterBreak". not really a word break:
     QTest::newRow("th_TH")
             << QString("th_TH")
+            << MBreakIterator::WordIterator
             << "ฉันจะใช้ไดเรกทอรีของ Google แทนการค้นหาเว็บตามปกติของ Google เมื่อใด"
             << (QList<int> () << 0 << 3 << 5 << 8 << 17 << 20 << 21 << 27 << 28 << 31 << 34 << 39 << 43 << 46 << 50 << 53 << 54 << 60 << 61 << 66 << 68);
 
     // For Chinese, ICU breaks after every Chinese character:
     QTest::newRow("zh_CN")
             << QString("zh_CN")
+            << MBreakIterator::WordIterator
             << "什么时候该选用 Google 目录查询而非网络查询呢？"
             << (QList<int> () << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 14 << 15 << 16 << 17 << 18 << 19 << 20 << 21 << 22 << 23 << 24 << 25 << 26 << 27);
 
@@ -96,16 +102,19 @@ void defaultData()
     // For Chinese, ICU breaks after every Chinese character:
     QTest::newRow("zh_CN")
             << QString("zh_CN")
+            << MBreakIterator::WordIterator
             << "什么时候该选用Google目录查询而非网络查询呢？"
             << (QList<int> () << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 13 << 14 << 15 << 16 << 17 << 18 << 19 << 20 << 21 << 22 << 23 << 24 << 25);
 
     QTest::newRow("de_DE")
             << QString("de_DE")
+            << MBreakIterator::WordIterator
             << "Wann sollte ich das Google Verzeichnis anstelle der regulären Websuche von Google verwenden?"
             << (QList<int> () << 0 << 4 << 5 << 11 << 12 << 15 << 16 << 19 << 20 << 26 << 27 << 38 << 39 << 47 << 48 << 51 << 52 << 61 << 62 << 70 << 71 << 74 << 75 << 81 << 82 << 91 << 92);
 
     QTest::newRow("ar_SA")
             << QString("ar_SA")
+            << MBreakIterator::WordIterator
             << "نريد NOKIA الهواتف لتصبح أفضل."
             << (QList<int> () << 0 << 4 << 5 << 10 << 11 << 18 << 19 << 24 << 25 << 29 << 30);
 
@@ -114,8 +123,34 @@ void defaultData()
     // just “documents” the current behaviour here until we can fix it:
     QTest::newRow("ar_SA")
             << QString("ar_SA")
+            << MBreakIterator::WordIterator
             << "نريدNOKIAالهواتف لتصبح أفضل."
             << (QList<int> () << 0 << 16 << 17 << 22 << 23 << 27 << 28);
+
+    // For Thai, ICU does a "GraphemeClusterBreak". not really a word break:
+    QTest::newRow("th_TH")
+            << QString("th_TH")
+            << MBreakIterator::WordIterator
+            << "พรพรรณ ก้องกิตติวงศ์"
+            << (QList<int> () << 0 << 2 << 6 << 7 << 11 << 16 << 20);
+    // For Thai, ICU does a "GraphemeClusterBreak". not really a word break:
+    QTest::newRow("th_TH")
+            << QString("th_TH")
+            << MBreakIterator::LineIterator
+            << "พรพรรณ ก้องกิตติวงศ์"
+            << (QList<int> () << 0 << 2 << 7 << 11 << 16 << 20);
+    // For Thai, ICU does a "GraphemeClusterBreak". not really a word break:
+    QTest::newRow("th_TH")
+            << QString("th_TH")
+            << MBreakIterator::SentenceIterator
+            << "พรพรรณ ก้องกิตติวงศ์"
+            << (QList<int> () << 0 << 20);
+    // Thai using a non-Thai locale:
+    QTest::newRow("en_US")
+            << QString("en_US")
+            << MBreakIterator::WordIterator
+            << "พรพรรณ ก้องกิตติวงศ์"
+            << (QList<int> () << 0 << 2 << 6 << 7 << 11 << 16 << 20);
 }
 
 void Ft_BreakIterator::constructors_data()
@@ -126,14 +161,15 @@ void Ft_BreakIterator::constructors_data()
 void Ft_BreakIterator::constructors()
 {
     QFETCH(QString, locale_name);
+    QFETCH(MBreakIterator::Type, breakIteratorType);
     QFETCH(QString, sourceString);
     QFETCH(QList<int>, correctBoundaries);
 
     MLocale locale(locale_name);
     TestBreakIterator *testBreakIterator
-        = new TestBreakIterator(locale, sourceString, MBreakIterator::WordIterator);
+        = new TestBreakIterator(locale, sourceString, breakIteratorType);
     TestBreakIterator *testBreakIteratorDefaultLocale
-       = new TestBreakIterator(sourceString, MBreakIterator::WordIterator);
+       = new TestBreakIterator(sourceString, breakIteratorType);
     delete testBreakIterator;
     delete testBreakIteratorDefaultLocale;
 }
@@ -146,13 +182,14 @@ void Ft_BreakIterator::forward_data()
 void Ft_BreakIterator::forward()
 {
     QFETCH(QString, locale_name);
+    QFETCH(MBreakIterator::Type, breakIteratorType);
     QFETCH(QString, sourceString);
     QFETCH(QList<int>, correctBoundaries);
 
     MLocale locale(locale_name);
-    MBreakIterator it(locale, sourceString, MBreakIterator::WordIterator);
+    MBreakIterator it(locale, sourceString, breakIteratorType);
     MLocale::setDefault(locale);
-    MBreakIterator itDefault(sourceString, MBreakIterator::WordIterator);
+    MBreakIterator itDefault(sourceString, breakIteratorType);
     QListIterator<int> correctIt(correctBoundaries);
 
     for (int i = 0; i < 2; ++i) {
@@ -181,13 +218,14 @@ void Ft_BreakIterator::backward_data()
 void Ft_BreakIterator::backward()
 {
     QFETCH(QString, locale_name);
+    QFETCH(MBreakIterator::Type, breakIteratorType);
     QFETCH(QString, sourceString);
     QFETCH(QList<int>, correctBoundaries);
 
     MLocale locale(locale_name);
-    MBreakIterator it(locale, sourceString, MBreakIterator::WordIterator);
+    MBreakIterator it(locale, sourceString, breakIteratorType);
     MLocale::setDefault(locale);
-    MBreakIterator itDefault(sourceString, MBreakIterator::WordIterator);
+    MBreakIterator itDefault(sourceString, breakIteratorType);
     QListIterator<int> correctIt(correctBoundaries);
 
     it.toBack();
@@ -224,11 +262,12 @@ void Ft_BreakIterator::aroundIndex_data()
 void Ft_BreakIterator::aroundIndex()
 {
     QFETCH(QString, locale_name);
+    QFETCH(MBreakIterator::Type, breakIteratorType);
     QFETCH(QString, sourceString);
     QFETCH(QList<int>, correctBoundaries);
 
     MLocale locale(locale_name);
-    MBreakIterator it(locale, sourceString, MBreakIterator::WordIterator);
+    MBreakIterator it(locale, sourceString, breakIteratorType);
     QListIterator<int> correctIt(correctBoundaries);
 
     // look for boundaries around an explicit index "fromIndex":
@@ -273,11 +312,12 @@ void Ft_BreakIterator::peek_data()
 void Ft_BreakIterator::peek()
 {
     QFETCH(QString, locale_name);
+    QFETCH(MBreakIterator::Type, breakIteratorType);
     QFETCH(QString, sourceString);
     QFETCH(QList<int>, correctBoundaries);
 
     MLocale locale(locale_name);
-    MBreakIterator it(locale, sourceString, MBreakIterator::WordIterator);
+    MBreakIterator it(locale, sourceString, breakIteratorType);
     QListIterator<int> correctIt(correctBoundaries);
 
     // check that two peeks return the same value and that it is a correct value
