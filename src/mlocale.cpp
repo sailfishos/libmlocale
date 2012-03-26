@@ -258,10 +258,20 @@ bool MTranslationCatalog::loadWith(MLocale *mlocale, MLocale::Category category)
 
                 fname.truncate(rightmost);
 
-                // do not fall back to engineering English when trying
-                // to load real translations:
-                if (fname == engineeringEnglishName)
-                     break;
+                if (fname == engineeringEnglishName) {
+                    // do not fall back to engineering English when
+                    // trying to load real translations. But if this
+                    // point is reached, it means that no real
+                    // translations were found for the requested
+                    // locale. As a last fallback, try to load the
+                    // real English translations (not the engineering
+                    // English) here.
+                    realname = prefix + fname + "_en.qm";
+                    if (QFileInfo(realname).isReadable() && _translator.load(realname))
+                        return true;
+                    // nothing at all was found
+                    break;
+                }
             }
         }
     }
