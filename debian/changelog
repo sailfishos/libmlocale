@@ -1,3 +1,9 @@
+libmlocale (0.5.1-1) unstable; urgency=low
+
+  * Fixes: NB#289167 - [TASK] No fallback to English translation in application name if language not supported
+
+ -- Mike FABIAN <mike.fabian@basyskom.de>  Tue, 27 Mar 2012 11:12:44 +0300
+
 libmlocale (0.5.0-1) unstable; urgency=low
 
   * Fixes: NB#297804 - Calendar; Weekdays for Afghanistan region are clipped in monthly view
