@@ -1,5 +1,6 @@
 Name: libmlocale
 Summary: Contains classes MLocale and friends originally from libmeegotouch
+Release: 1
 Description: |
     Contains classes MLocale and friends originally from libmeegotouch. 
     With that separation one can use those localization facilities without 
@@ -9,9 +10,7 @@ URL: https://meego.gitorious.org/meegotouch/libmlocale
 Group: System/Libraries
 License: LGPLv2
 Sources:
-    - meegotouch-libmlocale-%{version}-1.tar.gz
-Patches:
-    - libmlocale-0.3.21-fix-linking.patch
+    - "%{name}-%{version}.tar.bz2"
 PkgConfigBR:
     - icu-uc
     - QtCore
@@ -19,21 +18,36 @@ PkgConfigBR:
     - x11
 PkgBR:
     - gconf-devel
+Files:
+    - "%doc LICENSE.LGPL"
+    - "%{_libdir}/*.so.*"
+    - "%{_datadir}/mlocale/icu"
 SubPackages:
     - Name: devel
       Summary: Devel files for limlocale
       Group: Development/Libraries
-      Description: |
-        %{summary}.
+      Description: "%{summary}."
+      Files:
+          - "%{_datadir}/qt4/mkspecs/features/*.prf"
+          - "%{_libdir}/*.so"
+          - "%{_libdir}/*.prl"
+          - "%{_includedir}/mlocale/*.h"
+          - "%{_includedir}/mlocale/M*"
+          - "%{_libdir}/pkgconfig/*.pc"
 
     - Name: tests
       Summary: Tests for limlocale
       Group: Development/Libraries
-      Description: |
-        %{summary}.
+      Description: "%{summary}."
+      Files:
+          - "%{_libdir}/libmlocale-tests"
+          - "%{_datadir}/libmlocale-tests/tests.xml"
 
     - Name: benchmarks
       Summary: Benchmarks files for limlocale
       Group: Development/Libraries
-      Description: |
-        %{summary}.
+      Description: "%{summary}."
+      Files:
+          - "%{_libdir}/libmlocale-benchmarks"
+          - "%{_datadir}/libmlocale-benchmarks/tests.xml"
+

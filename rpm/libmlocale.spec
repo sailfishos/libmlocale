@@ -14,9 +14,8 @@ Release:    1
 Group:      System/Libraries
 License:    LGPLv2
 URL:        https://meego.gitorious.org/meegotouch/libmlocale
-Source0:    meegotouch-libmlocale-%{version}-1.tar.gz
+Source0:    %{name}-%{version}.tar.bz2
 Source100:  libmlocale.yaml
-Patch0:     libmlocale-0.3.21-fix-linking.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(icu-uc)
@@ -39,7 +38,6 @@ Requires:   %{name} = %{version}-%{release}
 %description devel
 %{summary}.
 
-
 %package tests
 Summary:    Tests for limlocale
 Group:      Development/Libraries
@@ -47,7 +45,6 @@ Requires:   %{name} = %{version}-%{release}
 
 %description tests
 %{summary}.
-
 
 %package benchmarks
 Summary:    Benchmarks files for limlocale
@@ -58,12 +55,9 @@ Requires:   %{name} = %{version}-%{release}
 %{summary}.
 
 
-
 %prep
-%setup -q -n meegotouch-%{name}
+%setup -q -n %{name}-%{version}
 
-# libmlocale-0.3.21-fix-linking.patch
-%patch0 -p1
 # >> setup
 # << setup
 
@@ -93,33 +87,33 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-# >> files
 %doc LICENSE.LGPL
 %{_libdir}/*.so.*
 %{_datadir}/mlocale/icu
+# >> files
 # << files
 
 %files devel
 %defattr(-,root,root,-)
-# >> files devel
 %{_datadir}/qt4/mkspecs/features/*.prf
 %{_libdir}/*.so
 %{_libdir}/*.prl
 %{_includedir}/mlocale/*.h
 %{_includedir}/mlocale/M*
 %{_libdir}/pkgconfig/*.pc
+# >> files devel
 # << files devel
 
 %files tests
 %defattr(-,root,root,-)
-# >> files tests
 %{_libdir}/libmlocale-tests
 %{_datadir}/libmlocale-tests/tests.xml
+# >> files tests
 # << files tests
 
 %files benchmarks
 %defattr(-,root,root,-)
-# >> files benchmarks
 %{_libdir}/libmlocale-benchmarks
 %{_datadir}/libmlocale-benchmarks/tests.xml
+# >> files benchmarks
 # << files benchmarks
