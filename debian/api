@@ -1,8 +1,0 @@
-interface: libmlocale
-type: library
-libs-pkg: libmlocale0
-dev-pkg: libmlocale-dev
-state: stable
-scope: Platform
-doc-type: doxygen
-doxygen-conf: doc/mdoxy.cfg
