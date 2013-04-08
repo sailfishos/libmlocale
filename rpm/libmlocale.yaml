@@ -1,0 +1,39 @@
+Name: libmlocale
+Summary: Contains classes MLocale and friends originally from libmeegotouch
+Description: |
+    Contains classes MLocale and friends originally from libmeegotouch. 
+    With that separation one can use those localization facilities without 
+    having to bring on board also the MeeGo Touch GUI toolkit.
+Version: 0.5.0
+URL: https://meego.gitorious.org/meegotouch/libmlocale
+Group: System/Libraries
+License: LGPLv2
+Sources:
+    - meegotouch-libmlocale-%{version}-1.tar.gz
+Patches:
+    - libmlocale-0.3.21-fix-linking.patch
+PkgConfigBR:
+    - icu-uc
+    - QtCore
+    - QtOpenGL
+    - x11
+PkgBR:
+    - gconf-devel
+SubPackages:
+    - Name: devel
+      Summary: Devel files for limlocale
+      Group: Development/Libraries
+      Description: |
+        %{summary}.
+
+    - Name: tests
+      Summary: Tests for limlocale
+      Group: Development/Libraries
+      Description: |
+        %{summary}.
+
+    - Name: benchmarks
+      Summary: Benchmarks files for limlocale
+      Group: Development/Libraries
+      Description: |
+        %{summary}.
