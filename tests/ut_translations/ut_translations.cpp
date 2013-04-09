@@ -19,7 +19,7 @@
 
 #include "ut_translations.h"
 
-#include <QApplication>
+#include <QCoreApplication>
 
 using ML10N::MLocale;
 
@@ -27,8 +27,10 @@ void Ut_Translations::initTestCase()
 {
     static int argc = 0;
     static char *argv[1] = { (char *) "ut_translations" };
-    qap = new QApplication(argc, argv, "test");
+    qap = new QCoreApplication(argc, argv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
 }
 
 void Ut_Translations::cleanupTestCase()

@@ -25,7 +25,7 @@
 #include <Qt>
 #include <QTextCodec>
 
-#include <QApplication>
+#include <QCoreApplication>
 
 #include <MCharsetDetector>
 #include <MCharsetMatch>
@@ -35,7 +35,7 @@ class Ft_MCharsetDetector : public QObject
     Q_OBJECT
 
 private:
-    QApplication *qap;
+    QCoreApplication *qap;
 
 private slots:
     void initTestCase();

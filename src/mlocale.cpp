@@ -40,7 +40,11 @@
 #include <MDebug>
 #include <QTranslator>
 #include <QDir>
-#include <QApplication>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+# include <QGuiApplication>
+#else
+# include <QApplication>
+#endif
 #include <QMutex>
 #include <QDateTime>
 #include <QPointer>
@@ -4237,7 +4241,7 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
         bool ok = true;
         icu::NumberingSystem * targetNumSys =
             NumberingSystem::createInstanceByName(
-                targetNumberingSystem.toAscii().constData(), status);
+                targetNumberingSystem.toLatin1().constData(), status);
         if(U_FAILURE(status)) {
             mDebug("MLocale") << __PRETTY_FUNCTION__
                               << "Error NumberingSystem::createInstanceByName()"

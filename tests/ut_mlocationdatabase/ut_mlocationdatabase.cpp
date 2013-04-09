@@ -49,8 +49,10 @@ void Ut_MLocationDatabase::initTestCase()
 {
     static int dummyArgc = 1;
     static char *dummyArgv[1] = { (char *) "ut_mlocationdatabase" };
-    qap = new QApplication(dummyArgc, dummyArgv, "test");
+    qap = new QCoreApplication(dummyArgc, dummyArgv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
 }
 
 void Ut_MLocationDatabase::cleanupTestCase()

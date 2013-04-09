@@ -25,7 +25,7 @@
 #include <QDebug>
 #include <iostream>
 
-#include <QApplication>
+#include <QCoreApplication>
 
 #include "mlocale.h"
 #include "mlocalebuckets.h"
@@ -38,7 +38,7 @@ using std::endl;
 using ML10N::MLocale;
 using ML10N::MLocaleBuckets;
 
-QApplication *app = 0;
+QCoreApplication *app = 0;
 QStringList inputItems;
 
 
@@ -46,10 +46,12 @@ void Ft_MLocaleBuckets::initTestCase()
 {
     static char *argv[] = { (char *) "./ft_mlocalebuckets" };
     static int argc = 1;
-    app = new QApplication(argc, argv);
+    app = new QCoreApplication(argc, argv);
 
     // This is important for string constants with non-ASCII characters:
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
 
     inputItems
         << "Ömer"        //  0

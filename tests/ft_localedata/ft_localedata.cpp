@@ -26,7 +26,9 @@ void Ft_LocaleData::initTestCase()
     static int argc = 0;
     static char *argv[1] = { (char *) "" };
     app = new QCoreApplication(argc, argv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
     MLocale::setDataPath(qApp->applicationDirPath());
 }
 

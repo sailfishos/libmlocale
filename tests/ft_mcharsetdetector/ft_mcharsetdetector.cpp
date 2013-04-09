@@ -28,8 +28,10 @@ void Ft_MCharsetDetector::initTestCase()
 {
     static int dummyArgc = 1;
     static char *dummyArgv[1] = { (char *) "ft_mcharsetdetector" };
-    qap = new QApplication(dummyArgc, dummyArgv, "test");
+    qap = new QCoreApplication(dummyArgc, dummyArgv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
 }
 
 void Ft_MCharsetDetector::cleanupTestCase()
@@ -1949,9 +1951,9 @@ void Ft_MCharsetDetector::testDetection()
     QFETCH(QString, bestMatchName);
     QFETCH(QString, bestMatchLanguage);
 
-    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toAscii());
+    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1());
     if (codec == NULL) // there is no codec matching the name
-        QFAIL(QString("no such codec: " + inputEncoding).toAscii().constData());
+        QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
 
     QByteArray encodedString = codec->fromUnicode(text);
     // add Latin1 junk:

@@ -28,7 +28,7 @@
 #include <MCollator>
 #include <MCalendar>
 
-#include <QApplication>
+#include <QCoreApplication>
 
 #ifdef HAVE_ICU
 #include <unicode/unistr.h>
@@ -55,7 +55,7 @@ class Ft_Locales : public QObject
     Q_OBJECT
 
 private:
-    QApplication *qap;
+    QCoreApplication *qap;
     QString libqtcore4PackageVersion;
 
 private slots:

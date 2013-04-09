@@ -188,7 +188,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
     for (qint32 i = 0; i < matchesFound; ++i) {
         MCharsetMatch mCharsetMatch;
         mCharsetMatch.setName(
-            QString::fromAscii(ucsdet_getName(uCharsetMatch[i], &(d->_status))));
+            QString::fromLatin1(ucsdet_getName(uCharsetMatch[i], &(d->_status))));
         if(hasError()) {
             qWarning() << __PRETTY_FUNCTION__ << errorString();
             return QList<MCharsetMatch>();
@@ -200,7 +200,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
             return QList<MCharsetMatch>();
         }
         mCharsetMatch.setLanguage(
-            QString::fromAscii(ucsdet_getLanguage(uCharsetMatch[i], &(d->_status))));
+            QString::fromLatin1(ucsdet_getLanguage(uCharsetMatch[i], &(d->_status))));
         if(hasError()) {
             qWarning() << __PRETTY_FUNCTION__ << errorString();
             return QList<MCharsetMatch>();
@@ -504,7 +504,7 @@ QString MCharsetDetector::text(const MCharsetMatch &charsetMatch)
     Q_D(MCharsetDetector);
     clearError();
     QTextCodec *codec
-        = QTextCodec::codecForName(charsetMatch.name().toAscii());
+        = QTextCodec::codecForName(charsetMatch.name().toLatin1());
     if (codec == NULL) { // there is no codec matching the name
         d->_status = U_ILLEGAL_ARGUMENT_ERROR;
         qWarning() << __PRETTY_FUNCTION__
@@ -538,7 +538,7 @@ void MCharsetDetector::setDeclaredEncoding(const QString &encoding)
     if (d->_declaredEncoding == QLatin1String("GB2312"))
         d->_declaredEncoding = QLatin1String("GB18030");
     ucsdet_setDeclaredEncoding(d->_uCharsetDetector,
-                               d->_declaredEncoding.toAscii().constData(),
+                               d->_declaredEncoding.toLatin1().constData(),
                                int32_t(-1),
                                &(d->_status));
     if(hasError())

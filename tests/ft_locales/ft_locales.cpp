@@ -33,8 +33,10 @@ void Ft_Locales::initTestCase()
 {
     static int dummyArgc = 1;
     static char *dummyArgv[1] = { (char *) "ft_locales" };
-    qap = new QApplication(dummyArgc, dummyArgv, "test");
+    qap = new QCoreApplication(dummyArgc, dummyArgv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
     QProcess process;
     process.start("sh -c \"dpkg -s libqtcore4 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
     if (!process.waitForFinished()) {
@@ -81,25 +83,25 @@ void Ft_Locales::testBug169305()
     MLocale locale0("en_US@layout-direction=auto");
     locale0.installTrCatalog("foo");
     MLocale::setDefault(locale0);
-    QCOMPARE(QApplication::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
+    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCOMPARE(qApp->layoutDirection(), Qt::LeftToRight);
     MLocale locale1("ar_SA@layout-direction=auto");
     locale1.installTrCatalog("foo");
     MLocale::setDefault(locale1);
-    QCOMPARE(QApplication::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
+    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCOMPARE(qApp->layoutDirection(), Qt::RightToLeft);
     MLocale locale2;
     QCOMPARE(locale2.name(), QString("ar_SA@layout-direction=auto"));
     locale2.installTrCatalog("foo");
     MLocale::setDefault(locale2);
-    QCOMPARE(QApplication::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
+    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCoreApplication::processEvents();
-    QCOMPARE(QApplication::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
+    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCOMPARE(qApp->layoutDirection(), Qt::RightToLeft);
     MLocale::setDefault(locale0);
-    QCOMPARE(QApplication::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
+    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCoreApplication::processEvents();
-    QCOMPARE(QApplication::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
+    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCOMPARE(qApp->layoutDirection(), Qt::LeftToRight);
 }
 

@@ -25,7 +25,7 @@
 #include <Qt>
 #include <QTextCodec>
 
-#include <QApplication>
+#include <QCoreApplication>
 
 #include <MStringSearch>
 
@@ -38,7 +38,7 @@ class Ft_MStringSearch : public QObject
     Q_OBJECT
 
 private:
-    QApplication *qap;
+    QCoreApplication *qap;
 
 private slots:
     void initTestCase();

@@ -29,7 +29,9 @@ void Pt_MLocale::initTestCase()
     static int argc = 0;
     static char *argv[1] = { (char *) "" };
     qap = new QCoreApplication(argc, argv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
     QProcess process;
 #ifdef HAVE_ICU
     process.start("sh -c \"dpkg -s libicu44 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");

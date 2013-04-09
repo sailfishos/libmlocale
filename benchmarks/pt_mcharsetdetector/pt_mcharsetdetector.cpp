@@ -27,7 +27,9 @@ void Pt_MCharsetDetector::initTestCase()
     static int argc = 0;
     static char *argv[1] = { (char *) "" };
     qap = new QCoreApplication(argc, argv);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+#endif
 }
 
 void Pt_MCharsetDetector::cleanupTestCase()
@@ -123,9 +125,9 @@ void Pt_MCharsetDetector::benchmarkDetection()
     QFETCH(QString, bestMatchName);
     QFETCH(QString, bestMatchLanguage);
 
-    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toAscii());
+    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1());
     if (codec == NULL) // there is no codec matching the name
-        QFAIL(QString("no such codec: " + inputEncoding).toAscii().constData());
+        QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
 
     QByteArray encodedString = codec->fromUnicode(text);
     MCharsetDetector charsetDetector(encodedString);
