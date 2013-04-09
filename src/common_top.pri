@@ -60,19 +60,9 @@ contains(M_BUILD_FEATURES, testable) {
 
 
 ## Dependencies
-
 contains(DEFINES, HAVE_ICU) {
     LIBS += -licui18n -licuuc -licudata
 }
-
-QT += \
-    svg \
-    network \
-    core \
-    gui \
-    xml
-
-!simulator: QT += opengl
 
 QMAKE_EXTRA_TARGETS += check
 check.depends = $$DESTDIR/lib$${TARGET}.so.$$VERSION

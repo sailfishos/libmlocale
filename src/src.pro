@@ -3,6 +3,7 @@ CONFIG += ordered
 DEFINES += M_BUILD_MLOCALE
 
 include(common_top.pri)
+QT += xml
 
 TARGET = mlocale
 
