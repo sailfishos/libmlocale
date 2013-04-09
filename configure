@@ -501,7 +501,7 @@ fi
 
 # substitute prefix in .pc files
 MEEGOTOUCH_PC_DIR="$outpath/src/data"
-MEEGOTOUCH_PC_FILES="mlocale"
+MEEGOTOUCH_PC_FILES="mlocale mlocale5"
 
 # make sure the directory exists
 if [ ! -d $MEEGOTOUCH_PC_DIR ]; then
