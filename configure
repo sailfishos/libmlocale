@@ -578,7 +578,7 @@ if [ -z "$QT_MAJOR_VERSION" ]; then
 fi
 
 if [ "$QT_MAJOR_VERSION" -lt "$QT_MAJOR_VERSION_NEEDED" ] \
-    || [ "$QT_MINOR_VERSION" -lt "$QT_MINOR_VERSION_NEEDED" ]; then
+    && [ "$QT_MINOR_VERSION" -lt "$QT_MINOR_VERSION_NEEDED" ]; then
     echo "Your Qt version is too old: $QT_VERSION"
     echo "You need at least version $QT_MAJOR_VERSION_NEEDED.$QT_MINOR_VERSION_NEEDED.0"
     echo "Cannot proceed."
