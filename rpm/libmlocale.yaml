@@ -15,7 +15,6 @@ PkgConfigBR:
     - icu-uc
     - QtCore
     - QtOpenGL
-    - x11
 PkgBR:
     - gconf-devel
 Files:

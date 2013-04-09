@@ -21,7 +21,6 @@ Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:  pkgconfig(QtCore)
 BuildRequires:  pkgconfig(QtOpenGL)
-BuildRequires:  pkgconfig(x11)
 BuildRequires:  gconf-devel
 
 %description
