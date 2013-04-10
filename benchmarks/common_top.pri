@@ -20,7 +20,8 @@ equals(QT_MAJOR_VERSION, 4): target.path = $$[QT_INSTALL_LIBS]/libmlocale-benchm
 equals(QT_MAJOR_VERSION, 5): target.path = $$[QT_INSTALL_LIBS]/libmlocale-benchmarks5
 INSTALLS += target
 
-LIBS += $$mAddLibrary(mlocale)
+equals(QT_MAJOR_VERSION, 4): LIBS += $$mAddLibrary(mlocale)
+equals(QT_MAJOR_VERSION, 5): LIBS += $$mAddLibrary(mlocale5)
 
 support_files.files =
 equals(QT_MAJOR_VERSION, 4): support_files.path = $$[QT_INSTALL_LIBS]/libmlocale-benchmarks
