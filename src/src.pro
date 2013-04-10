@@ -5,7 +5,8 @@ DEFINES += M_BUILD_MLOCALE
 include(common_top.pri)
 QT += xml
 
-TARGET = mlocale
+equals(QT_MAJOR_VERSION, 4): TARGET = mlocale
+equals(QT_MAJOR_VERSION, 5): TARGET = mlocale5
 
 INCLUDEPATH += .
 
@@ -102,7 +103,8 @@ INSTALLS += install_prf
 
 # install pkgconfig file
 install_pkgconfig.path = $$ML_INSTALL_LIBS/pkgconfig
-install_pkgconfig.files = data/mlocale.pc
+equals(QT_MAJOR_VERSION, 4): install_pkgconfig.files = data/mlocale.pc
+equals(QT_MAJOR_VERSION, 5): install_pkgconfig.files = data/mlocale5.pc
 
 INSTALLS += install_pkgconfig
 
