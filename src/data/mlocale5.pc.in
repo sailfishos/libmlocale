@@ -1,0 +1,11 @@
+prefix=@@M_UNIX_INSTALL_PREFIX@@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/mlocale5
+
+Name: mlocale5
+Description: MeeGo Locale Library
+Version: @@M_VERSION@@
+Requires: Qt5Gui
+Cflags: -I${includedir}
+Libs: -L${libdir} -lmlocale5
