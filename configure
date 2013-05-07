@@ -556,12 +556,6 @@ QT_MINOR_VERSION_NEEDED=7
 
 QT_VERSION=$($QMAKE_BIN -query QT_VERSION)
 
-if [ $? -ne 0 ]; then
-    # qtchooser + qt5?
-    QMAKE_BIN="qmake -qt=5"
-    QT_VERSION=$($QMAKE_BIN -query QT_VERSION)
-fi
-
 QT_MAJOR_VERSION=0
 QT_MINOR_VERSION=0
 QT_PATCH_VERSION=0

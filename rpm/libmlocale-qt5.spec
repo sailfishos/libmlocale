@@ -65,6 +65,7 @@ Requires:   %{name} = %{version}-%{release}
 
 %build
 # >> build pre
+export QT_SELECT=5
 # << build pre
 
 %configure --disable-static
@@ -76,6 +77,7 @@ make %{?jobs:-j%jobs}
 %install
 rm -rf %{buildroot}
 # >> install pre
+export QT_SELECT=5
 # << install pre
 %make_install
 
