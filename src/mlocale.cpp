@@ -1821,14 +1821,6 @@ MLocale::createSystemMLocale()
         lcMonetary      = pCurrentLcMonetary->value();
         lcTelephone     = pCurrentLcTelephone->value();
 
-        if ( !pCurrentLanguage->isValid() )        language = "en_GB";
-        if ( !pCurrentLcTime->isValid() )          lcTime = "en_GB";
-        if ( !pCurrentLcTimeFormat24h->isValid() ) lcTimeFormat24h = "12";
-        if ( !pCurrentLcCollate->isValid() )       lcCollate = "en_GB";
-        if ( !pCurrentLcNumeric->isValid() )       lcNumeric = "en_GB";
-        if ( !pCurrentLcMonetary->isValid() )      lcMonetary = "en_GB";
-        // no default for lcTelephone
-
         delete pCurrentLanguage;
         delete pCurrentLcTime;
         delete pCurrentLcTimeFormat24h;
@@ -1841,14 +1833,21 @@ MLocale::createSystemMLocale()
     MLocale *systemLocale;
 
     if (language.isEmpty()) {
-        language = qgetenv("LANG");
-        QString locale = cleanLanguageCountryPosix(language);
+        QString locale = qgetenv("LANG");
+        language = cleanLanguageCountryPosix(locale);
 
-        if (locale.isEmpty())
-            locale = PosixStr;
+        if (language.isEmpty()) {
+            language = PosixStr;
+            lcTime = PosixStr;
+            lcTimeFormat24h = "12";
+            lcCollate = PosixStr;
+            lcNumeric = PosixStr;
+            lcMonetary = PosixStr;
+            // no default for lcTelephone
+        }
 
         // No need to set the category according to env here
-        systemLocale = new MLocale(locale);
+        systemLocale = new MLocale(language);
     } else {
         // Empty country codes cause problems in some applications.
         // Try to add the “right” country when reading the gconf
