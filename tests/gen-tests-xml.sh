@@ -1,6 +1,7 @@
 #!/bin/bash
 
 TESTDIR=`dirname $0`
+INSTALL_PATH=$1
 DOMAIN="Application Framework"
 FEATURE="MeeGo Touch UI Framework"
 TYPE="Functional"
@@ -22,7 +23,7 @@ for TEST in `ls -d ?t_*`; do
 		fi
 
 TESTCASE_TEMPLATE="<case name=\"$TEST\" description=\"$TEST\" requirement=\"\" timeout=\"300\" insignificant=\"$INSIGNIFICANT\">
-        <step expected_result=\"0\">/usr/lib/libmlocale-tests/$TEST</step>
+        <step expected_result=\"0\">$INSTALL_PATH/$TEST</step>
       </case>
       "
 

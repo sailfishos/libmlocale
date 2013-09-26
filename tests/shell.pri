@@ -1,4 +1,7 @@
-shell_scripts.commands += $$PWD/gen-tests-xml.sh > $$OUT_PWD/tests.xml
+equals(QT_MAJOR_VERSION, 4): ml_unittest_install_path = $$[QT_INSTALL_LIBS]/libmlocale-tests
+equals(QT_MAJOR_VERSION, 5): ml_unittest_install_path = $$[QT_INSTALL_LIBS]/libmlocale-tests5
+
+shell_scripts.commands += $$PWD/gen-tests-xml.sh $${ml_unittest_install_path} > $$OUT_PWD/tests.xml
 shell_scripts.files += $$OUT_PWD/tests.xml
 shell_scripts.CONFIG += no_check_exist
 
