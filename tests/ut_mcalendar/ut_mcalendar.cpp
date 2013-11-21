@@ -95,7 +95,11 @@ void Ut_MCalendar::cleanup()
 void Ut_MCalendar::testDataPaths()
 {
     MLocale locale;
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
+#else
+    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
+#endif
 }
 
 void Ut_MCalendar::testTimeZones()

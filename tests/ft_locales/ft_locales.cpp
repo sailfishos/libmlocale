@@ -3930,7 +3930,11 @@ void Ft_Locales::testMLocaleIndexBucket()
     // we need to instantiate a MLocale before dataPaths returns
     // a valid result.
     MLocale locale(localeName);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
+#else
+    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
+#endif
 
     MLocale localeEn("en_US");
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
@@ -4093,7 +4097,11 @@ void Ft_Locales::testDifferentStrengthComparison()
     QFETCH(QString, string2);
     QFETCH(QList<MLocale::Comparison>, comparisonExpectedResults);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
+#else
+    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
+#endif
     MLocale locale(localeName);
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     MCollator collator = locale.collator();
@@ -4503,7 +4511,11 @@ void Ft_Locales::checkAvailableLocales()
     QString ft_localesTestOutput = "";
     foreach(QString supportedLocaleName, supportedLocaleNames) {
         MLocale locale(supportedLocaleName);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
+#else
+        QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
+#endif
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
         QCOMPARE(locale.timeFormat24h(), MLocale::LocaleDefaultTimeFormat24h);
         qSort(sortingTestList.begin(), sortingTestList.end(), locale.collator());
