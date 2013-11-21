@@ -119,7 +119,7 @@ void Ut_MCalendar::testTimeZonesInCountry_data()
         << (QStringList() << "Europe/Helsinki");
     QTest::newRow("JP")
         << "JP"
-        << (QStringList() << "Asia/Tokyo");
+        << (QStringList() << "Asia/Tokyo" << "JST" << "Japan");
 }
 
 void Ut_MCalendar::testTimeZonesInCountry()
