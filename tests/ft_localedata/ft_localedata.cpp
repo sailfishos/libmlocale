@@ -23,9 +23,6 @@ using ML10N::MLocale;
 
 void Ft_LocaleData::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    app = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -99,4 +96,4 @@ void Ft_LocaleData::testNumberData()
     QCOMPARE(locale.formatNumber(value), result);
 }
 
-QTEST_APPLESS_MAIN(Ft_LocaleData);
+QTEST_GUILESS_MAIN(Ft_LocaleData);

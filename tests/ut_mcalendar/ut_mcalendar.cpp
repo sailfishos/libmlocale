@@ -54,9 +54,6 @@ static QString maybeEmbedDateTimeString(const QString &dateTimeString, const MLo
 
 void Ut_MCalendar::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    qap = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -79,7 +76,6 @@ void Ut_MCalendar::initTestCase()
 
 void Ut_MCalendar::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ut_MCalendar::init()
@@ -6031,5 +6027,5 @@ void Ut_MCalendar::testWeekdayType()
     QCOMPARE(saturdayTransition, calendar.getWeekendTransition(MLocale::Saturday));
     QCOMPARE(sundayTransition, calendar.getWeekendTransition(MLocale::Sunday));
 }
-QTEST_APPLESS_MAIN(Ut_MCalendar);
+QTEST_GUILESS_MAIN(Ut_MCalendar);
 

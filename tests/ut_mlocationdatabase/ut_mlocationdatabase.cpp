@@ -47,9 +47,6 @@ class TestCountry : public MCountry
 
 void Ut_MLocationDatabase::initTestCase()
 {
-    static int dummyArgc = 1;
-    static char *dummyArgv[1] = { (char *) "ut_mlocationdatabase" };
-    qap = new QCoreApplication(dummyArgc, dummyArgv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -896,4 +893,4 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
     QProcess::execute("cat " + errorFileName);
     QVERIFY2(allErrors.isEmpty(), qPrintable("There were errors, please check contents of " + errorFileName));
 }
-QTEST_APPLESS_MAIN(Ut_MLocationDatabase);
+QTEST_GUILESS_MAIN(Ut_MLocationDatabase);

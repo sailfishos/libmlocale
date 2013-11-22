@@ -37,9 +37,6 @@ public:
 
 void Ft_BreakIterator::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    qap = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -47,7 +44,6 @@ void Ft_BreakIterator::initTestCase()
 
 void Ft_BreakIterator::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ft_BreakIterator::init()
@@ -334,4 +330,4 @@ void Ft_BreakIterator::peek()
 }
 
 
-QTEST_APPLESS_MAIN(Ft_BreakIterator);
+QTEST_GUILESS_MAIN(Ft_BreakIterator);

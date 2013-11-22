@@ -25,9 +25,6 @@ using ML10N::MLocale;
 
 void Ft_Numbers::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    qap = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -44,7 +41,6 @@ void Ft_Numbers::initTestCase()
 
 void Ft_Numbers::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ft_Numbers::init()
@@ -3286,5 +3282,5 @@ void Ft_Numbers::testToLocalizedNumbers()
     QCOMPARE(result, expectedResult);
 }
 
-QTEST_APPLESS_MAIN(Ft_Numbers);
+QTEST_GUILESS_MAIN(Ft_Numbers);
 

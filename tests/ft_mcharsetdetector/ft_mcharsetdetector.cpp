@@ -26,9 +26,6 @@ using ML10N::MCharsetDetector;
 
 void Ft_MCharsetDetector::initTestCase()
 {
-    static int dummyArgc = 1;
-    static char *dummyArgv[1] = { (char *) "ft_mcharsetdetector" };
-    qap = new QCoreApplication(dummyArgc, dummyArgv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -36,7 +33,6 @@ void Ft_MCharsetDetector::initTestCase()
 
 void Ft_MCharsetDetector::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ft_MCharsetDetector::init()
@@ -2001,4 +1997,4 @@ void Ft_MCharsetDetector::testDetection()
     }
 }
 
-QTEST_APPLESS_MAIN(Ft_MCharsetDetector);
+QTEST_GUILESS_MAIN(Ft_MCharsetDetector);

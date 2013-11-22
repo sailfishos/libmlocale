@@ -55,7 +55,6 @@ class Ft_Locales : public QObject
     Q_OBJECT
 
 private:
-    QCoreApplication *qap;
     QString libqtcore4PackageVersion;
 
 private slots:

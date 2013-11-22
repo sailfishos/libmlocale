@@ -37,7 +37,6 @@ class Pt_MLocale : public QObject
     Q_OBJECT
 
 private:
-    QCoreApplication *qap;
     QString icuPackageVersion;
 
 private slots:

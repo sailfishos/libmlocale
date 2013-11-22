@@ -38,7 +38,6 @@ class Ft_Sorting : public QObject
     Q_OBJECT
 
 private:
-    QCoreApplication *qap;
     QString icuPackageVersion;
 
 private slots:

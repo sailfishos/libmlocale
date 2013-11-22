@@ -29,9 +29,6 @@ using ML10N::MCalendar;
 
 void Pt_MCalendar::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    qap = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -48,7 +45,6 @@ void Pt_MCalendar::initTestCase()
 
 void Pt_MCalendar::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Pt_MCalendar::init()
@@ -339,5 +335,5 @@ void Pt_MCalendar::benchmarkFormatDateTimeICU()
     }
 }
 
-QTEST_APPLESS_MAIN(Pt_MCalendar);
+QTEST_GUILESS_MAIN(Pt_MCalendar);
 

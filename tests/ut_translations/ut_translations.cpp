@@ -25,9 +25,7 @@ using ML10N::MLocale;
 
 void Ut_Translations::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "ut_translations" };
-    qap = new QCoreApplication(argc, argv);
+    qap = QCoreApplication::instance();
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -35,7 +33,6 @@ void Ut_Translations::initTestCase()
 
 void Ut_Translations::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ut_Translations::init()
@@ -908,4 +905,4 @@ void Ut_Translations::benchmarkQLocaleCopyConstructorAndDeleteStack()
     }
 }
 
-QTEST_APPLESS_MAIN(Ut_Translations);
+QTEST_GUILESS_MAIN(Ut_Translations);

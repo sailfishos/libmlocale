@@ -35,9 +35,6 @@ class Ft_LocaleData : public QObject
 {
     Q_OBJECT
 
-private:
-    QCoreApplication *app;
-
 private slots:
     void initTestCase();
 

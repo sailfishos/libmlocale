@@ -31,9 +31,6 @@ class TestLocale : public MLocale
 
 void Ft_Locales::initTestCase()
 {
-    static int dummyArgc = 1;
-    static char *dummyArgv[1] = { (char *) "ft_locales" };
-    qap = new QCoreApplication(dummyArgc, dummyArgv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -50,7 +47,6 @@ void Ft_Locales::initTestCase()
 
 void Ft_Locales::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ft_Locales::init()
@@ -4860,4 +4856,4 @@ void Ft_Locales::checkAvailableLocales()
     }
 }
 
-QTEST_APPLESS_MAIN(Ft_Locales);
+QTEST_MAIN(Ft_Locales);

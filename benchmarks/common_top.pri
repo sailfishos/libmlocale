@@ -29,3 +29,11 @@ equals(QT_MAJOR_VERSION, 5): support_files.path = $$[QT_INSTALL_LIBS]/libmlocale
 INSTALLS += support_files
 
 CONFIG-=app_bundle
+
+equals(QT_MAJOR_VERSION, 4): DEFINES += '\'QTEST_GUILESS_MAIN(TestObject)=\
+int main(int argc, char *argv[]) \
+{ \
+    QCoreApplication app(argc, argv); \
+    TestObject tc; \
+    return QTest::qExec(&tc, argc, argv); \
+}\''

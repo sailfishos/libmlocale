@@ -28,9 +28,6 @@ using ML10N::MLocationDatabase;
 
 void Pt_MLocationDatabase::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    qap = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -38,7 +35,6 @@ void Pt_MLocationDatabase::initTestCase()
 
 void Pt_MLocationDatabase::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Pt_MLocationDatabase::init()
@@ -108,5 +104,5 @@ void Pt_MLocationDatabase::benchmarkMatchingCities()
     }
 }
 
-QTEST_APPLESS_MAIN(Pt_MLocationDatabase);
+QTEST_GUILESS_MAIN(Pt_MLocationDatabase);
 

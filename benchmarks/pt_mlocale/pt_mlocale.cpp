@@ -26,9 +26,6 @@ using ML10N::MCollator;
 
 void Pt_MLocale::initTestCase()
 {
-    static int argc = 0;
-    static char *argv[1] = { (char *) "" };
-    qap = new QCoreApplication(argc, argv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -47,7 +44,6 @@ void Pt_MLocale::initTestCase()
 
 void Pt_MLocale::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Pt_MLocale::init()
@@ -275,4 +271,4 @@ void Pt_MLocale::benchmarkCollatorStrengthSwitching()
     }
 }
 #endif
-QTEST_APPLESS_MAIN(Pt_MLocale);
+QTEST_GUILESS_MAIN(Pt_MLocale);

@@ -27,9 +27,6 @@ using ML10N::MStringSearch;
 
 void Ft_MStringSearch::initTestCase()
 {
-    static int dummyArgc = 1;
-    static char *dummyArgv[1] = { (char *) "ft_mstringsearch" };
-    qap = new QCoreApplication(dummyArgc, dummyArgv);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 #endif
@@ -37,7 +34,6 @@ void Ft_MStringSearch::initTestCase()
 
 void Ft_MStringSearch::cleanupTestCase()
 {
-    delete qap;
 }
 
 void Ft_MStringSearch::init()
@@ -682,5 +678,5 @@ void Ft_MStringSearch::testSearch()
     QCOMPARE(matchText, firstMatchText);
 }
 
-QTEST_APPLESS_MAIN(Ft_MStringSearch);
+QTEST_GUILESS_MAIN(Ft_MStringSearch);
 

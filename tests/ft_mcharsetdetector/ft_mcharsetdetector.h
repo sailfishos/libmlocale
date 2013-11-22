@@ -34,9 +34,6 @@ class Ft_MCharsetDetector : public QObject
 {
     Q_OBJECT
 
-private:
-    QCoreApplication *qap;
-
 private slots:
     void initTestCase();
     void cleanupTestCase();

@@ -53,7 +53,6 @@ class Ut_MCalendar : public QObject
     Q_OBJECT
 
 private:
-    QCoreApplication *qap;
     QString icuPackageVersion;
 
 private slots:
