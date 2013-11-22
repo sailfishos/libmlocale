@@ -20,7 +20,6 @@ Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:  pkgconfig(QtCore)
-BuildRequires:  pkgconfig(QtOpenGL)
 BuildRequires:  gconf-devel
 
 %description
@@ -61,6 +60,7 @@ Requires:   %{name} = %{version}-%{release}
 
 %build
 # >> build pre
+export QT_SELECT=4
 # << build pre
 
 %configure --disable-static
@@ -72,6 +72,7 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 # >> install pre
+export QT_SELECT=4
 # << install pre
 %make_install
 
