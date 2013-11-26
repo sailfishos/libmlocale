@@ -1,23 +1,27 @@
 fi_FI{
-    NumberElements{
-            "--",
-	    " ",
-	    ";",
-	    "%",
-	    "0",
-	    "#",
-	    "-",
-	    "E",
-	    "‰",
-            "∞",
-	    "epäluku",
-	    "+",
+    LocaleScript{
+        "Latn",
     }
-    
-    NumberPatterns{
-           "#,##0.###",
-	   "#,##0.00 ¤",
-	   "#,##0 %",
-           "#E0",
+    NumberElements{
+        latn{
+            patterns{
+                currencyFormat{"#,##0.00 ¤"}
+                decimalFormat{"#,##0.###"}
+                percentFormat{"#,##0 %"}
+                scientificFormat{"#E0"}
+            }
+            symbols{
+                decimal{"--"}
+                exponential{"E"}
+                group{" "}
+                infinity{"∞"}
+                list{";"}
+                minusSign{"-"}
+                nan{"epäluku"}
+                perMille{"‰"}
+                percentSign{"%"}
+                plusSign{"+"}
+            }
+        }
     }
 }
