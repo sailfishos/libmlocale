@@ -1491,13 +1491,13 @@ void MLocalePrivate::removeTrFromQCoreApp()
 void MLocalePrivate::insertDirectionTrToQCoreApp()
 {
     if (s_rtlTranslator == 0) {
-        s_rtlTranslator = new QTranslator( qApp );
+        s_rtlTranslator = new QTranslator( QCoreApplication::instance() );
         bool ok = s_rtlTranslator->load(":/libmeegotouch_rtl.qm");
 	Q_UNUSED(ok);
         Q_ASSERT(ok);
     }
     if (s_ltrTranslator == 0) {
-        s_ltrTranslator = new QTranslator( qApp );
+        s_ltrTranslator = new QTranslator( QCoreApplication::instance() );
         bool ok = s_ltrTranslator->load(":/libmeegotouch_ltr.qm");
 	Q_UNUSED(ok);
         Q_ASSERT(ok);
@@ -2127,7 +2127,9 @@ void MLocale::setDefault(const MLocale &locale)
     // support in translations via %Ln, %L1, %L2, ...:
     QLocale::setDefault((s_systemDefault->d_ptr)->createQLocale(MLcNumeric));
     // sends QEvent::ApplicationLayoutDirectionChange to qApp:
-    qApp->setLayoutDirection(s_systemDefault->textDirection());
+    if (qApp) {
+        qApp->setLayoutDirection(s_systemDefault->textDirection());
+    }
 #ifdef HAVE_ICU
     _defaultLayoutDirection = MIcuConversions::parseLayoutDirectionOption(s_systemDefault->name());
 #else
@@ -4605,7 +4607,9 @@ void MLocale::refreshSettings()
             // Setting the default QLocale is needed to get localized number
             // support in translations via %Ln, %L1, %L2, ...:
             QLocale::setDefault(d->createQLocale(MLcNumeric));
-            qApp->setLayoutDirection(this->textDirection());
+            if (qApp) {
+                qApp->setLayoutDirection(this->textDirection());
+            }
 #ifdef HAVE_ICU
             _defaultLayoutDirection = MIcuConversions::parseLayoutDirectionOption(s_systemDefault->name());
 #else
