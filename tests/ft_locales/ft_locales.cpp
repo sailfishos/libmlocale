@@ -901,6 +901,7 @@ void Ft_Locales::testMLocaleToLower_data()
         << QString("größe")
         ;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     if(libqtcore4PackageVersion >= "4.7.2~git20110119"
        && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
         QTest::newRow("de_DE")
@@ -918,7 +919,16 @@ void Ft_Locales::testMLocaleToLower_data()
             << QString("gröẞe") // Qt bug?
             ;
     }
+#else
+    QTest::newRow("de_DE")
+        << QString("de_DE")
+        << QString("GRÖẞE")
+        << QString("größe")
+        << QString("größe")
+        ;
+#endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     if(libqtcore4PackageVersion >= "4.7.2~git20110119"
        && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
         QTest::newRow("de_CH") // no difference in behaviour to de_CH here
@@ -936,6 +946,14 @@ void Ft_Locales::testMLocaleToLower_data()
             << QString("gröẞe") // Qt bug?
             ;
     }
+#else
+    QTest::newRow("de_CH") // no difference in behaviour to de_CH here
+        << QString("de_CH")
+        << QString("GRÖẞE")
+        << QString("größe")
+        << QString("größe")
+        ;
+#endif
 
     QTest::newRow("en_GB")
         << QString("en_GB")
