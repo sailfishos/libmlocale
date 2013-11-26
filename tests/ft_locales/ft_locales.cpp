@@ -79,25 +79,25 @@ void Ft_Locales::testBug169305()
     MLocale locale0("en_US@layout-direction=auto");
     locale0.installTrCatalog("foo");
     MLocale::setDefault(locale0);
-    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
+    QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCOMPARE(qApp->layoutDirection(), Qt::LeftToRight);
     MLocale locale1("ar_SA@layout-direction=auto");
     locale1.installTrCatalog("foo");
     MLocale::setDefault(locale1);
-    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
+    QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCOMPARE(qApp->layoutDirection(), Qt::RightToLeft);
     MLocale locale2;
     QCOMPARE(locale2.name(), QString("ar_SA@layout-direction=auto"));
     locale2.installTrCatalog("foo");
     MLocale::setDefault(locale2);
-    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
+    QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCoreApplication::processEvents();
-    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("RTL"));
+    QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCOMPARE(qApp->layoutDirection(), Qt::RightToLeft);
     MLocale::setDefault(locale0);
-    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
+    QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCoreApplication::processEvents();
-    QCOMPARE(QObject::tr("QT_LAYOUT_DIRECTION"), QString("LTR"));
+    QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCOMPARE(qApp->layoutDirection(), Qt::LeftToRight);
 }
 
