@@ -149,8 +149,13 @@ void Ft_MCharsetDetector::testConstructors_data()
     QTest::newRow("Invalid EUC-JP, it is really Latin1")
         << "EUC-JP"
         << QString::fromUtf8("Hello Wörld, täst, Grüße.").toLatin1()
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         << QString::fromUtf8("Hello W�ld, t�t, Gr�e.")
         << true;
+#else
+        << QString::fromUtf8("Hello W�rld, t�st, Gre.")
+        << false;
+#endif
 }
 
 void Ft_MCharsetDetector::testConstructors()
