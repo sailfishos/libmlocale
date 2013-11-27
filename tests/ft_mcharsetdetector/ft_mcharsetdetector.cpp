@@ -469,7 +469,7 @@ void Ft_MCharsetDetector::testDetection_data()
         << ""
         << false
         << "ISO-8859-8"
-        << "ISO-8859-8"
+        << "ISO-8859-8-I" /* ICU autodetection preffers Hebrew Logical over Hebrew Visual */
         << "he";
     QTest::newRow("Short Hebrew UTF-8")
         << "עִבְרִית"
