@@ -3986,12 +3986,16 @@ QString MLocale::indexBucket(const QString &str, const QStringList &buckets, con
         MIcuConversions::unicodeStringToQString(
             MIcuConversions::qStringToUnicodeString(str).toUpper(
                 d->getCategoryLocale(MLocale::MLcCollate)));
+    if (strUpperCase.isEmpty())
+        return strUpperCase;
     QString firstCharacter;
-    if (strUpperCase.at(0).isHighSurrogate())
+    if (strUpperCase.at(0).isHighSurrogate() && strUpperCase.length() > 1)
         firstCharacter = strUpperCase.at(0) + strUpperCase.at(1);
     else
         firstCharacter = strUpperCase.at(0);
     firstCharacter = MLocalePrivate::removeAccents(firstCharacter);
+    if (firstCharacter.isEmpty())
+        return firstCharacter;
     // removing the accents as above also does expansions
     // like “㈠ → (一)”. If this happened, take the first character
     //  of the expansion:
