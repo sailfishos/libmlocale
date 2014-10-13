@@ -22,7 +22,7 @@ for TEST in `ls -d ?t_*`; do
                 fi
 
 TESTCASE_TEMPLATE="<case name=\"$TEST\" description=\"$TEST\" requirement=\"\" timeout=\"300\" insignificant=\"$INSIGNIFICANT\">
-        <step expected_result=\"0\">/usr/lib/libmeegotouch-benchmarks/$TEST</step>
+        <step expected_result=\"0\">/usr/lib/libmlocale-benchmarks5/$TEST</step>
       </case>
       "
 
