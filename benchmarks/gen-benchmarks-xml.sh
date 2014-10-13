@@ -2,7 +2,7 @@
 
 TESTDIR=`dirname $0`
 DOMAIN="Application Framework"
-FEATURE="MeeGo Touch UI Framework"
+FEATURE="MLocale library"
 TYPE="Benchmarks"
 LEVEL="Component"
 
