@@ -91,6 +91,7 @@ export QT_SELECT=5
 %defattr(-,root,root,-)
 %doc LICENSE.LGPL
 %{_libdir}/*.so.*
+%dir %{_datadir}/mlocale5
 %{_datadir}/mlocale5/icu
 # >> files
 # << files
@@ -109,6 +110,7 @@ export QT_SELECT=5
 %files tests
 %defattr(-,root,root,-)
 %{_libdir}/libmlocale-tests5
+%dir %{_datadir}/libmlocale-tests5
 %{_datadir}/libmlocale-tests5/tests.xml
 # >> files tests
 # << files tests
@@ -116,6 +118,7 @@ export QT_SELECT=5
 %files benchmarks
 %defattr(-,root,root,-)
 %{_libdir}/libmlocale-benchmarks5
+%dir %{_datadir}/libmlocale-benchmarks5
 %{_datadir}/libmlocale-benchmarks5/tests.xml
 # >> files benchmarks
 # << files benchmarks

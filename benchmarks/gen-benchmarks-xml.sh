@@ -2,7 +2,7 @@
 
 TESTDIR=`dirname $0`
 DOMAIN="Application Framework"
-FEATURE="MeeGo Touch UI Framework"
+FEATURE="MLocale library"
 TYPE="Benchmarks"
 LEVEL="Component"
 
@@ -22,7 +22,7 @@ for TEST in `ls -d ?t_*`; do
                 fi
 
 TESTCASE_TEMPLATE="<case name=\"$TEST\" description=\"$TEST\" requirement=\"\" timeout=\"300\" insignificant=\"$INSIGNIFICANT\">
-        <step expected_result=\"0\">/usr/lib/libmeegotouch-benchmarks/$TEST</step>
+        <step expected_result=\"0\">/usr/lib/libmlocale-benchmarks5/$TEST</step>
       </case>
       "
 
@@ -41,7 +41,7 @@ done
 
 TESTSUITE_TEMPLATE="<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>
 <testdefinition version=\"0.1\">
-  <suite name=\"libmeegotouch-benchmarks\" domain=\"$DOMAIN\" type=\"$TYPE\" level=\"$LEVEL\">
+  <suite name=\"libmlocale-benchmarks\" domain=\"$DOMAIN\" type=\"$TYPE\" level=\"$LEVEL\">
     <set name=\"benchmark_memory_tests\" description=\"Memory Benchmark Unit Tests\" feature=\"$FEATURE\">
 
       $MT_TESTCASES

@@ -3,7 +3,7 @@
 TESTDIR=`dirname $0`
 INSTALL_PATH=$1
 DOMAIN="Application Framework"
-FEATURE="MeeGo Touch UI Framework"
+FEATURE="MLocale library"
 TYPE="Functional"
 LEVEL="Component"
 
