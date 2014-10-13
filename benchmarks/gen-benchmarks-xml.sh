@@ -41,7 +41,7 @@ done
 
 TESTSUITE_TEMPLATE="<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>
 <testdefinition version=\"0.1\">
-  <suite name=\"libmeegotouch-benchmarks\" domain=\"$DOMAIN\" type=\"$TYPE\" level=\"$LEVEL\">
+  <suite name=\"libmlocale-benchmarks\" domain=\"$DOMAIN\" type=\"$TYPE\" level=\"$LEVEL\">
     <set name=\"benchmark_memory_tests\" description=\"Memory Benchmark Unit Tests\" feature=\"$FEATURE\">
 
       $MT_TESTCASES
