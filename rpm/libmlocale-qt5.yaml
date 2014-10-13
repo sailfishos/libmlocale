@@ -23,6 +23,7 @@ PkgBR:
 Files:
     - "%doc LICENSE.LGPL"
     - "%{_libdir}/*.so.*"
+    - "%dir %{_datadir}/mlocale5"
     - "%{_datadir}/mlocale5/icu"
 SubPackages:
     - Name: devel
@@ -43,6 +44,7 @@ SubPackages:
       Description: "%{summary}."
       Files:
           - "%{_libdir}/libmlocale-tests5"
+          - "%dir %{_datadir}/libmlocale-tests5"
           - "%{_datadir}/libmlocale-tests5/tests.xml"
 
     - Name: benchmarks
@@ -51,5 +53,6 @@ SubPackages:
       Description: "%{summary}."
       Files:
           - "%{_libdir}/libmlocale-benchmarks5"
+          - "%dir %{_datadir}/libmlocale-benchmarks5"
           - "%{_datadir}/libmlocale-benchmarks5/tests.xml"
 
