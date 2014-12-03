@@ -175,30 +175,30 @@ void Ut_Translations::testQtTrId_data()
     QTest::addColumn<QString>("engEnglish");
     QTest::addColumn<QString>("translation");
 
+    //% "Untranslated message (engineering English)"
     QTest::newRow("en_GB untranslated")
             << QString("en_GB")
-            //% "Untranslated message (engineering English)"
             << QString(QT_TRID_NOOP("xx_untranslated_message"))
             << QString("!! Untranslated message (engineering English)")
             << QString("!! Untranslated message (engineering English)");
 
+    //% "Translated message (engineering English)"
     QTest::newRow("en_GB translated")
             << QString("en_GB")
-            //% "Translated message (engineering English)"
             << QString(QT_TRID_NOOP("xx_translated_message"))
             << QString("!! Translated message (engineering English)")
             << QString("Translated message");
 
+    //% "Untranslated message (engineering English)"
     QTest::newRow("de_DE untranslated")
             << QString("de_DE")
-            //% "Untranslated message (engineering English)"
             << QString(QT_TRID_NOOP("xx_untranslated_message"))
             << QString("!! Untranslated message (engineering English)")
             << QString("!! Untranslated message (engineering English)");
 
+    //% "Translated message (engineering English)"
     QTest::newRow("de_DE translated")
             << QString("de_DE")
-            //% "Translated message (engineering English)"
             << QString(QT_TRID_NOOP("xx_translated_message"))
             << QString("!! Translated message (engineering English)")
             << QString("Übersetzte Meldung");
@@ -253,33 +253,33 @@ void Ut_Translations::testQtTrIdLocalizedNumbers_data()
     QTest::addColumn<QString>("engEnglish");
     QTest::addColumn<QString>("translation");
 
+    //% "Big localized number: %L1 (engineering English)"
     QTest::newRow("en_GB 4711")
             << QString("en_GB")
-            //% "Big localized number: %L1 (engineering English)"
             << QString(QT_TRID_NOOP("id_%L1_big_number"))
             << 4711.0
             << QString("!! Big localized number: %L1 (engineering English)")
             << QString("Big localized number: 4,711");
 
+    //% "Big non-localized number: %L1 (engineering English)"
     QTest::newRow("en_GB 4711 nonlocal")
             << QString("en_GB")
-            //% "Big non-localized number: %L1 (engineering English)"
             << QString(QT_TRID_NOOP("id_%L1_big_nonlocal_number"))
             << 4711.0
             << QString("!! Big non-localized number: %L1 (engineering English)")
             << QString("Big non-localized number: 4711");
 
+    //% "Big localized number: %L1 (engineering English)"
     QTest::newRow("ar_EG 4711")
             << QString("ar_EG")
-            //% "Big localized number: %L1 (engineering English)"
             << QString(QT_TRID_NOOP("id_%L1_big_number"))
             << 4711.0
             << QString("!! Big localized number: %L1 (engineering English)")
             << QString("Big localized number: ٤٬٧١١");
 
+    //% "Big non-localized number: %L1 (engineering English)"
     QTest::newRow("ar_EG 4711 nonlocal")
             << QString("ar_EG")
-            //% "Big non-localized number: %L1 (engineering English)"
             << QString(QT_TRID_NOOP("id_%L1_big_nonlocal_number"))
             << 4711.0
             << QString("!! Big non-localized number: %L1 (engineering English)")
@@ -600,9 +600,9 @@ void Ut_Translations::testQtTrIdMultipleVariable_data()
     QTest::addColumn<QString>("engEnglish");
     QTest::addColumn<QString>("translation");
 
+    //% "Name: %1 City: %2"
     QTest::newRow("de_DE")
             << QString("de_DE")
-            //% "Name: %1 City: %2"
             << QString(QT_TRID_NOOP("id_name_%1_and_%2_city"))
             << QString("Müller")
             << QString("Köln")
