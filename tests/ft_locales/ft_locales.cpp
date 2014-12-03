@@ -593,6 +593,16 @@ void Ft_Locales::testMLocaleLanguageEndonym_data()
     QTest::addColumn<QString>("locale_name");
     QTest::addColumn<QString>("endonym_result");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB")
+            << QString("en_GB")
+            << QString("English (United Kingdom)");
+    QTest::newRow("en_US")
+            << QString("en_US")
+            << QString("English (United States)");
+    return;
+#endif
+
     QTest::newRow("ar")
             << QString("ar")
             << QString("العربية");
@@ -795,6 +805,16 @@ void Ft_Locales::testMLocaleCountryEndonym_data()
     QTest::addColumn<QString>("locale_name");
     QTest::addColumn<QString>("endonym_result");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB")
+            << QString("en_GB")
+            << QString("United Kingdom");
+    QTest::newRow("en_US")
+            << QString("en_US")
+            << QString("United States");
+    return;
+#endif
+
     QTest::newRow("fi_FI")
             << QString("fi_FI")
             << QString("Suomi");
@@ -830,6 +850,16 @@ void Ft_Locales::testMLocaleLocaleScripts_data()
 {
     QTest::addColumn<QString>("localeName");
     QTest::addColumn<QStringList>("localeScripts");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB")
+            << QString("en_GB")
+            << (QStringList () << "Latn");
+    QTest::newRow("ru_RU")
+            << QString("ru_RU")
+            << (QStringList () << "Cyrl");
+    return;
+#endif
 
     QTest::newRow("fi_FI")
             << QString("fi_FI")
@@ -886,6 +916,24 @@ void Ft_Locales::testMLocaleToLower_data()
     QTest::addColumn<QString>("testString");
     QTest::addColumn<QString>("expectedMLocale");
     QTest::addColumn<QString>("expectedQt");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB")
+        << QString("en_GB")
+        << QString("Big")
+        << QString("big")
+        << QString("big")
+        ;
+
+    QTest::newRow("de_DE")
+        << QString("de_DE")
+        << QString("Größe")
+        << QString("größe")
+        << QString("größe")
+        ;
+
+    return;
+#endif
 
     QTest::newRow("de_DE")
         << QString("de_DE")
@@ -1149,6 +1197,24 @@ void Ft_Locales::testMLocaleToUpper_data()
     QTest::addColumn<QString>("expectedMLocale");
     QTest::addColumn<QString>("expectedQt");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB")
+        << QString("en_GB")
+        << QString("Big")
+        << QString("BIG")
+        << QString("BIG")
+        ;
+
+    QTest::newRow("de_DE")
+        << QString("de_DE")
+        << QString("Größe")
+        << QString("GRÖSSE")
+        << QString("GRÖSSE")
+        ;
+
+    return;
+#endif
+
     QTest::newRow("de_DE")
         << QString("de_DE")
         << QString("Größe")
@@ -1361,6 +1427,35 @@ void Ft_Locales::testMLocaleIndexBucket_data()
     QTest::addColumn<QString>("lcCollate");
     QTest::addColumn<QStringList>("stringsSorted");
     QTest::addColumn<QStringList>("expectedBuckets");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QStringList basicEnglishStringsSorted =
+        (QStringList()
+         <<"ç"<<"Ç"<<"cote"<<"coté"<<"côte"<<"côté"
+         <<"f"<<"F"<<"ff"<<"ﬀ"<<"Ff"<<"ffi"<<"ﬃ"<<"Ffi"<<"ﬄ"<<"ﬁ"<<"ﬂ"
+         <<"i"<<"I"<<"ï"<<"Ï"<<"İ"<<"ı"
+         <<"ö"<<"Ö"<<"öe"<<"Öe"<<"ÖE"
+         <<"s"<<"S"<<"ſ"<<"ß"<<"ẞ"
+         <<"test"<<"Test"
+         <<"z"<<"Z"<<"zx"<<"Zx"<<"ZX"
+            );
+    QStringList basicEnglishExpectedBuckets =
+        (QStringList()
+         <<"C"<<"C"<<"C"<<"C"<<"C"<<"C"
+         <<"F"<<"F"<<"F"<<"F"<<"F"<<"F"<<"F"<<"F"<<"F"<<"F"<<"F"
+         <<"I"<<"I"<<"I"<<"I"<<"I"<<"I"
+         <<"O"<<"O"<<"O" <<"O" <<"O"
+         <<"S"<<"S"<<"S"<<"S"<<"S"
+         <<"T"<<"T"
+         <<"Z"<<"Z"<<"Z"<<"Z"<<"Z"
+            );
+    QTest::newRow("en_US")
+        <<"ja_JP"
+        <<"en_US"
+        << basicEnglishStringsSorted
+        << basicEnglishExpectedBuckets;
+    return;
+#endif
 
     QStringList englishStringsSorted =
         (QStringList()

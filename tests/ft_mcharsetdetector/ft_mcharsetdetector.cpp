@@ -281,6 +281,34 @@ void Ft_MCharsetDetector::testDetection_data()
     QTest::addColumn<QString>("bestMatchName");
     QTest::addColumn<QString>("bestMatchLanguage");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("Short German UTF-8")
+        << "Grüße"
+        << ""
+        << ""
+        << false
+        << "UTF-8"
+        << "UTF-8"
+        << "";
+    QTest::newRow("Short German Latin1")
+        << "Grüße"
+        << ""
+        << "ISO-8859-1" // declared encoding, makes it work
+        << false
+        << "ISO-8859-1"
+        << "ISO-8859-1"
+        << "";
+    QTest::newRow("Short German Latin1")
+        << "Grüße"
+        << "de"         // declared locale, makes it work
+        << ""
+        << false
+        << "ISO-8859-1"
+        << "ISO-8859-1"
+        << "de";
+    return;
+#endif
+
     QString longGerman("Als Menschenrechte werden subjektive Rechte bezeichnet, die jedem Menschen gleichermaßen zustehen. Das Konzept der Menschenrechte geht davon aus, dass alle Menschen allein aufgrund ihres Menschseins[1] mit gleichen Rechten ausgestattet und dass diese egalitär begründeten Rechte universell, unveräußerlich und unteilbar sind. Die Idee der Menschenrechte ist eng verbunden mit dem Humanismus und der im Zeitalter der Aufklärung entwickelten Idee des Naturrechts.");
     QTest::newRow("Long German UTF-8")
         << longGerman

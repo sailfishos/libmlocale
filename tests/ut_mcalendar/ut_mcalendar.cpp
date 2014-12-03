@@ -221,6 +221,25 @@ void Ut_MCalendar::testIcuFormatString_data()
     QTest::addColumn<QString>("timeMediumResult");
     QTest::addColumn<QString>("timeLongResult");
     QTest::addColumn<QString>("timeFullResult");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("de_DE, Gregorian calendar, LocaleDefaultTimeFormat24h")
+        << "fi_FI" // language does not matter unless lc_time is empty
+        << "fi_FI" // lc_messages does not matter
+        << "de_DE@mix-time-and-language=no" // only lc_time matters
+        << MLocale::LocaleDefaultTimeFormat24h
+        << MLocale::GregorianCalendar
+        << "dd.MM.yy"
+        << "dd.MM.yyyy"
+        << "d. MMMM y"
+        << "EEEE, d. MMMM y"
+        << "HH:mm"
+        << "HH:mm:ss"
+        << "HH:mm:ss z"
+        << "HH:mm:ss zzzz";
+    return;
+#endif
+
     //--------------------------------------------------
     QTest::newRow("de_DE, Gregorian calendar, LocaleDefaultTimeFormat24h")
         << "fi_FI" // language does not matter unless lc_time is empty
@@ -1103,6 +1122,27 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromLocaltimeQDateTime_data()
     QTime time(12, 31, 0, 0);
     QDateTime datetime(date, time, Qt::LocalTime);
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("21.7.2008_en_GB_Gregorian")
+            << datetime
+            << QString("en_GB") // language
+            << QString("en_GB") // lc_messages
+            << QString("en_GB") // lc_time
+            << QString("en_GB") // lc_numeric
+            << QString("Europe/Helsinki")
+            << MLocale::LocaleDefaultTimeFormat24h
+            << MLocale::GregorianCalendar
+            << QString("21/07/2008")
+            << QString("21 Jul 2008")
+            << QString("21 July 2008")
+            << QString("Monday, 21 July 2008")
+            << QString("12:31")
+            << QString("12:31:00")
+            << QString("12:31:00 EEST")
+            << QString("12:31:00 Eastern European Summer Time");
+    return;
+#endif
+
     QTest::newRow("21.7.2008_fi_FI_Gregorian")
             << datetime
             << QString("fi_FI") // language
@@ -1709,6 +1749,29 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromMCalendar_data()
     QTest::addColumn<QString>("timeMediumResult");
     QTest::addColumn<QString>("timeLongResult");
     QTest::addColumn<QString>("timeFullResult");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("21.7.2008_en_US_Gregorian")
+        << QString("fi_FI")
+        << QString("fi_FI")
+        << QString("en_US@mix-time-and-language=no") // lc_time
+        << QString("fi_FI")
+        << "Europe/Helsinki"
+        << MLocale::LocaleDefaultTimeFormat24h
+        << MLocale::GregorianCalendar
+        << 2008
+        << 7
+        << 21
+        << "7/21/08"
+        << "Jul 21, 2008"
+        << "July 21, 2008"
+        << "Monday, July 21, 2008"
+        << "2:31 PM"
+        << "2:31:00 PM"
+        << "2:31:00 PM GMT+03:00"
+        << "2:31:00 PM Eastern European Summer Time";
+    return;
+#endif
 
     QTest::newRow("21.7.2008_en_US_Gregorian")
         << QString("fi_FI")
@@ -4281,6 +4344,25 @@ void Ut_MCalendar::testFormatDateTimeICU_data()
     QTest::addColumn<QString>("format");
     QTest::addColumn<QString>("result");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("fi_FI “G”")
+            << MLocale::GregorianCalendar
+            << 2008
+            << 2
+            << 3
+            << 12
+            << 25
+            << 3
+            << "fi_FI" // language
+            << "fi_FI" // lc_messages
+            << "fi_FI" // lc_time
+            << "fi_FI" // lc_numeric
+            << "Europe/Helsinki"
+            << "G" // era designator
+            << "jKr.";
+    return;
+#endif
+
     QTest::newRow("fi_FI “G”")
             << MLocale::GregorianCalendar
             << 2008
@@ -4817,6 +4899,17 @@ void Ut_MCalendar::testWeekdaySymbols_data()
                                               << "星期五"
                                               << "星期六"
                                               << "星期日";
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("weekday_symbols en_GB en_GB en_GB")
+        << "en_GB"
+        << "en_GB"
+        << "en_GB"
+        << MLocale::GregorianCalendar
+        << en_GB_Symbols;
+    return;
+#endif
+
     QTest::newRow("weekday_symbols fi_FI fi_FI fi_FI")
         << "fi_FI"
         << "fi_FI"
@@ -4976,6 +5069,16 @@ void Ut_MCalendar::testMonthSymbols_data()
                                               << "十一月"
                                               << "十二月";
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("month_symbols de_DE en_GB fi_FI")
+            << "de_DE"
+            << "en_GB"
+            << "fi_FI"
+            << MLocale::GregorianCalendar
+            << en_GB_Symbols;
+    return;
+#endif
+
     QTest::newRow("month_symbols de_DE fi_FI fi_FI")
             << "de_DE"
             << "fi_FI"
@@ -5105,6 +5208,19 @@ void Ut_MCalendar::testDateYearAndMonth_data()
     QTest::addColumn<QString>("lcNumeric");
     QTest::addColumn<QString>("expectedFormatString");
     QTest::addColumn<QString>("expectedResult");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_US")
+        << MLocale::GregorianCalendar
+        << QDateTime(QDate(2011,12,16),QTime(18,42,5))
+        << "en_US"
+        << "en_US"
+        << "en_US"
+        << "en_US"
+        << "LLLL yyyy"
+        << "December 2011";
+    return;
+#endif
 
     QTest::newRow("en_US")
         << MLocale::GregorianCalendar
@@ -5284,6 +5400,19 @@ void Ut_MCalendar::testDateWeekdayAbbreviatedAndDayOfMonth_data()
     QTest::addColumn<QString>("expectedFormatString");
     QTest::addColumn<QString>("expectedResult");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_US")
+        << MLocale::GregorianCalendar
+        << QDateTime(QDate(2011,12,16),QTime(18,42,5))
+        << "en_US"
+        << "en_US"
+        << "en_US"
+        << "en_US"
+        << "ccc d"
+        << "Fri 16";
+    return;
+#endif
+
     QTest::newRow("en_US")
         << MLocale::GregorianCalendar
         << QDateTime(QDate(2011,12,16),QTime(18,42,5))
@@ -5425,6 +5554,19 @@ void Ut_MCalendar::testDateWeekdayWideAndDayOfMonth_data()
     QTest::addColumn<QString>("lcNumeric");
     QTest::addColumn<QString>("expectedFormatString");
     QTest::addColumn<QString>("expectedResult");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_US")
+        << MLocale::GregorianCalendar
+        << QDateTime(QDate(2011,12,16),QTime(18,42,5))
+        << "en_US"
+        << "en_US"
+        << "en_US"
+        << "en_US"
+        << "cccc d"
+        << "Friday 16";
+    return;
+#endif
 
     QTest::newRow("en_US")
         << MLocale::GregorianCalendar
@@ -5577,6 +5719,24 @@ void Ut_MCalendar::testWeekdayType_data()
    QTest::addColumn<int>("fridayTransition");
    QTest::addColumn<int>("saturdayTransition");
    QTest::addColumn<int>("sundayTransition");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+   QTest::newRow("de_DE")
+       << "de_DE"
+       << "de_DE"
+       << MLocale::DefaultCalendar
+       << 1
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 << 3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   QTest::newRow("de_DE")
+       << "de_DE"
+       << "de_DE"
+       << MLocale::GregorianCalendar
+       << 1
+       <<  0 <<  0 <<  0 <<  0 <<  0 << 1 << 3
+       << -1 << -1 << -1 << -1 << -1 << 0 << 86400000;
+   return;
+#endif
 
    QTest::newRow("de_DE")
        << "de_DE"

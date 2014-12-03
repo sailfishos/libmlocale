@@ -36,11 +36,15 @@ private slots:
     void cleanupTestCase();
     void initTestCase();
     void testEnglishGrouping();
+    void testRemove();
+    void testCopy();
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+private:
+#endif
     void testChinesePinyinGrouping();
     void testGermanPhonebookGrouping();
     void testCzechGrouping();
-    void testRemove();
-    void testCopy();
 
     void sortTestFiles_data();
     void sortTestFiles();
