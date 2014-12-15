@@ -60,6 +60,15 @@ void defaultData()
     QTest::addColumn<QString>("sourceString");
     QTest::addColumn<QList<int> >("correctBoundaries");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB")
+            << QString("en_GB")
+            << MBreakIterator::WordIterator
+            << "This is a simple sentence. Täst."
+            << (QList<int> ()<< 0 << 4 << 5 << 7 << 8 << 9 << 10 << 16 << 17 << 25 << 26  << 27 << 31 << 32);
+    return;
+#endif
+
     // an empty locale_name should be equivalent to the locale_name "en_US_POSIX"
     QTest::newRow("")
             << QString("")

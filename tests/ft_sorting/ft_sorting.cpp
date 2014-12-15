@@ -183,6 +183,23 @@ void Ft_Sorting::testMLocaleSorting_data()
     QTest::addColumn<QString>("target4");
     QTest::addColumn<QString>("target5");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("Sorting_en_GB")
+            << QString("en_EN")
+            << QString("z3zz")
+            << QString("åtgh")
+            << QString("b2bb")
+            << QString("ähjj")
+            << QString("abcd")
+
+            << QString("abcd")
+            << QString("ähjj")
+            << QString("åtgh")
+            << QString("b2bb")
+            << QString("z3zz");
+    return;
+#endif
+
     QTest::newRow("Sorting_fi_FI")
             << QString("fi_FI")
             << QString("z3zz")

@@ -104,6 +104,21 @@ void Ft_MStringSearch::testSearch_data()
     QTest::addColumn<QList<int> >("matchLengths");
     QTest::addColumn<QStringList>("matchTexts");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("English en_GB")
+        << "en_GB"
+        << "en_GB"
+        << "aa"
+        << "Hello Aalto and Åse áá!"
+        << MBreakIterator::CharacterIterator
+        << MLocale::CollatorStrengthPrimary
+        << true
+        << (QList<int> () << 6 << 20)
+        << (QList<int> () << 2 << 2)
+        << (QStringList() << "Aa" << "áá");
+    return;
+#endif
+
     QTest::newRow("Danish da_DK")
         << "da_DK"
         << "da_DK"

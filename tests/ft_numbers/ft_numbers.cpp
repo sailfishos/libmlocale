@@ -58,6 +58,20 @@ void Ft_Numbers::testQLongLongs_data()
     QTest::addColumn<qlonglong>("val");
     QTest::addColumn<QString>("formatted");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_US")
+            << QString("en_US")
+            << QString("en_US")
+            << qlonglong(1542678073)
+            << QString("1,542,678,073");
+    QTest::newRow("en_US")
+            << QString("en_US")
+            << QString("de_DE")
+            << qlonglong(1542678073)
+            << QString("1.542.678.073");
+    return;
+#endif
+
     QTest::newRow("en_US")
             << QString("en_US")
             << QString("en_US")
@@ -232,6 +246,22 @@ void Ft_Numbers::testToLongLong_data()
     QTest::addColumn<bool>("parsable");
     QTest::addColumn<qlonglong>("parsedLongLong");
     QTest::addColumn<QString>("formattedAgainLongLong");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+        << QString("en_GB")
+        << QString("0")
+        << true
+        << qlonglong(0)
+        << QString("0");
+    QTest::newRow("en_GB 0.1")
+        << QString("en_GB")
+        << QString("0.1")
+        << false
+        << qlonglong(0)
+        << QString("0");
+    return;
+#endif
 
     QTest::newRow("fi_FI \"\"")
         << QString("fi_FI")
@@ -416,6 +446,19 @@ void Ft_Numbers::testShorts_data()
     QTest::addColumn<QString>("localeName");
     QTest::addColumn<short>("val");
     QTest::addColumn<QString>("formatted");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 21131")
+            << QString("en_GB")
+            << short(21131)
+            << QString("21,131");
+    QTest::newRow("en_GB -1824")
+            << QString("en_GB")
+            << short(-1824)
+            << QString("-1,824");
+    return;
+#endif
+
     QTest::newRow("fi_FI 632")
             << QString("fi_FI")
             << short(632)
@@ -513,6 +556,22 @@ void Ft_Numbers::testToShort_data()
     QTest::addColumn<bool>("parsable");
     QTest::addColumn<short>("parsedShort");
     QTest::addColumn<QString>("formattedAgainShort");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+        << QString("en_GB")
+        << QString("0")
+        << true
+        << short(0)
+        << QString("0");
+    QTest::newRow("en_GB 0.1")
+        << QString("en_GB")
+        << QString("0.1")
+        << false
+        << short(0)
+        << QString("0");
+    return;
+#endif
 
     QTest::newRow("fi_FI \"\"")
         << QString("fi_FI")
@@ -683,6 +742,19 @@ void Ft_Numbers::testInts_data()
     QTest::addColumn<QString>("localeName");
     QTest::addColumn<int>("val");
     QTest::addColumn<QString>("formatted");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("fi_FI 1369430476")
+            << QString("fi_FI")
+            << int(1369430476)
+            << QString("1 369 430 476");
+    QTest::newRow("en_GB 1369430476")
+            << QString("en_GB")
+            << int(1369430476)
+            << QString("1,369,430,476");
+    return;
+#endif
+
     QTest::newRow("fi_FI 1369430476")
             << QString("fi_FI")
             << int(1369430476)
@@ -781,6 +853,22 @@ void Ft_Numbers::testToInt_data()
     QTest::addColumn<bool>("parsable");
     QTest::addColumn<int>("parsedInt");
     QTest::addColumn<QString>("formattedAgainInt");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+        << QString("en_GB")
+        << QString("0")
+        << true
+        << int(0)
+        << QString("0");
+    QTest::newRow("en_GB 0.1")
+        << QString("en_GB")
+        << QString("0.1")
+        << false
+        << int(0)
+        << QString("0");
+    return;
+#endif
 
     QTest::newRow("fi_FI \"\"")
         << QString("fi_FI")
@@ -927,6 +1015,19 @@ void Ft_Numbers::testDoubles_data()
     QTest::addColumn<QString>("localeName");
     QTest::addColumn<double>("val");
     QTest::addColumn<QString>("formatted");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+            << QString("en_GB")
+            << double(0)
+            << QString("0");
+    QTest::newRow("en_GB 0.1")
+            << QString("en_GB")
+            << double(0.1)
+            << QString("0.1");
+    return;
+#endif
+
     QTest::newRow("fi_FI 0")
             << QString("fi_FI")
             << double(0)
@@ -1130,6 +1231,24 @@ void Ft_Numbers::testToDouble_data()
     QTest::addColumn<bool>("parsable");
     QTest::addColumn<double>("parsedDouble");
     QTest::addColumn<QString>("formattedAgainDouble");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+        << QString("en_GB")
+        << QString("0")
+        << int(0)
+        << true
+        << double(0)
+        << QString("0");
+    QTest::newRow("en_GB 0.1")
+        << QString("en_GB")
+        << QString("0.1")
+        << int(1)
+        << true
+        << double(0.1)
+        << QString("0.1");
+    return;
+#endif
 
     QTest::newRow("fi_FI \"\"")
         << QString("fi_FI")
@@ -1653,6 +1772,19 @@ void Ft_Numbers::testFloats_data()
     QTest::addColumn<QString>("localeName");
     QTest::addColumn<float>("val");
     QTest::addColumn<QString>("formatted");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+            << QString("en_GB")
+            << float(0)
+            << QString("0");
+    QTest::newRow("en_GB 0.1")
+            << QString("en_GB")
+            << float(0.1)
+            << QString("0.1");
+    return;
+#endif
+
     QTest::newRow("fi_FI 0")
             << QString("fi_FI")
             << float(0)
@@ -1791,6 +1923,22 @@ void Ft_Numbers::testToFloat_data()
     QTest::addColumn<bool>("parsable");
     QTest::addColumn<float>("parsedFloat");
     QTest::addColumn<QString>("formattedAgainFloat");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+        << QString("en_GB")
+        << QString("0")
+        << true
+        << float(0)
+        << QString("0");
+    QTest::newRow("en_GB 0.1")
+        << QString("en_GB")
+        << QString("0.1")
+        << true
+        << float(0.1)
+        << QString("0.1");
+    return;
+#endif
 
     QTest::newRow("fi_FI \"\"")
         << QString("fi_FI")
@@ -2328,6 +2476,18 @@ void Ft_Numbers::testDoublesWithFormatting_data()
 
     double defaultNumber = 1234567.1234567;
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("en_GB 0")
+            << QString("en_GB")
+            << defaultNumber
+            << 0 << 0 << QString("1,234,567");
+    QTest::newRow("en_GB 2")
+            << QString("en_GB")
+            << defaultNumber
+            << 2 << 0 << QString("1,234,567.12");
+    return;
+#endif
+
     QTest::newRow("fi_FI 0")
             << QString("fi_FI")
             << defaultNumber
@@ -2491,6 +2651,20 @@ void Ft_Numbers::testPercents_data()
     QTest::addColumn<int>("decimals");
     QTest::addColumn<QString>("formatted");
 
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("0_en")
+            << QString("en_GB")
+            << 0.123456
+            << 0
+            << QString("12%");
+    QTest::newRow("2_en")
+            << QString("en_GB")
+            << 0.123456
+            << 2
+            << QString("12.35%");
+    return;
+#endif
+
     QTest::newRow("fi_FI")
             << QString("fi_FI")
             << 0.123456
@@ -2560,6 +2734,24 @@ void Ft_Numbers::testCurrencies_data()
     QTest::addColumn<double>("val");
     QTest::addColumn<QString>("currency");
     QTest::addColumn<QString>("formatted");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("0_en")
+        << QString("en_GB")
+        << QString("en_GB")
+        << QString("en_GB")
+        << 1234.56
+        << "EUR"
+        << QString("€1,234.56");
+    QTest::newRow("1_en")
+        << QString("en_GB")
+        << QString("en_GB")
+        << QString("en_GB")
+        << 1234.56
+        << "USD"
+        << QString("$1,234.56");
+    return;
+#endif
 
     QTest::newRow("0_fi")
         << QString("fi_FI")
@@ -2744,6 +2936,16 @@ void Ft_Numbers::testPercentPlaceholdersInQt_data()
     QTest::addColumn<QString>("formatString");
     QTest::addColumn<double>("number");
     QTest::addColumn<QString>("formatted");
+
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QTest::newRow("cs_CZ")
+        << QString("en_US")
+        << QString("cs_CZ")
+        << QString("%L1")
+        << double(-1.2345)
+        << QString("-1,2345");
+    return;
+#endif
 
     QTest::newRow("zh_CN")
         << QString("zh_CN")
