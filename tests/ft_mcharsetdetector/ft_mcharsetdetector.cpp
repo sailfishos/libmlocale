@@ -145,17 +145,6 @@ void Ft_MCharsetDetector::testConstructors_data()
         << QString::fromUtf8("täst本").toUtf8()
         << QString::fromUtf8("tÃ¤stæ") + QChar(0x9c) + QString::fromUtf8("¬")
         << false;
-
-    QTest::newRow("Invalid EUC-JP, it is really Latin1")
-        << "EUC-JP"
-        << QString::fromUtf8("Hello Wörld, täst, Grüße.").toLatin1()
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-        << QString::fromUtf8("Hello W�ld, t�t, Gr�e.")
-        << true;
-#else
-        << QString::fromUtf8("Hello W�rld, t�st, Gre.")
-        << false;
-#endif
 }
 
 void Ft_MCharsetDetector::testConstructors()

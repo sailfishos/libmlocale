@@ -2905,6 +2905,9 @@ void Ft_Numbers::testCurrencies_data()
 
 void Ft_Numbers::testCurrencies()
 {
+#if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
+    QSKIP("Icu Format strings change between releases. Skipping this test.");
+#endif
     QFETCH(QString, language);
     QFETCH(QString, lcMonetary);
     QFETCH(QString, lcNumeric);
