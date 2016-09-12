@@ -1,8 +1,6 @@
 include(../common_top.pri)
 
-CONFIG += link_pkgconfig
 TARGET = ft_mstringsearch
-PKGCONFIG += gconf-2.0
 
 # unit
 TEST_SOURCES =  \
