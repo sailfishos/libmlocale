@@ -4,6 +4,7 @@ DEFINES += M_BUILD_MLOCALE
 
 include(common_top.pri)
 QT += xml
+QT -= gui
 
 equals(QT_MAJOR_VERSION, 4): TARGET = mlocale
 equals(QT_MAJOR_VERSION, 5): TARGET = mlocale5
