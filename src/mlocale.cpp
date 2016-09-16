@@ -40,11 +40,8 @@
 #include <MDebug>
 #include <QTranslator>
 #include <QDir>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QGuiApplication>
-#else
-# include <QApplication>
-#endif
+#include <QMetaProperty>
+#include <QCoreApplication>
 #include <QMutex>
 #include <QDateTime>
 #include <QPointer>
@@ -2091,6 +2088,16 @@ struct MStaticLocaleDestroyer {
 };
 static MStaticLocaleDestroyer staticLocaleDestroyer;
 
+static void setApplicationLayoutDirection(Qt::LayoutDirection layoutDirection)
+{
+    if (QCoreApplication *app = QCoreApplication::instance()) {
+        int layoutDirProperty = app->metaObject()->indexOfProperty("layoutDirection");
+        if (layoutDirProperty != -1) {
+            app->metaObject()->property(layoutDirProperty).write(app, layoutDirection);
+        }
+    }
+}
+
 void MLocale::setDefault(const MLocale &locale)
 {
     defaultLocaleMutex.lock();
@@ -2127,19 +2134,18 @@ void MLocale::setDefault(const MLocale &locale)
     // support in translations via %Ln, %L1, %L2, ...:
     QLocale::setDefault((s_systemDefault->d_ptr)->createQLocale(MLcNumeric));
     // sends QEvent::ApplicationLayoutDirectionChange to qApp:
-    if (qApp) {
-        qApp->setLayoutDirection(s_systemDefault->textDirection());
-    }
+    setApplicationLayoutDirection(s_systemDefault->textDirection());
 #ifdef HAVE_ICU
     _defaultLayoutDirection = MIcuConversions::parseLayoutDirectionOption(s_systemDefault->name());
 #else
     _defaultLayoutDirection = Qt::LeftToRight;
 #endif
 
-    if ( qApp && qApp->metaObject() && qApp->metaObject()->className() == QString( "MApplication" ) )
+    QCoreApplication *qapp = QCoreApplication::instance();
+    if ( qapp && qapp->metaObject() && qapp->metaObject()->className() == QString( "MApplication" ) )
     {
         QObject::connect(s_systemDefault, SIGNAL(settingsChanged()),
-                         qApp, SIGNAL(localeSettingsChanged()));
+                         qapp, SIGNAL(localeSettingsChanged()));
     }
 
     QObject::connect(s_systemDefault, SIGNAL(settingsChanged()),
@@ -4607,9 +4613,7 @@ void MLocale::refreshSettings()
             // Setting the default QLocale is needed to get localized number
             // support in translations via %Ln, %L1, %L2, ...:
             QLocale::setDefault(d->createQLocale(MLcNumeric));
-            if (qApp) {
-                qApp->setLayoutDirection(this->textDirection());
-            }
+            setApplicationLayoutDirection(this->textDirection());
 #ifdef HAVE_ICU
             _defaultLayoutDirection = MIcuConversions::parseLayoutDirectionOption(s_systemDefault->name());
 #else
