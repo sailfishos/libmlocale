@@ -86,10 +86,6 @@ INSTALLS += target \
     install_headers
 ###
 
-contains(DEFINES, HAVE_ICU) {
-    SUBDIRS += icu-extradata
-}
-
 # install MeeGo Touch feature files
 install_prf.path = $$[QT_INSTALL_DATA]/mkspecs/features
 install_prf.files = \

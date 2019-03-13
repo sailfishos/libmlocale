@@ -1,5 +1,0 @@
-sr{
-    zoneStrings{
-        hourFormat { "+HH:mm;-HH:mm" }
-    }
-}
