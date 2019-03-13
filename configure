@@ -501,7 +501,7 @@ fi
 
 # substitute prefix in .pc files
 MEEGOTOUCH_PC_DIR="$outpath/src/data"
-MEEGOTOUCH_PC_FILES="mlocale mlocale5"
+MEEGOTOUCH_PC_FILES="mlocale5"
 
 # make sure the directory exists
 if [ ! -d $MEEGOTOUCH_PC_DIR ]; then
@@ -551,8 +551,8 @@ if [ -z "$QMAKE_BIN" ]; then
 fi
 
 # now check for qt version
-QT_MAJOR_VERSION_NEEDED=4
-QT_MINOR_VERSION_NEEDED=7
+QT_MAJOR_VERSION_NEEDED=5
+QT_MINOR_VERSION_NEEDED=0
 
 QT_VERSION=$($QMAKE_BIN -query QT_VERSION)
 

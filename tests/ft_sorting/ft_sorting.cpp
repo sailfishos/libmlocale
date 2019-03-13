@@ -38,9 +38,6 @@ public:
 
 void Ft_Sorting::initTestCase()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
     QProcess process;
     process.start("sh -c \"dpkg -s libicu44 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
     if (!process.waitForFinished()) {

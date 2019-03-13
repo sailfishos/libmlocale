@@ -11,8 +11,7 @@ DISABLE_QTTRID_ENGINEERING_ENGLISH = yes
 CATALOGNAME = ut_translations-tr
 SOURCEDIR = $$PWD/..
 TRANSLATIONDIR = $$PWD
-equals(QT_MAJOR_VERSION, 4): TRANSLATION_INSTALLDIR = $$[QT_INSTALL_LIBS]/libmlocale-tests/translations-tr
-equals(QT_MAJOR_VERSION, 5): TRANSLATION_INSTALLDIR = $$[QT_INSTALL_LIBS]/libmlocale-tests5/translations-tr
+TRANSLATION_INSTALLDIR = $$[QT_INSTALL_LIBS]/libmlocale-tests5/translations-tr
 # add “-verbose” to force without “-idbased” which is the default in translations.pri
 LRELEASE_OPTIONS = "-verbose"
 

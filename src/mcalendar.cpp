@@ -288,14 +288,7 @@ void MCalendar::setDateTime(QDateTime dateTime)
 
     // We cannot use QDateTime::toTime_t because this
     // works only for dates after 1970-01-01T00:00:00.000.
-#if QT_VERSION >= 0x040700
     UDate icuDate = dateTime.toMSecsSinceEpoch();
-#else
-    // Qt < 4.7 lacks QDateTime::toMSecsSinceEpoch(), we need to emulate it:
-    int days = QDate(1970, 1, 1).daysTo(dateTime.date());
-    qint64 msecs = qint64(QTime().secsTo(dateTime.time())) * 1000;
-    UDate icuDate = (qint64(days) * MSECS_PER_DAY) + msecs;
-#endif
 
     if (originalTimeSpec == Qt::LocalTime) {
         // convert from local time to UTC
@@ -335,21 +328,7 @@ QDateTime MCalendar::qDateTime(Qt::TimeSpec spec) const
     QDateTime dateTime;
     // avoid conversions by Qt
     dateTime.setTimeSpec(Qt::UTC);
-#if QT_VERSION >= 0x040700
     dateTime.setMSecsSinceEpoch(qint64(icuDate));
-#else
-    // Qt < 4.7 lacks QDateTime::setMSecsSinceEpoch(), we need to emulate it.
-    qint64 msecs = qint64(icuDate);
-    int ddays = msecs / MSECS_PER_DAY;
-    msecs %= MSECS_PER_DAY;
-    if (msecs < 0) {
-        // negative
-        --ddays;
-        msecs += MSECS_PER_DAY;
-    }
-    dateTime.setDate(QDate(1970, 1, 1).addDays(ddays));
-    dateTime.setTime(QTime().addMSecs(msecs));
-#endif
     // note: we set time spec after time value so Qt will not any
     // conversions of its own to UTC. We might let Qt handle it but
     // this might be more robust
