@@ -169,7 +169,7 @@ MCalendar::MCalendar(MLocale::CalendarType calendarType,
 
     if (timezone.isEmpty() == false) {
         // with explicit time zone
-        UnicodeString tzString;
+        icu::UnicodeString tzString;
         tzString = MIcuConversions::qStringToUnicodeString(timezone);
         icu::TimeZone *tz = icu::TimeZone::createTimeZone(tzString);
         d->_calendar = icu::Calendar::createInstance(tz, calLocale, status);
@@ -196,7 +196,7 @@ MCalendar::MCalendar(const MLocale &mLocale, const QString &timezone)
     = mLocale.d_ptr->getCategoryLocale(MLocale::MLcTime);
 
     if (timezone.isEmpty() == false) {
-        UnicodeString tzString;
+        icu::UnicodeString tzString;
         tzString = MIcuConversions::qStringToUnicodeString(timezone);
         icu::TimeZone *tz = icu::TimeZone::createTimeZone(tzString);
         d->_calendar = icu::Calendar::createInstance(tz, calLocale, status);
@@ -861,7 +861,7 @@ QStringList MCalendar::supportedTimeZones()
 
     QStringList result;
     UErrorCode status = U_ZERO_ERROR;
-    const UnicodeString *next = strEnum->snext(status);
+    const icu::UnicodeString *next = strEnum->snext(status);
 
     while (next != 0) {
         result << MIcuConversions::unicodeStringToQString(*next);
@@ -880,7 +880,7 @@ QStringList MCalendar::supportedTimeZones(const QString &country)
 
     QStringList result;
     UErrorCode status = U_ZERO_ERROR;
-    const UnicodeString *next = strEnum->snext(status);
+    const icu::UnicodeString *next = strEnum->snext(status);
 
     while (next != 0) {
         result << MIcuConversions::unicodeStringToQString(*next);

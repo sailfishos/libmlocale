@@ -182,7 +182,7 @@ bool MCollator::operator()(const QString &s1, const QString &s2) const
     const icu::UnicodeString us2 = MIcuConversions::qStringToUnicodeString(s2);
     icu::Collator::EComparisonResult result =  d->_coll->compare(us1, us2);
 
-    if (result == Collator::LESS) {
+    if (result == icu::Collator::LESS) {
         return true;
     } else {
         return false;

@@ -234,7 +234,7 @@ void MStringSearchPrivate::icuStringSearchSetCollator()
 {
     clearError();
     _icuStringSearch->setCollator(
-        static_cast<RuleBasedCollator *>(_icuCollator),
+        static_cast<icu::RuleBasedCollator *>(_icuCollator),
         _status);
     if(hasError())
         qWarning() << __PRETTY_FUNCTION__
@@ -288,7 +288,7 @@ MStringSearch::MStringSearch(const QString &pattern, const QString &text, const 
     d->_icuStringSearch = new icu::StringSearch(
         MIcuConversions::qStringToUnicodeString(d->_pattern),
         MIcuConversions::qStringToUnicodeString(d->_text),
-        static_cast<RuleBasedCollator *>(d->_icuCollator),
+        static_cast<icu::RuleBasedCollator *>(d->_icuCollator),
         d->_icuBreakIterator,
         d->_status);
     if(d->hasError())
