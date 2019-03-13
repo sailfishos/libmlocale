@@ -35,6 +35,8 @@
 #include <unicode/dtfmtsym.h> // date format symbols
 #include <unicode/putil.h> // u_setDataDirectory
 #include <unicode/numsys.h>
+
+using namespace icu;
 #endif
 
 #include <MDebug>
@@ -682,9 +684,9 @@ void MLocalePrivate::simplifyDateFormatForMixing(icu::DateFormat *df) const
         icuFormatQString.replace(QLatin1String("ss 's'"), QLatin1String("ss"));
         // kk contains “'ж'.”
         icuFormatQString.replace(QString::fromUtf8("'ж'."), QLatin1String(""));
-        // ru_RU contains “y 'г'.” (e.g. “2008 г.”)
+        // ru_RU contains “y 'г'.” (e.g. “2008 г.”)
         // (note the U+00A0 NO-BREAK SPACE in front of the “'г'.”):
-        icuFormatQString.replace(QString::fromUtf8(" 'г'."), QLatin1String(""));
+        icuFormatQString.replace(QString::fromUtf8(" 'г'."), QLatin1String(""));
         // sv_SE contains “d:'e'” (e.g. “18:e”):
         icuFormatQString.replace(QLatin1String(":'e'"), QLatin1String(""));
         // sv_SE and nb_NO contain “'kl'.”

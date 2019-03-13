@@ -22,6 +22,8 @@
 #ifdef HAVE_ICU
 #include <unicode/timezone.h>
 #include "micuconversions.h"
+
+using namespace icu;
 #endif
 
 namespace ML10N {

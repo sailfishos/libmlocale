@@ -21,6 +21,7 @@
 
 #include <QDebug>
 #include <QString>
+
 #include <unicode/unistr.h>
 #include <unicode/datefmt.h>
 
@@ -30,8 +31,7 @@ namespace ML10N {
 
 icu::UnicodeString MIcuConversions::qStringToUnicodeString(const QString &sourceStr)
 {
-    return UnicodeString(static_cast<const UChar *>(sourceStr.utf16()),
-                   sourceStr.length());
+    return icu::UnicodeString(sourceStr.utf16(), sourceStr.length());
 }
 
 QString MIcuConversions::unicodeStringToQString(const icu::UnicodeString &sourceStr)
@@ -76,7 +76,7 @@ icu::DateFormat::EStyle MIcuConversions::toEStyle(MLocale::TimeType timeType)
     }
 
     if (timeType == MLocale::TimeLong) {
-        return DateFormat::kLong;
+        return icu::DateFormat::kLong;
     }
 
     return icu::DateFormat::kFull;

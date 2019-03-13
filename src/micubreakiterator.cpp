@@ -24,6 +24,8 @@
 #include <unicode/brkiter.h>
 #include <unicode/uchriter.h>
 #include "mlocale_p.h"
+
+using namespace icu;
 #endif
 
 namespace ML10N {

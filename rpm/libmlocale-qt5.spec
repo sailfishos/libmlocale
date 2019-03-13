@@ -51,7 +51,7 @@ Requires:   %{name} = %{version}-%{release}
 %build
 export QT_SELECT=5
 
-%configure --disable-static
+%configure --disable-static -icu
 make %{?_smp_mflags}
 
 %install

@@ -670,8 +670,8 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
     foreach(MCity city, cities) {
         UErrorCode status = U_ZERO_ERROR;
         icu::UnicodeString canonicalId;
-        icu::UnicodeString id = static_cast<const UChar *>(city.timeZone().utf16());
-        TimeZone::getCanonicalID (id, canonicalId, status);
+        icu::UnicodeString id = city.timeZone().utf16();
+        icu::TimeZone::getCanonicalID (id, canonicalId, status);
         QString cityCanonicalTimeZoneICU =
             QString(reinterpret_cast<const QChar *>(canonicalId.getBuffer()), canonicalId.length());
         if (cityCanonicalTimeZoneICU.isEmpty())
