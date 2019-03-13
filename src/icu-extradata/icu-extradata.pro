@@ -134,8 +134,7 @@ greaterThan(ICUVERSION, 4.4) {
                  data/lang/pt_PT.txt \
                  data/lang/zh.txt \
                  data/lang/zh_Hant.txt
-    COLLTXT    = data/coll/zh.txt \
-                 data/coll/be.txt \
+    COLLTXT    = data/coll/be.txt \
                  data/coll/bg.txt \
                  data/coll/kk.txt \
                  data/coll/mk.txt \
