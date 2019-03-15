@@ -23,9 +23,6 @@ using ML10N::MLocale;
 
 void Ft_LocaleData::initTestCase()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
     MLocale::setDataPath(qApp->applicationDirPath());
 }
 

@@ -1,7 +1,0 @@
-ar_AE{
-    calendar{
-        gregorian{
-            DateTimeElements:intvector { 7, 4 }
-        }
-    }
-}

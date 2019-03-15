@@ -24,9 +24,7 @@
 
 #include <unicode/utypes.h>
 #include <unicode/uversion.h>
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=4)
 #include <unicode/localpointer.h>
-#endif
 #include <unicode/uenum.h>
 #include <unicode/ucsdet.h>
 

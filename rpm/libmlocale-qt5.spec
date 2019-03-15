@@ -67,8 +67,6 @@ export QT_SELECT=5
 %defattr(-,root,root,-)
 %doc LICENSE.LGPL
 %{_libdir}/*.so.*
-%dir %{_datadir}/mlocale5
-%{_datadir}/mlocale5/icu
 
 %files devel
 %defattr(-,root,root,-)

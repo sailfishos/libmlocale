@@ -31,9 +31,6 @@ class TestLocale : public MLocale
 
 void Ft_Locales::initTestCase()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
     QProcess process;
     process.start("sh -c \"dpkg -s libqtcore4 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
     if (!process.waitForFinished()) {
@@ -949,59 +946,19 @@ void Ft_Locales::testMLocaleToLower_data()
         << QString("größe")
         ;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-       && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("de_DE")
-            << QString("de_DE")
-            << QString("GRÖẞE")
-            << QString("größe")
-            << QString("größe") // works because Qt’s toLower uses libicu now
-            ;
-    }
-    else {
-        QTest::newRow("de_DE")
-            << QString("de_DE")
-            << QString("GRÖẞE")
-            << QString("größe")
-            << QString("gröẞe") // Qt bug?
-            ;
-    }
-#else
     QTest::newRow("de_DE")
         << QString("de_DE")
         << QString("GRÖẞE")
         << QString("größe")
         << QString("größe")
         ;
-#endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-       && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("de_CH") // no difference in behaviour to de_CH here
-            << QString("de_CH")
-            << QString("GRÖẞE")
-            << QString("größe")
-            << QString("größe") // works because Qt’s toLower uses libicu now
-            ;
-    }
-    else {
-        QTest::newRow("de_CH") // no difference in behaviour to de_CH here
-            << QString("de_CH")
-            << QString("GRÖẞE")
-            << QString("größe")
-            << QString("gröẞe") // Qt bug?
-            ;
-    }
-#else
     QTest::newRow("de_CH") // no difference in behaviour to de_CH here
         << QString("de_CH")
         << QString("GRÖẞE")
         << QString("größe")
         << QString("größe")
         ;
-#endif
 
     QTest::newRow("en_GB")
         << QString("en_GB")
@@ -4039,11 +3996,7 @@ void Ft_Locales::testMLocaleIndexBucket()
     // we need to instantiate a MLocale before dataPaths returns
     // a valid result.
     MLocale locale(localeName);
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
-#else
     QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
-#endif
 
     MLocale localeEn("en_US");
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
@@ -4206,11 +4159,7 @@ void Ft_Locales::testDifferentStrengthComparison()
     QFETCH(QString, string2);
     QFETCH(QList<MLocale::Comparison>, comparisonExpectedResults);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
-#else
     QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
-#endif
     MLocale locale(localeName);
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     MCollator collator = locale.collator();
@@ -4618,11 +4567,7 @@ void Ft_Locales::checkAvailableLocales()
     QString ft_localesTestOutput = "";
     foreach(QString supportedLocaleName, supportedLocaleNames) {
         MLocale locale(supportedLocaleName);
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-        QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
-#else
         QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
-#endif
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
         QCOMPARE(locale.timeFormat24h(), MLocale::LocaleDefaultTimeFormat24h);
         qSort(sortingTestList.begin(), sortingTestList.end(), locale.collator());

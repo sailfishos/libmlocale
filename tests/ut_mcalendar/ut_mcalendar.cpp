@@ -54,9 +54,6 @@ static QString maybeEmbedDateTimeString(const QString &dateTimeString, const MLo
 
 void Ut_MCalendar::initTestCase()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
     QProcess process;
     process.start("sh -c \"dpkg -s libicu44 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
     if (!process.waitForFinished()) {
@@ -91,11 +88,7 @@ void Ut_MCalendar::cleanup()
 void Ut_MCalendar::testDataPaths()
 {
     MLocale locale;
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale/icu"));
-#else
     QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
-#endif
 }
 
 void Ut_MCalendar::testTimeZones()

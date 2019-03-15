@@ -26,9 +26,6 @@ using ML10N::MCharsetDetector;
 
 void Ft_MCharsetDetector::initTestCase()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
 }
 
 void Ft_MCharsetDetector::cleanupTestCase()

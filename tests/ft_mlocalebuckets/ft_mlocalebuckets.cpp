@@ -43,11 +43,6 @@ QStringList inputItems;
 
 void Ft_MLocaleBuckets::initTestCase()
 {
-    // This is important for string constants with non-ASCII characters:
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
-
     inputItems
         << "Ömer"        //  0
         << "Yannick"     //  1

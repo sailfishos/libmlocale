@@ -1,7 +1,3 @@
-#####################################################################
-# DirectUI project file
-#####################################################################
-
 CONFIG += ordered
 TEMPLATE = subdirs
 
@@ -22,7 +18,6 @@ isEqual( IN_PWD, $${OUT_PWD} ) {
 
 SUBDIRS += \
     src \
-    src/icu-extradata \
     benchmarks \
     tests \
 

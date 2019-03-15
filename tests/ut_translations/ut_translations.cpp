@@ -26,9 +26,6 @@ using ML10N::MLocale;
 void Ut_Translations::initTestCase()
 {
     qap = QCoreApplication::instance();
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-#endif
 }
 
 void Ut_Translations::cleanupTestCase()

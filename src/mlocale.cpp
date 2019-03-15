@@ -2819,23 +2819,6 @@ void MLocalePrivate::fixFormattedNumberForRTL(QString *formattedNumber) const
         removeDirectionalFormattingCodes(formattedNumber);
         if(formattedNumber->contains(QRegExp(QString::fromUtf8("[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]")))) {
             swapPostAndPrefixOfFormattedNumber(formattedNumber);
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-            // icu >= 4.6 can use different symbols for different
-            // digit systems. No need to do any manual replacing.
-#else
-            formattedNumber->replace(QString::fromUtf8("%"), QString::fromUtf8("٪"));
-            formattedNumber->replace(QString::fromUtf8("‰"), QString::fromUtf8("؉"));
-            formattedNumber->replace(QString::fromUtf8(","), QString::fromUtf8("٬"));
-            // Some currency names like http://en.wikipedia.org/wiki/United_Arab_Emirates_dirham
-            // sign: "د.إ.‏", code: AED, contain periods, therefore take care to replace
-            // the period with an ARABIC DECIMAL SEPARATOR only if the period is between
-            // digits:
-            formattedNumber->replace(
-                QRegExp(QString::fromUtf8("([٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹])\\.([٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹])")),
-                        QString::fromUtf8("\\1٫\\2"));
-            if(categoryNameNumeric.startsWith(QLatin1String("ar")))
-                formattedNumber->replace(QString::fromUtf8("NaN"), QString::fromUtf8("ليس رقم"));
-#endif
         }
     }
     if(formattedNumber->at(0).direction() == QChar::DirAL) {
@@ -2889,15 +2872,6 @@ void MLocalePrivate::fixParseInputForRTL(QString *formattedNumber) const
     removeDirectionalFormattingCodes(formattedNumber);
     if(formattedNumber->contains(QRegExp(QString::fromUtf8("[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]")))) {
         swapPostAndPrefixOfFormattedNumber(formattedNumber);
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-        // icu >= 4.6 can use different symbols for different
-        // digit systems. No need to do any manual replacing.
-#else
-        formattedNumber->replace(QString::fromUtf8("٪"), QString::fromUtf8("%"));
-        formattedNumber->replace(QString::fromUtf8("؉"), QString::fromUtf8("‰"));
-        formattedNumber->replace(QString::fromUtf8("٫"), QString::fromUtf8("."));
-        formattedNumber->replace(QString::fromUtf8("٬"), QString::fromUtf8(","));
-#endif
     }
 }
 #endif
@@ -3736,7 +3710,6 @@ QString MLocalePrivate::numberingSystem(const QString &localeName) const
             return numberingSystem;
         }
         int len;
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
         res = ures_getByKey(res, "NumberElements", res, &status);
         if (U_FAILURE(status)) {
             ures_close(res);
@@ -3746,12 +3719,7 @@ QString MLocalePrivate::numberingSystem(const QString &localeName) const
                                                "default",
                                                &len,
                                                &status);
-#else
-        const UChar *val = ures_getStringByKey(res,
-                                               "defaultNumberingSystem",
-                                               &len,
-                                               &status);
-#endif
+
         ures_close(res);
         if (U_SUCCESS(status)) {
             // found numbering system, return it:
@@ -3795,16 +3763,6 @@ QString MLocale::decimalPoint() const
     QString numberingSystem = d->numberingSystem(categoryNameNumeric);
     QString resourceBundleLocaleName = categoryNameNumeric;
     QString decimal = QLatin1String(".");
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-    // icu >= 4.6 can use different symbols for different
-    // numbering systems. No need to do any manual hack for
-    // to return different symbols for different numering systems.
-#else
-    // for icu < 4.6, return the ARABIC DECIMAL SEPARATOR
-    // when the numbering system is "arab" or "arabext":
-    if(numberingSystem == "arab" || numberingSystem == "arabext")
-        return QString::fromUtf8("٫");
-#endif
     do {
         // Trying several resource bundles is a workaround for
         // http://site.icu-project.org/design/resbund/issues
@@ -3825,7 +3783,6 @@ QString MLocale::decimalPoint() const
             continue;
         }
         int len;
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
         res = ures_getByKey(res, numberingSystem.toStdString().c_str(),
                             res, &status);
         if (U_FAILURE(status)) {
@@ -3838,9 +3795,6 @@ QString MLocale::decimalPoint() const
             continue;
         }
         const UChar *val = ures_getStringByKey(res, "decimal", &len, &status);
-#else
-        const UChar *val = ures_getStringByIndex(res, 0, &len, &status);
-#endif
         ures_close(res);
         if (U_SUCCESS(status)) {
             // found decimal point, return it:
@@ -4243,49 +4197,40 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
     QString targetDigits;
 #ifdef HAVE_ICU
     UErrorCode status = U_ZERO_ERROR;
- #if !((U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6))
-    if(targetNumberingSystem == "hanidec") {
-        targetDigits = QString::fromUtf8("〇一二三四五六七八九");
-    }
-    else {
-#else
-    if(true){
-#endif
-        bool ok = true;
-        icu::NumberingSystem * targetNumSys =
+    bool ok = true;
+    icu::NumberingSystem * targetNumSys =
             NumberingSystem::createInstanceByName(
                 targetNumberingSystem.toLatin1().constData(), status);
-        if(U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__
-                              << "Error NumberingSystem::createInstanceByName()"
-                              << targetNumberingSystem
-                              << u_errorName(status);
-            ok = false;
-        }
-        else {
-            if(!targetNumSys->isAlgorithmic() && targetNumSys->getRadix() == 10) {
-                targetDigits = MIcuConversions::unicodeStringToQString(
-                    targetNumSys->getDescription());
-                if(targetDigits.size() != 10) {
-                    mDebug("MLocale")
+    if(U_FAILURE(status)) {
+        mDebug("MLocale") << __PRETTY_FUNCTION__
+                          << "Error NumberingSystem::createInstanceByName()"
+                          << targetNumberingSystem
+                          << u_errorName(status);
+        ok = false;
+    }
+    else {
+        if(!targetNumSys->isAlgorithmic() && targetNumSys->getRadix() == 10) {
+            targetDigits = MIcuConversions::unicodeStringToQString(
+                        targetNumSys->getDescription());
+            if(targetDigits.size() != 10) {
+                mDebug("MLocale")
                         << __PRETTY_FUNCTION__
                         << targetNumberingSystem
                         << "number of digits is not 10, should not happen";
-                    ok = false;
-                }
-            }
-            else {
-                mDebug("MLocale")
-                    << __PRETTY_FUNCTION__
-                    << targetNumberingSystem
-                    << "not algorithmic or radix not 10, should not happen";
                 ok = false;
             }
         }
-        delete targetNumSys;
-        if (!ok)
-            return text;
+        else {
+            mDebug("MLocale")
+                    << __PRETTY_FUNCTION__
+                    << targetNumberingSystem
+                    << "not algorithmic or radix not 10, should not happen";
+            ok = false;
+        }
     }
+    delete targetNumSys;
+    if (!ok)
+        return text;
 #else
     if(targetNumberingSystem == "arab")
         targetDigits = QString::fromUtf8("٠١٢٣٤٥٦٧٨٩");
