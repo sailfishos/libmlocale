@@ -3,8 +3,8 @@ Summary:    Contains classes MLocale and friends originally from libmeegotouch
 Version:    0.5.0
 Release:    1
 Group:      System/Libraries
-License:    LGPLv2.1
-URL:        https://git.merproject.org/mer-core/libmlocale
+License:    LGPLv2
+URL:        https://git.sailfishos.org/mer-core/libmlocale
 Source0:    %{name}-%{version}.tar.bz2
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
