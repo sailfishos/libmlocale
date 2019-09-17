@@ -3971,21 +3971,29 @@ QString MLocale::indexBucket(const QString &str, const QStringList &buckets, con
         if (coll(strUpperCase, buckets[i])) {
             if (i == 0) {
                 return firstCharacter;
+            } else if (buckets.first() == QString::fromUtf8("一")) { // stroke count sorting
+                return QString::number(i) + QString::fromUtf8("劃");
+            } else if (i > 1 && !coll(buckets[i-2], buckets[i-1])
+                       && !str.startsWith(buckets[i-1], Qt::CaseInsensitive)) {
+                // some locales have conflicting data as in exemplar characters containing accented variants
+                // of some letters while collation doesn't have primary level difference between them,
+                // for example hungarian short and long vowels, and russian Е/Ё.
+                // in such case return the earlier bucket for all strings that don't start with the latter
+                // To consider: do we need to handle even longer runs of primary level equal buckets?
+                return buckets[i-2];
             }
-            else {
-                if(buckets.first() == QString::fromUtf8("一")) // stroke count sorting
-                    return QString::number(i)+QString::fromUtf8("劃");
-                else
-                    return buckets[i-1];
-            }
+
+            return buckets[i-1];
         }
     }
     // return the last bucket if any substring starting from the beginning compares
     // primary equal to the last bucket label:
-    for (int i = 0; i < strUpperCase.size(); ++i)
-        if(!coll(buckets.last(),strUpperCase.left(i+1))
-           && !coll(strUpperCase.left(i+1),buckets.last()))
+    for (int i = 0; i < strUpperCase.size(); ++i) {
+        if (!coll(buckets.last(),strUpperCase.left(i+1))
+                && !coll(strUpperCase.left(i+1), buckets.last())) {
             return buckets.last();
+        }
+    }
     // last resort, no appropriate bucket found:
     return firstCharacter;
 }
