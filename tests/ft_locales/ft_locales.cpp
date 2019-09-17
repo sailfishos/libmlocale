@@ -591,12 +591,7 @@ void Ft_Locales::testMLocaleLanguageEndonym_data()
     QTest::addColumn<QString>("endonym_result");
 
 #if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
-    QTest::newRow("en_GB")
-            << QString("en_GB")
-            << QString("English (United Kingdom)");
-    QTest::newRow("en_US")
-            << QString("en_US")
-            << QString("English (United States)");
+    QSKIP("Locale endonyms really testing only ICU data, skipping");
     return;
 #endif
 
@@ -1784,14 +1779,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
         <<"fr_CA"
         << frenchStringsSorted
         << frenchExpectedBuckets;
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-#else
-    QTest::newRow("fr_FR")
-        <<"ja_JP"
-        <<"fr_FR"
-        << frenchStringsSorted
-        << frenchExpectedBuckets;
-#endif
     QStringList spanishStringsSorted =
         (QStringList()
          <<"aaa"
@@ -3398,10 +3385,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⼜" // 29
          <<"⼝" // 30
          <<"叫" // kRSUnicode 30.2
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-#else
-         <<"𠮩" // kRSUnicode 30.2
-#endif
          <<"君" // kRSUnicode 30.4
          <<"咚" // kRSUnicode 30.5
          <<"⼞" // 31
@@ -3618,12 +3601,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⿔" // 213
          <<"⿕" // 214
          <<"龢" // kRSUnicode 214.5
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
          <<"𠮩" // kRSUnicode 30.2
          <<"𪛖" // kRSUnicode 214.20
-#else
-         <<"𪛖" // kRSUnicode 214.20
-#endif
             );
     QStringList unihanExpectedBuckets =
         (QStringList()
@@ -3685,10 +3664,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⼝" // 30
          <<"⼝" // 30
          <<"⼝" // 30
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-#else
-         <<"⼝" // 30
-#endif
          <<"⼞" // 31
          <<"⼟" // 32
          <<"⼠" // 33
@@ -3904,10 +3879,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⿕" // 214
          <<"⿕" // 214
          <<"⿕" // 214
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
          <<"⿕" // 214
-#else
-#endif
             );
     QTest::newRow("zh_TW@collation=stroke")
         <<"ja_JP"

@@ -133,29 +133,17 @@ void Ft_Numbers::testQLongLongs_data()
             << QString("ar_EG@numbers=arab")
             << QString("ar_EG@numbers=latn")
             << qlonglong(-1542678073)
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
             << QString("‪-1,542,678,073‬");
-#else
-            << QString("‪-1,542,678,073‬");
-#endif
     QTest::newRow("ar_EG")
             << QString("fa")
             << QString("ar_EG@numbers=latn")
             << qlonglong(-1542678073)
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
             << QString("‪-1,542,678,073‬");
-#else
-            << QString("‪-1,542,678,073‬");
-#endif
     QTest::newRow("ar_EG")
             << QString("en_US")
             << QString("ar_EG@numbers=latn")
             << qlonglong(-1542678073)
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
             << QString("-1,542,678,073");
-#else
-            << QString("-1,542,678,073");
-#endif
     QTest::newRow("ar_TN")
             << QString("ar_TN@numbers=arab")
             << QString("ar_TN@numbers=latn")
@@ -2595,20 +2583,12 @@ void Ft_Numbers::testDoublesWithFormatting_data()
             << QString("ar_EG@numbers=latn")
             << 1234567.123450
             << 6 << 0
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
             << QString("‪1,234,567.12345‬");
-#else
-            << QString("‪1,234,567.12345‬");
-#endif
     QTest::newRow("ar_EG@numbers=latn 6")
             << QString("ar_EG@numbers=latn")
             << 1234567.123450
             << 6 << 6
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
             << QString("‪1,234,567.123450‬");
-#else
-            << QString("‪1,234,567.123450‬");
-#endif
     QTest::newRow("ar_EG@numbers=arab 6")
             << QString("ar_EG@numbers=arab")
             << 1234567.123450
@@ -2847,11 +2827,7 @@ void Ft_Numbers::testCurrencies_data()
         << QString("en_US") // lc_numeric
         << 1234.56
         << "USD"
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
         << QString("1,234.56 US$");
-#else
-        << QString("1,234.56 US$");
-#endif
     QTest::newRow("ar_SA")
         << QString("de_DE")
         << QString("ar_SA")
@@ -2865,11 +2841,7 @@ void Ft_Numbers::testCurrencies_data()
         << QString("en_US")
         << 1234.56
         << "USD"
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
         << QString("1,234.56 US$");
-#else
-        << QString("1,234.56 US$");
-#endif
     QTest::newRow("fa_IR")
         << QString("de_DE")
         << QString("fa_IR")
