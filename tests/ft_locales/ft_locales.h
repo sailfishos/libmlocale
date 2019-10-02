@@ -54,9 +54,6 @@ class Ft_Locales : public QObject
 {
     Q_OBJECT
 
-private:
-    QString libqtcore4PackageVersion;
-
 private slots:
     void initTestCase();
     void cleanupTestCase();

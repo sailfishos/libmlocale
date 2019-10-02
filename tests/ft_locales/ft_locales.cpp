@@ -31,15 +31,6 @@ class TestLocale : public MLocale
 
 void Ft_Locales::initTestCase()
 {
-    QProcess process;
-    process.start("sh -c \"dpkg -s libqtcore4 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
-    if (!process.waitForFinished()) {
-        qDebug() << "cannot run process to check libqtcore4 package version , exiting ...";
-        exit(1);
-    }
-    libqtcore4PackageVersion = process.readAllStandardOutput();
-    libqtcore4PackageVersion.replace("\n", "");
-    qDebug() << "libqtcore4 package version is:" << libqtcore4PackageVersion;
 }
 
 void Ft_Locales::cleanupTestCase()
@@ -591,12 +582,7 @@ void Ft_Locales::testMLocaleLanguageEndonym_data()
     QTest::addColumn<QString>("endonym_result");
 
 #if !defined(ALSO_VERIFY_ICU_DOES_ITS_JOB_AS_WE_EXPECT)
-    QTest::newRow("en_GB")
-            << QString("en_GB")
-            << QString("English (United Kingdom)");
-    QTest::newRow("en_US")
-            << QString("en_US")
-            << QString("English (United States)");
+    QSKIP("Locale endonyms really testing only ICU data, skipping");
     return;
 #endif
 
@@ -969,28 +955,15 @@ void Ft_Locales::testMLocaleToLower_data()
         << QString("item naïve i̇")
         ;
 
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-        && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("tr_TR")
+    QTest::newRow("tr_TR")
             << QString("tr_TR")
             << QString("ITEM NAÏVE İ")
-            // I lowercases to ı in Turkish locale and İ to i
+               // I lowercases to ı in Turkish locale and İ to i
             << QString("ıtem naïve i")
-            // Qt’s toLower uses libicu now and thus works
-            << QString("ıtem naïve i")
-            ;
-    }
-    else {
-        QTest::newRow("tr_TR")
-            << QString("tr_TR")
-            << QString("ITEM NAÏVE İ")
-            // I lowercases to ı in Turkish locale and İ to i
-            << QString("ıtem naïve i")
-            // Qt’s toLower is *not* locale aware
-            // last two chars are U+0069 (LATIN SMALL LETTER I) U+307 (COMBINING DOT ABOVE)
+               // Qt’s toLower is *not* locale aware
+               // last two chars are U+0069 (LATIN SMALL LETTER I) U+307 (COMBINING DOT ABOVE)
             << QString("item naïve i̇")
-            ;
-    }
+               ;
 
     QTest::newRow("en_GB")
         << QString("de_GB")
@@ -1006,49 +979,23 @@ void Ft_Locales::testMLocaleToLower_data()
         << QString("σι")
         ;
 
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-        && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("en_GB")
+    QTest::newRow("en_GB")
             << QString("en_GB")
             << QString("ΙΣ")
             << QString("ις")
-            // Qt’s toLower is now context aware and lowercases the final Σ
-            // correctly using ICU
-            << QString("ις")
-            ;
-    }
-    else {
-        QTest::newRow("en_GB")
-            << QString("en_GB")
-            << QString("ΙΣ")
-            << QString("ις")
-            // Qt’s toLower is *not* context aware and lowercases the final Σ
-            // the same way as a non-final one:
+               // Qt’s toLower is *not* context aware and lowercases the final Σ
+               // the same way as a non-final one:
             << QString("ισ")
-            ;
-    }
+               ;
 
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-       && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("el_GR")
+    QTest::newRow("el_GR")
             << QString("el_GR")
             << QString("ΙΣ")
             << QString("ις")
-            // Qt’s toLower is now context aware and lowercases the final Σ
-            // correctly using ICU
-            << QString("ις")
-            ;
-    }
-    else {
-        QTest::newRow("el_GR")
-            << QString("el_GR")
-            << QString("ΙΣ")
-            << QString("ις")
-            // Qt’s toLower is *not* context aware and lowercases the final Σ
-            // the same way as a non-final one:
+               // Qt’s toLower is *not* context aware and lowercases the final Σ
+               // the same way as a non-final one:
             << QString("ισ")
-            ;
-    }
+               ;
 
     QTest::newRow("en_GB")
         << QString("en_GB")
@@ -1200,23 +1147,12 @@ void Ft_Locales::testMLocaleToUpper_data()
         << QString("ITEM NAÏVE I")
         ;
 
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-       && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("tr_TR")
-            << QString("tr_TR")
-            << QString("item naïve ı")
-            << QString("İTEM NAÏVE I")
-            << QString("İTEM NAÏVE I") // works because Qt’s toUpper uses libicu now
-            ;
-    }
-    else {
-        QTest::newRow("tr_TR")
+    QTest::newRow("tr_TR")
             << QString("tr_TR")
             << QString("item naïve ı")
             << QString("İTEM NAÏVE I")
             << QString("ITEM NAÏVE I")
-            ;
-    }
+               ;
 
     QTest::newRow("en_GB")
         << QString("en_GB")
@@ -1225,24 +1161,12 @@ void Ft_Locales::testMLocaleToUpper_data()
         << QString("İ") // U+0049 (LATIN CAPITAL LETTER I) U+0307  (COMBINING DOT ABOVE)
         ;
 
-    if(libqtcore4PackageVersion >= "4.7.2~git20110119"
-       && libqtcore4PackageVersion < "4.7.4~git20110516-0maemo2") { // Qt uses libicu
-        QTest::newRow("tr_TR")
-            << QString("tr_TR")
-            << QString("i̇") // U+0069 (LATIN SMALL LETTER I) U+0307  (COMBINING DOT ABOVE)
-            << QString("İ̇") // U+0130 (LATIN CAPITAL LETTER I WITH DOT ABOVE) U+0307  (COMBINING DOT ABOVE)
-            // works because Qt’s toUpper uses libicu now
-            << QString("İ̇") // U+0130 (LATIN CAPITAL LETTER I WITH DOT ABOVE) U+0307  (COMBINING DOT ABOVE)
-            ;
-    }
-    else {
-        QTest::newRow("tr_TR")
+    QTest::newRow("tr_TR")
             << QString("tr_TR")
             << QString("i̇") // U+0069 (LATIN SMALL LETTER I) U+0307  (COMBINING DOT ABOVE)
             << QString("İ̇") // U+0130 (LATIN CAPITAL LETTER I WITH DOT ABOVE) U+0307  (COMBINING DOT ABOVE)
             << QString("İ") // U+0049 (LATIN CAPITAL LETTER I) U+0307  (COMBINING DOT ABOVE)
-            ;
-    }
+               ;
 
     QTest::newRow("en_GB")
         << QString("en_GB")
@@ -1784,14 +1708,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
         <<"fr_CA"
         << frenchStringsSorted
         << frenchExpectedBuckets;
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-#else
-    QTest::newRow("fr_FR")
-        <<"ja_JP"
-        <<"fr_FR"
-        << frenchStringsSorted
-        << frenchExpectedBuckets;
-#endif
     QStringList spanishStringsSorted =
         (QStringList()
          <<"aaa"
@@ -3398,10 +3314,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⼜" // 29
          <<"⼝" // 30
          <<"叫" // kRSUnicode 30.2
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-#else
-         <<"𠮩" // kRSUnicode 30.2
-#endif
          <<"君" // kRSUnicode 30.4
          <<"咚" // kRSUnicode 30.5
          <<"⼞" // 31
@@ -3618,12 +3530,8 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⿔" // 213
          <<"⿕" // 214
          <<"龢" // kRSUnicode 214.5
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
          <<"𠮩" // kRSUnicode 30.2
          <<"𪛖" // kRSUnicode 214.20
-#else
-         <<"𪛖" // kRSUnicode 214.20
-#endif
             );
     QStringList unihanExpectedBuckets =
         (QStringList()
@@ -3685,10 +3593,6 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⼝" // 30
          <<"⼝" // 30
          <<"⼝" // 30
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
-#else
-         <<"⼝" // 30
-#endif
          <<"⼞" // 31
          <<"⼟" // 32
          <<"⼠" // 33
@@ -3904,10 +3808,7 @@ void Ft_Locales::testMLocaleIndexBucket_data()
          <<"⿕" // 214
          <<"⿕" // 214
          <<"⿕" // 214
-#if (U_ICU_VERSION_MAJOR_NUM > 4) || (U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >=6)
          <<"⿕" // 214
-#else
-#endif
             );
     QTest::newRow("zh_TW@collation=stroke")
         <<"ja_JP"
