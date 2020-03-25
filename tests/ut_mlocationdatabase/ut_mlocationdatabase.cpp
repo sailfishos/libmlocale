@@ -723,7 +723,7 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
             + gmtTotalOffsetSummer
             + ")\"\n";
     }
-    qSort(ut_mlocationdatabaseTestOutput2Lines.begin(), ut_mlocationdatabaseTestOutput2Lines.end());
+    std::sort(ut_mlocationdatabaseTestOutput2Lines.begin(), ut_mlocationdatabaseTestOutput2Lines.end());
     QString ut_mlocationdatabaseTestOutput2 = "";
     foreach (QString line, ut_mlocationdatabaseTestOutput2Lines) {
         ut_mlocationdatabaseTestOutput2 += line;

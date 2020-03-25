@@ -484,8 +484,8 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
     }
     // sort the list of matches again if confidences have been changed:
     if(sortNeeded)
-        qSort(mCharsetMatchList.begin(), mCharsetMatchList.end(),
-              qGreater<MCharsetMatch>());
+        std::sort(mCharsetMatchList.begin(), mCharsetMatchList.end(),
+              std::greater<MCharsetMatch>());
     if(mCharsetMatchList.isEmpty()) {
         // is there any better status to describe this case?
         d->_status = U_CE_NOT_FOUND_ERROR;
@@ -677,7 +677,7 @@ QStringList MCharsetDetector::getAllDetectableCharsets()
             d->_allDetectableCharsets << cs;
     }
 
-    qSort(d->_allDetectableCharsets);
+    std::sort(d->_allDetectableCharsets.begin(), d->_allDetectableCharsets.end());
 
     return d->_allDetectableCharsets;
 }

@@ -75,7 +75,7 @@ struct MLocaleBucketItem
 
 
 
-// Functor for qStableSort() comparison
+// Functor for std::stable_sort() comparison
 class MLocaleBucketItemComparator
 {
 public:

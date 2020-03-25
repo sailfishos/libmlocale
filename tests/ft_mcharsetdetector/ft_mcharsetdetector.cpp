@@ -90,8 +90,8 @@ void Ft_MCharsetDetector::testMCharsetMatch()
         match.setConfidence(confidencesSorted[i].toInt());
         mCharsetMatchListSorted << match;
     }
-    qSort(mCharsetMatchList.begin(), mCharsetMatchList.end(),
-          qGreater<MCharsetMatch>());
+    std::sort(mCharsetMatchList.begin(), mCharsetMatchList.end(),
+          std::greater<MCharsetMatch>());
 #if defined(VERBOSE_OUTPUT)
     for(int i = 0; i < names.size(); ++i) {
         qDebug() << mCharsetMatchList[i].name()

@@ -79,7 +79,7 @@ void MCollatorPrivate::initCollator(const icu::Locale &locale)
   QStringList stringList;
   stringList << "bb" << "da" << "aa" << "ab";
 
-  qSort(stringList.begin(), stringList.end(), comp); // sorts the list
+  std::sort(stringList.begin(), stringList.end(), comp); // sorts the list
   \endverbatim
 
  */
