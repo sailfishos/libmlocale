@@ -43,7 +43,7 @@ void MLocaleBucketsPrivate::setItems(const QStringList &unsortedItems, Qt::SortO
     for (int i=0; i < unsortedItems.size(); ++i) {
         items.append(MLocaleBucketItem(unsortedItems.at(i), i));
     }
-    qStableSort(items.begin(), items.end(), MLocaleBucketItemComparator(sortOrder));
+    std::stable_sort(items.begin(), items.end(), MLocaleBucketItemComparator(sortOrder));
 
     QString lastBucket;
     QStringList lastBucketItems;

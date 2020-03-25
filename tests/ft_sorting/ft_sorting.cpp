@@ -412,7 +412,7 @@ void Ft_Sorting::testMLocaleSorting()
 #if defined(VERBOSE_OUTPUT)
     printf("%s %s %s %s %s\n", sl[0].toUtf8().data(), sl[1].toUtf8().data(), sl[2].toUtf8().data(), sl[3].toUtf8().data(), sl[4].toUtf8().data());
 #endif
-    qSort(sl.begin(), sl.end(), mCollator);
+    std::sort(sl.begin(), sl.end(), mCollator);
 #if defined(VERBOSE_OUTPUT)
     printf("%s %s %s %s %s\n", sl[0].toUtf8().data(), sl[1].toUtf8().data(), sl[2].toUtf8().data(), sl[3].toUtf8().data(), sl[4].toUtf8().data());
 #endif
@@ -424,18 +424,18 @@ void Ft_Sorting::testMLocaleSorting()
 
     MCollator mCollatorDefaultLocale;
     QStringList sl2 = stringListOrig;
-    qSort(sl2.begin(), sl2.end(), mCollatorDefaultLocale);
+    std::sort(sl2.begin(), sl2.end(), mCollatorDefaultLocale);
     QCOMPARE(sl2, sl);
 
     TestCollator *testCollator = new TestCollator(locale);
     sl2 = stringListOrig;
-    qSort(sl2.begin(), sl2.end(), *testCollator);
+    std::sort(sl2.begin(), sl2.end(), *testCollator);
     QCOMPARE(sl2, sl);
     delete testCollator;
 
     TestCollator *testCollatorDefaultLocale = new TestCollator();
     sl2 = stringListOrig;
-    qSort(sl2.begin(), sl2.end(), *testCollatorDefaultLocale);
+    std::sort(sl2.begin(), sl2.end(), *testCollatorDefaultLocale);
     QCOMPARE(sl2, sl);
     delete testCollatorDefaultLocale;
 }

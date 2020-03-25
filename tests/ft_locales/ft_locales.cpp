@@ -3902,9 +3902,9 @@ void Ft_Locales::testMLocaleIndexBucket()
     MLocale localeEn("en_US");
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     QStringList stringsSortedCopy = stringsSorted;
-    qSort (stringsSortedCopy.begin(), stringsSortedCopy.end(),
+    std::sort (stringsSortedCopy.begin(), stringsSortedCopy.end(),
            localeEn.collator());
-    qSort (stringsSortedCopy.begin(), stringsSortedCopy.end(),
+    std::sort (stringsSortedCopy.begin(), stringsSortedCopy.end(),
            locale.collator());
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
@@ -4407,7 +4407,7 @@ void Ft_Locales::checkAvailableLocales()
     supportedLocaleNames.append(numberSystemTestLocales);
     // sort the list for easier comparison in the output
     // (i.e. es_419 should be near es, not at the end of the list):
-    qSort(supportedLocaleNames.begin(), supportedLocaleNames.end());
+    std::sort(supportedLocaleNames.begin(), supportedLocaleNames.end());
     MCalendar::setSystemTimeZone("GMT+0");
     QDateTime dateTime(QDate(2008, 7, 21), QTime(14, 31, 0, 0), Qt::LocalTime);
     MCalendar gregorianCalendar(MLocale::GregorianCalendar);
@@ -4471,7 +4471,7 @@ void Ft_Locales::checkAvailableLocales()
         QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
         QCOMPARE(locale.timeFormat24h(), MLocale::LocaleDefaultTimeFormat24h);
-        qSort(sortingTestList.begin(), sortingTestList.end(), locale.collator());
+        std::sort(sortingTestList.begin(), sortingTestList.end(), locale.collator());
         QString newLinePlusSupportedLocaleName('\n' + supportedLocaleName);
         ft_localesTestOutput
             += supportedLocaleName + "\tLanguage endonym\t"

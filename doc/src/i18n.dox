@@ -157,10 +157,10 @@ MLocale locale ("fi_FI");
 where "fi" and "FI" define that the Finnish language in used in Finland.
 
 \subsection Collator Collator
-To collate, get the comparator with \c MLocale::collator() method or create it MCollator() for default locale collator. This object acts as a functor and can be passed to Qt's \c qSort() or any other sorting methods. 
+To collate, get the comparator with \c MLocale::collator() method or create it MCollator() for default locale collator. This object acts as a functor and can be passed to std::sort() or any other sorting methods. 
 The comparator basically compares two items as "lessThan" function and returns true if the first parameter should come before the second one. 
 
-If some other collation system than the locale's default is needed, use \c setCollation() method before getting the comparator. To start sorting, use Qt's \c qSort()  function.
+If some other collation system than the locale's default is needed, use \c setCollation() method before getting the comparator. To start sorting, use std::sort()  function.
 
 To use the default collation system:
 \code
@@ -169,7 +169,7 @@ QStringList sl; // This contains the strings which need to be sorted
 MLocale myLocale; // get the current locale
 MCollator c = myLocale.collator(); // getting the comparator
 ...
-qSort(sl.begin, sl.end, c); // start to sort!
+std::sort(sl.begin, sl.end, c); // start to sort!
 ...
 \endcode
 
@@ -190,7 +190,7 @@ MLocale myLocale("de_DE@collation=phonebook");
 
 MCollator c = myLocale.collator(); // getting the comparator
 ...
-qSort(sl.begin, sl.end, c); // start to sort!
+std::sort(sl.begin, sl.end, c); // start to sort!
 ...
 \endcode
 
