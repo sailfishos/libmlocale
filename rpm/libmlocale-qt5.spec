@@ -57,7 +57,7 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 export QT_SELECT=5
-%make_install
+%make_install INSTALL_ROOT=%{buildroot}
 
 %post -p /sbin/ldconfig
 
