@@ -18,7 +18,9 @@ contains(DEFINES, HAVE_ICU) {
 SUBDIRS += \
     ft_breakiterator \
     ft_locales \
-    ft_localedata \
+    \ ## commented out as genrb is packaged separately in Fedora
+    \ ## and this test is mainly focussed on ICU, but not mlocale
+    \ # ft_localedata \
     ft_mlocalebuckets \
     ft_numbers \
     ft_sorting \

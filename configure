@@ -536,7 +536,12 @@ if [ -z "$QTDIR" ]; then
     if [ $? -eq 0 ]; then
         QMAKE_BIN=`which qmake`
     else
-        echo "qmake was not found in your path\n"
+        which qmake-qt5 > /dev/null
+        if [ $? -eq 0 ]; then
+            QMAKE_BIN=`which qmake-qt5`
+        else
+            echo "qmake was not found in your path\n"
+        fi
     fi
 elif [ -f "$QTDIR/bin/qmake" ]; then
     QMAKE_BIN="$QTDIR/bin/qmake"
