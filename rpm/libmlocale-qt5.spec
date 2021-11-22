@@ -2,9 +2,8 @@ Name:       libmlocale-qt5
 Summary:    Contains classes MLocale and friends originally from libmeegotouch
 Version:    0.5.0
 Release:    1
-Group:      System/Libraries
 License:    LGPLv2
-URL:        https://git.sailfishos.org/mer-core/libmlocale
+URL:        https://github.com/sailfishos/libmlocale
 Source0:    %{name}-%{version}.tar.bz2
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -23,7 +22,6 @@ having to bring on board also the MeeGo Touch GUI toolkit.
 
 %package devel
 Summary:    Devel files for limlocale
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -31,7 +29,6 @@ Requires:   %{name} = %{version}-%{release}
 
 %package tests
 Summary:    Tests for limlocale
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description tests
@@ -39,7 +36,6 @@ Requires:   %{name} = %{version}-%{release}
 
 %package benchmarks
 Summary:    Benchmarks files for limlocale
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description benchmarks
@@ -52,12 +48,11 @@ Requires:   %{name} = %{version}-%{release}
 export QT_SELECT=5
 
 %configure --disable-static -icu
-make %{?_smp_mflags}
+%make_build
 
 %install
-rm -rf %{buildroot}
 export QT_SELECT=5
-%make_install INSTALL_ROOT=%{buildroot}
+%make_install
 
 %post -p /sbin/ldconfig
 
@@ -65,7 +60,7 @@ export QT_SELECT=5
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSE.LGPL
+%license LICENSE.LGPL
 %{_libdir}/*.so.*
 
 %files devel
