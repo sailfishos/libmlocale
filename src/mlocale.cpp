@@ -2858,10 +2858,12 @@ void MLocalePrivate::fixFormattedNumberForRTL(QString *formattedNumber) const
     // make sure the result is not reordered again depending on
     // context (this assumes that the formats are all edited exactly
     // as they should appear in display order already!):
+#if 0 // non-functional
     if(q->localeScripts()[0] != "Arab" && q->localeScripts()[0] != "Hebr")
         return;
     formattedNumber->prepend(QChar(0x202A)); // LEFT-TO-RIGHT EMBEDDING
     formattedNumber->append(QChar(0x202C)); // POP DIRECTIONAL FORMATTING
+#endif
     return;
 }
 #endif
@@ -3815,11 +3817,13 @@ QString MLocale::joinStringList(const QStringList &texts) const
 {
     QStringList textsWithBidiMarkers;
     QString separator(QLatin1String(", "));
+#if 0 // non-functional
     if (localeScripts()[0] == QLatin1String("Arab"))
         separator = QString::fromUtf8("، "); // U+060C ARABIC COMMA + space
     else if (localeScripts().contains(QLatin1String("Hani"))) {
         separator = QString::fromUtf8("、"); // U+3001 IDEOGRAPHIC COMMA, no space
     }
+#endif
     foreach (const QString &text, texts) {
         if (MLocale::directionForText(text) == Qt::RightToLeft)
             // RIGHT-TO-LEFT EMBEDDING + text + POP DIRECTIONAL FORMATTING
@@ -4009,9 +4013,12 @@ QString MLocale::indexBucket(const QString &str) const
 }
 #endif
 
-#ifdef HAVE_ICU
 QStringList MLocale::localeScripts() const
 {
+    QStringList scripts;
+    qWarning() << "MLocale::localeScripts() missing proper implementation. Add if needed.";
+#if 0 // LocaleScript data removed from ICU, no point trying.
+#ifdef HAVE_ICU
     Q_D(const MLocale);
     UErrorCode status = U_ZERO_ERROR;
 
@@ -4028,7 +4035,6 @@ QStringList MLocale::localeScripts() const
                           << u_errorName(status);
     }
 
-    QStringList scripts;
     qint32 len;
     const UChar *val;
 
@@ -4037,6 +4043,9 @@ QStringList MLocale::localeScripts() const
             scripts << QString::fromUtf16(val, len);
     }
     ures_close(res);
+#endif
+#endif
+
     if (scripts.isEmpty())
         // "Zyyy" Code for undetermined script,
         // see http://www.unicode.org/iso15924/iso15924-codes.html
@@ -4044,7 +4053,6 @@ QStringList MLocale::localeScripts() const
 
     return scripts;
 }
-#endif
 
 void MLocale::copyCatalogsFrom(const MLocale &other)
 {
