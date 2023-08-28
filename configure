@@ -501,7 +501,7 @@ fi
 
 # substitute prefix in .pc files
 MEEGOTOUCH_PC_DIR="$outpath/src/data"
-MEEGOTOUCH_PC_FILES="mlocale5"
+MEEGOTOUCH_PC_FILES="mlocale5 mlocale6"
 
 # make sure the directory exists
 if [ ! -d $MEEGOTOUCH_PC_DIR ]; then
@@ -530,23 +530,29 @@ done
 #-------------------------------------------------------------------------------
 # build makefiles based on the configuration
 #-------------------------------------------------------------------------------
-
-if [ -z "$QTDIR" ]; then
-    which qmake > /dev/null
-    if [ $? -eq 0 ]; then
-        QMAKE_BIN=`which qmake`
-    else
-        which qmake-qt5 > /dev/null
+if [ -z "$QMAKE_BIN" ]; then
+    if [ -z "$QTDIR" ]; then
+        which qmake > /dev/null
         if [ $? -eq 0 ]; then
-            QMAKE_BIN=`which qmake-qt5`
+            QMAKE_BIN=`which qmake`
         else
-            echo "qmake was not found in your path\n"
+            which qmake-qt5 > /dev/null
+            if [ $? -eq 0 ]; then
+                QMAKE_BIN=`which qmake-qt5`
+            else
+                which qmake6 > /dev/null
+                if [ $? -eq 0 ]; then
+                    QMAKE_BIN=`which qmake6`
+                else
+                    echo "qmake was not found in your path\n"
+                fi
+            fi
         fi
+    elif [ -f "$QTDIR/bin/qmake" ]; then
+        QMAKE_BIN="$QTDIR/bin/qmake"
+    else
+        echo "QTDIR variable was set but could not find $QTDIR/bin/qmake\n"
     fi
-elif [ -f "$QTDIR/bin/qmake" ]; then
-    QMAKE_BIN="$QTDIR/bin/qmake"
-else
-    echo "QTDIR variable was set but could not find $QTDIR/bin/qmake\n"
 fi
 
 if [ -z "$QMAKE_BIN" ]; then
@@ -605,6 +611,7 @@ $QMAKE_BIN "$relpath/projects.pro" $QMAKE_CONFIG $QMAKE_SWITCHES
 
 echo ""
 echo ""
+echo "Qt version .......... $QT_VERSION"
 echo "Optional build dependencies found:"
 
 echo "ICU ............................. $HAVE_ICU"

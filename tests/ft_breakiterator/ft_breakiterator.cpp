@@ -16,8 +16,10 @@
 ** of this file.
 **
 ****************************************************************************/
-
+#include <QtCore>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QTextCodec>
+#endif
 #include <QDebug>
 
 #include <MLocale>

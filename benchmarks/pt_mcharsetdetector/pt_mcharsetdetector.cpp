@@ -117,13 +117,16 @@ void Pt_MCharsetDetector::benchmarkDetection()
     QFETCH(QString, inputEncoding);
     QFETCH(QString, bestMatchName);
     QFETCH(QString, bestMatchLanguage);
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1());
     if (codec == NULL) // there is no codec matching the name
         QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
 
     QByteArray encodedString = codec->fromUnicode(text);
     MCharsetDetector charsetDetector(encodedString);
+#else
+    MCharsetDetector charsetDetector("UTF-8");
+#endif
     charsetDetector.setDeclaredLocale(declaredLocale);
     charsetDetector.setDeclaredEncoding(declaredEncoding);
     charsetDetector.enableInputFilter(enableInputFilter);

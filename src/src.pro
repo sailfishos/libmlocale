@@ -6,7 +6,7 @@ include(common_top.pri)
 QT += xml
 QT -= gui
 
-TARGET = mlocale5
+TARGET = mlocale$${QT_MAJOR_VERSION}
 
 INCLUDEPATH += .
 
@@ -87,7 +87,7 @@ INSTALLS += target \
 ###
 
 # install MeeGo Touch feature files
-install_prf.path = $$[QT_INSTALL_DATA]/mkspecs/features
+install_prf.path = $$[QT_INSTALL_ARCHDATA]/mkspecs/features
 install_prf.files = \
     $${M_SOURCE_TREE}/mkspecs/features/mlocale.prf \
     $${M_SOURCE_TREE}/mkspecs/features/mlocale_common.prf \
@@ -99,7 +99,7 @@ INSTALLS += install_prf
 
 # install pkgconfig file
 install_pkgconfig.path = $$ML_INSTALL_LIBS/pkgconfig
-install_pkgconfig.files = data/mlocale5.pc
+install_pkgconfig.files = data/mlocale$${QT_MAJOR_VERSION}.pc
 
 INSTALLS += install_pkgconfig
 

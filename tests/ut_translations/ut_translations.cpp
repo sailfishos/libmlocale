@@ -155,12 +155,15 @@ void Ut_Translations::testOriginalQtTr()
     // Everything should be untranslated now:
     QCOMPARE(tr(qPrintable(string_id)), string_id);
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTranslator translator;
     translator.load(catalog);
     qap->installTranslator(&translator);
+#endif
     QCOMPARE(tr(qPrintable(string_id)), translation);
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     qap->removeTranslator(&translator);
+#endif
     // Everything should be untranslated again now:
     QCOMPARE(tr(qPrintable(string_id)), string_id);
 }

@@ -18,7 +18,9 @@
 ****************************************************************************/
 
 #include <QCoreApplication>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QTextCodec>
+#endif
 #include <QTextStream>
 #include <MLocale>
 #include <unicode/uversion.h>
@@ -900,7 +902,11 @@ void Ut_MCalendar::testIcuFormatString()
                 static_cast<MLocale::TimeType>(timeType),
                 calendarType);
             QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
             debugStream.setCodec("UTF-8");
+#else
+            debugStream.setEncoding(QStringConverter::Utf8);
+#endif
             debugStream << lcTime
                         << " timeFormat24h: " << timeFormat24h
                         << " dateType: " << dateType << " timeType: " << timeType
@@ -1551,7 +1557,11 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromLocaltimeQDateTime()
             expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
 #if defined(VERBOSE_OUTPUT)
             QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
             debugStream.setCodec("UTF-8");
+#else
+            debugStream.setEncoding(QStringConverter::Utf8);
+#endif
             debugStream
                 << "language " << localeName
                 << " lc_time " << lcTime
@@ -2671,7 +2681,11 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromMCalendar()
             expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
 #if defined(VERBOSE_OUTPUT)
             QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
             debugStream.setCodec("UTF-8");
+#else
+            debugStream.setEncoding(QStringConverter::Utf8);
+#endif
             debugStream
                 << "language " << localeName
                 << " lc_time " << lcTime
@@ -2936,7 +2950,11 @@ void Ut_MCalendar::testIslamicCalendar()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "result format: " << format
         << "\n";
@@ -4233,7 +4251,11 @@ void Ut_MCalendar::testPosixFormatPattern()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -4671,7 +4693,11 @@ void Ut_MCalendar::testFormatDateTimeICU()
     mcal.setDateTime(datetime);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "--------------------\n"
         << " localeName: " << localeName
@@ -4775,7 +4801,11 @@ void Ut_MCalendar::testTimeZoneDisplayNames()
     MCalendar mcal(locale,timeZone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "--------------------\n"
         << " localeName: " << localeName
@@ -4914,7 +4944,11 @@ void Ut_MCalendar::testWeekdaySymbols()
     MCalendar mcal(calendarType);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << language
         << " lc_messages " << lcMessages
@@ -5113,7 +5147,11 @@ void Ut_MCalendar::testMonthSymbols()
     MCalendar mcal(calendarType);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << language
         << " lc_messages " << lcMessages
@@ -5306,7 +5344,11 @@ void Ut_MCalendar::testDateYearAndMonth()
     QString result = locale.formatDateTime(mcal, MLocale::DateYearAndMonth, MLocale::TimeNone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -5461,7 +5503,11 @@ void Ut_MCalendar::testDateWeekdayAbbreviatedAndDayOfMonth()
     QString result = locale.formatDateTime(mcal, MLocale::DateWeekdayAbbreviatedAndDayOfMonth, MLocale::TimeNone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -5616,7 +5662,11 @@ void Ut_MCalendar::testDateWeekdayWideAndDayOfMonth()
     QString result = locale.formatDateTime(mcal, MLocale::DateWeekdayWideAndDayOfMonth, MLocale::TimeNone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -6054,7 +6104,11 @@ void Ut_MCalendar::testWeekdayType()
     calendar.setTime(19, 23, 0);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "language " << language << " lc_time " << lcTime
         << " calendar type " << calendar.type()

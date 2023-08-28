@@ -211,7 +211,11 @@ void Ft_Numbers::testQLongLongs()
     loc.setCategoryLocale(MLocale::MLcNumeric, localeNameLcNumeric);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "localeName: " << localeName
         << " localeNameLcNumeric: " << localeNameLcNumeric
@@ -1203,7 +1207,9 @@ void Ft_Numbers::testDoubles()
     MLocale loc(localeName);
     QString result = loc.formatNumber(val);
     QTextStream stream(stdout);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     stream.setCodec("UTF-8");
+#endif
     stream << "result: " << result << " expected: " << formatted << "\n";
     QCOMPARE(result, formatted);
 }
@@ -2432,7 +2438,9 @@ void Ft_Numbers::testToFloat()
     float result = locale.toFloat(formattedFloat);
 #if defined(VERBOSE_OUTPUT)
     QTextStream stream(stdout);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     stream.setCodec("UTF-8");
+#endif
     stream << localeName
            << " formattedFloat: " << formattedFloat
            << " parsable: " << parsable
@@ -2609,7 +2617,11 @@ void Ft_Numbers::testDoublesWithFormatting()
     MLocale loc(localeName);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "localeName: " << localeName
         << " number: " << val
@@ -2888,7 +2900,11 @@ void Ft_Numbers::testCurrencies()
     locale.setCategoryLocale(MLocale::MLcNumeric, lcNumeric);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << " language: " << language
         << " lcMonetary: " << lcMonetary
@@ -3042,7 +3058,11 @@ void Ft_Numbers::testPercentPlaceholdersInQt()
     MLocale::setDefault(locale);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << " localeName: " << localeName
         << " localeNameLcNumeric: " << localeNameLcNumeric
@@ -3139,7 +3159,11 @@ void Ft_Numbers::testToLatinNumbers()
     QString result = MLocale::toLatinNumbers(input);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << QTest::currentTestFunction() << " "
         << QTest::currentDataTag() << "\n"
@@ -3444,7 +3468,11 @@ void Ft_Numbers::testToLocalizedNumbers()
     QString result = locale.toLocalizedNumbers(input);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << QTest::currentTestFunction() << " "
         << QTest::currentDataTag() << "\n"

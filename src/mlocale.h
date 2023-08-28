@@ -28,7 +28,9 @@
 #include <QMap>
 
 class QString;
-class QStringList;
+#if QT_VERSION < 0x051500
+    class QStringList;
+#endif
 class QDateTime;
 class QTranslator;
 
