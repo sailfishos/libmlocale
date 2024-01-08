@@ -47,14 +47,14 @@ Requires:   %{name} = %{version}-%{release}
 %build
 export QT_SELECT=5
 
-%configure --disable-static -icu
+%configure -icu
 %make_build
 
 %install
 export QT_SELECT=5
-%make_install
+%qmake5_install
 
-find -name \*.a -delete %{buildroot}
+find %{buildroot} -name \*.a -delete
 
 %post -p /sbin/ldconfig
 
