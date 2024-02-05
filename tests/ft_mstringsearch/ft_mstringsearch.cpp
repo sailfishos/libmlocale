@@ -72,7 +72,11 @@ void Ft_MStringSearch::testConstructors()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream << "language: " << language
                 << " lcCollate: " << lcCollate << "\n"
                 << " pattern               : " << pattern << "\n"
@@ -401,7 +405,11 @@ void Ft_MStringSearch::testSearch()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream
         << "****************************************************\n"
         << QTest::currentDataTag()

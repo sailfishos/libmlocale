@@ -229,8 +229,13 @@ bool MLocationDatabasePrivate::loadTimeZoneData()
     QString line;
     do {
         line = stream.readLine();
+#if QT_VERSION < 0x051500
         QStringList timeZoneIds(line.split(QLatin1Char(' '),
                                            QString::SkipEmptyParts));
+#else
+        QStringList timeZoneIds(line.split(QLatin1Char(' '),
+                                           Qt::SkipEmptyParts));
+#endif
         if(!timeZoneIds.isEmpty()) {
             QString canonicalTimeZoneId = timeZoneIds.first();
             foreach(const QString &alias, timeZoneIds) {

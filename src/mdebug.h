@@ -65,7 +65,11 @@ private:
     QtMsgType convertMsgType(int type);
 
     struct Stream {
+#if QT_VERSION < 0x051500
         Stream(int type) : ts(&buffer, QIODevice::WriteOnly), ref(1), type(type), output(true) {}
+#else
+        Stream(int type) : ts(&buffer, QIODeviceBase::WriteOnly), ref(1), type(type), output(true) {}
+#endif
 
         QTextStream ts;
         QString buffer;

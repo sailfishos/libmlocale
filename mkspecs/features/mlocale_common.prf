@@ -4,7 +4,7 @@ macx {
     INCLUDEPATH += /Library/Frameworks/mlocale.framework/Headers
 }
 
-ML_INC_DIR = $$ML_PREFIX/include/mlocale
+ML_INC_DIR = $$ML_PREFIX/include/mlocale$${QT_MAJOR_VERSION}
 ML_LIB_DIR = $$ML_LIBDIR
 
 INCLUDEPATH += $${ML_INC_DIR}

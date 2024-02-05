@@ -171,7 +171,9 @@ void Ft_MCharsetDetector::testConstructors()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     debugStream.setCodec("UTF-8");
+#endif
     debugStream << "result1:    " << result1
                 << " size: " << result1.size() << "\n"
                 << "textResult: " << textResult
@@ -1965,7 +1967,7 @@ void Ft_MCharsetDetector::testDetection()
     QFETCH(QString, inputEncoding);
     QFETCH(QString, bestMatchName);
     QFETCH(QString, bestMatchLanguage);
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1());
     if (codec == NULL) // there is no codec matching the name
         QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
@@ -1974,6 +1976,9 @@ void Ft_MCharsetDetector::testDetection()
     // add Latin1 junk:
     // encodedString = QByteArray(QString("ï").toLatin1()) + encodedString;
     MCharsetDetector charsetDetector(encodedString);
+#else
+    MCharsetDetector charsetDetector(text.toUtf8());
+#endif
     charsetDetector.setDeclaredLocale(declaredLocale);
     charsetDetector.setDeclaredEncoding(declaredEncoding);
     charsetDetector.enableInputFilter(enableInputFilter);
@@ -1984,13 +1989,19 @@ void Ft_MCharsetDetector::testDetection()
     int numberOfMatches = mCharsetMatchList.size();
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream << "======================================================================\n";
     debugStream << QTest::currentDataTag() << "\n";
     debugStream << "-------input text in UTF-8:\n";
     debugStream << text << "\n";
     debugStream << "-------input text converted to " << inputEncoding << ":\n";
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream << encodedString << "\n";
+#endif
     debugStream << "------ converted back to UTF-8 using the best detected encoding:\n";
     debugStream << charsetDetector.text(bestMatch) << "\n";
     debugStream << "----------------------------------------------------------------------\n";

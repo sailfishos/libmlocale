@@ -294,7 +294,11 @@ void Ut_MLocationDatabase::testCitiesInTimeZone()
     QList<MCity> citiesInTimeZone = db.citiesInTimeZone(timeZoneId);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream << "number of cities in time zone "
                 << timeZoneId << ' '
                 << citiesInTimeZone.size() << '\n';
@@ -656,7 +660,11 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
     }
 
     QTextStream debugStream(stderr);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
 
     QDateTime summerDateTime(QDate(2010, 6, 21), QTime(0, 0, 0, 0), Qt::LocalTime);
     QDateTime winterDateTime(QDate(2009, 12, 24), QTime(0, 0, 0, 0), Qt::LocalTime);
@@ -800,7 +808,11 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
 
     MLocale locale("en_US");
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
 
     QStringList olsonIds;
 #if 0

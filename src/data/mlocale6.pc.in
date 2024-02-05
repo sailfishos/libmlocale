@@ -1,0 +1,11 @@
+prefix=@@M_UNIX_INSTALL_PREFIX@@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/mlocale6
+
+Name: mlocale6
+Description: MeeGo Locale Library
+Version: @@M_VERSION@@
+Requires: Qt6Gui
+Cflags: -I${includedir}
+Libs: -L${libdir} -lmlocale6

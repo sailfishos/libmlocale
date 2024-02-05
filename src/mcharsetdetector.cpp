@@ -30,7 +30,9 @@
 
 #include <QString>
 #include <QStringList>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QTextCodec>
+#endif
 #include <QDebug>
 
 namespace ML10N {
@@ -500,6 +502,12 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
 QString MCharsetDetector::text(const MCharsetMatch &charsetMatch)
 {
     Q_D(MCharsetDetector);
+    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if(charsetMatch.name().toLatin1().isEmpty() || charsetMatch.name().toLatin1() != "UTF-8") {
+        qWarning() << "Don`t use non utf8 charset";
+    }
+    return QString(d->_ba.constData());
+    #else
     clearError();
     QTextCodec *codec
         = QTextCodec::codecForName(charsetMatch.name().toLatin1());
@@ -519,6 +527,7 @@ QString MCharsetDetector::text(const MCharsetMatch &charsetMatch)
             d->_status = U_INVALID_CHAR_FOUND;
         return text;
     }
+    #endif
 }
 
 void MCharsetDetector::setDeclaredLocale(const QString &locale)
@@ -575,11 +584,11 @@ QStringList MCharsetDetector::getAllDetectableCharsets()
     // Iscii-Gjr Iscii-Pnj Iscii-Bng Iscii-Dev TSCII GBK gb2312.1980-0
     // gbk-0 CP936 MS936 windows-936 jisx0201*-0 jisx0208*-0
     // ksc5601.1987-0 cp949 Big5-HKSCS big5-0 big5hkscs-0
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QStringList availableCodecsQt;
     foreach(const QByteArray &ba, QTextCodec::availableCodecs())
         availableCodecsQt << QString(ba);
-
+#endif
     // Charsets detectable by libicu 4.4.2:
     QStringList allDetectableCharsetsICU;
     allDetectableCharsetsICU
@@ -673,7 +682,11 @@ QStringList MCharsetDetector::getAllDetectableCharsets()
 
     // remove all charsets not supported by QTextCodec and all duplicates:
     foreach(const QString &cs, allDetectableCharsetsICU) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if(!d->_allDetectableCharsets.contains(cs))
+#else
         if(availableCodecsQt.contains(cs) && !d->_allDetectableCharsets.contains(cs))
+#endif
             d->_allDetectableCharsets << cs;
     }
 
