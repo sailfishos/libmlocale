@@ -2659,9 +2659,9 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromMCalendar()
                 expectedResult = dateResults[dateType] + ", " + timeResults[timeType];
             else if(locale.categoryName(MLocale::MLcTime).startsWith("fa_IR")) {
                 if (dateType == MLocale::DateShort || dateType == MLocale::DateMedium)
-                        expectedResult = "‫" + dateResults[dateType] + "،‏ " + timeResults[timeType] + "‬";
+                        expectedResult = QChar(0x202B) + dateResults[dateType] + "،‏ " + timeResults[timeType] + QChar(0x202C);
                     else
-                        expectedResult = "‫" + dateResults[dateType] + "، ساعت " + timeResults[timeType]  + "‬";
+                        expectedResult = QChar(0x202B) + dateResults[dateType] + "، ساعت " + timeResults[timeType]  + QChar(0x202C);
             }
             else if(locale.categoryName(MLocale::MLcTime).startsWith("vi")) {
                 expectedResult = timeResults[timeType] + " " + dateResults[dateType];
