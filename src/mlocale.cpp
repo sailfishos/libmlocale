@@ -47,6 +47,7 @@ using namespace icu;
 #include <QMutex>
 #include <QDateTime>
 #include <QPointer>
+#include <QRegularExpression>
 
 #ifdef HAVE_ICU
 #include "mcollator.h"
@@ -286,7 +287,8 @@ bool MTranslationCatalog::loadWith(MLocale *mlocale, MLocale::Category category)
     // load "foo_de.qm" because the language has been switched to German
     // but "foo_de.qm" does not exist. We do *not* want to keep the previous
     // "foo_ar.qm" contents in that case.
-    _translator.load("", 0);
+    bool _ = _translator.load("", 0);
+    Q_UNUSED(_)
     return false;
 }
 
@@ -698,7 +700,9 @@ void MLocalePrivate::simplifyDateFormatForMixing(icu::DateFormat *df) const
         // hardcoded text in the language of the the time category and
         // most likely not understandable in the language of the
         // message locale:
-        icuFormatQString.replace(QRegExp("'[^']*'"), QLatin1String(""));
+        icuFormatQString.replace(
+            QRegularExpression("'[^']*'"),
+            QLatin1String(""));
         // use stand-alone versions of month names and weekday names only
         // inflected versions will make no sense in the context of a different
         // language:
@@ -875,10 +879,9 @@ bool MLocalePrivate::mixingSymbolsWanted(const QString &categoryNameMessages, co
                       || categoryScriptTime == QLatin1String("Hebr"));
     bool messagesIsRtl = (categoryScriptMessages == QLatin1String("Arab")
                           || categoryScriptMessages == QLatin1String("Hebr"));
-    if (categoryNameTime.contains(QRegExp("@.*mix-time-and-language=yes"))) {
+    if (categoryNameTime.contains(QRegularExpression("@.*mix-time-and-language=yes"))) {
         return true;
-    }
-    else if(!categoryNameTime.contains(QRegExp("@.*mix-time-and-language=no"))
+    } else if(!categoryNameTime.contains(QRegularExpression("@.*mix-time-and-language=no"))
        && languageMessages != languageTime
        && languageMessages != "zh"
        && languageMessages != "ja"
@@ -908,8 +911,7 @@ bool MLocalePrivate::mixingSymbolsWanted(const QString &categoryNameMessages, co
         // hopeless.  (See also
         // https://projects.maemo.org/bugzilla/show_bug.cgi?id=270020)
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -1651,16 +1653,16 @@ bool MLocalePrivate::parseIcuLocaleString(const QString &localeString, QString *
     // as in the above example, but there is the exception
     // es_419, i.e. Spanish in Latin America where the “country code”
     // is “419”.
-    QRegExp regexp("^([a-z]{2,3})(?:_([A-Z][a-z]{3,3}))?(?:_([A-Z]{2,2}|419))?(?:_{1,2}([A-Z][A-Z_]*))?(?:@.*)?$");
-    if (regexp.indexIn(localeString) == 0
-        && regexp.capturedTexts().size() == 5) {
-        *language = regexp.capturedTexts().at(1);
-        *script   = regexp.capturedTexts().at(2); // "" if no match
-        *country  = regexp.capturedTexts().at(3); // "" if no match
-        *variant  = regexp.capturedTexts().at(4); // "" if no match
+    QRegularExpression regexp("^([a-z]{2,3})(?:_([A-Z][a-z]{3,3}))?(?:_([A-Z]{2,2}|419))?(?:_{1,2}([A-Z][A-Z_]*))?(?:@.*)?$");
+    QRegularExpressionMatch match = regexp.match(localeString);
+
+    if (match.hasMatch() && match.capturedTexts().size() == 5) {
+        *language = match.captured(1);
+        *script = match.captured(2);
+        *country = match.captured(3);
+        *variant = match.captured(4);
         return true;
-    }
-    else {
+    } else {
         *language = "";
         *script = "";
         *country = "";
@@ -1747,20 +1749,22 @@ cleanLanguageCountryPosix(QString &localeString)
     // let’s make this behave the same way as the icu locale names work for es_419,
     // we only use LANG as a fallback to specify a locale when gconf isn’t available
     // or doesn’t work.
-    QRegExp regexp("([a-z]{2,3})(_([A-Z]{2,2}|419))?(?:.(?:[a-zA-Z0-9-]+))?(@([A-Z][a-z]+))?");
+    QRegularExpression regexp("([a-z]{2,3})(_([A-Z]{2,2}|419))?(?:.(?:[a-zA-Z0-9-]+))?(@([A-Z][a-z]+))?");
+    QRegularExpressionMatch match = regexp.match(localeString);
 
-    if (regexp.indexIn(localeString) == 0 &&
-            regexp.capturedTexts().size() == 6) { // size of regexp pattern above
+    if (match.hasMatch()
+            && match.capturedTexts().size() == 6) { // size of regexp pattern above
         QStringList strings;
-
-        strings << regexp.capturedTexts().at(1); // language
+        strings << match.captured(1); // language
 
         // POSIX locale modifier, interpreted as script
-        if (!regexp.capturedTexts().at(5).isEmpty())
-            strings << regexp.capturedTexts().at(5);
+        if (!match.captured(5).isEmpty()) {
+            strings << match.captured(5);
+        }
 
-        if (!regexp.capturedTexts().at(3).isEmpty())
-            strings << regexp.capturedTexts().at(3); // country
+        if (!match.captured(3).isEmpty()) {
+            strings << match.captured(3); // country
+        }
 
         // we don't need variant
         return strings.join("_");
@@ -2817,7 +2821,7 @@ void MLocalePrivate::fixFormattedNumberForRTL(QString *formattedNumber) const
         // (actually some of the Arabic currency symbols have RLM markers in the icu
         // data ...).
         removeDirectionalFormattingCodes(formattedNumber);
-        if(formattedNumber->contains(QRegExp(QString::fromUtf8("[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]")))) {
+        if (formattedNumber->contains(QRegularExpression(QString::fromUtf8("[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]")))) {
             swapPostAndPrefixOfFormattedNumber(formattedNumber);
         }
     }
@@ -2864,6 +2868,7 @@ void MLocalePrivate::fixFormattedNumberForRTL(QString *formattedNumber) const
     formattedNumber->prepend(QChar(0x202A)); // LEFT-TO-RIGHT EMBEDDING
     formattedNumber->append(QChar(0x202C)); // POP DIRECTIONAL FORMATTING
 #endif
+    Q_UNUSED(q)
     return;
 }
 #endif
@@ -2872,7 +2877,7 @@ void MLocalePrivate::fixFormattedNumberForRTL(QString *formattedNumber) const
 void MLocalePrivate::fixParseInputForRTL(QString *formattedNumber) const
 {
     removeDirectionalFormattingCodes(formattedNumber);
-    if(formattedNumber->contains(QRegExp(QString::fromUtf8("[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]")))) {
+    if(formattedNumber->contains(QRegularExpression(QString::fromUtf8("[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹]")))) {
         swapPostAndPrefixOfFormattedNumber(formattedNumber);
     }
 }
@@ -3846,13 +3851,22 @@ QStringList MLocale::exemplarCharactersIndex() const
     // the current locale:
     QStringList exemplarCharactersIndex
         = QString::fromUtf8("A B C D E F G H I J K L M N O P Q R S T U V W X Y Z")
-        .split(QLatin1String(" "),QString::SkipEmptyParts);
+#if QT_VERSION < 0x051500
+            .split(QLatin1String(" "),QString::SkipEmptyParts);
+#else
+            .split(QLatin1String(" "),Qt::SkipEmptyParts);
+#endif
     QString charStr;
     if (collationLocaleName.contains(QLatin1String("collation=unihan"))) {
         charStr = QString::fromUtf8("⼀ ⼁ ⼂ ⼃ ⼄ ⼅ ⼆ ⼇ ⼈ ⼉ ⼊ ⼋ ⼌ ⼍ ⼎ ⼏ ⼐ ⼑ ⼒ ⼓ ⼔ ⼕ ⼖ ⼗ ⼘ ⼙ ⼚ ⼛ ⼜ ⼝ ⼞ ⼟ ⼠ ⼡ ⼢ ⼣ ⼤ ⼥ ⼦ ⼧ ⼨ ⼩ ⼪ ⼫ ⼬ ⼭ ⼮ ⼯ ⼰ ⼱ ⼲ ⼳ ⼴ ⼵ ⼶ ⼷ ⼸ ⼹ ⼺ ⼻ ⼼ ⼽ ⼾ ⼿ ⽀ ⽁ ⽂ ⽃ ⽄ ⽅ ⽆ ⽇ ⽈ ⽉ ⽊ ⽋ ⽌ ⽍ ⽎ ⽏ ⽐ ⽑ ⽒ ⽓ ⽔ ⽕ ⽖ ⽗ ⽘ ⽙ ⽚ ⽛ ⽜ ⽝ ⽞ ⽟ ⽠ ⽡ ⽢ ⽣ ⽤ ⽥ ⽦ ⽧ ⽨ ⽩ ⽪ ⽫ ⽬ ⽭ ⽮ ⽯ ⽰ ⽱ ⽲ ⽳ ⽴ ⽵ ⽶ ⽷ ⽸ ⽹ ⽺ ⽻ ⽼ ⽽ ⽾ ⽿ ⾀ ⾁ ⾂ ⾃ ⾄ ⾅ ⾆ ⾇ ⾈ ⾉ ⾊ ⾋ ⾌ ⾍ ⾎ ⾏ ⾐ ⾑ ⾒ ⾓ ⾔ ⾕ ⾖ ⾗ ⾘ ⾙ ⾚ ⾛ ⾜ ⾝ ⾞ ⾟ ⾠ ⾡ ⾢ ⾣ ⾤ ⾥ ⾦ ⾧ ⾨ ⾩ ⾪ ⾫ ⾬ ⾭ ⾮ ⾯ ⾰ ⾱ ⾲ ⾳ ⾴ ⾵ ⾶ ⾷ ⾸ ⾹ ⾺ ⾻ ⾼ ⾽ ⾾ ⾿ ⿀ ⿁ ⿂ ⿃ ⿄ ⿅ ⿆ ⿇ ⿈ ⿉ ⿊ ⿋ ⿌ ⿍ ⿎ ⿏ ⿐ ⿑ ⿒ ⿓ ⿔ ⿕");
         // add a dummy bucket at the end 𪛖 is the last character in unihan order:
         charStr += QString::fromUtf8(" 𪛖");
-        return charStr.split(QLatin1String(" "),QString::SkipEmptyParts);
+        return charStr
+#if QT_VERSION < 0x051500
+            .split(QLatin1String(" "),QString::SkipEmptyParts);
+#else
+            .split(QLatin1String(" "),Qt::SkipEmptyParts);
+#endif
     }
     // special treatment for Chinese locales because these have the
     // collation options "stroke" and "pinyin" which require different
@@ -3864,13 +3878,23 @@ QStringList MLocale::exemplarCharactersIndex() const
     if(collationLocaleName.startsWith(QLatin1String("zh"))) {
         if(collationLocaleName.contains(QLatin1String("collation=zhuyin"))) {
             charStr = QString::fromUtf8("ㄅ ㄆ ㄇ ㄈ ㄉ ㄊ ㄋ ㄌ ㄍ ㄎ ㄏ ㄐ ㄑ ㄒ ㄓ ㄔ ㄕ ㄖ ㄗ ㄘ ㄙ ㄧ ㄨ ㄩ ㄚ ㄛ ㄜ ㄝ ㄞ ㄟ ㄠ ㄡ ㄢ ㄣ ㄤ ㄥ ㄦ ㄪ ㄫ ㄬ ㄭ");
-            return charStr.split(QLatin1String(" "),QString::SkipEmptyParts);
+            return charStr
+#if QT_VERSION < 0x051500
+                .split(QLatin1String(" "),QString::SkipEmptyParts);
+#else
+                .split(QLatin1String(" "),Qt::SkipEmptyParts);
+#endif
         }
         if(collationLocaleName.contains(QLatin1String("collation=pinyinsearch"))) {
             collationLocaleName = QLatin1String("zh_CN@collation=pinyinsearch");
             charStr = QString::fromUtf8("A B C D E F G H I J K L M N O P Q R S T U V W X Y Z");
             exemplarCharactersIndex =
-                charStr.split(QLatin1String(" "),QString::SkipEmptyParts);
+                charStr
+#if QT_VERSION < 0x051500
+                    .split(QLatin1String(" "),QString::SkipEmptyParts);
+#else
+                    .split(QLatin1String(" "),Qt::SkipEmptyParts);
+#endif
             // to get all characters with pinyin starting with z
             // (last one is 蓙) into the Z bucket
             exemplarCharactersIndex << QString::fromUtf8("Α"); // GREEK CAPITAL LETTER ALPHA
@@ -3912,8 +3936,12 @@ QStringList MLocale::exemplarCharactersIndex() const
     charStr.remove(']');
     charStr.remove('{');
     charStr.remove('}');
-    exemplarCharactersIndex = charStr.split(QLatin1String(" "),
-                                            QString::SkipEmptyParts);
+    exemplarCharactersIndex = charStr
+#if QT_VERSION < 0x051500
+        .split(QLatin1String(" "),QString::SkipEmptyParts);
+#else
+        .split(QLatin1String(" "),Qt::SkipEmptyParts);
+#endif
 
     // Special hack for the last Japanese bucket:
     if (exemplarCharactersIndex.last() == QString::fromUtf8("わ")) {
@@ -3930,7 +3958,12 @@ QStringList MLocale::exemplarCharactersIndex() const
          || collationLocaleName.startsWith(QLatin1String("zh_SG")))
         ) {
         charStr = QString::fromUtf8("ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ ｉ ｊ ｋ ｌ ｍ ｎ ｏ ｐ ｑ ｒ ｓ ｔ ｕ ｖ ｗ ｘ ｙ ｚ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z");
-        return charStr.split(QLatin1String(" "),QString::SkipEmptyParts);
+        return charStr
+#if QT_VERSION < 0x051500
+                .split(QLatin1String(" "),QString::SkipEmptyParts);
+#else
+                .split(QLatin1String(" "),Qt::SkipEmptyParts);
+#endif
     }
     return exemplarCharactersIndex;
 }
@@ -4770,8 +4803,9 @@ QString MLocalePrivate::formatPhoneNumber( const QString& phoneNumber,
     MLocale::PhoneNumberGrouping grouping ) const
 {
   // first do sanity check of the input string
-  QRegExp rx( "\\+?\\d*" );
-  if ( ! rx.exactMatch( phoneNumber ) )
+  QRegularExpression rx( QRegularExpression::anchoredPattern("\\+?\\d*") );
+  QRegularExpressionMatch match = rx.match(phoneNumber);
+  if (!match.hasMatch())
   {
     qWarning( "MLocale::formatPhoneNumber: cannot understand number: %s",
 	      qPrintable( phoneNumber ) );

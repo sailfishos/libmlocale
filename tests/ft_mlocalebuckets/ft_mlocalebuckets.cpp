@@ -837,7 +837,11 @@ void Ft_MLocaleBuckets::sortTestFiles()
     QVERIFY(buckets.isEmpty());
     QVERIFY(buckets.bucketCount() == 0);
     QTextStream debugStream(stdout);
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     debugStream.setCodec("UTF-8");
+#else
+    debugStream.setEncoding(QStringConverter::Utf8);
+#endif
     debugStream << "**********************************************\n";
     debugStream << prettyResult;
     debugStream.flush();

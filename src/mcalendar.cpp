@@ -269,7 +269,11 @@ void MCalendar::setDate(int year, int month, int day)
 //! Sets the calendar date from QDate
 void MCalendar::setDate(const QDate &date)
 {
+#if QT_VERSION < 0x051500
     QDateTime datetime(date);
+#else
+    QDateTime datetime(date.startOfDay());
+#endif
     setDateTime(datetime);
 }
 
