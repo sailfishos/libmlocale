@@ -42,7 +42,7 @@ Requires:   %{name} = %{version}-%{release}
 %{summary}.
 
 %prep
-%setup -q -n %{name}-%{version}
+%autosetup -n %{name}-%{version}
 
 %build
 export QT_SELECT=5
@@ -61,12 +61,10 @@ find %{buildroot} -name \*.a -delete
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license LICENSE.LGPL
 %{_libdir}/*.so.*
 
 %files devel
-%defattr(-,root,root,-)
 %{_datadir}/qt5/mkspecs/features/*.prf
 %{_libdir}/*.so
 %{_libdir}/*.prl
@@ -75,13 +73,11 @@ find %{buildroot} -name \*.a -delete
 %{_libdir}/pkgconfig/*.pc
 
 %files tests
-%defattr(-,root,root,-)
 %{_libdir}/libmlocale-tests5
 %dir %{_datadir}/libmlocale-tests5
 %{_datadir}/libmlocale-tests5/tests.xml
 
 %files benchmarks
-%defattr(-,root,root,-)
 %{_libdir}/libmlocale-benchmarks5
 %dir %{_datadir}/libmlocale-benchmarks5
 %{_datadir}/libmlocale-benchmarks5/tests.xml
