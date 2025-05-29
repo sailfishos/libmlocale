@@ -18,7 +18,7 @@
 ****************************************************************************/
 
 #ifndef ML10N_MCHARSETDETECTOR_P_H
-#define ML10N_MCHARSETDETECTR_P_H
+#define ML10N_MCHARSETDETECTOR_P_H
 
 #include <unicode/utypes.h>
 
