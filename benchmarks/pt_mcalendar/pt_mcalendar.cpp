@@ -18,7 +18,6 @@
 ****************************************************************************/
 
 #include <QCoreApplication>
-#include <QTextCodec>
 #include <MLocale>
 #include <unicode/uversion.h>
 
@@ -29,15 +28,6 @@ using ML10N::MCalendar;
 
 void Pt_MCalendar::initTestCase()
 {
-    QProcess process;
-    process.start("sh -c \"dpkg -s libicu44 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
-    if (!process.waitForFinished()) {
-        qDebug() << "cannot run process to check libicu44 package version , exiting ...";
-        exit(1);
-    }
-    icuPackageVersion = process.readAllStandardOutput();
-    icuPackageVersion.replace("\n", "");
-    qDebug() << "libicu44 package version is:" << icuPackageVersion;
 }
 
 void Pt_MCalendar::cleanupTestCase()

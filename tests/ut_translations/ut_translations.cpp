@@ -622,30 +622,30 @@ void Ut_Translations::testQtTrIdMultipleVariable()
     locale.removeTrCatalog("ut_translations-qttrid");
     MLocale::setDefault(locale);
     // Everything should be untranslated now:
-    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1).arg(variable2),
-             messageId.arg(variable1).arg(variable2));
+    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1, variable2),
+             messageId.arg(variable1, variable2));
 
     // installs the catalog for the “Engineering English”:
     locale.installTrCatalog("ut_translations-qttrid.qm");
     QCOMPARE(locale.translate("", qPrintable(messageId))
-             .arg(variable1).arg(variable2),
-             engEnglish.arg(variable1).arg(variable2));
+             .arg(variable1, variable2),
+             engEnglish.arg(variable1, variable2));
 
     MLocale::setDefault(locale);
     // now qtTrId should return the engineering English:
-    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1).arg(variable2),
-             engEnglish.arg(variable1).arg(variable2));
+    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1, variable2),
+             engEnglish.arg(variable1, variable2));
 
     // installs the catalog for the real translation:
     locale.installTrCatalog("ut_translations-qttrid");
     QCOMPARE(locale.translate(
-                 "", qPrintable(messageId)).arg(variable1).arg(variable2),
+                 "", qPrintable(messageId)).arg(variable1, variable2),
              translation);
 
     MLocale::setDefault(locale);
     // now qtTrId should return the real translation, unless
     // the message is not translated at all:
-    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1).arg(variable2),
+    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1, variable2),
              translation);
 
     // removes the catalogs for both the engineering English and the
@@ -653,8 +653,8 @@ void Ut_Translations::testQtTrIdMultipleVariable()
     locale.removeTrCatalog("ut_translations-qttrid");
     MLocale::setDefault(locale);
     // Everything should be untranslated again now:
-    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1).arg(variable2),
-             messageId.arg(variable1).arg(variable2));
+    QCOMPARE(qtTrId(qPrintable(messageId)).arg(variable1, variable2),
+             messageId.arg(variable1, variable2));
 }
 
 void Ut_Translations::testQtTrIdMultipleVariableWithPlural_data()

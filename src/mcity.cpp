@@ -131,9 +131,9 @@ qint32 MCity::timeZoneRawOffset() const
 qint32 MCity::timeZoneDstOffset(QDateTime dateTime) const
 {
     Q_D(const MCity);
-    UBool local = dateTime.timeSpec() == Qt::LocalTime? true : false;
+    UBool local = dateTime.timeZone() == QTimeZone::systemTimeZone() ? true : false;
     // we avoid time conversions done by Qt:
-    dateTime.setTimeSpec(Qt::UTC);
+    dateTime.setTimeZone(QTimeZone::utc());
     UDate icuDate = dateTime.toMSecsSinceEpoch();
     icu::TimeZone *tz =
         TimeZone::createTimeZone(MIcuConversions::qStringToUnicodeString(d->timeZone));
@@ -153,9 +153,9 @@ qint32 MCity::timeZoneDstOffset(QDateTime dateTime) const
 qint32 MCity::timeZoneTotalOffset(QDateTime dateTime) const
 {
     Q_D(const MCity);
-    UBool local = dateTime.timeSpec() == Qt::LocalTime? true : false;
+    UBool local = dateTime.timeZone() == QTimeZone::systemTimeZone() ? true : false;
     // we avoid time conversions done by Qt:
-    dateTime.setTimeSpec(Qt::UTC);
+    dateTime.setTimeZone(QTimeZone::utc());
     UDate icuDate = dateTime.toMSecsSinceEpoch();
     icu::TimeZone *tz =
         TimeZone::createTimeZone(MIcuConversions::qStringToUnicodeString(d->timeZone));
@@ -168,6 +168,12 @@ qint32 MCity::timeZoneTotalOffset(QDateTime dateTime) const
         return rawOffset + dstOffset;
     else
         return INT32_MAX;
+}
+#else
+qint32 MCity::timeZoneTotalOffset(QDateTime dateTime) const
+{
+    Q_UNUSED(dateTime);
+    return 0;
 }
 #endif
 

@@ -20,7 +20,6 @@
 #include "ft_sorting.h"
 #include <MLocale>
 #include <MCollator>
-#include <QTextCodec>
 #include <QDebug>
 #include <QProcess>
 
@@ -38,15 +37,6 @@ public:
 
 void Ft_Sorting::initTestCase()
 {
-    QProcess process;
-    process.start("sh -c \"dpkg -s libicu44 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
-    if (!process.waitForFinished()) {
-        qDebug() << "cannot run process to check libicu44 package version , exiting ...";
-        exit(1);
-    }
-    icuPackageVersion = process.readAllStandardOutput();
-    icuPackageVersion.replace("\n", "");
-    qDebug() << "libicu44 package version is:" << icuPackageVersion;
 }
 
 void Ft_Sorting::cleanup()
@@ -225,69 +215,33 @@ void Ft_Sorting::testMLocaleSorting_data()
             << QString("ø")
             << QString("å");
 
-    if (!icuPackageVersion.isEmpty() &&  icuPackageVersion < "4.2.1-0maemo3") {
-        qDebug() << "NB#154449 not yet fixed, sort order must be wrong.";
-        QTest::newRow("Sorting_nb_NO")
-                << QString("nb_NO")
-                << QString("å")
-                << QString("ø")
-                << QString("z")
-                << QString("a")
-                << QString("f")
+    QTest::newRow("Sorting_nb_NO")
+            << QString("nb_NO")
+            << QString("å")
+            << QString("ø")
+            << QString("z")
+            << QString("a")
+            << QString("f")
 
-                << QString("a")
-                << QString("å")
-                << QString("f")
-                << QString("ø")
-                << QString("z");
-    } else {
-        qDebug() << "NB#154449 fixed, sort order must be correct.";
-        QTest::newRow("Sorting_nb_NO")
-                << QString("nb_NO")
-                << QString("å")
-                << QString("ø")
-                << QString("z")
-                << QString("a")
-                << QString("f")
+            << QString("a")
+            << QString("f")
+            << QString("z")
+            << QString("ø")
+            << QString("å");
 
-                << QString("a")
-                << QString("f")
-                << QString("z")
-                << QString("ø")
-                << QString("å");
-    }
+    QTest::newRow("Sorting_no_NO")
+            << QString("no_NO")
+            << QString("å")
+            << QString("ø")
+            << QString("z")
+            << QString("a")
+            << QString("f")
 
-    if (!icuPackageVersion.isEmpty() &&  icuPackageVersion < "4.2.1-0maemo3") {
-        qDebug() << "NB#154449 not yet fixed, sort order must be wrong.";
-        QTest::newRow("Sorting_no_NO")
-                << QString("no_NO")
-                << QString("å")
-                << QString("ø")
-                << QString("z")
-                << QString("a")
-                << QString("f")
-
-                << QString("a")
-                << QString("å")
-                << QString("f")
-                << QString("ø")
-                << QString("z");
-    } else {
-        qDebug() << "NB#154449 fixed, sort order must be correct.";
-        QTest::newRow("Sorting_no_NO")
-                << QString("no_NO")
-                << QString("å")
-                << QString("ø")
-                << QString("z")
-                << QString("a")
-                << QString("f")
-
-                << QString("a")
-                << QString("f")
-                << QString("z")
-                << QString("ø")
-                << QString("å");
-    }
+            << QString("a")
+            << QString("f")
+            << QString("z")
+            << QString("ø")
+            << QString("å");
 
     QTest::newRow("Sorting_en_GB")
             << QString("en_EN")

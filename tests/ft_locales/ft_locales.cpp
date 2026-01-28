@@ -19,6 +19,15 @@
 
 #include "ft_locales.h"
 
+#include <QtTest/QtTest>
+#include <Qt>
+#include <QCoreApplication>
+#include <QGuiApplication>
+#include <QRegularExpression>
+#include <QTimeZone>
+
+#include <MCalendar>
+
 #define VERBOSE_OUTPUT
 
 using ML10N::MLocale;
@@ -68,12 +77,12 @@ void Ft_Locales::testBug169305()
     locale0.installTrCatalog("foo");
     MLocale::setDefault(locale0);
     QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("LTR"));
-    QCOMPARE(qApp->layoutDirection(), Qt::LeftToRight);
+    QCOMPARE(QGuiApplication::layoutDirection(), Qt::LeftToRight);
     MLocale locale1("ar_SA@layout-direction=auto");
     locale1.installTrCatalog("foo");
     MLocale::setDefault(locale1);
     QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("RTL"));
-    QCOMPARE(qApp->layoutDirection(), Qt::RightToLeft);
+    QCOMPARE(QGuiApplication::layoutDirection(), Qt::RightToLeft);
     MLocale locale2;
     QCOMPARE(locale2.name(), QString("ar_SA@layout-direction=auto"));
     locale2.installTrCatalog("foo");
@@ -81,12 +90,12 @@ void Ft_Locales::testBug169305()
     QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("RTL"));
     QCoreApplication::processEvents();
     QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("RTL"));
-    QCOMPARE(qApp->layoutDirection(), Qt::RightToLeft);
+    QCOMPARE(QGuiApplication::layoutDirection(), Qt::RightToLeft);
     MLocale::setDefault(locale0);
     QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("LTR"));
     QCoreApplication::processEvents();
     QCOMPARE(QCoreApplication::translate("QApplication", "QT_LAYOUT_DIRECTION"), QString("LTR"));
-    QCOMPARE(qApp->layoutDirection(), Qt::LeftToRight);
+    QCOMPARE(QGuiApplication::layoutDirection(), Qt::LeftToRight);
 }
 
 void Ft_Locales::testMLocaleConstructor()
@@ -476,11 +485,11 @@ void Ft_Locales::testMLocaleTextDirection()
     MLocale locale(localeName);
     QCOMPARE((int)locale.textDirection(), direction);
     MLocale::setDefault(locale);
-    if(localeName.contains(QRegExp("@.*layout-direction=auto")))
+    if(localeName.contains(QRegularExpression("@.*layout-direction=auto")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LayoutDirectionAuto);
-    else if(localeName.contains(QRegExp("@.*layout-direction=ltr")))
+    else if(localeName.contains(QRegularExpression("@.*layout-direction=ltr")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LeftToRight);
-    else if(localeName.contains(QRegExp("@.*layout-direction=rtl")))
+    else if(localeName.contains(QRegularExpression("@.*layout-direction=rtl")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::RightToLeft);
     else
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LeftToRight);
@@ -772,7 +781,6 @@ void Ft_Locales::testMLocaleLanguageEndonym()
     MLocale locale(locale_name);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "locale name: " << locale_name
         << " result: " << locale.languageEndonym()
@@ -1084,7 +1092,6 @@ void Ft_Locales::testMLocaleToLower()
     }
 #if 1
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "localeName      [" << localeName      << "]\n"
         << "testString      [" << testString      << "]" << testStringCodePoints << "\n"
@@ -1234,7 +1241,6 @@ void Ft_Locales::testMLocaleToUpper()
     }
 #if 1
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "localeName      [" << localeName      << "]\n"
         << "testString      [" << testString      << "]" << testStringCodePoints << "\n"
@@ -1299,7 +1305,6 @@ void Ft_Locales::testMLocaleJoinStringList()
     QString result = locale.joinStringList(texts);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "localeName= " << localeName << "\n"
         << " expectedResult= [" << expectedResult << "]\n"
@@ -3915,7 +3920,6 @@ void Ft_Locales::testMLocaleIndexBucket()
            locale.collator());
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream << " stringsSorted.size():" << stringsSorted.size()
                 << " expectedBuckets.size():" << expectedBuckets.size()
                 << "\n";
@@ -4079,7 +4083,6 @@ void Ft_Locales::testDifferentStrengthComparison()
     QList<MLocale::Comparison> comparisonResults;
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << " lc_collate=" << lcCollate
         << " " << string1 << " " << string2
@@ -4419,7 +4422,7 @@ void Ft_Locales::checkAvailableLocales()
     // (i.e. es_419 should be near es, not at the end of the list):
     std::sort(supportedLocaleNames.begin(), supportedLocaleNames.end());
     MCalendar::setSystemTimeZone("GMT+0");
-    QDateTime dateTime(QDate(2008, 7, 21), QTime(14, 31, 0, 0), Qt::LocalTime);
+    QDateTime dateTime(QDate(2008, 7, 21), QTime(14, 31, 0, 0), QTimeZone::systemTimeZone());
     MCalendar gregorianCalendar(MLocale::GregorianCalendar);
     MCalendar islamicCalendar(MLocale::IslamicCalendar);
     gregorianCalendar.setDateTime(dateTime);
@@ -4814,11 +4817,12 @@ void Ft_Locales::checkAvailableLocales()
     ft_localesTestInputFile.close();
     
     // QTextStream debugStream(stdout);
-    // debugStream.setCodec("UTF-8");
     // debugStream << ft_localesTestInput;
 
     if (ft_localesTestOutput != ft_localesTestInput) {
-        QProcess::execute("diff -u " + ft_localesTestInputFileName + ' ' + ft_localesTestOutputFileName);
+        QProcess process;
+        process.start("diff", QStringList() << "-u" << ft_localesTestInputFileName << ft_localesTestOutputFileName);
+        process.waitForFinished();
 //        QFAIL(qPrintable("files " + ft_localesTestOutputFileName + " and " + ft_localesTestInputFileName + " differ."));
     }
 }

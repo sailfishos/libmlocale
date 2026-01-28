@@ -37,9 +37,6 @@ class Ft_Sorting : public QObject
 {
     Q_OBJECT
 
-private:
-    QString icuPackageVersion;
-
 private slots:
     void initTestCase();
     void cleanup();

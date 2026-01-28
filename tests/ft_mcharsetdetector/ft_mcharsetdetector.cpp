@@ -18,6 +18,11 @@
 ****************************************************************************/
 
 #include "ft_mcharsetdetector.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QStringEncoder>
+#else
+#include <QTextCodec>
+#endif
 
 #define VERBOSE_OUTPUT
 
@@ -140,7 +145,7 @@ void Ft_MCharsetDetector::testConstructors_data()
     QTest::newRow("UTF-8, but force detection as ISO-8859-1")
         << "ISO-8859-1"
         << QString::fromUtf8("täst本").toUtf8()
-        << QString::fromUtf8("tÃ¤stæ") + QChar(0x9c) + QString::fromUtf8("¬")
+        << QString(QString::fromUtf8("tÃ¤stæ") + QChar(0x9c) + QString::fromUtf8("¬"))
         << false;
 }
 
@@ -171,7 +176,6 @@ void Ft_MCharsetDetector::testConstructors()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream << "result1:    " << result1
                 << " size: " << result1.size() << "\n"
                 << "textResult: " << textResult
@@ -201,6 +205,17 @@ void Ft_MCharsetDetector::testDetectableCharsets_data()
 {
     QTest::addColumn<QStringList>("expectedCharsets");
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QTest::newRow("at least these charsets should be detectable")
+        << (QStringList()
+            << "UTF-8"
+            << "UTF-16BE"
+            << "UTF-16LE"
+            << "UTF-32BE"
+            << "UTF-32LE"
+            << "ISO-8859-1")
+        ;
+#else
     QTest::newRow("at least these charsets should be detectable")
         << (QStringList()
             << "UTF-8"
@@ -230,6 +245,7 @@ void Ft_MCharsetDetector::testDetectableCharsets_data()
             << "windows-1256"
             << "windows-1254")
         ;
+#endif
 }
 
 void Ft_MCharsetDetector::testDetectableCharsets()
@@ -1966,11 +1982,19 @@ void Ft_MCharsetDetector::testDetection()
     QFETCH(QString, bestMatchName);
     QFETCH(QString, bestMatchLanguage);
 
-    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1());
-    if (codec == NULL) // there is no codec matching the name
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QStringEncoder encoder(inputEncoding.toLatin1().constData());
+    if (!encoder.isValid())
+        QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
+
+    QByteArray encodedString = encoder.encode(text);
+#else
+    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1().constData());
+    if (!codec)
         QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
 
     QByteArray encodedString = codec->fromUnicode(text);
+#endif
     // add Latin1 junk:
     // encodedString = QByteArray(QString("ï").toLatin1()) + encodedString;
     MCharsetDetector charsetDetector(encodedString);
@@ -1984,7 +2008,6 @@ void Ft_MCharsetDetector::testDetection()
     int numberOfMatches = mCharsetMatchList.size();
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream << "======================================================================\n";
     debugStream << QTest::currentDataTag() << "\n";
     debugStream << "-------input text in UTF-8:\n";

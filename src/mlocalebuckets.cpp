@@ -19,6 +19,7 @@
 
 #include "mlocalebuckets.h"
 #include "mlocalebuckets_p.h"
+#include <algorithm>
 
 namespace ML10N {
 
@@ -121,9 +122,16 @@ void MLocaleBucketsPrivate::removeEmptyBucket(int bucketIndex)
 {
     if (bucketIndex >= 0 && bucketIndex < bucketItems.count() &&
         bucketItems.at(bucketIndex).isEmpty()) {
-        buckets.removeAt(bucketIndex);
-        bucketItems.remove(bucketIndex);
-        origIndices.remove(bucketIndex);
+
+        if (bucketIndex < buckets.count() - 1) {
+            std::move(buckets.begin() + bucketIndex + 1, buckets.end(), buckets.begin() + bucketIndex);
+            std::move(bucketItems.begin() + bucketIndex + 1, bucketItems.end(), bucketItems.begin() + bucketIndex);
+            std::move(origIndices.begin() + bucketIndex + 1, origIndices.end(), origIndices.begin() + bucketIndex);
+        }
+
+        buckets.pop_back();
+        bucketItems.pop_back();
+        origIndices.pop_back();
     }
 }
 

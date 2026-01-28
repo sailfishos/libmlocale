@@ -25,15 +25,6 @@ using ML10N::MLocale;
 
 void Ft_Numbers::initTestCase()
 {
-    QProcess process;
-    process.start("sh -c \"dpkg -s libicu44 | grep Version | perl -pe 's/^Version:[[:space:]]*([^[[:space:]]+)$/$1/g'\"");
-    if (!process.waitForFinished()) {
-        qDebug() << "cannot run process to check libicu44 package version , exiting ...";
-        exit(1);
-    }
-    icuPackageVersion = process.readAllStandardOutput();
-    icuPackageVersion.replace("\n", "");
-    qDebug() << "libicu44 package version is:" << icuPackageVersion;
 }
 
 void Ft_Numbers::cleanupTestCase()
@@ -211,7 +202,6 @@ void Ft_Numbers::testQLongLongs()
     loc.setCategoryLocale(MLocale::MLcNumeric, localeNameLcNumeric);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "localeName: " << localeName
         << " localeNameLcNumeric: " << localeNameLcNumeric
@@ -1203,7 +1193,6 @@ void Ft_Numbers::testDoubles()
     MLocale loc(localeName);
     QString result = loc.formatNumber(val);
     QTextStream stream(stdout);
-    stream.setCodec("UTF-8");
     stream << "result: " << result << " expected: " << formatted << "\n";
     QCOMPARE(result, formatted);
 }
@@ -1490,19 +1479,7 @@ void Ft_Numbers::testToDouble_data()
         << double(1.0E+9)
         << QString("1,000,000,000");
 
-    if (!icuPackageVersion.isEmpty() && icuPackageVersion < "4.4.2-0maemo3") {
-        qDebug() << "NB#206085 not yet fixed, some exponents parsed wrong.";
-        QTest::newRow("en_GB 1E+10")
-            << QString("en_GB")
-            << QString("1E+10")
-            << int(0)
-            << true
-            << double(0)
-            << QString("0");
-    }
-    else {
-        qDebug() << "NB#206085 fixed, exponent parsing corrected.";
-        QTest::newRow("en_GB 1E+10")
+    QTest::newRow("en_GB 1E+10")
             << QString("en_GB")
             << QString("1E+10")
             << int(0)
@@ -1637,7 +1614,6 @@ void Ft_Numbers::testToDouble_data()
             << true
             << double(1000.0)
             << QString("‪۱٬۰۰۰‬");
-    }
 
     QTest::newRow("de_DE 1234.56")
         << QString("de_DE")
@@ -2139,18 +2115,7 @@ void Ft_Numbers::testToFloat_data()
         << float(1.0E+9)
         << QString("1,000,000,000");
 
-    if (!icuPackageVersion.isEmpty() && icuPackageVersion < "4.4.2-0maemo3") {
-        qDebug() << "NB#206085 not yet fixed, some exponents parsed wrong.";
-        QTest::newRow("en_GB 1E+10")
-            << QString("en_GB")
-            << QString("1E+10")
-            << true
-            << float(0)
-            << QString("0");
-    }
-    else {
-        qDebug() << "NB#206085 fixed, exponent parsing corrected.";
-        QTest::newRow("en_GB 1E+10")
+    QTest::newRow("en_GB 1E+10")
             << QString("en_GB")
             << QString("1E+10")
             << true
@@ -2322,7 +2287,6 @@ void Ft_Numbers::testToFloat_data()
             << true
             << float(1000.0)
             << QString("‪۱٬۰۰۰‬");
-    }
 
     QTest::newRow("en_GB 1E+38")
         << QString("en_GB")
@@ -2432,7 +2396,6 @@ void Ft_Numbers::testToFloat()
     float result = locale.toFloat(formattedFloat);
 #if defined(VERBOSE_OUTPUT)
     QTextStream stream(stdout);
-    stream.setCodec("UTF-8");
     stream << localeName
            << " formattedFloat: " << formattedFloat
            << " parsable: " << parsable
@@ -2609,7 +2572,6 @@ void Ft_Numbers::testDoublesWithFormatting()
     MLocale loc(localeName);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "localeName: " << localeName
         << " number: " << val
@@ -2888,7 +2850,6 @@ void Ft_Numbers::testCurrencies()
     locale.setCategoryLocale(MLocale::MLcNumeric, lcNumeric);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << " language: " << language
         << " lcMonetary: " << lcMonetary
@@ -3042,7 +3003,6 @@ void Ft_Numbers::testPercentPlaceholdersInQt()
     MLocale::setDefault(locale);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << " localeName: " << localeName
         << " localeNameLcNumeric: " << localeNameLcNumeric
@@ -3139,7 +3099,6 @@ void Ft_Numbers::testToLatinNumbers()
     QString result = MLocale::toLatinNumbers(input);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << QTest::currentTestFunction() << " "
         << QTest::currentDataTag() << "\n"
@@ -3444,7 +3403,6 @@ void Ft_Numbers::testToLocalizedNumbers()
     QString result = locale.toLocalizedNumbers(input);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << QTest::currentTestFunction() << " "
         << QTest::currentDataTag() << "\n"

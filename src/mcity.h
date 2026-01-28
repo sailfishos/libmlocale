@@ -21,6 +21,7 @@
 #define ML10N_MCITY_H
 
 #include <QDateTime>
+#include <QTimeZone>
 
 #include "mlocaleexport.h"
 #include "mcountry.h"

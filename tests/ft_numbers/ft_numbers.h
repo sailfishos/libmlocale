@@ -40,9 +40,6 @@ class Ft_Numbers : public QObject
 {
     Q_OBJECT
 
-private:
-    QString icuPackageVersion;
-
 private slots:
     void initTestCase();
     void cleanupTestCase();

@@ -209,7 +209,6 @@ MDebug &MDebug::operator <<(const MWidgetController *controller)
 void MDebug::printDebugChildInformation(QGraphicsWidget *widget, int initialIndentationDepth)
 {
     QTextStream s(stderr);
-    s.setCodec("UTF-8");
     QString indentation;
     for (int i = 0; i < initialIndentationDepth * 4; i++)
         indentation += ' ';

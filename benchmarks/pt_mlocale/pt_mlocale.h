@@ -22,7 +22,7 @@
 
 #include <QtTest/QtTest>
 #include <QCoreApplication>
-#include <QTextCodec>
+
 #include <QTextStream>
 #include <QObject>
 #include <MLocale>
@@ -35,9 +35,6 @@
 class Pt_MLocale : public QObject
 {
     Q_OBJECT
-
-private:
-    QString icuPackageVersion;
 
 private slots:
     void initTestCase();

@@ -18,6 +18,11 @@
 ****************************************************************************/
 
 #include "pt_mcharsetdetector.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QStringEncoder>
+#else
+#include <QTextCodec>
+#endif
 
 using ML10N::MCharsetDetector;
 using ML10N::MCharsetMatch;
@@ -118,11 +123,19 @@ void Pt_MCharsetDetector::benchmarkDetection()
     QFETCH(QString, bestMatchName);
     QFETCH(QString, bestMatchLanguage);
 
-    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1());
-    if (codec == NULL) // there is no codec matching the name
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QStringEncoder encoder(inputEncoding.toLatin1().constData());
+    if (!encoder.isValid())
+        QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
+
+    QByteArray encodedString = encoder.encode(text);
+#else
+    QTextCodec *codec = QTextCodec::codecForName(inputEncoding.toLatin1().constData());
+    if (!codec)
         QFAIL(QString("no such codec: " + inputEncoding).toLatin1().constData());
 
     QByteArray encodedString = codec->fromUnicode(text);
+#endif
     MCharsetDetector charsetDetector(encodedString);
     charsetDetector.setDeclaredLocale(declaredLocale);
     charsetDetector.setDeclaredEncoding(declaredEncoding);

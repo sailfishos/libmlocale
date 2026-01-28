@@ -22,7 +22,7 @@
 
 #include <QtTest/QtTest>
 #include <QCoreApplication>
-#include <QTextCodec>
+
 #include <QTextStream>
 #include <QObject>
 #include <MCharsetDetector>

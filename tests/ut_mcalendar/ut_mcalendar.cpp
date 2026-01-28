@@ -18,8 +18,8 @@
 ****************************************************************************/
 
 #include <QCoreApplication>
-#include <QTextCodec>
 #include <QTextStream>
+#include <QTimeZone>
 #include <MLocale>
 #include <unicode/uversion.h>
 
@@ -179,9 +179,10 @@ void Ut_MCalendar::testConversionFromAndToQDateTime()
     MCalendar::setSystemTimeZone(timeZone);
 
     MCalendar mcal;
-    QDateTime datetime(qDate, qTime, (Qt::TimeSpec) qTimeSpec);
+    QTimeZone tz = (qTimeSpec == Qt::UTC) ? QTimeZone::utc() : QTimeZone(timeZone.toLatin1());
+    QDateTime datetime(qDate, qTime, tz);
     mcal.setDateTime(datetime);
-    QCOMPARE(mcal.qDateTime((Qt::TimeSpec) qTimeSpec), datetime);
+    QCOMPARE(mcal.qDateTime((Qt::TimeSpec)qTimeSpec), datetime);
 }
 
 void Ut_MCalendar::testIcuFormatString_data()
@@ -900,7 +901,6 @@ void Ut_MCalendar::testIcuFormatString()
                 static_cast<MLocale::TimeType>(timeType),
                 calendarType);
             QTextStream debugStream(stdout);
-            debugStream.setCodec("UTF-8");
             debugStream << lcTime
                         << " timeFormat24h: " << timeFormat24h
                         << " dateType: " << dateType << " timeType: " << timeType
@@ -1082,7 +1082,7 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromLocaltimeQDateTime_data()
 
     QDate date(2008, 7, 21);
     QTime time(12, 31, 0, 0);
-    QDateTime datetime(date, time, Qt::LocalTime);
+    QDateTime datetime(date, time, QTimeZone::systemTimeZone());
 
     QTest::newRow("21.7.2008_fi_FI_Gregorian")
             << datetime
@@ -1551,7 +1551,6 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromLocaltimeQDateTime()
             expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
 #if defined(VERBOSE_OUTPUT)
             QTextStream debugStream(stdout);
-            debugStream.setCodec("UTF-8");
             debugStream
                 << "language " << localeName
                 << " lc_time " << lcTime
@@ -1620,7 +1619,7 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromUTCQDateTime_data()
 
     QDate date(2008, 7, 21);
     QTime time(12, 31, 0, 0);
-    QDateTime datetime(date, time, Qt::UTC); // finland is utc+3 so maps to 15:31
+    QDateTime datetime(date, time, QTimeZone::utc()); // finland is utc+3 so maps to 15:31
 
     QTest::newRow("21.7.2008_fi_FI_Gregorian")
             << datetime
@@ -2671,7 +2670,6 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromMCalendar()
             expectedResult = maybeEmbedDateTimeString(expectedResult, locale);
 #if defined(VERBOSE_OUTPUT)
             QTextStream debugStream(stdout);
-            debugStream.setCodec("UTF-8");
             debugStream
                 << "language " << localeName
                 << " lc_time " << lcTime
@@ -2729,11 +2727,11 @@ void Ut_MCalendar::testVariousSetDateTimeMethods_data()
     QTest::addColumn<int>("qDateTimeOffsetToLocalInHours");
 
     QTest::newRow("foo")
-        << QDateTime(QDate(2010, 7, 13), QTime(14, 51, 07, 0), Qt::LocalTime)
+        << QDateTime(QDate(2010, 7, 13), QTime(14, 51, 07, 0), QTimeZone("Europe/Helsinki"))
         << "Europe/Helsinki"
         << 0;
     QTest::newRow("bar")
-        << QDateTime(QDate(2010, 7, 13), QTime(14, 51, 07, 0), Qt::UTC)
+        << QDateTime(QDate(2010, 7, 13), QTime(14, 51, 07, 0), QTimeZone::utc())
         << "Europe/Helsinki"
         << 3;
 }
@@ -2936,7 +2934,6 @@ void Ut_MCalendar::testIslamicCalendar()
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "result format: " << format
         << "\n";
@@ -4228,12 +4225,11 @@ void Ut_MCalendar::testPosixFormatPattern()
     mcal.setTime(hour, minute, second);
     QDate date(year, month, day);
     QTime time(hour, minute, second);
-    QDateTime datetime(date, time, Qt::LocalTime);
+    QDateTime datetime(date, time, QTimeZone::systemTimeZone());
     QLocale qlocale(localeName);
 
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -4666,12 +4662,11 @@ void Ut_MCalendar::testFormatDateTimeICU()
     locale.setCalendarType(calendarType);
     QDate date(year, month, day);
     QTime time(hour, minute, second);
-    QDateTime datetime(date, time, Qt::LocalTime);
+    QDateTime datetime(date, time, QTimeZone::systemTimeZone());
     MCalendar mcal(locale);
     mcal.setDateTime(datetime);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "--------------------\n"
         << " localeName: " << localeName
@@ -4775,7 +4770,6 @@ void Ut_MCalendar::testTimeZoneDisplayNames()
     MCalendar mcal(locale,timeZone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "--------------------\n"
         << " localeName: " << localeName
@@ -4914,7 +4908,6 @@ void Ut_MCalendar::testWeekdaySymbols()
     MCalendar mcal(calendarType);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << language
         << " lc_messages " << lcMessages
@@ -5113,7 +5106,6 @@ void Ut_MCalendar::testMonthSymbols()
     MCalendar mcal(calendarType);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << language
         << " lc_messages " << lcMessages
@@ -5306,7 +5298,6 @@ void Ut_MCalendar::testDateYearAndMonth()
     QString result = locale.formatDateTime(mcal, MLocale::DateYearAndMonth, MLocale::TimeNone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -5461,7 +5452,6 @@ void Ut_MCalendar::testDateWeekdayAbbreviatedAndDayOfMonth()
     QString result = locale.formatDateTime(mcal, MLocale::DateWeekdayAbbreviatedAndDayOfMonth, MLocale::TimeNone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -5616,7 +5606,6 @@ void Ut_MCalendar::testDateWeekdayWideAndDayOfMonth()
     QString result = locale.formatDateTime(mcal, MLocale::DateWeekdayWideAndDayOfMonth, MLocale::TimeNone);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << localeName
         << " lc_messages " << lcMessages
@@ -6054,7 +6043,6 @@ void Ut_MCalendar::testWeekdayType()
     calendar.setTime(19, 23, 0);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream
         << "language " << language << " lc_time " << lcTime
         << " calendar type " << calendar.type()

@@ -291,8 +291,9 @@ fi
 
 # Test for ICU
 if [ "$CFG_ICU" != "no" ]; then
-    which icu-config > /dev/null
-    if [ $? -eq 0 ]; then
+    if pkg-config --exists icu-uc 2>/dev/null; then
+        HAVE_ICU=yes
+    elif which icu-config > /dev/null 2>&1; then
         icu-config --exists
         if [ $? -eq 0 ]; then
             HAVE_ICU=yes

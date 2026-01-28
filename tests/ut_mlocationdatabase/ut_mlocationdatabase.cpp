@@ -17,6 +17,7 @@
 **
 ****************************************************************************/
 #include "ut_mlocationdatabase.h"
+#include <QTimeZone>
 
 #include "mlocationdatabase.h"
 #include "mcity.h"
@@ -294,7 +295,6 @@ void Ut_MLocationDatabase::testCitiesInTimeZone()
     QList<MCity> citiesInTimeZone = db.citiesInTimeZone(timeZoneId);
 #if defined(VERBOSE_OUTPUT)
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
     debugStream << "number of cities in time zone "
                 << timeZoneId << ' '
                 << citiesInTimeZone.size() << '\n';
@@ -383,7 +383,7 @@ void Ut_MLocationDatabase::dumpCitiesInTimeZoneIds()
         // be differences due to changes in the database.
         // Just show the difference on standard output for easy checking
         // what has changed:
-        QProcess::execute("diff -u " +  testInputFileName + ' ' + dumpFileName);
+        QProcess::execute("diff", QStringList() << "-u" << testInputFileName << dumpFileName);
     }
 }
 
@@ -487,7 +487,8 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 3, 28), QTime(3, 59, 59, 0), Qt::LocalTime)
+        << QDateTime(QDate(2010, 3, 28), QTime(3, 59, 59, 0), QTimeZone::systemTimeZone())
+
         << 2 * 3600 * 1000  // 2 hours always
         << 0 * 3600 * 1000  // 0 hours in winter
         << 2 * 3600 * 1000; // 2 hours in winter
@@ -499,7 +500,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 3, 28), QTime(4, 0, 0, 0), Qt::LocalTime)
+        << QDateTime(QDate(2010, 3, 28), QTime(4, 0, 0, 0), QTimeZone::systemTimeZone())
         << 2 * 3600 * 1000  // 2 hours always
         << 1 * 3600 * 1000  // 1 hours in summer
         << 3 * 3600 * 1000; // 3 hours in summer
@@ -511,7 +512,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 3, 28), QTime(0, 59, 59, 0), Qt::UTC)
+        << QDateTime(QDate(2010, 3, 28), QTime(0, 59, 59, 0), QTimeZone::utc())
         << 2 * 3600 * 1000  // 2 hours always
         << 0 * 3600 * 1000  // 0 hours in winter
         << 2 * 3600 * 1000; // 2 hours in winter
@@ -523,7 +524,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 3, 28), QTime(1, 0, 0, 0), Qt::UTC)
+        << QDateTime(QDate(2010, 3, 28), QTime(1, 0, 0, 0), QTimeZone::utc())
         << 2 * 3600 * 1000  // 2 hours always
         << 1 * 3600 * 1000  // 1 hours in summer
         << 3 * 3600 * 1000; // 3 hours in summer
@@ -536,7 +537,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 10, 31), QTime(2, 59, 59, 0), Qt::LocalTime)
+        << QDateTime(QDate(2010, 10, 31), QTime(2, 59, 59, 0), QTimeZone::systemTimeZone())
         << 2 * 3600 * 1000  // 2 hours always
         << 1 * 3600 * 1000  // 1 hours in summer
         << 3 * 3600 * 1000; // 3 hours in summer
@@ -548,7 +549,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 10, 31), QTime(3, 0, 0, 0), Qt::LocalTime)
+        << QDateTime(QDate(2010, 10, 31), QTime(3, 0, 0, 0), QTimeZone::systemTimeZone())
         << 2 * 3600 * 1000  // 2 hours always
         << 0 * 3600 * 1000  // 0 hours in winter
         << 2 * 3600 * 1000; // 2 hours in winter
@@ -560,7 +561,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 10, 31), QTime(0, 59, 59, 0), Qt::UTC)
+        << QDateTime(QDate(2010, 10, 31), QTime(0, 59, 59, 0), QTimeZone::utc())
         << 2 * 3600 * 1000  // 2 hours always
         << 1 * 3600 * 1000  // 1 hours in summer
         << 3 * 3600 * 1000; // 3 hours in summer
@@ -572,7 +573,7 @@ void Ut_MLocationDatabase::testCities_data()
         << "Europe/Helsinki"
         << "Finland"
         << "" // local name currently always empty
-        << QDateTime(QDate(2010, 10, 31), QTime(1, 0, 0, 0), Qt::UTC)
+        << QDateTime(QDate(2010, 10, 31), QTime(1, 0, 0, 0), QTimeZone::utc())
         << 2 * 3600 * 1000  // 2 hours always
         << 0 * 3600 * 1000  // 0 hours in winter
         << 2 * 3600 * 1000; // 2 hours in winter
@@ -656,10 +657,9 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
     }
 
     QTextStream debugStream(stderr);
-    debugStream.setCodec("UTF-8");
 
-    QDateTime summerDateTime(QDate(2010, 6, 21), QTime(0, 0, 0, 0), Qt::LocalTime);
-    QDateTime winterDateTime(QDate(2009, 12, 24), QTime(0, 0, 0, 0), Qt::LocalTime);
+    QDateTime summerDateTime(QDate(2010, 6, 21), QTime(0, 0, 0, 0), QTimeZone::systemTimeZone());
+    QDateTime winterDateTime(QDate(2009, 12, 24), QTime(0, 0, 0, 0), QTimeZone::systemTimeZone());
     QString ut_mlocationdatabaseTestOutput = "";
     QStringList ut_mlocationdatabaseTestOutput2Lines; // for Rodrigo Abreu
     foreach(MCity city, cities) {
@@ -771,7 +771,7 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
         // be differences due to changes in the database.
         // Just show the difference on standard output for easy checking
         // what has changed:
-        QProcess::execute("diff -u " + ut_mlocationdatabaseTestInput2FileName + ' ' + ut_mlocationdatabaseTestOutput2FileName);
+        QProcess::execute("diff", QStringList() << "-u" << ut_mlocationdatabaseTestInput2FileName << ut_mlocationdatabaseTestOutput2FileName);
     }
 
     if (ut_mlocationdatabaseTestOutput != ut_mlocationdatabaseTestInput) {
@@ -779,7 +779,7 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
         // be differences due to changes in the database.
         // Just show the difference on standard output for easy checking
         // what has changed:
-        QProcess::execute("diff -u " + ut_mlocationdatabaseTestInputFileName + ' ' + ut_mlocationdatabaseTestOutputFileName);
+        QProcess::execute("diff", QStringList() << "-u" << ut_mlocationdatabaseTestInputFileName << ut_mlocationdatabaseTestOutputFileName);
     }
     debugStream << __PRETTY_FUNCTION__ << " took " << timer.restart() << " milliseconds ";
 #endif
@@ -800,7 +800,6 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
 
     MLocale locale("en_US");
     QTextStream debugStream(stdout);
-    debugStream.setCodec("UTF-8");
 
     QStringList olsonIds;
 #if 0
@@ -824,8 +823,8 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
 #endif
     olsonIds.sort();
 
-    QDateTime startDateTime(QDate(2011,01,1), QTime(2,58,44), Qt::UTC);
-    QDateTime endDateTime(QDate(2012,01,1), QTime(2,58,45), Qt::UTC);
+    QDateTime startDateTime(QDate(2011,01,1), QTime(2,58,44), QTimeZone::utc());
+    QDateTime endDateTime(QDate(2012,01,1), QTime(2,58,45), QTimeZone::utc());
     QHash<QString, QString> errorHash;
     QString allErrors;
     foreach(const QString &olsonId, olsonIds) {
@@ -883,7 +882,7 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
         << "contents of " + errorFileName + " :\n"
         << "------------------------------------------------------\n";
     debugStream.flush();
-    QProcess::execute("cat " + errorFileName);
+    QProcess::execute("cat", QStringList() << errorFileName);
     QVERIFY2(allErrors.isEmpty(), qPrintable("There were errors, please check contents of " + errorFileName));
 }
 QTEST_GUILESS_MAIN(Ut_MLocationDatabase);

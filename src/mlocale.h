@@ -26,10 +26,10 @@
 #include <QtGlobal>
 #include <QObject>
 #include <QMap>
+#include <QString>
+#include <QStringList>
+#include <QDateTime>
 
-class QString;
-class QStringList;
-class QDateTime;
 class QTranslator;
 
 namespace ML10N {

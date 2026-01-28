@@ -30,8 +30,13 @@
 
 #include <QString>
 #include <QStringList>
-#include <QTextCodec>
 #include <QDebug>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QStringDecoder>
+#include <QStringEncoder>
+#else
+#include <QTextCodec>
+#endif
 
 namespace ML10N {
 
@@ -501,24 +506,38 @@ QString MCharsetDetector::text(const MCharsetMatch &charsetMatch)
 {
     Q_D(MCharsetDetector);
     clearError();
-    QTextCodec *codec
-        = QTextCodec::codecForName(charsetMatch.name().toLatin1());
-    if (codec == NULL) { // there is no codec matching the name
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QStringDecoder decoder(charsetMatch.name().toLatin1().constData());
+    if (!decoder.isValid()) {
         d->_status = U_ILLEGAL_ARGUMENT_ERROR;
         qWarning() << __PRETTY_FUNCTION__
                  << "no codec for the name" << charsetMatch.name()
                  << errorString();
-        // return empty string to indicate that no conversion is possible:
+        return QString();
+    }
+    else {
+        QString text = decoder.decode(d->_ba);
+        if (decoder.hasError())
+            d->_status = U_INVALID_CHAR_FOUND;
+        return text;
+    }
+#else
+    QTextCodec *codec = QTextCodec::codecForName(charsetMatch.name().toLatin1().constData());
+    if (!codec) {
+        d->_status = U_ILLEGAL_ARGUMENT_ERROR;
+        qWarning() << __PRETTY_FUNCTION__
+                 << "no codec for the name" << charsetMatch.name()
+                 << errorString();
         return QString();
     }
     else {
         QTextCodec::ConverterState state;
-        QString text =
-            codec->toUnicode(d->_ba.constData(), d->_ba.size(), &state);
+        QString text = codec->toUnicode(d->_ba.constData(), d->_ba.size(), &state);
         if (state.invalidChars > 0)
             d->_status = U_INVALID_CHAR_FOUND;
         return text;
     }
+#endif
 }
 
 void MCharsetDetector::setDeclaredLocale(const QString &locale)
@@ -577,8 +596,16 @@ QStringList MCharsetDetector::getAllDetectableCharsets()
     // ksc5601.1987-0 cp949 Big5-HKSCS big5-0 big5hkscs-0
 
     QStringList availableCodecsQt;
-    foreach(const QByteArray &ba, QTextCodec::availableCodecs())
-        availableCodecsQt << QString(ba);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    availableCodecsQt << "UTF-8" << "UTF-16" << "UTF-16BE" << "UTF-16LE"
+                      << "UTF-32" << "UTF-32BE" << "UTF-32LE"
+                      << "ISO-8859-1" << "Latin1";
+#else
+    for (const QByteArray &codec : QTextCodec::availableCodecs())
+    {
+        availableCodecsQt << QString::fromLatin1(codec);
+    }
+#endif
 
     // Charsets detectable by libicu 4.4.2:
     QStringList allDetectableCharsetsICU;

@@ -23,7 +23,6 @@
 #include <QtTest/QtTest>
 #include <QObject>
 #include <Qt>
-#include <QTextCodec>
 
 #include <QCoreApplication>
 

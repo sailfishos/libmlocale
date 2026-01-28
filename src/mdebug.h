@@ -21,6 +21,7 @@
 #define ML10N_MDEBUG_H
 
 #include <QDebug>
+#include <QIODevice>
 
 //! \internal
 

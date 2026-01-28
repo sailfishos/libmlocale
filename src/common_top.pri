@@ -34,6 +34,7 @@ macx:CONFIG -= lib_bundle
 
 !win32-msvc*:QMAKE_CXXFLAGS += -Wno-long-long -pedantic
 !win32:QMAKE_CXXFLAGS += -Wno-variadic-macros -fvisibility=hidden
+!win32:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 # enable QString optimizations
 DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS

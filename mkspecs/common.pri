@@ -53,6 +53,7 @@ unix {
 # Compiler configuration for all subprojects in libm
 
 !win32-msvc*:QMAKE_CXXFLAGS *= -g
+!win32:QMAKE_CXXFLAGS *= -Wno-deprecated-copy
 
 contains( CONFIG, coverage ) {
     QMAKE_CXXFLAGS *= -ftest-coverage -fprofile-arcs

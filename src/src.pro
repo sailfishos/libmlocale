@@ -1,6 +1,7 @@
 CONFIG += ordered
 
 DEFINES += M_BUILD_MLOCALE
+DEFINES += QT_DEPRECATED_WARNINGS
 
 include(common_top.pri)
 QT += xml
@@ -69,11 +70,6 @@ contains(DEFINES, HAVE_ICU) {
 
     SOURCES += \
         mnullbreakiterator.cpp
-}
-
-contains(DEFINES, HAVE_QMSYSTEM2) {
-    CONFIG+=qmsystem2
-    QMAKE_CXXFLAGS -= -pedantic
 }
 
 HEADERS += \

@@ -30,9 +30,6 @@ class Pt_MCalendar : public QObject
 {
     Q_OBJECT
 
-private:
-    QString icuPackageVersion;
-
 private slots:
     void initTestCase();
     void cleanupTestCase();

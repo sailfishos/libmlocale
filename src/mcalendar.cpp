@@ -23,6 +23,7 @@
 #include <QString>
 #include <QDateTime>
 #include <QDebug>
+#include <QTimeZone>
 
 #include "mlocale_p.h"
 #include "micuconversions.h"
@@ -34,11 +35,6 @@ namespace ML10N {
 MCalendarPrivate::MCalendarPrivate(MLocale::CalendarType calendarType)
     : _calendar(0), _calendarType(calendarType), _valid(true)
 {
-    if ( ! _watcher )
-    {
-        _watcher = new MTimeZoneWatcher();
-    }
-
     if (_calendarType == MLocale::DefaultCalendar) {
         MLocale defaultLocale;
         _calendarType = defaultLocale.calendarType();
@@ -60,38 +56,6 @@ MCalendarPrivate::~MCalendarPrivate()
 {
     delete _calendar;
 }
-
-MTimeZoneWatcher *MCalendarPrivate::_watcher = NULL;
-
-MTimeZoneWatcher::MTimeZoneWatcher()
-{
-#ifdef HAVE_QMSYSTEM2
-    _qmtime = new MeeGo::QmTime();
-    bool result = connect( _qmtime, SIGNAL( timeOrSettingsChanged(MeeGo::QmTime::WhatChanged) ),
-			   this, SLOT( timeOrSettingsChangedSlot(MeeGo::QmTime::WhatChanged) ) );
-    if ( ! result )
-        mWarning( "connection to QmTime object failed" );
-#endif
-}
-
-MTimeZoneWatcher::~MTimeZoneWatcher()
-{
-#ifdef HAVE_QMSYSTEM2
-    delete _qmtime;
-#endif
-}
-
-#ifdef HAVE_QMSYSTEM2
-void MTimeZoneWatcher::timeOrSettingsChangedSlot( MeeGo::QmTime::WhatChanged )
-{
-    QString zone;
-    if ( ! _qmtime->getTimezone( zone ) ) {
-        mWarning( "MTimeZoneWatcher: QmTime::getTimeZone() failed" );
-    } else {
-        MCalendar::setSystemTimeZone( zone );
-    }
-}
-#endif
 
 MCalendarPrivate &MCalendarPrivate::operator=(const MCalendarPrivate &other)
 {
@@ -269,7 +233,11 @@ void MCalendar::setDate(int year, int month, int day)
 //! Sets the calendar date from QDate
 void MCalendar::setDate(const QDate &date)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QDateTime datetime = date.startOfDay();
+#else
     QDateTime datetime(date);
+#endif
     setDateTime(datetime);
 }
 
@@ -284,15 +252,18 @@ void MCalendar::setDateTime(QDateTime dateTime)
 
     // we avoid time conversions made by qt
     Qt::TimeSpec originalTimeSpec = dateTime.timeSpec();
-    dateTime.setTimeSpec(Qt::UTC);
+    QTimeZone originalTimeZone = dateTime.timeZone();
+    dateTime.setTimeZone(QTimeZone::utc());
 
-    // We cannot use QDateTime::toTime_t because this
-    // works only for dates after 1970-01-01T00:00:00.000.
     UDate icuDate = dateTime.toMSecsSinceEpoch();
 
-    if (originalTimeSpec == Qt::LocalTime) {
+    if (originalTimeSpec == Qt::LocalTime ||
+        (originalTimeSpec == Qt::TimeZone && originalTimeZone != QTimeZone::utc())) {
         // convert from local time to UTC
-        icu::UnicodeString tz_name = MIcuConversions::qStringToUnicodeString(MCalendar::systemTimeZone());
+        QString tzName = (originalTimeSpec == Qt::TimeZone)
+            ? QString::fromLatin1(originalTimeZone.id())
+            : MCalendar::systemTimeZone();
+        icu::UnicodeString tz_name = MIcuConversions::qStringToUnicodeString(tzName);
         icu::TimeZone *tz = icu::TimeZone::createTimeZone(tz_name) ;
         d->_calendar->setTimeZone(*tz);
         qint32 rawOffset;
@@ -323,16 +294,15 @@ QDateTime MCalendar::qDateTime(Qt::TimeSpec spec) const
         tz.getOffset(icuDate, true /*local */, rawOffset, dstOffset, status);
         icuDate = icuDate + rawOffset + dstOffset;
     }
-    // We cannot use QDateTime::setTime_t because this
-    // works only for dates after 1970-01-01T00:00:00.000.
     QDateTime dateTime;
     // avoid conversions by Qt
-    dateTime.setTimeSpec(Qt::UTC);
+    dateTime.setTimeZone(QTimeZone::utc());
     dateTime.setMSecsSinceEpoch(qint64(icuDate));
-    // note: we set time spec after time value so Qt will not any
+    // note: we set time zone after time value so Qt will not do any
     // conversions of its own to UTC. We might let Qt handle it but
     // this might be more robust
-    dateTime.setTimeSpec(spec);
+    QTimeZone tz = (spec == Qt::UTC) ? QTimeZone::utc() : QTimeZone(systemTimeZone().toLatin1());
+    dateTime.setTimeZone(tz);
     return dateTime;
 }
 

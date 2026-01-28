@@ -28,7 +28,6 @@
 
 #include <QString>
 #include <QStringList>
-#include <QTextCodec>
 #include <QDebug>
 
 #include "micuconversions.h"

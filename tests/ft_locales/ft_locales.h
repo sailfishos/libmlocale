@@ -20,15 +20,10 @@
 #ifndef FT_LOCALES_H
 #define FT_LOCALES_H
 
-#include <QtTest/QtTest>
 #include <QObject>
-#include <Qt>
 
 #include <MLocale>
 #include <MCollator>
-#include <MCalendar>
-
-#include <QCoreApplication>
 
 #ifdef HAVE_ICU
 #include <unicode/unistr.h>
