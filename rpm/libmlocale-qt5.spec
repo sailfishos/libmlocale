@@ -1,6 +1,6 @@
 Name:       libmlocale-qt5
-Summary:    Contains classes MLocale and friends originally from libmeegotouch
-Version:    0.5.0
+Summary:    Contains classes MLocale and friends
+Version:    0.8.1
 Release:    1
 License:    LGPLv2
 URL:        https://github.com/sailfishos/libmlocale
@@ -15,27 +15,24 @@ BuildRequires:  pkgconfig(Qt5Test)
 BuildRequires:  qt5-qttools-linguist
 
 %description
-Contains classes MLocale and friends originally from libmeegotouch. 
-With that separation one can use those localization facilities without 
-having to bring on board also the MeeGo Touch GUI toolkit.
-
+Contains classes MLocale and friends.
 
 %package devel
-Summary:    Devel files for limlocale
+Summary:    Devel files for libmlocale
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
 %{summary}.
 
 %package tests
-Summary:    Tests for limlocale
+Summary:    Tests for libmlocale
 Requires:   %{name} = %{version}-%{release}
 
 %description tests
 %{summary}.
 
 %package benchmarks
-Summary:    Benchmarks files for limlocale
+Summary:    Benchmarks files for libmlocale
 Requires:   %{name} = %{version}-%{release}
 
 %description benchmarks
@@ -81,4 +78,3 @@ find %{buildroot} -name \*.a -delete
 %{_libdir}/libmlocale-benchmarks5
 %dir %{_datadir}/libmlocale-benchmarks5
 %{_datadir}/libmlocale-benchmarks5/tests.xml
-
