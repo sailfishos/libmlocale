@@ -28,8 +28,6 @@
 #include "mlocale_p.h"
 #include "micuconversions.h"
 
-#include "mdebug.h"
-
 namespace ML10N {
 
 MCalendarPrivate::MCalendarPrivate(MLocale::CalendarType calendarType)
@@ -599,8 +597,8 @@ MLocale::WeekdayType MCalendar::getDayOfWeekType(MLocale::Weekday weekday) const
     UErrorCode status = U_ZERO_ERROR;
     UCalendarWeekdayType icuWeekDayType = d->_calendar->getDayOfWeekType(MIcuConversions::icuWeekday(static_cast<int>(weekday)), status);
     if (U_FAILURE(status))
-        mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error getDayOfWeekType"
-                          << u_errorName(status);
+        qDebug() << __PRETTY_FUNCTION__ << "Error getDayOfWeekType"
+                 << u_errorName(status);
     return MIcuConversions::mWeekdayType(icuWeekDayType);
 }
 

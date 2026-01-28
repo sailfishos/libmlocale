@@ -93,7 +93,7 @@ void MBreakIteratorPrivate::init(const QString &text,
    MBreakIterator it(locale, text, MBreakIterator::WordIterator);
    while (it.hasNext()) {
      int index = it.next();
-     mDebug() << "index at " << i;
+     qDebug() << "index at " << i;
    }
    \endverbatim
 

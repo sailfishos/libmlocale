@@ -39,7 +39,6 @@
 using namespace icu;
 #endif
 
-#include <MDebug>
 #include <QTranslator>
 #include <QDir>
 #include <QMetaProperty>
@@ -1591,7 +1590,7 @@ void MLocalePrivate::setCategoryLocale(MLocale *mlocale,
         UErrorCode status = U_ZERO_ERROR;
         _numberFormatLcTime = icu::NumberFormat::createInstance(timeLocale, status);
         if (!U_SUCCESS(status)) {
-            mDebug("MLocalePrivate") << "Unable to create number format for LcTime" << u_errorName(status);
+            qDebug() << "Unable to create number format for LcTime" << u_errorName(status);
             _valid = false;
         }
 #endif
@@ -1606,7 +1605,7 @@ void MLocalePrivate::setCategoryLocale(MLocale *mlocale,
         UErrorCode status = U_ZERO_ERROR;
         _numberFormat = icu::NumberFormat::createInstance(numericLocale, status);
         if (!U_SUCCESS(status)) {
-            mDebug("MLocalePrivate") << "Unable to create number format for LcNumeric" << u_errorName(status);
+            qDebug() << "Unable to create number format for LcNumeric" << u_errorName(status);
             _valid = false;
         }
         delete _numberFormatLcTime;
@@ -1616,7 +1615,7 @@ void MLocalePrivate::setCategoryLocale(MLocale *mlocale,
         status = U_ZERO_ERROR;
         _numberFormatLcTime = icu::NumberFormat::createInstance(timeLocale, status);
         if (!U_SUCCESS(status)) {
-            mDebug("MLocalePrivate") << "Unable to create number format for LcTime" << u_errorName(status);
+            qDebug() << "Unable to create number format for LcTime" << u_errorName(status);
             _valid = false;
         }
 #endif
@@ -1636,7 +1635,7 @@ void MLocalePrivate::setCategoryLocale(MLocale *mlocale,
             _phoneNumberGrouping = MLocale::NoPhoneNumberGrouping;
         }
     } else {
-        //mDebug("MLocalePrivate") << "unimplemented category change"; // DEBUG
+        //qDebug() << "unimplemented category change"; // DEBUG
     }
 }
 
@@ -3648,15 +3647,13 @@ QString MLocale::countryEndonym() const
                                          qPrintable(resourceBundleLocaleName),
                                          &status);
         if (U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_open"
-                              << u_errorName(status);
+            qWarning() << __PRETTY_FUNCTION__ << "Error ures_open" << u_errorName(status);
             ures_close(res);
             return countryCode;
         }
         res = ures_getByKey(res, Countries, res, &status);
         if (U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_getByKey"
-                              << u_errorName(status);
+            qWarning() << __PRETTY_FUNCTION__ << "Error ures_getByKey" << u_errorName(status);
             ures_close(res);
             return countryCode;
         }
@@ -3700,9 +3697,9 @@ QString MLocalePrivate::numberingSystem(const QString &localeName) const
                                          qPrintable(resourceBundleLocaleName),
                                          &status);
         if (U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_open"
-                              << resourceBundleLocaleName
-                              << u_errorName(status);
+            qWarning() << __PRETTY_FUNCTION__ << "Error ures_open"
+                       << resourceBundleLocaleName
+                       << u_errorName(status);
             ures_close(res);
             return numberingSystem;
         }
@@ -3768,9 +3765,9 @@ QString MLocale::decimalPoint() const
                                          qPrintable(resourceBundleLocaleName),
                                          &status);
         if (U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_open"
-                              << resourceBundleLocaleName
-                              << u_errorName(status);
+            qWarning() << __PRETTY_FUNCTION__ << "Error ures_open"
+                       << resourceBundleLocaleName
+                       << u_errorName(status);
             ures_close(res);
             return decimal;
         }
@@ -3899,8 +3896,8 @@ QStringList MLocale::exemplarCharactersIndex() const
         ures_open(NULL, collationLocaleName.toUtf8().constData(), &status);
 
     if (U_FAILURE(status)) {
-        mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_open"
-                          << collationLocaleName << u_errorName(status);
+        qWarning() << __PRETTY_FUNCTION__ << "Error ures_open"
+                   << collationLocaleName << u_errorName(status);
         ures_close(res);
         return exemplarCharactersIndex;
     }
@@ -3911,8 +3908,8 @@ QStringList MLocale::exemplarCharactersIndex() const
                                            "ExemplarCharactersIndex",
                                            &len, &status);
     if (U_FAILURE(status)) {
-        mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_getStringByKey"
-                          << collationLocaleName << u_errorName(status);
+        qWarning() << __PRETTY_FUNCTION__ << "Error ures_getStringByKey"
+                   << collationLocaleName << u_errorName(status);
         ures_close(res);
 
         return exemplarCharactersIndex;
@@ -4046,14 +4043,12 @@ QStringList MLocale::localeScripts() const
     UResourceBundle *res = ures_open(NULL, qPrintable(d->_defaultLocale), &status);
 
     if (U_FAILURE(status)) {
-        mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_open"
-                          << u_errorName(status);
+        qWarning() << __PRETTY_FUNCTION__ << "Error ures_open" << u_errorName(status);
     }
 
     res = ures_getByKey(res, "LocaleScript", res, &status);
     if (U_FAILURE(status)) {
-        mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_getByKey"\
-                          << u_errorName(status);
+        qWarning() << __PRETTY_FUNCTION__ << "Error ures_getByKey"\ << u_errorName(status);
     }
 
     qint32 len;
@@ -4239,27 +4234,25 @@ QString MLocale::toLocalizedNumbers(const QString &text) const
             NumberingSystem::createInstanceByName(
                 targetNumberingSystem.toLatin1().constData(), status);
     if (U_FAILURE(status)) {
-        mDebug("MLocale") << __PRETTY_FUNCTION__
-                          << "Error NumberingSystem::createInstanceByName()"
-                          << targetNumberingSystem
-                          << u_errorName(status);
+        qWarning() << __PRETTY_FUNCTION__
+                   << "Error NumberingSystem::createInstanceByName()"
+                   << targetNumberingSystem
+                   << u_errorName(status);
         ok = false;
     } else {
         if (!targetNumSys->isAlgorithmic() && targetNumSys->getRadix() == 10) {
             targetDigits = MIcuConversions::unicodeStringToQString(
                         targetNumSys->getDescription());
             if (targetDigits.size() != 10) {
-                mDebug("MLocale")
-                        << __PRETTY_FUNCTION__
-                        << targetNumberingSystem
-                        << "number of digits is not 10, should not happen";
+                qWarning() << __PRETTY_FUNCTION__
+                           << targetNumberingSystem
+                           << "number of digits is not 10, should not happen";
                 ok = false;
             }
         } else {
-            mDebug("MLocale")
-                    << __PRETTY_FUNCTION__
-                    << targetNumberingSystem
-                    << "not algorithmic or radix not 10, should not happen";
+            qWarning() << __PRETTY_FUNCTION__
+                       << targetNumberingSystem
+                       << "not algorithmic or radix not 10, should not happen";
             ok = false;
         }
     }
@@ -4394,15 +4387,13 @@ QString MLocale::languageEndonym(const QString &locale)
                                          qPrintable(resourceBundleLocaleName),
                                          &status);
         if (U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_open"
-                              << u_errorName(status);
+            qWarning() << __PRETTY_FUNCTION__ << "Error ures_open" << u_errorName(status);
             ures_close(res);
             return locale;
         }
         res = ures_getByKey(res, Languages, res, &status);
         if (U_FAILURE(status)) {
-            mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error ures_getByKey"
-                              << u_errorName(status);
+            qWarning() << __PRETTY_FUNCTION__ << "Error ures_getByKey" << u_errorName(status);
             ures_close(res);
             return locale;
         }

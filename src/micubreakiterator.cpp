@@ -18,7 +18,6 @@
 ****************************************************************************/
 
 #include "micubreakiterator.h"
-#include <MDebug>
 
 #ifdef HAVE_ICU
 #include <unicode/brkiter.h>
@@ -27,6 +26,8 @@
 
 using namespace icu;
 #endif
+
+#include <QDebug>
 
 namespace ML10N {
 
@@ -83,7 +84,7 @@ void MIcuBreakIteratorPrivate::init(const MLocale &locale, const QString &text,
     }
 
     if (U_FAILURE(status)) {
-        mWarning("MIcuBreakIteratorPrivate") << "failed creating iterator:" << u_errorName(status);
+        qWarning() << "failed creating iterator:" << u_errorName(status);
         return;
     }
 

@@ -69,7 +69,7 @@ void EmptyMainLoopHelper::terminateOnEmptyMainLoop2()
             struct timeval t;
             gettimeofday(&t, 0);
 
-            mDebug("EmptyMainLoopHelper") << QString("%1[%2%3]: quitting")
+            qDebug() << QString("%1[%2%3]: quitting")
                    .arg(MComponentData::instance()->appName())
                    .arg((int)t.tv_sec)
                    .arg((int)(t.tv_usec % 1000000), 6, 10, (const QChar)'0');
