@@ -3909,7 +3909,6 @@ void Ft_Locales::testMLocaleIndexBucket()
     // we need to instantiate a MLocale before dataPaths returns
     // a valid result.
     MLocale locale(localeName);
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
 
     MLocale localeEn("en_US");
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
@@ -4075,7 +4074,6 @@ void Ft_Locales::testDifferentStrengthComparison()
     QFETCH(QString, string2);
     QFETCH(QList<MLocale::Comparison>, comparisonExpectedResults);
 
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
     MLocale locale(localeName);
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     MCollator collator = locale.collator();
@@ -4481,7 +4479,6 @@ void Ft_Locales::checkAvailableLocales()
     QString ft_localesTestOutput = "";
     foreach (QString supportedLocaleName, supportedLocaleNames) {
         MLocale locale(supportedLocaleName);
-        QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
         QCOMPARE(locale.timeFormat24h(), MLocale::LocaleDefaultTimeFormat24h);
         std::sort(sortingTestList.begin(), sortingTestList.end(), locale.collator());

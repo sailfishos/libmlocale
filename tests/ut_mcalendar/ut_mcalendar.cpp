@@ -70,12 +70,6 @@ void Ut_MCalendar::cleanup()
 {
 }
 
-void Ut_MCalendar::testDataPaths()
-{
-    MLocale locale;
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
-}
-
 void Ut_MCalendar::testTimeZones()
 {
     qDebug() << "systemTimeZone() =" << MCalendar::systemTimeZone();

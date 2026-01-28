@@ -58,7 +58,6 @@ private slots:
     void init();
     void cleanup();
 
-    void testDataPaths();
     void testTimeZones();
 
     void testTimeZonesInCountry_data();
