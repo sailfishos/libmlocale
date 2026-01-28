@@ -598,7 +598,7 @@ fi
 
 #Run qmake
 cd "$outpath"
-$QMAKE_BIN "$relpath/projects.pro" $QMAKE_CONFIG $QMAKE_SWITCHES
+$QMAKE_BIN "$relpath/libmlocale.pro" $QMAKE_CONFIG $QMAKE_SWITCHES
 
 #-------------------------------------------------------------------------------
 # give feedback on configuration
