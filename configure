@@ -617,9 +617,10 @@ echo "Extra features ...... $MLOCALECONFIG_FEATURES"
 echo "Release ............. $CFG_RELEASE"
 echo "Debug ............... $CFG_DEBUG"
 
-echo
-echo "Benchmarks .......... $CFG_BUILD_BENCHMARKS"
-echo "Tests ............... $CFG_BUILD_TESTS"
+# these are built no regardless of options. comment out but leave here in case we start honoring options some day
+#echo
+#echo "Benchmarks .......... $CFG_BUILD_BENCHMARKS"
+#echo "Tests ............... $CFG_BUILD_TESTS"
 
 echo ""
 echo libmlocale is now configured for building. Just run \'make\'.
