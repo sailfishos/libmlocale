@@ -107,8 +107,7 @@ public:
      * how MLocale gets and sets config values of the system.
      * These can be for example the current language or region of
      * the system. Users of the MLocale library can implement
-     * a factory if needed. for an example look at the
-     * MLocaleGConfConfigItemFactory.
+     * a factory if needed.
      */
     static void setConfigItemFactory( const MLocaleAbstractConfigItemFactory* factory );
 
@@ -337,8 +336,8 @@ public:
      * MLocale(const QString &localeName, QObject *parent), it will
      * return a copy of the system default locale, if this already
      * exists. If the system default locale does not exist yet, it is
-     * created based on the global settings in the relevant gconf
-     * keys. If the gconf settings are not available the system
+     * created based on the global settings in the relevant conf
+     * keys. If the conf settings are not available the system
      * default locale is created based on the contents of the LANG
      * environment variable.
      *
@@ -2042,11 +2041,11 @@ public:
     static QStringList translationPaths();
 
     /*!
-     * \brief Monitors all changes in the locale related gconf keys
+     * \brief Monitors all changes in the locale related conf keys
      *
      * After calling this method, all changes in the locale related
-     * gconf keys will change this locale according to the changes in the
-     * gconf keys, and emit the settingsChanged() signal.
+     * conf keys will change this locale according to the changes in the
+     * conf keys, and emit the settingsChanged() signal.
      */
     void connectSettings();
 

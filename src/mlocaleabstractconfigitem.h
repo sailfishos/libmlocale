@@ -34,7 +34,7 @@ public:
     MLocaleAbstractConfigItem( const QString& key );
 
     // returns true, if this value is valid,
-    // false otherwise. e.g. a non-existing gconf key
+    // false otherwise. e.g. a non-existing conf key
     // should retuen false here.
     virtual bool isValid() const = 0;
 

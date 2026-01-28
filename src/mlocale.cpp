@@ -90,7 +90,7 @@ namespace
     const QString SettingsLcNumeric("/meegotouch/i18n/lc_numeric");
     const QString SettingsLcMonetary("/meegotouch/i18n/lc_monetary");
     const QString SettingsLcTelephone("/meegotouch/i18n/lc_telephone");
-    QMap<QString, QString> gconfLanguageMap;
+    QMap<QString, QString> confLanguageMap;
 }
 
 /// Helper
@@ -1628,7 +1628,7 @@ void MLocalePrivate::setCategoryLocale(MLocale *mlocale,
     } else if (category == MLocale::MLcTelephone) {
         _telephoneLocale = localeName;
         // here we set the phone number grouping depending on the
-        // setting in the gconf key
+        // setting in the conf key
         if ( _telephoneLocale.startsWith( QLatin1String( "en_US" ) ) ) {
             _phoneNumberGrouping = MLocale::NorthAmericanPhoneNumberGrouping;
         } else {
@@ -1742,7 +1742,7 @@ cleanLanguageCountryPosix(QString &localeString)
     // es_419, i.e. Spanish in Latin America where the “country code”
     // is “419”. es_419 isn’t really a valid value for LANG, but for consistency
     // let’s make this behave the same way as the icu locale names work for es_419,
-    // we only use LANG as a fallback to specify a locale when gconf isn’t available
+    // we only use LANG as a fallback to specify a locale when conf isn’t available
     // or doesn’t work.
     QRegularExpression regexp("([a-z]{2,3})(_([A-Z]{2,2}|419))?(?:.(?:[a-zA-Z0-9-]+))?(@([A-Z][a-z]+))?");
     QRegularExpressionMatch match = regexp.match(localeString);
@@ -1846,50 +1846,50 @@ MLocale::createSystemMLocale()
         systemLocale = new MLocale(language);
     } else {
         // Empty country codes cause problems in some applications.
-        // Try to add the “right” country when reading the gconf
-        // keys.  But the gconf key /meegotouch/i18n/langauge is often
+        // Try to add the “right” country when reading the conf
+        // keys.  But the conf key /meegotouch/i18n/language is often
         // only set to a language without country.  Try to add a the
         // “right” country if it is missing.  For example “zh”
         // means simplified Chinese in the Nokia translations,
         // therefore it is OK to change this to “zh_CN”. “ar” is
         // used for all variants of Arabic, change this to “ar_EG”,
         // etc. ...
-        if (gconfLanguageMap.isEmpty()) {
-            gconfLanguageMap["ar"] = "ar_EG";
-            gconfLanguageMap["cs"] = "cs_CZ";
-            gconfLanguageMap["da"] = "da_DK";
-            gconfLanguageMap["de"] = "de_DE";
-            gconfLanguageMap["en"] = "en_GB";
-            gconfLanguageMap["es"] = "es_ES";
+        if (confLanguageMap.isEmpty()) {
+            confLanguageMap["ar"] = "ar_EG";
+            confLanguageMap["cs"] = "cs_CZ";
+            confLanguageMap["da"] = "da_DK";
+            confLanguageMap["de"] = "de_DE";
+            confLanguageMap["en"] = "en_GB";
+            confLanguageMap["es"] = "es_ES";
             // “es_419” is used for Latin American Spanish
             // translations, but some applications have problems with
             // a country code like “419”, we cannot easily replace
             // it with “es_MX” though because this breaks loading of
             // the Latin American Spanisch translations.
             //
-            // gconfLanguageMap["es_419"] = "es_MX";
-            gconfLanguageMap["fi"] = "fi_FI";
-            gconfLanguageMap["fr"] = "fr_FR";
-            gconfLanguageMap["hu"] = "hu_HU";
-            gconfLanguageMap["id"] = "id_ID";
-            gconfLanguageMap["it"] = "it_IT";
-            gconfLanguageMap["ms"] = "ms_MY";
-            gconfLanguageMap["nl"] = "nl_NL";
-            gconfLanguageMap["no"] = "no_NO";
-            gconfLanguageMap["pl"] = "pl_PL";
-            gconfLanguageMap["pt"] = "pt_PT";
-            gconfLanguageMap["ro"] = "ro_RO";
-            gconfLanguageMap["ru"] = "ru_RU";
-            gconfLanguageMap["sk"] = "sk_SK";
-            gconfLanguageMap["sv"] = "sv_SE";
-            gconfLanguageMap["th"] = "th_TH";
-            gconfLanguageMap["tr"] = "tr_TR";
-            gconfLanguageMap["uk"] = "uk_UA";
-            gconfLanguageMap["zh"] = "zh_CN";
+            // confLanguageMap["es_419"] = "es_MX";
+            confLanguageMap["fi"] = "fi_FI";
+            confLanguageMap["fr"] = "fr_FR";
+            confLanguageMap["hu"] = "hu_HU";
+            confLanguageMap["id"] = "id_ID";
+            confLanguageMap["it"] = "it_IT";
+            confLanguageMap["ms"] = "ms_MY";
+            confLanguageMap["nl"] = "nl_NL";
+            confLanguageMap["no"] = "no_NO";
+            confLanguageMap["pl"] = "pl_PL";
+            confLanguageMap["pt"] = "pt_PT";
+            confLanguageMap["ro"] = "ro_RO";
+            confLanguageMap["ru"] = "ru_RU";
+            confLanguageMap["sk"] = "sk_SK";
+            confLanguageMap["sv"] = "sv_SE";
+            confLanguageMap["th"] = "th_TH";
+            confLanguageMap["tr"] = "tr_TR";
+            confLanguageMap["uk"] = "uk_UA";
+            confLanguageMap["zh"] = "zh_CN";
         }
 
-        if (gconfLanguageMap.contains(language))
-            language = gconfLanguageMap.value(language);
+        if (confLanguageMap.contains(language))
+            language = confLanguageMap.value(language);
         systemLocale = new MLocale(language);
     }
 
