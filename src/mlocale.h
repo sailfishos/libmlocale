@@ -49,7 +49,7 @@ struct MStaticLocaleDestroyer;
  *
  * \brief MLocale is a class that implements locale dependent data formatting as well as translation, collation and calendar systems.
  *
- * For more general information about Internationalization in libmeegotouch
+ * For more general information about Internationalization
  * see also the <a href="i18n.html">Internationalization Guidelines</a>
  *
  * The locale system in the MeeGo Touch UI Framework is separated into
@@ -129,7 +129,7 @@ public:
      * “DateShort”, “DateMedium”, “DateLong”, “DateFull”, have the same meaning
      * as the respective data types in ICU.
      * 
-     * The value “DateYearAndMonth” is a libmeegotouch addition to
+     * The value “DateYearAndMonth” is a libmlocale addition to
      * format only the year and the month without the
      * day. “DateYearAndMonth” implies “TimeNone”. For example in
      * Finnish locale the result of using “DateYearAndMonth” is

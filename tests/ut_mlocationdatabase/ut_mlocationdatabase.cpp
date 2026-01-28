@@ -139,9 +139,7 @@ void Ut_MLocationDatabase::testNearestCity()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
+    // do only run the tests, if we were able to load some cities
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -168,9 +166,6 @@ void Ut_MLocationDatabase::testMatchingCities()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -285,9 +280,6 @@ void Ut_MLocationDatabase::testCitiesInTimeZone()
     MLocationDatabase db;
     QList<MCountry> countries = db.countries();
 
-    // do only run the tests, if we were able to load
-    // some countries from the meegotouch-cities-*
-    // package.
     if (countries.count() < 10) {
         qWarning( "loading of country list failed, skipping test" );
         return;
@@ -332,9 +324,6 @@ void Ut_MLocationDatabase::dumpCitiesInTimeZoneIds()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -405,9 +394,6 @@ void Ut_MLocationDatabase::testCitiesInCountry()
     MLocationDatabase db;
     QList<MCountry> countries = db.countries();
 
-    // do only run the tests, if we were able to load
-    // some countries from the meegotouch-cities-*
-    // package.
     if (countries.count() < 10) {
         qWarning( "loading of country list failed, skipping test" );
         return;
@@ -444,9 +430,6 @@ void Ut_MLocationDatabase::testCountryCodes()
     MLocationDatabase db;
     QList<MCountry> countries = db.countries();
 
-    // do only run the tests, if we were able to load
-    // some countries from the meegotouch-cities-*
-    // package.
     if (countries.count() < 10) {
         qWarning( "loading of country list failed, skipping test" );
         return;
@@ -597,9 +580,6 @@ void Ut_MLocationDatabase::testCities()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -648,9 +628,6 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -790,9 +767,6 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
