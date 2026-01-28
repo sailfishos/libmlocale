@@ -485,11 +485,11 @@ void Ft_Locales::testMLocaleTextDirection()
     MLocale locale(localeName);
     QCOMPARE((int)locale.textDirection(), direction);
     MLocale::setDefault(locale);
-    if(localeName.contains(QRegularExpression("@.*layout-direction=auto")))
+    if (localeName.contains(QRegularExpression("@.*layout-direction=auto")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LayoutDirectionAuto);
-    else if(localeName.contains(QRegularExpression("@.*layout-direction=ltr")))
+    else if (localeName.contains(QRegularExpression("@.*layout-direction=ltr")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LeftToRight);
-    else if(localeName.contains(QRegularExpression("@.*layout-direction=rtl")))
+    else if (localeName.contains(QRegularExpression("@.*layout-direction=rtl")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::RightToLeft);
     else
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LeftToRight);
@@ -4330,7 +4330,7 @@ void Ft_Locales::checkAvailableLocales()
     // for (int i = 0; i < numberOfAvailableLocales; ++i) {
     //     qDebug() << "available:" << availableLocaleNames[i] << availableDisplayNames[i];
     // }
-    foreach(const QString &requiredLocaleName, requiredLocaleNames) {
+    foreach (const QString &requiredLocaleName, requiredLocaleNames) {
         // if (availableLocaleNames.contains(requiredLocaleName))
         //     qDebug() << "required and available: "
         //              << requiredLocaleName
@@ -4407,8 +4407,8 @@ void Ft_Locales::checkAvailableLocales()
         supportedLocaleNames << "zh_CN@collation=stroke";
     }
     QStringList numberSystemTestLocales;
-    foreach(QString supportedLocaleName, supportedLocaleNames) {
-        if(supportedLocaleName.startsWith("ar")) {
+    foreach (QString supportedLocaleName, supportedLocaleNames) {
+        if (supportedLocaleName.startsWith("ar")) {
             numberSystemTestLocales << supportedLocaleName + QLatin1String("@numbers=arab");
             numberSystemTestLocales << supportedLocaleName + QLatin1String("@numbers=latn");
         }
@@ -4479,7 +4479,7 @@ void Ft_Locales::checkAvailableLocales()
         << "z" << "za" << "zz" << "ž" << "ža"<< "žz"
         ;
     QString ft_localesTestOutput = "";
-    foreach(QString supportedLocaleName, supportedLocaleNames) {
+    foreach (QString supportedLocaleName, supportedLocaleNames) {
         MLocale locale(supportedLocaleName);
         QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
@@ -4775,7 +4775,7 @@ void Ft_Locales::checkAvailableLocales()
                             }
                             ft_localesTestOutput +=
                                 newLinePlusSupportedLocaleName;
-                            if(mixing > 0)
+                            if (mixing > 0)
                                 ft_localesTestOutput += QLatin1String(" & ") + messageLocale;
                             ft_localesTestOutput +=
                                 QLatin1Char('\t')

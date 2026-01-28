@@ -21,7 +21,8 @@
 
 namespace ML10N {
 
-class MLocaleNullConfigItemPrivate {
+class MLocaleNullConfigItemPrivate
+{
 public:
     bool valid;
     QString key;
@@ -42,19 +43,19 @@ MLocaleNullConfigItem::~MLocaleNullConfigItem()
 
 bool MLocaleNullConfigItem::isValid() const
 {
-  return d_ptr->valid;
+    return d_ptr->valid;
 }
 
 QString MLocaleNullConfigItem::value() const
 {
-  return d_ptr->value;
+    return d_ptr->value;
 }
 
 void MLocaleNullConfigItem::setValue( const QString& value )
 {
-  d_ptr->value = value;
-  d_ptr->valid = true;
-  emit valueChanged( d_ptr->value );
+    d_ptr->value = value;
+    d_ptr->valid = true;
+    emit valueChanged(d_ptr->value);
 }
 
 }

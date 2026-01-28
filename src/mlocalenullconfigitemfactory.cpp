@@ -26,7 +26,7 @@ namespace ML10N {
 MLocaleAbstractConfigItem* MLocaleNullConfigItemFactory::createConfigItem( const QString& key ) const
 {
 //  qWarning( "holger MLocaleNullConfigItemFactory::createConfigItem called" );
-  return new MLocaleNullConfigItem( key );
+    return new MLocaleNullConfigItem( key );
 }
 
 }

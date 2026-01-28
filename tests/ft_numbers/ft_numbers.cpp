@@ -3022,13 +3022,13 @@ void Ft_Numbers::testToLatinNumbers_data()
 
     QString directionalFormattingCodes(
         QString()
-        +QChar(0x200F) // RIGHT-TO-LEFT MARK
-        +QChar(0x200E) // LEFT-TO-RIGHT MARK
-        +QChar(0x202D) // LEFT-TO-RIGHT OVERRIDE
-        +QChar(0x202E) // RIGHT-TO-LEFT OVERRIDE
-        +QChar(0x202A) // LEFT-TO-RIGHT EMBEDDING
-        +QChar(0x202B) // RIGHT-TO-LEFT EMBEDDING
-        +QChar(0x202C) // POP DIRECTIONAL FORMATTING
+        + QChar(0x200F) // RIGHT-TO-LEFT MARK
+        + QChar(0x200E) // LEFT-TO-RIGHT MARK
+        + QChar(0x202D) // LEFT-TO-RIGHT OVERRIDE
+        + QChar(0x202E) // RIGHT-TO-LEFT OVERRIDE
+        + QChar(0x202A) // LEFT-TO-RIGHT EMBEDDING
+        + QChar(0x202B) // RIGHT-TO-LEFT EMBEDDING
+        + QChar(0x202C) // POP DIRECTIONAL FORMATTING
         );
 
     QString arab    ("٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ");

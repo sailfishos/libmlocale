@@ -79,16 +79,13 @@ bool MLocationDatabasePrivate::loadCountries()
     
     QDomNode n = docElem.firstChild();
 
-    while(!n.isNull())
-    {
+    while (!n.isNull()) {
         QDomElement e = n.toElement(); // try to convert the node to an element.
-        if ( e.isNull() )
-        {
+        if (e.isNull()) {
             continue;
         }
         
-        if ( e.tagName() != "country" )
-        {
+        if (e.tagName() != "country") {
             continue;
         }
 
@@ -124,19 +121,16 @@ bool MLocationDatabasePrivate::loadCountries()
     return true;
 }
 
-
 bool MLocationDatabasePrivate::loadCities()
 {
     QFile file( path + "cities.xml" );
-    if (!file.open(QIODevice::ReadOnly))
-    {
+    if (!file.open(QIODevice::ReadOnly)) {
         qDebug( "loadCities file open failed" );
         return false;
     }
 
     QDomDocument doc;
-    if (!doc.setContent(&file))
-    {
+    if (!doc.setContent(&file)) {
         qDebug( "loadCities setContent failed" );
         file.close();
         return false;
@@ -148,16 +142,13 @@ bool MLocationDatabasePrivate::loadCities()
     
     QDomNode n = docElem.firstChild();
 
-    while(!n.isNull())
-    {
+    while (!n.isNull()) {
         QDomElement e = n.toElement(); // try to convert the node to an element.
-        if ( e.isNull() )
-        {
+        if (e.isNull()) {
             continue;
         }
         
-        if ( e.tagName() != "city" )
-        {
+        if (e.tagName() != "city") {
             continue;
         }
 
@@ -177,12 +168,11 @@ bool MLocationDatabasePrivate::loadCities()
 
         tmpEl = e.elementsByTagName( "timezone" ).at( 0 ).toElement();
         QString timeZoneId = canonicalizeTimeZoneId(tmpEl.text());
-        if(timeZoneId.isEmpty()) {
+        if (timeZoneId.isEmpty()) {
             qWarning() << __PRETTY_FUNCTION__ << "Time zone id"
                        << tmpEl.text() << "cannot be canonicalized. Using it as it is.";
             timeZoneId = tmpEl.text();
-        }
-        else if(timeZoneId != tmpEl.text()) {
+        } else if (timeZoneId != tmpEl.text()) {
             qWarning() << __PRETTY_FUNCTION__ << "Time zone id"
                        << tmpEl.text() << "canonicalized to" << timeZoneId;
         }
@@ -191,9 +181,8 @@ bool MLocationDatabasePrivate::loadCities()
         tmpEl = e.elementsByTagName( "countrykey" ).at( 0 ).toElement();
         QString countryKey = tmpEl.text();
 
-        if ( countries.contains( countryKey ) )
-        {
-            city.setCountry( countries[ countryKey ] );
+        if (countries.contains(countryKey)) {
+            city.setCountry(countries[countryKey]);
         }
 
         tmpEl = e.elementsByTagName( "latitude" ).at( 0 ).toElement();
@@ -216,11 +205,11 @@ bool MLocationDatabasePrivate::loadTimeZoneData()
 {
     QFile file;
     file.setFileName(zoneAliasFile);
-    if(!file.open(QIODevice::ReadOnly)) {
+    if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "file" << zoneAliasFile  << "is missing."
                    << "Using fallback, aliases might have problems.";
         file.setFileName(zoneAliasFileFallback);
-        if(!file.open(QIODevice::ReadOnly)) {
+        if (!file.open(QIODevice::ReadOnly)) {
             qWarning() << "fallback cannot be opened either.";
             return false;
         }
@@ -234,9 +223,9 @@ bool MLocationDatabasePrivate::loadTimeZoneData()
 #else
         QStringList timeZoneIds(line.split(QLatin1Char(' '), QString::SkipEmptyParts));
 #endif
-        if(!timeZoneIds.isEmpty()) {
+        if (!timeZoneIds.isEmpty()) {
             QString canonicalTimeZoneId = timeZoneIds.first();
-            foreach(const QString &alias, timeZoneIds) {
+            foreach (const QString &alias, timeZoneIds) {
                 canonicalTimeZoneIds[alias] = canonicalTimeZoneId;
             }
         }
@@ -280,23 +269,19 @@ bool MLocationDatabasePrivate::loadCapitals()
 MLocationDatabase::MLocationDatabase()
     : d_ptr( new MLocationDatabasePrivate )
 {
-    if ( ! d_ptr->loadTimeZoneData() )
-    {
-        qWarning( "loading of time zone data failed." );
+    if (!d_ptr->loadTimeZoneData()) {
+        qWarning("loading of time zone data failed.");
     }
-    if ( ! d_ptr->loadCountries() )
-    {
-        qWarning( "loading of country list failed." );
+    if (!d_ptr->loadCountries()) {
+        qWarning( "loading of country list failed.");
     }
 
-    if ( ! d_ptr->loadCities() )
-    {
-        qWarning( "loading of city list failed." );
+    if (!d_ptr->loadCities()) {
+        qWarning( "loading of city list failed.");
     }
 
-    if ( ! d_ptr->loadCapitals() )
-    {
-        qWarning( "loading of city list failed." );
+    if (!d_ptr->loadCapitals()) {
+        qWarning( "loading of city list failed.");
     }
 }
 
@@ -313,8 +298,7 @@ QList<MCountry> MLocationDatabase::countries()
 
     QList<MCountry> list;
 
-    foreach( const MCountry& country, d->countries )
-    {
+    foreach (const MCountry& country, d->countries) {
         list.append( country );
     }
     return list;
@@ -327,8 +311,7 @@ QList<MCity> MLocationDatabase::cities()
 
     QList<MCity> list;
 
-    foreach( const MCity& city, d->cities )
-    {
+    foreach (const MCity& city, d->cities) {
         list.append( city );
     }
     return list;
@@ -341,10 +324,8 @@ QList<MCity> MLocationDatabase::citiesInCountry( const QString& countryKey )
 
     QList<MCity> list;
 
-    foreach( const MCity& city, d->cities )
-    {
-        if ( city.country().key() == countryKey )
-        {
+    foreach (const MCity& city, d->cities) {
+        if (city.country().key() == countryKey) {
             list.append( city );
         }
     }
@@ -355,13 +336,13 @@ QList<MCity> MLocationDatabase::citiesInCountry( const QString& countryKey )
 static QString removeAccents(const QString &str)
 {
     QString result;
-    for(int i = 0; i < str.size(); ++i) {
+    for (int i = 0; i < str.size(); ++i) {
         QString decomposition = str[i].decomposition();
-        if(decomposition == "")
+        if (decomposition == "")
             result += str[i];
         else
-            for(int j = 0; j < decomposition.size(); ++j)
-                if(!decomposition[j].isMark())
+            for (int j = 0; j < decomposition.size(); ++j)
+                if (!decomposition[j].isMark())
                     result += decomposition[j];
     }
     return result;
@@ -372,7 +353,7 @@ QList<MCity> MLocationDatabase::citiesInTimeZone(const QString& timeZoneId)
     Q_D(MLocationDatabase);
     QList<MCity> list;
     QString canonicalTimeZoneId = d->canonicalizeTimeZoneId(timeZoneId);
-    if(canonicalTimeZoneId.isEmpty())
+    if (canonicalTimeZoneId.isEmpty())
         return list;
     // Cut out last section of timezone id, for example cut out
     // “Tell_City” out of “America/Indiana/Tell_City” In case of
@@ -387,10 +368,10 @@ QList<MCity> MLocationDatabase::citiesInTimeZone(const QString& timeZoneId)
 
     QList<MCity> olsonCities;
     QList<MCity> capitalCities;
-    foreach(const MCity& city, d->cities) {
+    foreach (const MCity& city, d->cities) {
         // city.timeZone is already canonical
         if (city.timeZone() == canonicalTimeZoneId) {
-            if(removeAccents(city.englishName()).contains(canonicalCity))
+            if (removeAccents(city.englishName()).contains(canonicalCity))
                 olsonCities.append(city);
             else if (!d->capitals[city.key()].isEmpty())
                 capitalCities.append(city);
@@ -398,9 +379,9 @@ QList<MCity> MLocationDatabase::citiesInTimeZone(const QString& timeZoneId)
                 list.append(city);
         }
     }
-    foreach(const MCity &olsonCity, olsonCities)
+    foreach (const MCity &olsonCity, olsonCities)
         list.prepend(olsonCity);
-    foreach(const MCity &capitalCity, capitalCities)
+    foreach (const MCity &capitalCity, capitalCities)
         list.prepend(capitalCity);
     return list;
 }
@@ -413,8 +394,7 @@ QList<MCity> MLocationDatabase::matchingCities(const QString& searchString)
     QStringMatcher *matcher = new QStringMatcher(searchString, Qt::CaseInsensitive);
     foreach (const MCity &city, d->cities) {
         if (matcher->indexIn(city.englishName()) != -1
-            || matcher->indexIn(city.localName()) != -1)
-        {
+            || matcher->indexIn(city.localName()) != -1) {
             list.append( city );
         }
     }
@@ -427,15 +407,13 @@ MCity MLocationDatabase::nearestCity(qreal latitude, qreal longitude)
     Q_D(MLocationDatabase);
 
     MCity bestCity;
-
     qreal bestDistance = 1000000;
 
-    QList<MCity> list;
-    foreach(const MCity &city, d->cities) {
+    foreach (const MCity &city, d->cities) {
         qreal distance =
             (latitude - city.latitude()) * (latitude - city.latitude())
             + (longitude - city.longitude()) * (longitude - city.longitude());
-        if ( distance < bestDistance ) {
+        if (distance < bestDistance) {
             bestDistance = distance;
             bestCity = city;
         }

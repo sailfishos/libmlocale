@@ -50,7 +50,7 @@ void MCollatorPrivate::initCollator(const icu::Locale &locale)
 {
     UErrorCode status = U_ZERO_ERROR;
     _coll = icu::Collator::createInstance(locale, status);
-    if(U_FAILURE(status)) {
+    if (U_FAILURE(status)) {
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::Collator::createInstance() failed with error"
                    << u_errorName(status);

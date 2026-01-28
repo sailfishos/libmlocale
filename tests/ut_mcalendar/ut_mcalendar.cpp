@@ -881,17 +881,17 @@ void Ut_MCalendar::testIcuFormatString()
                 expectedResult = timeResults[timeType];
             else if (timeType == MLocale::TimeNone)
                 expectedResult = dateResults[dateType];
-            else if(locale.categoryName(MLocale::MLcTime).startsWith("ja")
+            else if (locale.categoryName(MLocale::MLcTime).startsWith("ja")
                     && calendarType == MLocale::GregorianCalendar
                     && (dateType == MLocale::DateLong
                         || dateType == MLocale::DateFull))
                 expectedResult = dateResults[dateType] + timeResults[timeType];
-            else if(locale.categoryName(MLocale::MLcTime).startsWith("zh")
+            else if (locale.categoryName(MLocale::MLcTime).startsWith("zh")
                     && calendarType == MLocale::GregorianCalendar
                     && (dateType == MLocale::DateLong
                         || dateType == MLocale::DateFull))
                 expectedResult = dateResults[dateType] + timeResults[timeType];
-            else if(locale.categoryName(MLocale::MLcTime).startsWith("th_TH"))
+            else if (locale.categoryName(MLocale::MLcTime).startsWith("th_TH"))
                 expectedResult = dateResults[dateType] + ", " + timeResults[timeType];
             else
                 expectedResult = dateResults[dateType] + ' ' + timeResults[timeType];
@@ -2654,15 +2654,15 @@ void Ut_MCalendar::testMLocaleCalendarConversionsFromMCalendar()
                         expectedResult = dateResults[dateType] + ' ' + timeResults[timeType];
                     else
                         expectedResult = dateResults[dateType] + timeResults[timeType];
-            else if(locale.categoryName(MLocale::MLcTime).startsWith("th_TH"))
+            else if (locale.categoryName(MLocale::MLcTime).startsWith("th_TH"))
                 expectedResult = dateResults[dateType] + ", " + timeResults[timeType];
-            else if(locale.categoryName(MLocale::MLcTime).startsWith("fa_IR")) {
+            else if (locale.categoryName(MLocale::MLcTime).startsWith("fa_IR")) {
                 if (dateType == MLocale::DateShort || dateType == MLocale::DateMedium)
                         expectedResult = QChar(0x202B) + dateResults[dateType] + "،‏ " + timeResults[timeType] + QChar(0x202C);
                     else
                         expectedResult = QChar(0x202B) + dateResults[dateType] + "، ساعت " + timeResults[timeType]  + QChar(0x202C);
             }
-            else if(locale.categoryName(MLocale::MLcTime).startsWith("vi")) {
+            else if (locale.categoryName(MLocale::MLcTime).startsWith("vi")) {
                 expectedResult = timeResults[timeType] + " " + dateResults[dateType];
             }
             else

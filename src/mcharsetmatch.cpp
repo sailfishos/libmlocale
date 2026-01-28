@@ -88,9 +88,9 @@ MCharsetMatch &MCharsetMatch::operator=(const MCharsetMatch &other)
 
 bool MCharsetMatch::operator<(const MCharsetMatch &other) const
 {
-    if(this->confidence() < other.confidence())
+    if (this->confidence() < other.confidence())
         return true;
-    else if(this->confidence() == other.confidence()
+    else if (this->confidence() == other.confidence()
             && this->language().isEmpty()
             && !other.language().isEmpty())
         return true;
@@ -100,7 +100,7 @@ bool MCharsetMatch::operator<(const MCharsetMatch &other) const
 
 bool MCharsetMatch::operator>(const MCharsetMatch &other) const
 {
-    if(this->confidence() > other.confidence())
+    if (this->confidence() > other.confidence())
         return true;
     else if (this->confidence() == other.confidence()
              && !this->language().isEmpty()

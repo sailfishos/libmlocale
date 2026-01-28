@@ -29,8 +29,8 @@ namespace ML10N {
 
 class MLOCALE_EXPORT MLocaleAbstractConfigItem : public QObject
 {
-Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     MLocaleAbstractConfigItem( const QString& key );
 
     // returns true, if this value is valid,
@@ -44,7 +44,7 @@ Q_OBJECT
     // sets the value of this item
     virtual void setValue( const QString& value ) = 0;
 
-  signals:
+signals:
     void valueChanged( const QString& newValue );
 };
 

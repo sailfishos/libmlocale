@@ -49,7 +49,6 @@ MBreakIteratorPrivate::MBreakIteratorPrivate()
     // nothing
 }
 
-
 MBreakIteratorPrivate::~MBreakIteratorPrivate()
 {
     delete impl;

@@ -46,7 +46,7 @@ MCharsetDetectorPrivate::MCharsetDetectorPrivate()
       q_ptr(0)
 {
     _uCharsetDetector = ucsdet_open(&_status);
-    if(hasError())
+    if (hasError())
         qWarning() << __PRETTY_FUNCTION__ << errorString();
 }
 
@@ -57,7 +57,7 @@ MCharsetDetectorPrivate::~MCharsetDetectorPrivate()
 
 bool MCharsetDetectorPrivate::hasError() const
 {
-    if(U_SUCCESS(_status))
+    if (U_SUCCESS(_status))
         return false;
     else
         return true;
@@ -137,7 +137,7 @@ void MCharsetDetector::setText(const QByteArray &ba)
         while (d->_baExtended.size() < 50)
             d->_baExtended += d->_ba;
     ucsdet_setText(d->_uCharsetDetector, d->_baExtended.constData(), int32_t(-1), &(d->_status));
-    if(hasError())
+    if (hasError())
         qWarning() << __PRETTY_FUNCTION__ << errorString();
 }
 
@@ -152,14 +152,14 @@ MCharsetMatch MCharsetDetector::detect()
     // differ from the single match returned by ucsdet_detect().
     Q_D(MCharsetDetector);
     QList<MCharsetMatch> mCharsetMatchList = detectAll();
-    if(hasError()) {
+    if (hasError()) {
         qWarning() << __PRETTY_FUNCTION__ << errorString();
         return MCharsetMatch();
     }
     if (mCharsetMatchList.isEmpty()) {
         // should never happen, because detectAll() already sets an
         // error if no matches are found which the previous
-        // if(hasError()) should detect.
+        // if (hasError()) should detect.
         d->_status = U_CE_NOT_FOUND_ERROR;
         qWarning() << __PRETTY_FUNCTION__
                    << "no matches found at all" << errorString();
@@ -176,7 +176,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
     qint32 matchesFound;
     const UCharsetMatch **uCharsetMatch
         = ucsdet_detectAll(d->_uCharsetDetector, &matchesFound, &(d->_status));
-    if(hasError()) {
+    if (hasError()) {
         qWarning() << __PRETTY_FUNCTION__ << errorString();
         return QList<MCharsetMatch>();
     }
@@ -192,25 +192,25 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
         MCharsetMatch mCharsetMatch;
         mCharsetMatch.setName(
             QString::fromLatin1(ucsdet_getName(uCharsetMatch[i], &(d->_status))));
-        if(hasError()) {
+        if (hasError()) {
             qWarning() << __PRETTY_FUNCTION__ << errorString();
             return QList<MCharsetMatch>();
         }
         mCharsetMatch.setConfidence(
             static_cast<qint32>(ucsdet_getConfidence (uCharsetMatch[i], &(d->_status))));
-        if(hasError()) {
+        if (hasError()) {
             qWarning() << __PRETTY_FUNCTION__ << errorString();
             return QList<MCharsetMatch>();
         }
         mCharsetMatch.setLanguage(
             QString::fromLatin1(ucsdet_getLanguage(uCharsetMatch[i], &(d->_status))));
-        if(hasError()) {
+        if (hasError()) {
             qWarning() << __PRETTY_FUNCTION__ << errorString();
             return QList<MCharsetMatch>();
         }
         mCharsetMatchList << mCharsetMatch;
     }
-    if(d->_allDetectableCharsets.isEmpty())
+    if (d->_allDetectableCharsets.isEmpty())
         getAllDetectableCharsets();
     // libicu sometimes does not detect single byte encodings at all
     // even if they can encode the input without error. This seems to
@@ -229,7 +229,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
     // the list of matches with the confidence value of 10. If it
     // cannot encode the complete input, the iteration over the list
     // of matches will detect that and remove it again.
-    if(!d->_declaredEncoding.isEmpty()
+    if (!d->_declaredEncoding.isEmpty()
         && (d->_declaredEncoding.startsWith(QLatin1String("ISO-8859-"))
             || d->_declaredEncoding.startsWith(QLatin1String("windows-12"))
             || d->_declaredEncoding.startsWith(QLatin1String("KOI8"))))
@@ -244,24 +244,24 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
     // encodings I could find no case where the matches returned by
     // libicu did omit a multibyte encoding when it should have been
     // included.
-    if(!d->_declaredLocale.isEmpty()) {
+    if (!d->_declaredLocale.isEmpty()) {
         QString language = d->_declaredLocale.left(2);
-        if(language ==  QLatin1String("ru")) {
+        if (language ==  QLatin1String("ru")) {
             mCharsetMatchList << MCharsetMatch("KOI8-R", language, 10);
             mCharsetMatchList << MCharsetMatch("windows-1251", language, 10);
             mCharsetMatchList << MCharsetMatch("ISO-8859-5", language, 10);
         }
-        else if(language ==  QLatin1String("uk")) {
+        else if (language ==  QLatin1String("uk")) {
             mCharsetMatchList << MCharsetMatch("KOI8-U", language, 10);
             mCharsetMatchList << MCharsetMatch("windows-1251", language, 10);
             // ISO 8859-5 encoding is missing the letter ґ needed for
             // Ukrainian, i.e. ISO 8859-5 should not occur for Ukrainian
         }
-        else if(language == QLatin1String("tr"))
+        else if (language == QLatin1String("tr"))
             mCharsetMatchList << MCharsetMatch("ISO-8859-9", language, 10);
-        else if(language == QLatin1String("el"))
+        else if (language == QLatin1String("el"))
             mCharsetMatchList << MCharsetMatch("ISO-8859-7", language, 10);
-        else if(language == QLatin1String("en")
+        else if (language == QLatin1String("en")
                 || language == QLatin1String("da")
                 || language == QLatin1String("de")
                 || language == QLatin1String("es")
@@ -275,16 +275,16 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
                 || language == QLatin1String("pt")
                 || language == QLatin1String("sv"))
             mCharsetMatchList << MCharsetMatch("ISO-8859-1", language, 10);
-        else if(language == QLatin1String("cs")
+        else if (language == QLatin1String("cs")
                 || language == QLatin1String("hu")
                 || language == QLatin1String("pl")
                 || language == QLatin1String("ro"))
             mCharsetMatchList << MCharsetMatch("ISO-8859-1", language, 10);
-        else if(language == QLatin1String("ar")
+        else if (language == QLatin1String("ar")
                 || language == QLatin1String("fa")
                 || language == QLatin1String("ur"))
             mCharsetMatchList << MCharsetMatch("ISO-8859-6", language, 10);
-        else if(language == QLatin1String("he"))
+        else if (language == QLatin1String("he"))
             mCharsetMatchList << MCharsetMatch("ISO-8859-8", language, 10);
     }
     // iterate over the detected matches and do some fine tuning:
@@ -294,21 +294,21 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
     qint32 iso88595Confidence = 0;
     qint32 windows1251Confidence = 0;
     QList<MCharsetMatch>::iterator it = mCharsetMatchList.begin();
-    while(it != mCharsetMatchList.end()) {
-        if((*it).name() == QLatin1String("KOI8-R"))
+    while (it != mCharsetMatchList.end()) {
+        if ((*it).name() == QLatin1String("KOI8-R"))
             koi8rConfidence += (*it).confidence();
-        if((*it).name() == QLatin1String("KOI8-U"))
+        if ((*it).name() == QLatin1String("KOI8-U"))
             koi8uConfidence += (*it).confidence();
-        if((*it).name() == QLatin1String("ISO-8859-5"))
+        if ((*it).name() == QLatin1String("ISO-8859-5"))
             iso88595Confidence += (*it).confidence();
-        if((*it).name() == QLatin1String("windows-1251"))
+        if ((*it).name() == QLatin1String("windows-1251"))
             windows1251Confidence += (*it).confidence();
-        if((*it).name() == QLatin1String("ISO-2022-JP")) {
+        if ((*it).name() == QLatin1String("ISO-2022-JP")) {
             // non-Japanese text in ISO-2022-JP encoding is possible
             // but very unlikely:
             (*it).setLanguage("ja");
         }
-        if((*it).name() == QLatin1String("UTF-8")
+        if ((*it).name() == QLatin1String("UTF-8")
            && (*it).confidence() >= 80 && (*it).confidence() < 99) {
             // Actually libicu currently only returns confidence
             // values of 100, 80, 25, and 10 for UTF-8.  A value of 80
@@ -332,7 +332,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
             (*it).setConfidence(99);
             sortNeeded = true;
         }
-        if(!d->_declaredEncoding.isEmpty()
+        if (!d->_declaredEncoding.isEmpty()
            && (*it).name() == d->_declaredEncoding
            && (*it).confidence() == 10) {
             // A confidence value of 10 means the charset can
@@ -348,7 +348,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
             (*it).setConfidence(40);
             sortNeeded = true;
         }
-        if(!d->_declaredLocale.isEmpty()
+        if (!d->_declaredLocale.isEmpty()
            && d->_declaredLocale.startsWith((*it).language())
            && (*it).confidence() == 10) {
             // A confidence value of 10 means the charset can
@@ -364,7 +364,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
             // encoding.  Use a slightly lower value than for the
             // declared encoding. Setting the declared encoding
             // is more precise and should have somewhat higher priority
-            if(d->_declaredLocale.startsWith("ru")) {
+            if (d->_declaredLocale.startsWith("ru")) {
                 // Treat the Russian setDeclaredLocale("ru") case a
                 // bit different than the single byte encodings for
                 // other languages: Only increase the weight of
@@ -397,17 +397,17 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
                 // ISO-8859-5 but 21 to the confidence for
                 // windows-1251 to prefer windows-1251 a little bit
                 // over ISO-8859-5.
-                if((*it).name() == QLatin1String("KOI8-R")
+                if ((*it).name() == QLatin1String("KOI8-R")
                    && koi8rConfidence > 10 && koi8rConfidence < 30)
                     (*it).setConfidence(20 + koi8rConfidence);
-                else if((*it).name() == QLatin1String("ISO-8859-5")
+                else if ((*it).name() == QLatin1String("ISO-8859-5")
                    && iso88595Confidence > 10 && iso88595Confidence < 30)
                     (*it).setConfidence(20 + iso88595Confidence);
-                else if((*it).name() == QLatin1String("windows-1251")
+                else if ((*it).name() == QLatin1String("windows-1251")
                    && windows1251Confidence > 10 && windows1251Confidence < 30)
                     (*it).setConfidence(21 + windows1251Confidence);
             }
-            else if(d->_declaredLocale.startsWith("uk")) {
+            else if (d->_declaredLocale.startsWith("uk")) {
                 // Treat the Ukrainian setDeclaredLocale("uk") case a
                 // bit different than the single byte encodings for
                 // Russian.
@@ -430,21 +430,21 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
                 // I add 20 to the confidence for KOI8-U but 25 to the
                 // confidence for windows-1251 to prefer windows-1251
                 // over KOI8-U.
-                if((*it).name() == QLatin1String("KOI8-U")
+                if ((*it).name() == QLatin1String("KOI8-U")
                    && koi8uConfidence > 10 && koi8uConfidence < 30)
                     (*it).setConfidence(20 + koi8uConfidence);
-                else if((*it).name() == QLatin1String("windows-1251")
+                else if ((*it).name() == QLatin1String("windows-1251")
                    && windows1251Confidence > 10 && windows1251Confidence < 30)
                     (*it).setConfidence(25 + windows1251Confidence);
             }
-            else if((d->_declaredLocale.contains("TW")
+            else if ((d->_declaredLocale.contains("TW")
                 || d->_declaredLocale.contains("HK")
                 || d->_declaredLocale.contains("MO"))
                && (*it).name() == QLatin1String("Big5")) {
                  // Traditional Chinese, Big5 more likely
                 (*it).setConfidence(39);
             }
-            else if((d->_declaredLocale.contains("CN")
+            else if ((d->_declaredLocale.contains("CN")
                      || d->_declaredLocale.contains("SG")
                      || d->_declaredLocale == "zh")
                     && (*it).name() == QLatin1String("GB18030")) {
@@ -465,7 +465,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
             }
             sortNeeded = true;
         }
-        if(!d->_allDetectableCharsets.contains((*it).name())) {
+        if (!d->_allDetectableCharsets.contains((*it).name())) {
             // remove matches for charsets not supported by QTextCodec
             // then it is probably some weird charset we cannot use anyway
             it = mCharsetMatchList.erase(it);
@@ -475,7 +475,7 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
             // using this match, if not remove the match
             clearError();
             text(*it);
-            if(hasError()) {
+            if (hasError()) {
                 // qDebug() << __PRETTY_FUNCTION__
                 //          << "removing match" << (*it).name()
                 //          << "because it cannot encode the complete input"
@@ -488,10 +488,10 @@ QList<MCharsetMatch> MCharsetDetector::detectAll()
         }
     }
     // sort the list of matches again if confidences have been changed:
-    if(sortNeeded)
+    if (sortNeeded)
         std::sort(mCharsetMatchList.begin(), mCharsetMatchList.end(),
               std::greater<MCharsetMatch>());
-    if(mCharsetMatchList.isEmpty()) {
+    if (mCharsetMatchList.isEmpty()) {
         // is there any better status to describe this case?
         d->_status = U_CE_NOT_FOUND_ERROR;
         qWarning() << __PRETTY_FUNCTION__
@@ -558,7 +558,7 @@ void MCharsetDetector::setDeclaredEncoding(const QString &encoding)
                                d->_declaredEncoding.toLatin1().constData(),
                                int32_t(-1),
                                &(d->_status));
-    if(hasError())
+    if (hasError())
         qWarning() << __PRETTY_FUNCTION__ << errorString();
 }
 
@@ -692,15 +692,15 @@ QStringList MCharsetDetector::getAllDetectableCharsets()
         qint32 len;
         const UChar *uc;
         while ((uc = uenum_unext(en, &len, &(d->_status))) != NULL) {
-            if(uc && !hasError())
+            if (uc && !hasError())
                 allDetectableCharsetsICU << QString::fromUtf16(uc, len);
         }
     }
     uenum_close(en);
 
     // remove all charsets not supported by QTextCodec and all duplicates:
-    foreach(const QString &cs, allDetectableCharsetsICU) {
-        if(availableCodecsQt.contains(cs) && !d->_allDetectableCharsets.contains(cs))
+    foreach (const QString &cs, allDetectableCharsetsICU) {
+        if (availableCodecsQt.contains(cs) && !d->_allDetectableCharsets.contains(cs))
             d->_allDetectableCharsets << cs;
     }
 

@@ -62,8 +62,7 @@ void MIcuBreakIteratorPrivate::init(const MLocale &locale, const QString &text,
 {
     UErrorCode status = U_ZERO_ERROR;
 
-    icu::Locale msgLocale
-    = locale.d_ptr->getCategoryLocale(MLocale::MLcMessages);
+    icu::Locale msgLocale = locale.d_ptr->getCategoryLocale(MLocale::MLcMessages);
 
     switch (type) {
     case MBreakIterator::LineIterator:

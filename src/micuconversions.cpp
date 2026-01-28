@@ -103,13 +103,13 @@ QString MIcuConversions::layoutDirectionToString(Qt::LayoutDirection layoutDirec
 
 Qt::LayoutDirection MIcuConversions::stringToLayoutDirection(QString layoutDirectionName)
 {
-    if(layoutDirectionName == "rtl")
+    if (layoutDirectionName == "rtl")
         // force layout direction to RTL
         return Qt::RightToLeft;
-    else if(layoutDirectionName == "ltr")
+    else if (layoutDirectionName == "ltr")
         // force layout direction to LTR
         return Qt::LeftToRight;
-    else if(layoutDirectionName == "auto")
+    else if (layoutDirectionName == "auto")
         // determine layout direction from the locale
         return Qt::LayoutDirectionAuto;
     else
@@ -155,7 +155,7 @@ QString MIcuConversions::collationToString(MLocale::Collation coll)
 
 MLocale::Collation MIcuConversions::stringToCollation(QString collationName)
 {
-    if(collationName == "phonebook")
+    if (collationName == "phonebook")
         return MLocale::PhonebookCollation;
     else if (collationName == "pinyin")
         return MLocale::PinyinCollation;
@@ -219,7 +219,7 @@ QString MIcuConversions::calendarToString(MLocale::CalendarType calendarType)
 
 MLocale::CalendarType MIcuConversions::stringToCalendar(QString calendarTypeName)
 {
-    if(calendarTypeName == "gregorian")
+    if (calendarTypeName == "gregorian")
         return MLocale::GregorianCalendar;
     else if (calendarTypeName == "islamic")
         return MLocale::IslamicCalendar;
@@ -329,7 +329,7 @@ QString MIcuConversions::parseOption(const QString &localeName, const QString &o
     QString value;
     QRegularExpression regexp("^[^@]+@.*"+QRegularExpression::escape(option)+"=([^@=;]+)($|;.*$)");
     QRegularExpressionMatch match = regexp.match(localeName);
-    if(match.hasMatch() && match.lastCapturedIndex() >= 2) {
+    if (match.hasMatch() && match.lastCapturedIndex() >= 2) {
         value = match.captured(1);
     }
     return value;
@@ -338,25 +338,25 @@ QString MIcuConversions::parseOption(const QString &localeName, const QString &o
 QString MIcuConversions::setOption(const QString &localeName, const QString &option, const QString &value)
 {
     QString newLocaleName = localeName;
-    if(!newLocaleName.isEmpty() && !option.isEmpty()) {
-        if(value.isEmpty()) { // remove option completely
-            if(newLocaleName.contains('@') && newLocaleName.contains(option)) {
+    if (!newLocaleName.isEmpty() && !option.isEmpty()) {
+        if (value.isEmpty()) { // remove option completely
+            if (newLocaleName.contains('@') && newLocaleName.contains(option)) {
                 QRegularExpression regexp("^([^@]+@.*)"+QRegularExpression::escape(option)+"=[^@=;]+($|;.*$)");
                 newLocaleName.replace(regexp, "\\1\\2");
                 newLocaleName.replace(QLatin1String(";;"), QLatin1String(";"));
                 newLocaleName.replace(QLatin1String("@;"), QLatin1String("@"));
-                while(newLocaleName.endsWith(';'))
+                while (newLocaleName.endsWith(';'))
                     newLocaleName.chop(1);
-                if(newLocaleName.endsWith('@'))
+                if (newLocaleName.endsWith('@'))
                     newLocaleName.chop(1);
             }
         }
         else { // replace option value
-            if(!newLocaleName.contains('@')) {
+            if (!newLocaleName.contains('@')) {
                 newLocaleName += '@' + option + '=' + value;
             }
-            else if(!newLocaleName.contains(option)) {
-                if(newLocaleName.endsWith(';'))
+            else if (!newLocaleName.contains(option)) {
+                if (newLocaleName.endsWith(';'))
                     newLocaleName += option + '=' + value;
                 else
                     newLocaleName += ';' + option + '=' + value;

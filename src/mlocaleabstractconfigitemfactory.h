@@ -28,9 +28,9 @@ class MLocaleAbstractConfigItem;
 
 class MLocaleAbstractConfigItemFactory
 {
- public:
-  virtual MLocaleAbstractConfigItem* createConfigItem( const QString& key ) const = 0;
-  virtual ~MLocaleAbstractConfigItemFactory() {}
+public:
+    virtual MLocaleAbstractConfigItem* createConfigItem( const QString& key ) const = 0;
+    virtual ~MLocaleAbstractConfigItemFactory() {}
 };
 
 }

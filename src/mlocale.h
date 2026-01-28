@@ -23,6 +23,7 @@
 #include "mlocaleexport.h"
 
 #include <float.h>
+
 #include <QtGlobal>
 #include <QObject>
 #include <QMap>
@@ -2119,7 +2120,6 @@ Q_SIGNALS:
     void localeSettingsChanged();
 
 protected:
-
     /*!
      * \brief Returns the default locale object.
      */

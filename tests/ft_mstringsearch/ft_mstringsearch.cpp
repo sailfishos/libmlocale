@@ -600,7 +600,7 @@ void Ft_MStringSearch::testSearch()
     int matchStart = -1;
     int matchLength = 0;
     QString matchText = QString();
-    while(stringSearch.next() != -1) {
+    while (stringSearch.next() != -1) {
         matchStart = stringSearch.matchedStart();
         matchLength = stringSearch.matchedLength();
         matchText = stringSearch.matchedText();
@@ -654,7 +654,7 @@ void Ft_MStringSearch::testSearch()
     matchStart = -1;
     matchLength = 0;
     matchText = QString();
-    while(stringSearch.previous() != -1) {
+    while (stringSearch.previous() != -1) {
         matchStart = stringSearch.matchedStart();
         matchLength = stringSearch.matchedLength();
         matchText = stringSearch.matchedText();
