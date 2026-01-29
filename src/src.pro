@@ -82,7 +82,6 @@ INSTALLS += target \
     install_headers
 ###
 
-# install MeeGo Touch feature files
 install_prf.path = $$[QT_INSTALL_DATA]/mkspecs/features
 install_prf.files = \
     $${M_SOURCE_TREE}/mkspecs/features/mlocale.prf \

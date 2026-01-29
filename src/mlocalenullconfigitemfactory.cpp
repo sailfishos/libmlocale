@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -26,7 +26,7 @@ namespace ML10N {
 MLocaleAbstractConfigItem* MLocaleNullConfigItemFactory::createConfigItem( const QString& key ) const
 {
 //  qWarning( "holger MLocaleNullConfigItemFactory::createConfigItem called" );
-  return new MLocaleNullConfigItem( key );
+    return new MLocaleNullConfigItem( key );
 }
 
 }

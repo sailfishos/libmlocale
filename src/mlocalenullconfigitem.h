@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -33,8 +33,8 @@ class MLocaleNullConfigItemPrivate;
 
 class MLOCALE_EXPORT MLocaleNullConfigItem : public MLocaleAbstractConfigItem
 {
-Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     MLocaleNullConfigItem( const QString& key );
     virtual ~MLocaleNullConfigItem();
 
@@ -42,7 +42,7 @@ Q_OBJECT
     QString value() const;
     void setValue( const QString& value );
 
-  private:
+private:
     MLocaleNullConfigItemPrivate *const d_ptr;
 };
 

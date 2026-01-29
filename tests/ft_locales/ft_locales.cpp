@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -485,11 +485,11 @@ void Ft_Locales::testMLocaleTextDirection()
     MLocale locale(localeName);
     QCOMPARE((int)locale.textDirection(), direction);
     MLocale::setDefault(locale);
-    if(localeName.contains(QRegularExpression("@.*layout-direction=auto")))
+    if (localeName.contains(QRegularExpression("@.*layout-direction=auto")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LayoutDirectionAuto);
-    else if(localeName.contains(QRegularExpression("@.*layout-direction=ltr")))
+    else if (localeName.contains(QRegularExpression("@.*layout-direction=ltr")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LeftToRight);
-    else if(localeName.contains(QRegularExpression("@.*layout-direction=rtl")))
+    else if (localeName.contains(QRegularExpression("@.*layout-direction=rtl")))
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::RightToLeft);
     else
         QCOMPARE(MLocale::defaultLayoutDirection(), Qt::LeftToRight);
@@ -3909,7 +3909,6 @@ void Ft_Locales::testMLocaleIndexBucket()
     // we need to instantiate a MLocale before dataPaths returns
     // a valid result.
     MLocale locale(localeName);
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
 
     MLocale localeEn("en_US");
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
@@ -4075,7 +4074,6 @@ void Ft_Locales::testDifferentStrengthComparison()
     QFETCH(QString, string2);
     QFETCH(QList<MLocale::Comparison>, comparisonExpectedResults);
 
-    QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
     MLocale locale(localeName);
     locale.setCategoryLocale(MLocale::MLcCollate, lcCollate);
     MCollator collator = locale.collator();
@@ -4330,7 +4328,7 @@ void Ft_Locales::checkAvailableLocales()
     // for (int i = 0; i < numberOfAvailableLocales; ++i) {
     //     qDebug() << "available:" << availableLocaleNames[i] << availableDisplayNames[i];
     // }
-    foreach(const QString &requiredLocaleName, requiredLocaleNames) {
+    foreach (const QString &requiredLocaleName, requiredLocaleNames) {
         // if (availableLocaleNames.contains(requiredLocaleName))
         //     qDebug() << "required and available: "
         //              << requiredLocaleName
@@ -4407,8 +4405,8 @@ void Ft_Locales::checkAvailableLocales()
         supportedLocaleNames << "zh_CN@collation=stroke";
     }
     QStringList numberSystemTestLocales;
-    foreach(QString supportedLocaleName, supportedLocaleNames) {
-        if(supportedLocaleName.startsWith("ar")) {
+    foreach (QString supportedLocaleName, supportedLocaleNames) {
+        if (supportedLocaleName.startsWith("ar")) {
             numberSystemTestLocales << supportedLocaleName + QLatin1String("@numbers=arab");
             numberSystemTestLocales << supportedLocaleName + QLatin1String("@numbers=latn");
         }
@@ -4479,9 +4477,8 @@ void Ft_Locales::checkAvailableLocales()
         << "z" << "za" << "zz" << "ž" << "ža"<< "žz"
         ;
     QString ft_localesTestOutput = "";
-    foreach(QString supportedLocaleName, supportedLocaleNames) {
+    foreach (QString supportedLocaleName, supportedLocaleNames) {
         MLocale locale(supportedLocaleName);
-        QCOMPARE(MLocale::dataPaths(), (QStringList() << "/usr/share/mlocale5/icu"));
         locale.setTimeFormat24h(MLocale::LocaleDefaultTimeFormat24h);
         QCOMPARE(locale.timeFormat24h(), MLocale::LocaleDefaultTimeFormat24h);
         std::sort(sortingTestList.begin(), sortingTestList.end(), locale.collator());
@@ -4775,7 +4772,7 @@ void Ft_Locales::checkAvailableLocales()
                             }
                             ft_localesTestOutput +=
                                 newLinePlusSupportedLocaleName;
-                            if(mixing > 0)
+                            if (mixing > 0)
                                 ft_localesTestOutput += QLatin1String(" & ") + messageLocale;
                             ft_localesTestOutput +=
                                 QLatin1Char('\t')

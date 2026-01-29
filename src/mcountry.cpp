@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -30,25 +30,21 @@ public:
     QString countryCode;
 };
 
-
 MCountry::MCountry()
     : d_ptr( new MCountryPrivate )
 {
 }
-
 
 MCountry::~MCountry()
 {
     delete d_ptr;
 }
 
-
 MCountry::MCountry( const MCountry& other )
     : d_ptr( new MCountryPrivate )
 {
     *d_ptr = *other.d_ptr;
 }
-
 
 MCountry& MCountry::operator=( const MCountry& other )
 {
@@ -57,13 +53,11 @@ MCountry& MCountry::operator=( const MCountry& other )
     return *this;
 }
 
-
 QString MCountry::key() const
 {
     Q_D( const MCountry );
     return d->key;
 }
-
 
 QString MCountry::englishName() const
 {
@@ -71,13 +65,11 @@ QString MCountry::englishName() const
     return d->englishName;
 }
 
-
 QString MCountry::localName() const
 {
     Q_D( const MCountry );
     return d->localName;
 }
-
 
 QString MCountry::countryCode() const
 {
@@ -85,13 +77,11 @@ QString MCountry::countryCode() const
     return d->countryCode;
 }
 
-
 void MCountry::setKey( const QString& val )
 {
     Q_D( MCountry );
     d->key = val;
 }
-
 
 void MCountry::setEnglishName( const QString& val )
 {
@@ -99,13 +89,11 @@ void MCountry::setEnglishName( const QString& val )
     d->englishName = val;
 }
 
-
 void MCountry::setLocalName( const QString& val )
 {
     Q_D( MCountry );
     d->localName = val;
 }
-
 
 void MCountry::setCountryCode( const QString& val )
 {

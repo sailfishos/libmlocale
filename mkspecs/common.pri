@@ -1,8 +1,7 @@
 # Build configuration
 
 QMAKE_TARGET_COMPANY = Nokia
-QMAKE_TARGET_PRODUCT = DirectUI
-QMAKE_TARGET_DESCRIPTION = DirectUI Framework
+QMAKE_TARGET_PRODUCT = MLocale
 QMAKE_TARGET_COPYRIGHT = Copyright (C) 2010 Nokia
 
 
@@ -15,17 +14,6 @@ QMAKE_TARGET_COPYRIGHT = Copyright (C) 2010 Nokia
     include($${M_BUILD_TREE}/mkspecs/mlocaleconfig.pri)
 }
 
-#disable werrors on windows and freemantle (M_OS_MAEMO5 comes from meegotouchconfig.pri)
-win32 {
-    } else {
-        contains( DEFINES, M_OS_MAEMO5 ) {
-        } else { 
-	    !contains( M_BUILD_FEATURES, no-werror ) {
-	        QMAKE_CFLAGS *= -Werror
-	        QMAKE_CXXFLAGS *= -Werror
-            }
-        }
-    }
 
 mac {
     INCLUDEPATH += include

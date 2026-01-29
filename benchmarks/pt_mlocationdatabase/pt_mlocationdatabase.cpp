@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -55,9 +55,7 @@ void Pt_MLocationDatabase::benchmarkTimeZone()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the benchmark if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
+    // do only run the benchmark if we were able to load some cities
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -80,9 +78,6 @@ void Pt_MLocationDatabase::benchmarkMatchingCities()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the benchmark if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;

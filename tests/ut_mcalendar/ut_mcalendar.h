@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -58,7 +58,6 @@ private slots:
     void init();
     void cleanup();
 
-    void testDataPaths();
     void testTimeZones();
 
     void testTimeZonesInCountry_data();

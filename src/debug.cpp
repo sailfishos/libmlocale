@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -48,26 +48,26 @@ const char* binaryName(){
     static bool haveName = false;
     static char runningBinaryFileName[128] = "unknown";
 
-    if(haveName)
+    if (haveName)
         return runningBinaryFileName;
 
     stat_fd = open("/proc/self/stat", O_RDONLY);
-    if(stat_fd < 0){
+    if (stat_fd < 0){
         fprintf(stderr, "CRITICAL %s\n",
                 "Cant open /proc/self/stat. Error: ");
         abort();
     }
     read_result = read(stat_fd, buf, sizeof(buf));
     close(stat_fd);
-    if(read_result < 0 || sizeof(buf) < (size_t)read_result){
+    if (read_result < 0 || sizeof(buf) < (size_t)read_result){
         fprintf(stderr, "CRITICAL %s\n",
                 "Cant read /proc/self/stat. Error: ");
         abort();
     }
 
     sscanf(buf, "%*d (%[^)]s) %*s", runningBinaryFileName);
-    if(runningBinaryFileName[sizeof(runningBinaryFileName)-1] != 0){
-        if(stderr)
+    if (runningBinaryFileName[sizeof(runningBinaryFileName)-1] != 0){
+        if (stderr)
             fprintf(stderr, "CRITICAL %s\n",
                     "runningBinaryFileName too small for the name of the executable!");
         abort();
@@ -81,15 +81,15 @@ void msgLogger(MsgType type, const char *format, ...)
 {
     static FILE *log = NULL;
 
-    if(format[0] == 0)
+    if (format[0] == 0)
         return;
 
-    if(g_LogFileName[0] == 0)
+    if (g_LogFileName[0] == 0)
         snprintf(g_LogFileName, FILE_NAME_LEN, "%s.%d-libmlocale.log", binaryName(), getpid());
 
 #ifdef LOGDEBUG
     log = fopen(g_LogFileName, "a");
-    if(log == NULL){
+    if (log == NULL){
             fprintf(stderr, "CRITICAL %s\n",
                     "no log file opened");
     }
@@ -119,48 +119,48 @@ void msgLogger(MsgType type, const char *format, ...)
         case LogMsg:
             syslog(LOG_NOTICE, "%s: %s %s", binaryName(), timeStamp, msg);
             fprintf(stderr, "LOG ");
-            if(log)
+            if (log)
                 fprintf(log, "LOG ");
             break;
         case DebugMsg:
             syslog(LOG_DEBUG, "%s: %s %s", binaryName(), timeStamp, msg);
             fprintf(stderr, "DEBUG    ");
-            if(log)
+            if (log)
                 fprintf(log, "DEBUG    ");
             break;
         case WarningMsg:
             syslog(LOG_WARNING, "%s: %s %s", binaryName(), timeStamp, msg);
             fprintf(stderr, "WARNING ");
-            if(log)
+            if (log)
                 fprintf(log, "WARNING  ");
             break;
         case CriticalMsg:
             syslog(LOG_CRIT, "%s: %s %s", binaryName(), timeStamp, msg);
             fprintf(stderr, "CRITICAL ");
-            if(log)
+            if (log)
                 fprintf(log, "CRITICAL ");
             break;
         case FatalMsg:
             syslog(LOG_EMERG, "%s: %s %s", binaryName(), timeStamp, msg);
             fprintf(stderr, "FATAL ");
-            if(log)
+            if (log)
                 fprintf(log, "FATAL    ");
     }
 
-    if(log)
+    if (log)
         fprintf(log, "%s %s\n", timeStamp, msg);
     fprintf(stderr, "%s %s\n", timeStamp, msg);
 
-    if(log)
+    if (log)
         fflush(log);
     fflush(stderr);
 
-    if(log){
+    if (log){
         fclose(log);
         log = NULL;
     }
 
-    if(type == FatalMsg)
+    if (type == FatalMsg)
         abort();
 }
 

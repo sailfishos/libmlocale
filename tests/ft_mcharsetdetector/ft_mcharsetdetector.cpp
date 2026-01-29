@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -82,12 +82,12 @@ void Ft_MCharsetDetector::testMCharsetMatch()
     QFETCH(QStringList, confidencesSorted);
 
     QList<MCharsetMatch> mCharsetMatchList;
-    for(int i = 0; i < names.size(); ++i) {
+    for (int i = 0; i < names.size(); ++i) {
         MCharsetMatch match(names[i], languages[i], confidences[i].toInt());
         mCharsetMatchList << match;
     }
     QList<MCharsetMatch> mCharsetMatchListSorted;
-    for(int i = 0; i < names.size(); ++i) {
+    for (int i = 0; i < names.size(); ++i) {
         MCharsetMatch match;
         // use the setters here to get more test coverage
         match.setName(namesSorted[i]);
@@ -98,7 +98,7 @@ void Ft_MCharsetDetector::testMCharsetMatch()
     std::sort(mCharsetMatchList.begin(), mCharsetMatchList.end(),
           std::greater<MCharsetMatch>());
 #if defined(VERBOSE_OUTPUT)
-    for(int i = 0; i < names.size(); ++i) {
+    for (int i = 0; i < names.size(); ++i) {
         qDebug() << mCharsetMatchList[i].name()
                  << mCharsetMatchListSorted[i].name();
         qDebug() << mCharsetMatchList[i].language()
@@ -107,7 +107,7 @@ void Ft_MCharsetDetector::testMCharsetMatch()
                  << mCharsetMatchListSorted[i].confidence();
     }
 #endif
-    for(int i = 0; i < names.size(); ++i) {
+    for (int i = 0; i < names.size(); ++i) {
         QCOMPARE(mCharsetMatchList[i].name(),
                  mCharsetMatchListSorted[i].name());
         QCOMPARE(mCharsetMatchList[i].language(),
@@ -258,7 +258,7 @@ void Ft_MCharsetDetector::testDetectableCharsets()
 #if defined(VERBOSE_OUTPUT)
     qDebug() << "detectable charsets" << detectableCharsets;
 #endif
-    foreach(QString cs, expectedCharsets)
+    foreach (QString cs, expectedCharsets)
         QVERIFY2(detectableCharsets.contains(cs),
                  QString("charset %1 is missing in the list of detectable charset")
                  .arg(cs).toUtf8().constData());
@@ -2021,7 +2021,7 @@ void Ft_MCharsetDetector::testDetection()
     debugStream << "declaredEncoding=" << declaredEncoding << "\n";
     debugStream << "declaredLocale=" << declaredLocale << "\n";
     debugStream << "match count = " << numberOfMatches << "\n";
-    for(int i = 0; i < mCharsetMatchList.size(); ++i) {
+    for (int i = 0; i < mCharsetMatchList.size(); ++i) {
         debugStream << "match " << i << ": "
                     << mCharsetMatchList[i].name()
                     << "\tlanguage="<<mCharsetMatchList[i].language()

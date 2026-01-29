@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -28,8 +28,6 @@
 #include "mlocale_p.h"
 #include "micuconversions.h"
 
-#include "mdebug.h"
-
 namespace ML10N {
 
 MCalendarPrivate::MCalendarPrivate(MLocale::CalendarType calendarType)
@@ -41,7 +39,6 @@ MCalendarPrivate::MCalendarPrivate(MLocale::CalendarType calendarType)
     }
 }
 
-
 // copy constructor
 MCalendarPrivate::MCalendarPrivate(const MCalendarPrivate &other)
     : _calendar(other._calendar->clone()),
@@ -50,7 +47,6 @@ MCalendarPrivate::MCalendarPrivate(const MCalendarPrivate &other)
 {
     // nothing
 }
-
 
 MCalendarPrivate::~MCalendarPrivate()
 {
@@ -65,7 +61,6 @@ MCalendarPrivate &MCalendarPrivate::operator=(const MCalendarPrivate &other)
     _valid = other._valid;
     return *this;
 }
-
 
 MLocale::Weekday MCalendarPrivate::icuWeekdayToMWeekday(int uweekday)
 {
@@ -95,7 +90,6 @@ MLocale::Weekday MCalendarPrivate::icuWeekdayToMWeekday(int uweekday)
         return static_cast<MLocale::Weekday>(0);
     }
 }
-
 
 ///////////////////////
 // MCalendar class
@@ -148,7 +142,6 @@ MCalendar::MCalendar(MLocale::CalendarType calendarType,
     }
 }
 
-
 //! Constructs a MCalendar based on calendar system used by given MLocale
 MCalendar::MCalendar(const MLocale &mLocale, const QString &timezone)
     : d_ptr(new MCalendarPrivate(mLocale.calendarType()))
@@ -174,7 +167,6 @@ MCalendar::MCalendar(const MLocale &mLocale, const QString &timezone)
     }
 }
 
-
 //! Copy constructor
 MCalendar::MCalendar(const MCalendar &other)
     : d_ptr(new MCalendarPrivate(*other.d_ptr))
@@ -190,15 +182,12 @@ MCalendar::~MCalendar()
     delete d_ptr;
 }
 
-
 //! Assignment operator
 MCalendar &MCalendar::operator=(const MCalendar &other)
 {
     *d_ptr = *other.d_ptr;
     return *this;
 }
-
-
 
 //! checks the validity of the information of the calendar. Returns true if calendar is valid.
 bool MCalendar::isValid() const
@@ -210,7 +199,6 @@ bool MCalendar::isValid() const
     return d->_valid;
 }
 
-
 //! returns the used calendar system
 MLocale::CalendarType MCalendar::type() const
 {
@@ -218,7 +206,6 @@ MLocale::CalendarType MCalendar::type() const
 
     return d->_calendarType;
 }
-
 
 //! Sets the calendar date. Parameters self explanatory
 void MCalendar::setDate(int year, int month, int day)
@@ -228,7 +215,6 @@ void MCalendar::setDate(int year, int month, int day)
     // icu calendar uses 0 based numbering for months
     d->_calendar->set(year, month - 1, day);
 }
-
 
 //! Sets the calendar date from QDate
 void MCalendar::setDate(const QDate &date)
@@ -276,7 +262,6 @@ void MCalendar::setDateTime(QDateTime dateTime)
     d->_calendar->setTime(icuDate, status);
 }
 
-
 //! Converts calendar into QDate
 //! \param spec (optional) specification for resulting QDateTime, Qt::LocalTime (default) or Qt::UTC
 QDateTime MCalendar::qDateTime(Qt::TimeSpec spec) const
@@ -306,7 +291,6 @@ QDateTime MCalendar::qDateTime(Qt::TimeSpec spec) const
     return dateTime;
 }
 
-
 /*!
   \brief Set the year of the date to \a year.
  */
@@ -316,7 +300,6 @@ void MCalendar::setYear(int year)
 
     d->_calendar->set(UCAL_YEAR, year);
 }
-
 
 /*!
   \brief Set the month of the date to \a month.
@@ -338,7 +321,6 @@ void MCalendar::setDay(int day)
     d->_calendar->set(UCAL_DAY_OF_MONTH, day);
 }
 
-
 //! returns day number of the year. returns zero on error.
 int MCalendar::dayOfYear() const
 {
@@ -349,7 +331,6 @@ int MCalendar::dayOfYear() const
     return d->_calendar->get(UCAL_DAY_OF_YEAR, status);
 }
 
-
 //! Returns week number in the year
 int MCalendar::weekOfYear() const
 {
@@ -358,7 +339,6 @@ int MCalendar::weekOfYear() const
     UErrorCode status = U_ZERO_ERROR;
     return d->_calendar->get(UCAL_WEEK_OF_YEAR, status);
 }
-
 
 //! Returns month number
 int MCalendar::month() const
@@ -369,7 +349,6 @@ int MCalendar::month() const
     return d->_calendar->get(UCAL_MONTH, status) + 1; // icu month is zero based
 }
 
-
 //! Returns year number
 int MCalendar::year() const
 {
@@ -378,7 +357,6 @@ int MCalendar::year() const
     UErrorCode status = U_ZERO_ERROR;
     return d->_calendar->get(UCAL_YEAR, status);
 }
-
 
 //! returns the year the current week "belongs to".
 //
@@ -391,7 +369,6 @@ int MCalendar::yearOfWeek() const
     return d->_calendar->get(UCAL_YEAR_WOY, status);
 }
 
-
 //! Returns day of month
 int MCalendar::dayOfMonth() const
 {
@@ -400,7 +377,6 @@ int MCalendar::dayOfMonth() const
     UErrorCode status = U_ZERO_ERROR;
     return d->_calendar->get(UCAL_DAY_OF_MONTH, status);
 }
-
 
 //! Returns day of week. Monday = 1
 int MCalendar::dayOfWeek() const
@@ -442,7 +418,6 @@ void MCalendar::setSeconds(int seconds)
     d->_calendar->set(UCAL_SECOND, seconds);
 }
 
-
 //! Set calendar time of the day
 void MCalendar::setTime(int hours, int minutes, int seconds)
 {
@@ -450,7 +425,6 @@ void MCalendar::setTime(int hours, int minutes, int seconds)
     setMinutes(minutes);
     setSeconds(seconds);
 }
-
 
 /*!
   \brief Returns the current hours.
@@ -552,7 +526,6 @@ void MCalendar::addSeconds(int seconds)
     d->_calendar->add(UCAL_SECOND, seconds, status);
 }
 
-
 /*!
   \brief Returns first day of a month.
  */
@@ -597,7 +570,6 @@ int MCalendar::firstDayOfWeek() const
     return MCalendarPrivate::icuWeekdayToMWeekday(weekday);
 }
 
-
 //! sets what is the required amount of days for the first week of the year.
 void MCalendar::setMinimalDaysInFirstWeek(int days)
 {
@@ -605,7 +577,6 @@ void MCalendar::setMinimalDaysInFirstWeek(int days)
 
     d->_calendar->setMinimalDaysInFirstWeek(days);
 }
-
 
 //! returns the number of days required for the first week in the year
 int MCalendar::minimalDaysInFirstWeek() const
@@ -626,8 +597,8 @@ MLocale::WeekdayType MCalendar::getDayOfWeekType(MLocale::Weekday weekday) const
     UErrorCode status = U_ZERO_ERROR;
     UCalendarWeekdayType icuWeekDayType = d->_calendar->getDayOfWeekType(MIcuConversions::icuWeekday(static_cast<int>(weekday)), status);
     if (U_FAILURE(status))
-        mDebug("MLocale") << __PRETTY_FUNCTION__ << "Error getDayOfWeekType"
-                          << u_errorName(status);
+        qDebug() << __PRETTY_FUNCTION__ << "Error getDayOfWeekType"
+                 << u_errorName(status);
     return MIcuConversions::mWeekdayType(icuWeekDayType);
 }
 

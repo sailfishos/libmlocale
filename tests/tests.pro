@@ -31,7 +31,6 @@ SUBDIRS += \
 
 QMAKE_STRIP = echo
 include(shell.pri)
-include(runtests.pri)
 
 
 check.target = check

@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -73,8 +73,8 @@ QString MStringSearchPrivate::errorString() const
 
 bool MStringSearchPrivate::containsHani(const QString &text) const
 {
-    for(int i = 0; i < text.size(); ++i) {
-        if(text.at(i).isHighSurrogate()) {
+    for (int i = 0; i < text.size(); ++i) {
+        if (text.at(i).isHighSurrogate()) {
             // not exact, only some ranges
             // above the BMP like 0x20000 - 0x2A6DF
             // and 0x2F800 - 0x2FA1F contain Hani,
@@ -82,7 +82,7 @@ bool MStringSearchPrivate::containsHani(const QString &text) const
             return true;
         }
         ushort cp = text.at(i).unicode();
-        if((cp >= 0x4E00 && cp <= 0x9FFF) ||
+        if ((cp >= 0x4E00 && cp <= 0x9FFF) ||
            (cp >= 0x3400 && cp <= 0x4DFF) ||
            (cp >= 0xF900 && cp <= 0xFAFF)) {
             return true;
@@ -94,13 +94,13 @@ bool MStringSearchPrivate::containsHani(const QString &text) const
 QString MStringSearchPrivate::searchCollatorLocaleName(const QString &pattern, const MLocale &locale) const
 {
     QString categoryCollateName = locale.categoryName(MLocale::MLcCollate);
-    if(!categoryCollateName.startsWith("zh")) {
+    if (!categoryCollateName.startsWith("zh")) {
         return categoryCollateName;
     }
     else {
         QString categoryCollateCountry
             = locale.categoryCountry(MLocale::MLcCollate);
-        if((locale.collation() == MLocale::PinyinCollation
+        if ((locale.collation() == MLocale::PinyinCollation
             ||
             ((categoryCollateCountry == "CN"
               || categoryCollateCountry == "SG")
@@ -154,12 +154,12 @@ void MStringSearchPrivate::setIcuCollatorOptions()
     case Qt::CaseSensitive:
         clearError();
         _icuCollator->setAttribute(UCOL_CASE_FIRST, UCOL_LOWER_FIRST, _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::setAttribute(UCOL_CASE_FIRST, UCOL_LOWER_FIRST) failed with error"
                        << errorString();
         _icuCollator->setAttribute(UCOL_CASE_LEVEL, UCOL_ON, _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::setAttribute(UCOL_CASE_LEVEL, UCOL_ON) failed with error"
                        << errorString();
@@ -168,23 +168,23 @@ void MStringSearchPrivate::setIcuCollatorOptions()
     default:
         clearError();
         _icuCollator->setAttribute(UCOL_CASE_FIRST, UCOL_OFF, _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::setAttribute(UCOL_CASE_FIRST, UCOL_OFF, UCOL_OFF) failed with error"
                        << errorString();
         clearError();
         _icuCollator->setAttribute(UCOL_CASE_LEVEL, UCOL_OFF, _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::setAttribute(UCOL_CASE_LEVEL, UCOL_OFF) failed with error"
                        << errorString();
         break;
     }
-    if(_alternateHandlingShifted) {
+    if (_alternateHandlingShifted) {
         // ignore space and punctuation characters (simplified, real explanation is longer ...)
         clearError();
         _icuCollator->setAttribute(UCOL_ALTERNATE_HANDLING, UCOL_SHIFTED, _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::setAttribute(UCOL_ALTERNATE_HANDLING, UCOL_SHIFTED) failed with error"
                        << errorString();
@@ -193,7 +193,7 @@ void MStringSearchPrivate::setIcuCollatorOptions()
         // don’t ignore space and punctuation characters
         clearError();
         _icuCollator->setAttribute(UCOL_ALTERNATE_HANDLING, UCOL_NON_IGNORABLE, _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::setAttribute(UCOL_ALTERNATE_HANDLING, UCOL_NON_IGNORABLE) failed with error"
                        << errorString();
@@ -201,7 +201,7 @@ void MStringSearchPrivate::setIcuCollatorOptions()
     // force normalization:
     clearError();
     _icuCollator->setAttribute(UCOL_NORMALIZATION_MODE, UCOL_ON, _status);
-    if(hasError())
+    if (hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::Collator::setAttribute(UCOL_NORMALIZATION_MODE, UCOL_ON) failed with error"
                    << errorString();
@@ -211,15 +211,15 @@ void MStringSearchPrivate::updateOrInitIcuCollator()
 {
     QString newSearchCollatorLocaleName
         = searchCollatorLocaleName(_pattern, _locale);
-    if(!_icuCollator || _searchCollatorLocaleName != newSearchCollatorLocaleName) {
+    if (!_icuCollator || _searchCollatorLocaleName != newSearchCollatorLocaleName) {
         _searchCollatorLocaleName = newSearchCollatorLocaleName;
-        if(_icuCollator)
+        if (_icuCollator)
             delete _icuCollator;
         clearError();
         _icuCollator = icu::Collator::createInstance(
             icu::Locale(qPrintable(_searchCollatorLocaleName)),
             _status);
-        if(hasError())
+        if (hasError())
             qWarning() << __PRETTY_FUNCTION__
                        << "icu::Collator::createInstance() failed with error"
                        << errorString();
@@ -233,7 +233,7 @@ void MStringSearchPrivate::icuStringSearchSetCollator()
     _icuStringSearch->setCollator(
         static_cast<icu::RuleBasedCollator *>(_icuCollator),
         _status);
-    if(hasError())
+    if (hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "new icu::StringSearch() failed with error"
                    << errorString();
@@ -276,7 +276,7 @@ MStringSearch::MStringSearch(const QString &pattern, const QString &text, const 
             d->_status);
         break;
     }
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "breakIteratorType =" << breakIteratorType
                    << "icu::BreakIterator::create...Instance() failed with error"
@@ -288,7 +288,7 @@ MStringSearch::MStringSearch(const QString &pattern, const QString &text, const 
         static_cast<icu::RuleBasedCollator *>(d->_icuCollator),
         d->_icuBreakIterator,
         d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "new icu::StringSearch() failed with error"
                    << errorString();
@@ -319,11 +319,11 @@ void MStringSearch::setText(const QString &text)
     Q_D(MStringSearch);
     d->_text = text;
     d->clearError();
-    if(d->_icuStringSearch)
+    if (d->_icuStringSearch)
         d->_icuStringSearch->setText(
             MIcuConversions::qStringToUnicodeString(d->_text),
             d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "new icu::StringSearch::setText() failed with error"
                    << errorString();
@@ -339,13 +339,13 @@ void MStringSearch::setPattern(const QString &pattern)
 {
     Q_D(MStringSearch);
     d->clearError();
-    if(pattern == d->_pattern)
+    if (pattern == d->_pattern)
         return;
     d->_pattern = pattern;
     d->_icuStringSearch->setPattern(
         MIcuConversions::qStringToUnicodeString(d->_pattern),
         d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::StringSearch::setPattern() failed with error"
                    << errorString();
@@ -390,7 +390,7 @@ int MStringSearch::first()
     Q_D(MStringSearch);
     d->clearError();
     int first = d->_icuStringSearch->first(d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::StringSearch::first() failed with error"
                    << errorString();
@@ -405,7 +405,7 @@ int MStringSearch::last()
     Q_D(MStringSearch);
     d->clearError();
     int last = d->_icuStringSearch->last(d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::StringSearch::last() failed with error"
                    << errorString();
@@ -420,7 +420,7 @@ int MStringSearch::next()
     Q_D(MStringSearch);
     d->clearError();
     int next = d->_icuStringSearch->next(d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::StringSearch::next() failed with error"
                    << errorString();
@@ -435,7 +435,7 @@ int MStringSearch::previous()
     Q_D(MStringSearch);
     d->clearError();
     int previous = d->_icuStringSearch->previous(d->_status);
-    if(d->hasError())
+    if (d->hasError())
         qWarning() << __PRETTY_FUNCTION__
                    << "icu::StringSearch::previous() failed with error"
                    << errorString();
@@ -454,7 +454,7 @@ int MStringSearch::offset() const
 void MStringSearch::setOffset(int offset)
 {
     Q_D(MStringSearch);
-    if(offset < 0)
+    if (offset < 0)
         d->_icuStringSearch->setOffset(0, d->_status);
     else if (offset > d->_text.size())
         d->_icuStringSearch->setOffset(d->_text.size(), d->_status);

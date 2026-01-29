@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -139,9 +139,7 @@ void Ut_MLocationDatabase::testNearestCity()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
+    // do only run the tests, if we were able to load some cities
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -168,9 +166,6 @@ void Ut_MLocationDatabase::testMatchingCities()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -285,9 +280,6 @@ void Ut_MLocationDatabase::testCitiesInTimeZone()
     MLocationDatabase db;
     QList<MCountry> countries = db.countries();
 
-    // do only run the tests, if we were able to load
-    // some countries from the meegotouch-cities-*
-    // package.
     if (countries.count() < 10) {
         qWarning( "loading of country list failed, skipping test" );
         return;
@@ -299,7 +291,7 @@ void Ut_MLocationDatabase::testCitiesInTimeZone()
                 << timeZoneId << ' '
                 << citiesInTimeZone.size() << '\n';
 #endif
-    if(citiesInTimeZone.size() == 0 || keysOfSomeExpectedMatches.size() == 0) {
+    if (citiesInTimeZone.size() == 0 || keysOfSomeExpectedMatches.size() == 0) {
         QCOMPARE(citiesInTimeZone.size(), keysOfSomeExpectedMatches.size());
         return;
     }
@@ -332,16 +324,13 @@ void Ut_MLocationDatabase::dumpCitiesInTimeZoneIds()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
     }
 
     QString dump;
-    foreach(MCity city, cities) {
+    foreach (MCity city, cities) {
         QString timeZoneId = city.timeZone();
         dump
             += city.key()
@@ -351,7 +340,7 @@ void Ut_MLocationDatabase::dumpCitiesInTimeZoneIds()
             + timeZoneId
             + " :\n";
         QList<MCity> citiesInTimeZone = db.citiesInTimeZone(timeZoneId);
-        foreach(MCity cityInTimeZone, citiesInTimeZone) {
+        foreach (MCity cityInTimeZone, citiesInTimeZone) {
             dump
                 += "        "
                 + cityInTimeZone.key()
@@ -363,7 +352,7 @@ void Ut_MLocationDatabase::dumpCitiesInTimeZoneIds()
     QString dumpFileName
         = "/tmp/ut_mlocationdatabase-cities-in-timezone.txt";
     QFile dumpFile(dumpFileName);
-    if(!dumpFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    if (!dumpFile.open(QIODevice::WriteOnly | QIODevice::Truncate))
         QFAIL(qPrintable("could not open file " + dumpFileName));
     int bytesWritten = dumpFile.write(dump.toUtf8().constData());
     if (bytesWritten == -1)
@@ -405,9 +394,6 @@ void Ut_MLocationDatabase::testCitiesInCountry()
     MLocationDatabase db;
     QList<MCountry> countries = db.countries();
 
-    // do only run the tests, if we were able to load
-    // some countries from the meegotouch-cities-*
-    // package.
     if (countries.count() < 10) {
         qWarning( "loading of country list failed, skipping test" );
         return;
@@ -444,9 +430,6 @@ void Ut_MLocationDatabase::testCountryCodes()
     MLocationDatabase db;
     QList<MCountry> countries = db.countries();
 
-    // do only run the tests, if we were able to load
-    // some countries from the meegotouch-cities-*
-    // package.
     if (countries.count() < 10) {
         qWarning( "loading of country list failed, skipping test" );
         return;
@@ -597,9 +580,6 @@ void Ut_MLocationDatabase::testCities()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -607,7 +587,7 @@ void Ut_MLocationDatabase::testCities()
 
     bool found = false;
     MCity foundCity;
-    foreach(MCity city, cities) {
+    foreach (MCity city, cities) {
         if (city.key() == key) {
             foundCity = city;
             found = true;
@@ -648,9 +628,6 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -662,7 +639,7 @@ void Ut_MLocationDatabase::testCitiesDumpInfo()
     QDateTime winterDateTime(QDate(2009, 12, 24), QTime(0, 0, 0, 0), QTimeZone::systemTimeZone());
     QString ut_mlocationdatabaseTestOutput = "";
     QStringList ut_mlocationdatabaseTestOutput2Lines; // for Rodrigo Abreu
-    foreach(MCity city, cities) {
+    foreach (MCity city, cities) {
         UErrorCode status = U_ZERO_ERROR;
         icu::UnicodeString canonicalId;
         icu::UnicodeString id = city.timeZone().utf16();
@@ -790,9 +767,6 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
     MLocationDatabase db;
     QList<MCity> cities = db.cities();
 
-    // do only run the tests, if we were able to load
-    // some cities from the meegotouch-cities-*
-    // package.
     if (cities.count() < 10) {
         qWarning( "loading of city list failed, skipping test" );
         return;
@@ -804,8 +778,8 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
     QStringList olsonIds;
 #if 0
     // full test, test almost all Olson IDs:
-    foreach(MCity city, cities) {
-        if(!olsonIds.contains(city.timeZone()))
+    foreach (MCity city, cities) {
+        if (!olsonIds.contains(city.timeZone()))
             olsonIds << city.timeZone();
     }
 #else
@@ -827,13 +801,13 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
     QDateTime endDateTime(QDate(2012,01,1), QTime(2,58,45), QTimeZone::utc());
     QHash<QString, QString> errorHash;
     QString allErrors;
-    foreach(const QString &olsonId, olsonIds) {
+    foreach (const QString &olsonId, olsonIds) {
         debugStream << "checking olson id " << olsonId << "...\n";
         debugStream.flush();
         MCity city = db.citiesInTimeZone(olsonId).first();
         setenv("TZ", olsonId.toUtf8().constData(), 1);
         tzset();
-        for(QDateTime dateTime = startDateTime;
+        for (QDateTime dateTime = startDateTime;
             dateTime <  endDateTime;
             dateTime = dateTime.addSecs(4*900)) {
             QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
@@ -842,7 +816,7 @@ void Ut_MLocationDatabase::testTimeZoneOffsets()
             localtime_r(&ts, &tm);
             qint32 gmtoffLibc = tm.tm_gmtoff;
             qint32 gmtoffIcu = city.timeZoneTotalOffset(dateTime)/1000;
-            if(gmtoffIcu == gmtoffLibc) {
+            if (gmtoffIcu == gmtoffLibc) {
                 if (!errorHash[olsonId].isEmpty()) {
                     QString oldError =
                         dateTimeString + " FIXED: " + errorHash[olsonId];

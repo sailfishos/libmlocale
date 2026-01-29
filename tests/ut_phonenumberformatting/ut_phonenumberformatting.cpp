@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -25,7 +25,7 @@ using ML10N::MLocale;
 void Ut_PhoneNumberFormatting::initTestCase()
 {
     m_pLocale = new MLocale;
-    // make sure we are notified about gconf changes
+    // make sure we are notified about conf changes
     m_pLocale->connectSettings();
 }
 
@@ -349,7 +349,7 @@ void Ut_PhoneNumberFormatting::testDefaultFormatting()
     // and then we get the formatted phone number
     // for the default locale.
     // this way we test if a change in the
-    // locale gconf key really results in different
+    // locale conf key really results in different
     // formatted phone numbers for different phone
     // locales.
 

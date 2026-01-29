@@ -2,4 +2,9 @@ build-armel/*
 build-i386/*
 configure-stamp
 build-stamp
-
+*.o
+*.so
+*.so.*
+moc_*
+Makefile
+*.qm

@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -45,25 +45,21 @@ public:
     MCountry country;
 };
 
-
 MCity::MCity()
     : d_ptr( new MCityPrivate )
 {
 }
-
 
 MCity::~MCity()
 {
     delete d_ptr;
 }
 
-
 MCity::MCity( const MCity& other )
     : d_ptr( new MCityPrivate )
 {
     *d_ptr = *other.d_ptr;
 }
-
 
 MCity& MCity::operator=( const MCity& other )
 {
@@ -72,13 +68,11 @@ MCity& MCity::operator=( const MCity& other )
     return *this;
 }
 
-
 QString MCity::key() const
 {
     Q_D( const MCity );
     return d->key;
 }
-
 
 QString MCity::englishName() const
 {
@@ -86,13 +80,11 @@ QString MCity::englishName() const
     return d->englishName;
 }
 
-
 QString MCity::localName() const
 {
     Q_D( const MCity );
     return d->localName;
 }
-
 
 qreal MCity::latitude() const
 {
@@ -100,13 +92,11 @@ qreal MCity::latitude() const
     return d->latitude;
 }
 
-
 qreal MCity::longitude() const
 {
     Q_D( const MCity );
     return d->longitude;
 }
-
 
 QString MCity::timeZone() const
 {
@@ -183,13 +173,11 @@ MCountry MCity::country() const
     return d->country;
 }
 
-
 void MCity::setKey( const QString& val )
 {
     Q_D( MCity );
     d->key = val;
 }
-
 
 void MCity::setEnglishName( const QString& val )
 {
@@ -197,13 +185,11 @@ void MCity::setEnglishName( const QString& val )
     d->englishName = val;
 }
 
-
 void MCity::setLocalName( const QString& val )
 {
     Q_D( MCity );
     d->localName = val;
 }
-
 
 void MCity::setLatitude( qreal val )
 {
@@ -211,20 +197,17 @@ void MCity::setLatitude( qreal val )
     d->latitude = val;
 }
 
-
 void MCity::setLongitude( qreal val )
 {
     Q_D( MCity );
     d->longitude = val;
 }
 
-
 void MCity::setTimeZone( const QString& val )
 {
     Q_D( MCity );
     d->timeZone = val;
 }
-
 
 void MCity::setCountry( const MCountry& val )
 {

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Configures the libmeegotouch build
+# Configures the build
 #
 # Copyright (C) 2010 Nokia Corporation.
 #
@@ -39,7 +39,7 @@ M_PATCH_VERSION=`grep -m1 ML_PATCH_VERSION mkspecs/features/mlocale_defines.prf.
 M_VERSION=$M_MAJOR_VERSION.$M_MINOR_VERSION.$M_PATCH_VERSION
 
 if [ -z "$M_MAJOR_VERSION" ]; then
-   echo "Cannot process version from src/meegotouch_defines.prf: $M_VERSION"
+   echo "Cannot process version from src/mlocale_defines.prf: $M_VERSION"
    echo "Cannot proceed."
    exit 1
 fi
@@ -111,7 +111,7 @@ while [ "$#" -gt 0 ]; do
         VAL=no
         ;;
     #Qt style yes options
-        -h|-help|-v|-verbose|-debug|-release|-testable|-coverage|-timestamps|-dev|-minimal|-icu|-gconf|-meegographicssystem|-shortcuts)
+        -h|-help|-v|-verbose|-debug|-release|-testable|-coverage|-timestamps|-dev|-minimal|-icu|-gconf|-shortcuts)
         VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
         VAL=yes
         ;;
@@ -332,10 +332,10 @@ Configure options:
  that needs to be evaluated. If the evaluation succeeds, the feature is
  included. Here is a short explanation of each option:
 
-    -release ................. Compile and link libmeegotouch in release mode
- *  -debug ................... Compile and link libmeegotouch with debugging turned on
+    -release ................. Compile and link libmlocale in release mode
+ *  -debug ................... Compile and link libmlocale with debugging turned on
 
-    -testable ................ Enable the testability plugin interface in libmeegotouch
+    -testable ................ Enable the testability plugin interface in libmlocale
     -coverage ................ Enable code coverage calculation
     -no-werror ............... Disable warnings as errors gcc flag
 
@@ -391,7 +391,7 @@ fi
 
 
 if [ "$CFG_TESTABLE" = "yes" ]; then
-    MEEGOTOUCHCONFIG_FEATURES="$MEEGOTOUCHCONFIG_FEATURES testable"
+    MLOCALECONFIG_FEATURES="$MLOCALECONFIG_FEATURES testable"
 fi
 
 if [ "$CFG_COVERAGE" = "yes" ]; then
@@ -437,7 +437,7 @@ CONFIG += $MLOCALECONFIG_CONFIG
 
 ML_BUILD_PARTS += $CFG_BUILD_PARTS
 
-ML_BUILD_FEATURES += $MEEGOTOUCHCONFIG_FEATURES
+ML_BUILD_FEATURES += $MLOCALECONFIG_FEATURES
 
 #versioning
 ML_VERSION = $M_VERSION
@@ -457,7 +457,7 @@ DEFINES += $MLOCALECONFIG_DEPS
 
 EOF
 
-# replace meegotouchconfig.pri if it differs from the newly created temp file
+# replace mlocaleconfig.pri if it differs from the newly created temp file
 if cmp -s "$MLOCALECONFIG.tmp" "$MLOCALECONFIG"; then
     rm -f "$MLOCALECONFIG.tmp"
 else
@@ -493,7 +493,7 @@ cat "$relpath/mkspecs/features/mlocale_defines.prf.in" \
 | sed -e "s,@@MLOCALECONFIG_DEPS@@,$MLOCALECONFIG_DEPS,g" \
 > "$MLOCALE_DEFINES_PRF.tmp"
 
-# replace meegotouch_defines.prf if it differs from the newly created temp file
+# replace mlocale_defines.prf if it differs from the newly created temp file
 if cmp -s "$MLOCALE_DEFINES_PRF.tmp" "$MLOCALE_DEFINES_PRF"; then
     rm -f "$MLOCALE_DEFINES_PRF.tmp"
 else
@@ -501,17 +501,17 @@ else
 fi
 
 # substitute prefix in .pc files
-MEEGOTOUCH_PC_DIR="$outpath/src/data"
-MEEGOTOUCH_PC_FILES="mlocale5"
+MLOCALE_PC_DIR="$outpath/src/data"
+MLOCALE_PC_FILES="mlocale5"
 
 # make sure the directory exists
-if [ ! -d $MEEGOTOUCH_PC_DIR ]; then
-    mkdir -p $MEEGOTOUCH_PC_DIR
+if [ ! -d $MLOCALE_PC_DIR ]; then
+    mkdir -p $MLOCALE_PC_DIR
 fi
 
-for i in $MEEGOTOUCH_PC_FILES
+for i in $MLOCALE_PC_FILES
 do
-   pc_file="$MEEGOTOUCH_PC_DIR/$i.pc"
+   pc_file="$MLOCALE_PC_DIR/$i.pc"
    pc_in="$relpath/src/data/$i.pc.in"
 
    cat "$pc_in" \
@@ -519,7 +519,7 @@ do
    | sed "s/@@M_VERSION@@/$M_VERSION/g" \
    > "$pc_file.tmp"
 
-  # replace meegotouch_defines.prf if it differs from the newly created temp file
+  # replace mlocale_defines.prf if it differs from the newly created temp file
   if cmp -s "$pc_file.tmp" "$pc_file"; then
       rm -f "$pc_file.tmp"
   else
@@ -598,7 +598,7 @@ fi
 
 #Run qmake
 cd "$outpath"
-$QMAKE_BIN "$relpath/projects.pro" $QMAKE_CONFIG $QMAKE_SWITCHES
+$QMAKE_BIN "$relpath/libmlocale.pro" $QMAKE_CONFIG $QMAKE_SWITCHES
 
 #-------------------------------------------------------------------------------
 # give feedback on configuration
@@ -610,16 +610,17 @@ echo "Optional build dependencies found:"
 
 echo "ICU ............................. $HAVE_ICU"
 
-echo "MeeGo Touch UI framework build configuration:"
+echo "Mlocale build configuration:"
 echo "Version ............. $M_VERSION"
 echo "Build ............... $CFG_BUILD_PARTS"
-echo "Extra features ...... $MEEGOTOUCHCONFIG_FEATURES"
+echo "Extra features ...... $MLOCALECONFIG_FEATURES"
 echo "Release ............. $CFG_RELEASE"
 echo "Debug ............... $CFG_DEBUG"
 
-echo
-echo "Benchmarks .......... $CFG_BUILD_BENCHMARKS"
-echo "Tests ............... $CFG_BUILD_TESTS"
+# these are built no regardless of options. comment out but leave here in case we start honoring options some day
+#echo
+#echo "Benchmarks .......... $CFG_BUILD_BENCHMARKS"
+#echo "Tests ............... $CFG_BUILD_TESTS"
 
 echo ""
 echo libmlocale is now configured for building. Just run \'make\'.

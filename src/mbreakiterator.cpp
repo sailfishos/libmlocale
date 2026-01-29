@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -48,7 +48,6 @@ MBreakIteratorPrivate::MBreakIteratorPrivate()
 {
     // nothing
 }
-
 
 MBreakIteratorPrivate::~MBreakIteratorPrivate()
 {
@@ -94,7 +93,7 @@ void MBreakIteratorPrivate::init(const QString &text,
    MBreakIterator it(locale, text, MBreakIterator::WordIterator);
    while (it.hasNext()) {
      int index = it.next();
-     mDebug() << "index at " << i;
+     qDebug() << "index at " << i;
    }
    \endverbatim
 

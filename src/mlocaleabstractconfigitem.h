@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -29,12 +29,12 @@ namespace ML10N {
 
 class MLOCALE_EXPORT MLocaleAbstractConfigItem : public QObject
 {
-Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     MLocaleAbstractConfigItem( const QString& key );
 
     // returns true, if this value is valid,
-    // false otherwise. e.g. a non-existing gconf key
+    // false otherwise. e.g. a non-existing conf key
     // should retuen false here.
     virtual bool isValid() const = 0;
 
@@ -44,7 +44,7 @@ Q_OBJECT
     // sets the value of this item
     virtual void setValue( const QString& value ) = 0;
 
-  signals:
+signals:
     void valueChanged( const QString& newValue );
 };
 

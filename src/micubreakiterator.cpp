@@ -4,7 +4,7 @@
 ** All rights reserved.
 ** Contact: Nokia Corporation (directui@nokia.com)
 **
-** This file is part of libmeegotouch.
+** This file is part of libmlocale.
 **
 ** If you have questions regarding the use of this file, please contact
 ** Nokia at directui@nokia.com.
@@ -18,7 +18,6 @@
 ****************************************************************************/
 
 #include "micubreakiterator.h"
-#include <MDebug>
 
 #ifdef HAVE_ICU
 #include <unicode/brkiter.h>
@@ -27,6 +26,8 @@
 
 using namespace icu;
 #endif
+
+#include <QDebug>
 
 namespace ML10N {
 
@@ -62,8 +63,7 @@ void MIcuBreakIteratorPrivate::init(const MLocale &locale, const QString &text,
 {
     UErrorCode status = U_ZERO_ERROR;
 
-    icu::Locale msgLocale
-    = locale.d_ptr->getCategoryLocale(MLocale::MLcMessages);
+    icu::Locale msgLocale = locale.d_ptr->getCategoryLocale(MLocale::MLcMessages);
 
     switch (type) {
     case MBreakIterator::LineIterator:
@@ -84,7 +84,7 @@ void MIcuBreakIteratorPrivate::init(const MLocale &locale, const QString &text,
     }
 
     if (U_FAILURE(status)) {
-        mWarning("MIcuBreakIteratorPrivate") << "failed creating iterator:" << u_errorName(status);
+        qWarning() << "failed creating iterator:" << u_errorName(status);
         return;
     }
 
