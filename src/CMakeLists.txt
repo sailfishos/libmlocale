@@ -140,3 +140,14 @@ install(EXPORT mlocale6Targets
     NAMESPACE mlocale6::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/mlocale6
 )
+
+set(target mlocale6)
+configure_file(
+    ${PROJECT_NAME}.pc.in
+    ${PROJECT_NAME}.pc @ONLY
+)
+
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+)
