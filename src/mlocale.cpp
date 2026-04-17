@@ -1747,7 +1747,7 @@ cleanLanguageCountryPosix(QString &localeString)
     QRegularExpression regexp("([a-z]{2,3})(_([A-Z]{2,2}|419))?(?:.(?:[a-zA-Z0-9-]+))?(@([A-Z][a-z]+))?");
     QRegularExpressionMatch match = regexp.match(localeString);
 
-    if (match.hasMatch() && match.lastCapturedIndex() >= 5) {
+    if (match.hasMatch()) {
         QStringList strings;
 
         strings << match.captured(1);
