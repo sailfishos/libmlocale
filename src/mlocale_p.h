@@ -183,8 +183,7 @@ public:
 
     bool _valid;
 
-    // the default locale is used for messages and other categories if not
-    // overridden
+    // the default locale is used for messages and other categories if not overridden
     QString _defaultLocale;
     QString _messageLocale;
     QString _numericLocale;
