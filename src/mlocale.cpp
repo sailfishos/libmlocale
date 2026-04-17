@@ -63,22 +63,18 @@ namespace ML10N {
 
 void MLocale::clearSystemDefault()
 {
-    if ( MLocale::s_systemDefault )
-    {
-        delete MLocale::s_systemDefault;
-        MLocale::s_systemDefault = 0;
-    }
+    delete MLocale::s_systemDefault;
+    MLocale::s_systemDefault = nullptr;
 }
 
 
-static QPointer<QTranslator> s_ltrTranslator = 0;
-static QPointer<QTranslator> s_rtlTranslator = 0;
+static QPointer<QTranslator> s_ltrTranslator = nullptr;
+static QPointer<QTranslator> s_rtlTranslator = nullptr;
 
-static const MLocaleAbstractConfigItemFactory* g_pConfigItemFactory = 0;
+static const MLocaleAbstractConfigItemFactory* g_pConfigItemFactory = nullptr;
 
 namespace
 {
-    const char *const BackupNameFormatString = "%d%t%g%t%m%t%f";
     const QString RtlLanguages("ar:fa:he:ps:ur:");
     const char *const Languages = "Languages";
     const char *const Countries = "Countries";
@@ -128,7 +124,6 @@ static void replacePercentN(QString *result, int n)
 class MTranslationCatalog: public QSharedData
 {
 public:
-
     MTranslationCatalog(const QString &name);
     virtual ~MTranslationCatalog();
 
@@ -211,18 +206,18 @@ bool MTranslationCatalog::loadWith(MLocale *mlocale, MLocale::Category category)
 {
     QStringList localeDirs;
     QString fname;
+
     if (QFileInfo(_name).isRelative()) {
         localeDirs = MLocale::translationPaths();
         fname = _name;
-    }
-    else {
+    } else {
         localeDirs = (QStringList() << QFileInfo(_name).path());
         fname = QFileInfo(_name).fileName();
     }
 
-    const int size = localeDirs.size();
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < localeDirs.size(); ++i) {
         QString prefix = QDir(localeDirs.at(i)).absolutePath();
+
         if (prefix.length() && !prefix.endsWith(QLatin1Char('/')))
             prefix += QLatin1Char('/');
         QString realname;
@@ -304,26 +299,20 @@ bool MLocalePrivate::truncateLocaleName(QString *localeName)
     // so we remove them from the end of the locale string.
 
     int semicolonIndex = localeName->lastIndexOf(';');
-    if (semicolonIndex != -1)
-    {
+    if (semicolonIndex != -1) {
         // found semicolon, remove it and remaining part of string
         localeName->truncate(semicolonIndex);
         return true;
-    }
-    else
-    {
+    } else {
         int atIndex = localeName->lastIndexOf('@');
-        if (atIndex != -1)
-        {
+
+        if (atIndex != -1) {
             // found "@", remove it and remaining part of string
             localeName->truncate(atIndex);
             return true;
-        }
-        else
-        {
+        } else {
             int underscoreIndex = localeName->lastIndexOf('_');
-            if (underscoreIndex != -1)
-            {
+            if (underscoreIndex != -1) {
                 // found "_", remove it and remaining part of string
                 localeName->truncate(underscoreIndex);
                 return true;
@@ -366,12 +355,8 @@ bool MLocalePrivate::isTwelveHours(const QString &icuFormatQString) const
         }
         return false;
     }
-    else {
-        if (icuFormatQString.contains('a'))
-            return true;
-        else
-            return false;
-    }
+
+    return icuFormatQString.contains('a');
 }
 #endif
 
@@ -393,11 +378,11 @@ void MLocalePrivate::dateFormatTo24h(icu::DateFormat *df) const
                 if (c == '\'')
                     isQuoted = !isQuoted;
                 if (!isQuoted) {
-                    if (c == 'h')
+                    if (c == 'h') {
                         tmp.append("H");
-                    else if (c == 'K')
+                    } else if (c == 'K') {
                         tmp.append("k");
-                    else if (c == 'a') {
+                    } else if (c == 'a') {
                         if (tmp.endsWith(' ')) {
                             // remove space before 'a' if character
                             // after 'a' is space as well:
@@ -409,11 +394,10 @@ void MLocalePrivate::dateFormatTo24h(icu::DateFormat *df) const
                             if (i == icuFormatQString.size() - 1)
                                 tmp.remove(tmp.size()-1,1);
                         }
-                    }
-                    else
+                    } else {
                         tmp.append(c);
-                }
-                else {
+                    }
+                } else {
                     tmp.append(c);
                 }
             }
@@ -433,6 +417,7 @@ void MLocalePrivate::dateFormatTo12h(icu::DateFormat *df) const
         QString icuFormatQString;
         static_cast<SimpleDateFormat *>(df)->toPattern(icuFormatString);
         icuFormatQString = MIcuConversions::unicodeStringToQString(icuFormatString);
+
         if (!isTwelveHours(icuFormatQString)) {
             // change unquoted H -> h and k -> K
             // add 'a' at the right position (maybe adding a space as well)
@@ -444,6 +429,7 @@ void MLocalePrivate::dateFormatTo12h(icu::DateFormat *df) const
             if (language.startsWith( QLatin1String("ja"))
                 || language.startsWith( QLatin1String("zh")))
                 writeAmPmMarkerBeforeHours = true;
+
             if (writeAmPmMarkerBeforeHours) {
                 for (int i = 0; i < icuFormatQString.size(); ++i) {
                     QChar c = icuFormatQString[i];
@@ -456,34 +442,31 @@ void MLocalePrivate::dateFormatTo12h(icu::DateFormat *df) const
                                 amPmMarkerWritten = true;
                             }
                             tmp.append("h");
-                        }
-                        else if (c == 'k') {
+                        } else if (c == 'k') {
                             if (!amPmMarkerWritten) {
                                 tmp.append("a");
                                 amPmMarkerWritten = true;
                             }
                             tmp.append("K");
-                        }
-                        else
+                        } else {
                             tmp.append(c);
-                    }
-                    else {
+                        }
+                    } else {
                         tmp.append(c);
                     }
                 }
                 icuFormatQString = tmp;
-            }
-            else {
+            } else {
                 for (int i = 0; i < icuFormatQString.size(); ++i) {
                     QChar c = icuFormatQString[i];
                     if (c == '\'')
                         isQuoted = !isQuoted;
                     if (!isQuoted) {
-                        if (c == 'H')
+                        if (c == 'H') {
                             tmp.append("h");
-                        else if (c == 'k')
+                        } else if (c == 'k') {
                             tmp.append("K");
-                        else if (c == 'z') {
+                        } else if (c == 'z') {
                             if (!amPmMarkerWritten) {
                                 if (!tmp.endsWith(' '))
                                     tmp.append(' ');
@@ -491,11 +474,10 @@ void MLocalePrivate::dateFormatTo12h(icu::DateFormat *df) const
                                 amPmMarkerWritten = true;
                             }
                             tmp.append(c);
-                        }
-                        else
+                        } else {
                             tmp.append(c);
-                    }
-                    else {
+                        }
+                    } else {
                         tmp.append(c);
                     }
                 }
@@ -873,10 +855,10 @@ bool MLocalePrivate::mixingSymbolsWanted(const QString &categoryNameMessages, co
                       || categoryScriptTime == QLatin1String("Hebr"));
     bool messagesIsRtl = (categoryScriptMessages == QLatin1String("Arab")
                           || categoryScriptMessages == QLatin1String("Hebr"));
+
     if (categoryNameTime.contains(QRegularExpression("@.*mix-time-and-language=yes"))) {
         return true;
-    }
-    else if (!categoryNameTime.contains(QRegularExpression("@.*mix-time-and-language=no"))
+    } else if (!categoryNameTime.contains(QRegularExpression("@.*mix-time-and-language=no"))
        && languageMessages != languageTime
        && languageMessages != "zh"
        && languageMessages != "ja"
@@ -907,9 +889,8 @@ bool MLocalePrivate::mixingSymbolsWanted(const QString &categoryNameMessages, co
         // https://projects.maemo.org/bugzilla/show_bug.cgi?id=270020)
         return true;
     }
-    else {
-        return false;
-    }
+
+    return false;
 }
 #endif
 
@@ -930,6 +911,7 @@ icu::DateFormat *MLocalePrivate::createDateFormat(MLocale::DateType dateType,
         .arg(categoryNameTime)
         .arg(categoryNameNumeric)
         .arg(categoryNameMessages);
+
     if (_dateFormatCache.contains(key))
         return _dateFormatCache.object(key);
     categoryNameTime = fixCategoryNameForNumbers(
@@ -939,29 +921,26 @@ icu::DateFormat *MLocalePrivate::createDateFormat(MLocale::DateType dateType,
     icu::Locale calLocale = icu::Locale(qPrintable(categoryNameTime));
     icu::DateFormat::EStyle dateStyle;
     icu::DateFormat::EStyle timeStyle;
+
     if (dateType == MLocale::DateYearAndMonth
         || dateType == MLocale::DateWeekdayAbbreviatedAndDayOfMonth
         || dateType == MLocale::DateWeekdayWideAndDayOfMonth) {
         // doesn’t matter really will be customized anyway
         dateStyle = MIcuConversions::toEStyle(MLocale::DateFull);
         timeStyle = MIcuConversions::toEStyle(MLocale::TimeNone);
-    }
-    else {
+    } else {
         dateStyle = MIcuConversions::toEStyle(dateType);
         timeStyle = MIcuConversions::toEStyle(timeType);
     }
-    icu::DateFormat *df
-        = icu::DateFormat::createDateTimeInstance(dateStyle, timeStyle, calLocale);
+
+    icu::DateFormat *df = icu::DateFormat::createDateTimeInstance(dateStyle, timeStyle, calLocale);
     if (dateType == MLocale::DateYearAndMonth) {
         MLocalePrivate::dateFormatToYearAndMonth(df);
-    }
-    else if (dateType == MLocale::DateWeekdayAbbreviatedAndDayOfMonth) {
+    } else if (dateType == MLocale::DateWeekdayAbbreviatedAndDayOfMonth) {
         MLocalePrivate::dateFormatToWeekdayAbbreviatedAndDayOfMonth(df);
-    }
-    else if (dateType == MLocale::DateWeekdayWideAndDayOfMonth) {
+    } else if (dateType == MLocale::DateWeekdayWideAndDayOfMonth) {
         MLocalePrivate::dateFormatToWeekdayWideAndDayOfMonth(df);
-    }
-    else if (timeType != MLocale::TimeNone) {
+    } else if (timeType != MLocale::TimeNone) {
         switch (timeFormat24h) {
         case(MLocale::TwelveHourTimeFormat24h):
             MLocalePrivate::dateFormatTo12h(df);
@@ -1059,24 +1038,24 @@ MLocalePrivate::MLocalePrivate(const MLocalePrivate &other)
       _timeTranslations(other._timeTranslations),
       _trTranslations(other._trTranslations),
 
-      pCurrentLanguage(0),
-      pCurrentLcTime(0),
-      pCurrentLcTimeFormat24h(0),
-      pCurrentLcCollate(0),
-      pCurrentLcNumeric(0),
-      pCurrentLcMonetary(0),
-      pCurrentLcTelephone(0),
+      pCurrentLanguage(nullptr),
+      pCurrentLcTime(nullptr),
+      pCurrentLcTimeFormat24h(nullptr),
+      pCurrentLcCollate(nullptr),
+      pCurrentLcNumeric(nullptr),
+      pCurrentLcMonetary(nullptr),
+      pCurrentLcTelephone(nullptr),
 
 #ifdef HAVE_ICU
-      _pDateTimeCalendar(0),
+      _pDateTimeCalendar(nullptr),
 #endif
-      q_ptr(0)
+      q_ptr(nullptr)
 {
 #ifdef HAVE_ICU
-    if (other._numberFormat != 0) {
+    if (other._numberFormat != nullptr) {
         _numberFormat = static_cast<icu::NumberFormat *>((other._numberFormat)->clone());
     }
-    if (other._numberFormatLcTime != 0) {
+    if (other._numberFormatLcTime != nullptr) {
         _numberFormatLcTime = static_cast<icu::NumberFormat *>((other._numberFormatLcTime)->clone());
     }
 #endif
@@ -1091,7 +1070,7 @@ MLocalePrivate::~MLocalePrivate()
     // deleting the QTranslator removes them from the QCoreApplication
 
     delete _pDateTimeCalendar;
-    _pDateTimeCalendar = 0;
+    _pDateTimeCalendar = nullptr;
 #endif
 
     delete pCurrentLanguage;
@@ -1126,15 +1105,14 @@ MLocalePrivate &MLocalePrivate::operator=(const MLocalePrivate &other)
 
     if (other._numberFormat) {
         _numberFormat = static_cast<icu::NumberFormat *>((other._numberFormat)->clone());
-
     } else {
-        _numberFormat = 0;
+        _numberFormat = nullptr;
     }
+
     if (other._numberFormatLcTime) {
         _numberFormatLcTime = static_cast<icu::NumberFormat *>((other._numberFormatLcTime)->clone());
-
     } else {
-        _numberFormatLcTime = 0;
+        _numberFormatLcTime = nullptr;
     }
 #endif
 
@@ -1144,15 +1122,11 @@ MLocalePrivate &MLocalePrivate::operator=(const MLocalePrivate &other)
 void MLocalePrivate::dropCaches()
 {
 #ifdef HAVE_ICU
-    // call this function when the MLocale has changed so that
-    // cached data cannot be used any more
+    // call this function when the MLocale has changed so that cached data cannot be used any more
 
     // delete MCalendar instance for this MLocale
-    if ( _pDateTimeCalendar )
-    {
-        delete _pDateTimeCalendar;
-        _pDateTimeCalendar = 0;
-    }
+    delete _pDateTimeCalendar;
+    _pDateTimeCalendar = nullptr;
 
     // drop cached formatString conversions
     _icuFormatStringCache.clear();
@@ -1487,16 +1461,16 @@ void MLocalePrivate::removeTrFromQCoreApp()
 
 void MLocalePrivate::insertDirectionTrToQCoreApp()
 {
-    if (s_rtlTranslator == 0) {
+    if (s_rtlTranslator == nullptr) {
         s_rtlTranslator = new QTranslator( QCoreApplication::instance() );
         bool ok = s_rtlTranslator->load(":/libmeegotouch_rtl.qm");
-	Q_UNUSED(ok);
+        Q_UNUSED(ok);
         Q_ASSERT(ok);
     }
-    if (s_ltrTranslator == 0) {
+    if (s_ltrTranslator == nullptr) {
         s_ltrTranslator = new QTranslator( QCoreApplication::instance() );
         bool ok = s_ltrTranslator->load(":/libmeegotouch_ltr.qm");
-	Q_UNUSED(ok);
+        Q_UNUSED(ok);
         Q_ASSERT(ok);
     }
 
@@ -1535,7 +1509,7 @@ QLocale MLocalePrivate::createQLocale(MLocale::Category category) const
     QString numberOption;
 #endif
 
-    switch(category) {
+    switch (category) {
     case(MLocale::MLcNumeric):
     case(MLocale::MLcTime):
     case(MLocale::MLcMonetary):
@@ -1639,7 +1613,8 @@ void MLocalePrivate::setCategoryLocale(MLocale *mlocale,
     }
 }
 
-bool MLocalePrivate::parseIcuLocaleString(const QString &localeString, QString *language, QString *script, QString *country, QString *variant)
+bool MLocalePrivate::parseIcuLocaleString(const QString &localeString, QString *language, QString *script,
+                                          QString *country, QString *variant)
 {
     // A ICU locale string looks like this:
     //     aa_Bbbb_CC_DDDDDD@foo=fooval;bar=barval;
@@ -1657,13 +1632,12 @@ bool MLocalePrivate::parseIcuLocaleString(const QString &localeString, QString *
         *variant  = match.captured(4);
         return true;
     }
-    else {
-        *language = "";
-        *script = "";
-        *country = "";
-        *variant= "";
-        return false;
-    }
+
+    *language = "";
+    *script = "";
+    *country = "";
+    *variant= "";
+    return false;
 }
 
 QString MLocalePrivate::parseLanguage(const QString &localeString)
@@ -1699,12 +1673,14 @@ QString MLocalePrivate::removeAccents(const QString &str)
     QString result;
     for (int i = 0; i < str.size(); ++i) {
         QString decomposition = str[i].decomposition();
-        if (decomposition == "")
+        if (decomposition == "") {
             result += str[i];
-        else
-            for (int j = 0; j < decomposition.size(); ++j)
+        } else {
+            for (int j = 0; j < decomposition.size(); ++j) {
                 if (!decomposition[j].isMark())
                     result += decomposition[j];
+            }
+        }
     }
     return result;
 }
@@ -1732,8 +1708,7 @@ namespace
 // language is usually lower case in Linux but according to the above specification
 // it may start with uppercase as well (i.e. LANG=Fr_FR is allowed).
 //
-static QString
-cleanLanguageCountryPosix(QString &localeString)
+static QString cleanLanguageCountryPosix(QString &localeString)
 {
     // we do not need the encoding and therefore use non-capturing
     // parentheses for the encoding part here.
@@ -1762,25 +1737,20 @@ cleanLanguageCountryPosix(QString &localeString)
         // we don't need variant
         return strings.join("_");
     } else {
-        //Malformed locale code
+        // Malformed locale code
         return QString(PosixStr);
     }
 }
 
 void MLocale::setConfigItemFactory( const MLocaleAbstractConfigItemFactory* factory )
 {
-  if ( g_pConfigItemFactory )
-    {
-      delete g_pConfigItemFactory;
-    }
-
-  g_pConfigItemFactory = factory;
+    delete g_pConfigItemFactory;
+    g_pConfigItemFactory = factory;
 }
 
 const MLocaleAbstractConfigItemFactory * MLocale::configItemFactory()
 {
-    if ( ! g_pConfigItemFactory )
-    {
+    if (!g_pConfigItemFactory) {
         g_pConfigItemFactory = new MLocaleNullConfigItemFactory;
     }
 
@@ -1918,8 +1888,7 @@ MLocale MLocale::createCLocale()
     return MLocale(PosixStr);
 }
 
-void
-MLocale::connectSettings()
+void MLocale::connectSettings()
 {
     Q_D(MLocale);
 
@@ -1956,8 +1925,7 @@ MLocale::connectSettings()
                      this, SLOT(refreshSettings()));
 }
 
-void
-MLocale::disconnectSettings()
+void MLocale::disconnectSettings()
 {
     Q_D(MLocale);
 
@@ -2044,13 +2012,13 @@ MLocale::~MLocale()
 {
     // do not delete the d_ptr of s_systemDefault unless we are s_systemDefault
     if (d_ptr) {
-        if (s_systemDefault == 0) {
+        if (s_systemDefault == nullptr) {
             delete d_ptr;
         } else if (d_ptr != s_systemDefault->d_ptr) {
             delete d_ptr;
         } else if (this == s_systemDefault) {
             delete d_ptr;
-            s_systemDefault = 0;
+            s_systemDefault = nullptr;
         }
     }
 }
@@ -2076,15 +2044,19 @@ MLocale &MLocale::operator=(const MLocale &other)
 static QMutex defaultLocaleMutex;
 
 // The static default locale
-MLocale *MLocale::s_systemDefault = 0;
+MLocale *MLocale::s_systemDefault = nullptr;
 
 static Qt::LayoutDirection _defaultLayoutDirection = Qt::LeftToRight;
 
-struct MStaticLocaleDestroyer {
-    ~MStaticLocaleDestroyer() {
-        delete MLocale::s_systemDefault; MLocale::s_systemDefault = 0;
+struct MStaticLocaleDestroyer
+{
+    ~MStaticLocaleDestroyer()
+    {
+        delete MLocale::s_systemDefault;
+        MLocale::s_systemDefault = nullptr;
     }
 };
+
 static MStaticLocaleDestroyer staticLocaleDestroyer;
 
 static void setApplicationLayoutDirection(Qt::LayoutDirection layoutDirection)
@@ -2101,7 +2073,7 @@ void MLocale::setDefault(const MLocale &locale)
 {
     defaultLocaleMutex.lock();
 
-    if (s_systemDefault == 0) {
+    if (s_systemDefault == nullptr) {
         s_systemDefault = new MLocale(locale);
     } else if (&locale == s_systemDefault || locale.d_ptr == s_systemDefault->d_ptr) {
         defaultLocaleMutex.unlock();
@@ -2156,13 +2128,13 @@ void MLocale::setDefault(const MLocale &locale)
 
 MLocale &MLocale::getDefault()
 {
-    if (s_systemDefault == 0) {
+    if (s_systemDefault == nullptr) {
         // no default created, do it now
 
         // avoid race condition for multiple getDefaults()
         defaultLocaleMutex.lock();
 
-        if (s_systemDefault == 0) {
+        if (s_systemDefault == nullptr) {
             // we won the race
             s_systemDefault = createSystemMLocale();
             s_systemDefault->connectSettings();
@@ -2194,11 +2166,9 @@ void MLocale::setCollation(Collation collation)
     d->dropCaches();
 #ifdef HAVE_ICU
     if (!d->_collationLocale.isEmpty())
-        d->_collationLocale =
-            MIcuConversions::setCollationOption(d->_collationLocale, collation);
+        d->_collationLocale = MIcuConversions::setCollationOption(d->_collationLocale, collation);
     else
-        d->_defaultLocale =
-            MIcuConversions::setCollationOption(d->_defaultLocale, collation);
+        d->_defaultLocale = MIcuConversions::setCollationOption(d->_defaultLocale, collation);
 #else
     Q_UNUSED(collation);
 #endif
@@ -2219,11 +2189,9 @@ void MLocale::setCalendarType(CalendarType calendarType)
     d->dropCaches();
 #ifdef HAVE_ICU
     if (!d->_calendarLocale.isEmpty())
-        d->_calendarLocale =
-            MIcuConversions::setCalendarOption(d->_calendarLocale, calendarType);
+        d->_calendarLocale = MIcuConversions::setCalendarOption(d->_calendarLocale, calendarType);
     else
-        d->_defaultLocale =
-            MIcuConversions::setCalendarOption(d->_defaultLocale, calendarType);
+        d->_defaultLocale = MIcuConversions::setCalendarOption(d->_defaultLocale, calendarType);
 #else
     Q_UNUSED(calendarType);
 #endif
@@ -2260,6 +2228,7 @@ MLocale::TimeFormat24h MLocale::defaultTimeFormat24h() const
         = d->icuFormatString(MLocale::DateNone, MLocale::TimeShort,
                              calendarType(),
                              MLocale::LocaleDefaultTimeFormat24h);
+
     if (d->isTwelveHours(defaultTimeShortFormat))
         return MLocale::TwelveHourTimeFormat24h;
     else
@@ -2380,7 +2349,7 @@ QString MLocale::formatNumber(qlonglong i) const
 qlonglong MLocale::toLongLong(const QString &s, bool *ok) const
 {
     if (s.length() == 0) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (int(0));
     }
@@ -2392,30 +2361,29 @@ qlonglong MLocale::toLongLong(const QString &s, bool *ok) const
     icu::Formattable formattable;
     icu::ParsePosition parsePosition;
     qint64 result;
-    icu::DecimalFormat *decimalFormat
-        = static_cast<icu::DecimalFormat *>(d->_numberFormat);
+    icu::DecimalFormat *decimalFormat = static_cast<icu::DecimalFormat *>(d->_numberFormat);
+
     if (!decimalFormat->isParseIntegerOnly()) {
         decimalFormat->setParseIntegerOnly(true);
         decimalFormat->parse(str, formattable, parsePosition);
         decimalFormat->setParseIntegerOnly(false);
-    }
-    else
+    } else {
         decimalFormat->parse(str, formattable, parsePosition);
+    }
+
     if (parsePosition.getIndex() < str.length()) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (qlonglong(0));
-    }
-    else {
+    } else {
         UErrorCode status = U_ZERO_ERROR;
         result = formattable.getInt64(status);
         if (!U_SUCCESS(status)) {
-            if (ok != NULL)
+            if (ok)
                 *ok = false;
             return (qlonglong(0));
-        }
-        else {
-            if (ok != NULL)
+        } else {
+            if (ok)
                 *ok = true;
             return (qlonglong(result));
         }
@@ -2444,7 +2412,7 @@ QString MLocale::formatNumber(short i) const
 short MLocale::toShort(const QString &s, bool *ok) const
 {
     if (s.length() == 0) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (int(0));
     }
@@ -2462,30 +2430,28 @@ short MLocale::toShort(const QString &s, bool *ok) const
         decimalFormat->setParseIntegerOnly(true);
         decimalFormat->parse(str, formattable, parsePosition);
         decimalFormat->setParseIntegerOnly(false);
-    }
-    else
+    } else {
         decimalFormat->parse(str, formattable, parsePosition);
+    }
+
     if (parsePosition.getIndex() < str.length()) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (short(0));
-    }
-    else {
+    } else {
         UErrorCode status = U_ZERO_ERROR;
         result = formattable.getInt64(status);
         if (!U_SUCCESS(status)) {
-            if (ok != NULL)
+            if (ok)
                 *ok = false;
             return (short(0));
-        }
-        else {
+        } else {
             if (result < SHRT_MIN || result > SHRT_MAX) {
-                if (ok != NULL)
+                if (ok)
                     *ok = false;
                 return (short(0));
-            }
-            else {
-                if (ok != NULL)
+            } else {
+                if (ok)
                     *ok = true;
                 return (short(result));
             }
@@ -2515,7 +2481,7 @@ QString MLocale::formatNumber(int i) const
 int MLocale::toInt(const QString &s, bool *ok) const
 {
     if (s.length() == 0) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (int(0));
     }
@@ -2533,30 +2499,28 @@ int MLocale::toInt(const QString &s, bool *ok) const
         decimalFormat->setParseIntegerOnly(true);
         decimalFormat->parse(str, formattable, parsePosition);
         decimalFormat->setParseIntegerOnly(false);
-    }
-    else
+    } else {
         decimalFormat->parse(str, formattable, parsePosition);
+    }
+
     if (parsePosition.getIndex() < str.length()) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (int(0));
-    }
-    else {
+    } else {
         UErrorCode status = U_ZERO_ERROR;
         result = formattable.getInt64(status);
         if (!U_SUCCESS(status)) {
-            if (ok != NULL)
+            if (ok)
                 *ok = false;
             return (int(0));
-        }
-        else {
+        } else {
             if (result < INT_MIN || result > INT_MAX) {
-                if (ok != NULL)
+                if (ok)
                     *ok = false;
                 return (int(0));
-            }
-            else {
-                if (ok != NULL)
+            } else {
+                if (ok)
                     *ok = true;
                 return (int(result));
             }
@@ -2614,7 +2578,7 @@ QString MLocale::formatNumber(double i, int maxPrecision, int minPrecision) cons
 double MLocale::toDouble(const QString &s, bool *ok) const
 {
     if (s.length() == 0) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (int(0));
     }
@@ -2638,28 +2602,28 @@ double MLocale::toDouble(const QString &s, bool *ok) const
     icu::Formattable formattable;
     icu::ParsePosition parsePosition;
     double result;
+
     if (decimalFormat->isParseIntegerOnly()) {
         decimalFormat->setParseIntegerOnly(false);
         decimalFormat->parse(str, formattable, parsePosition);
         decimalFormat->setParseIntegerOnly(true);
-    }
-    else
+    } else {
         decimalFormat->parse(str, formattable, parsePosition);
+    }
+
     if (parsePosition.getIndex() < str.length()) {
-        if (ok != NULL)
+        if (ok )
             *ok = false;
         return (double(0.0));
-    }
-    else {
+    } else {
         UErrorCode status = U_ZERO_ERROR;
         result = formattable.getDouble(status);
         if (!U_SUCCESS(status)) {
-            if (ok != NULL)
+            if (ok)
                 *ok = false;
             return (double(0.0));
-        }
-        else {
-            if (ok != NULL)
+        } else {
+            if (ok)
                 *ok = true;
             return (result);
         }
@@ -2689,7 +2653,7 @@ QString MLocale::formatNumber(float i) const
 float MLocale::toFloat(const QString &s, bool *ok) const
 {
     if (s.length() == 0) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (int(0));
     }
@@ -2713,34 +2677,33 @@ float MLocale::toFloat(const QString &s, bool *ok) const
     icu::Formattable formattable;
     icu::ParsePosition parsePosition;
     double result;
+
     if (decimalFormat->isParseIntegerOnly()) {
         decimalFormat->setParseIntegerOnly(false);
         decimalFormat->parse(str, formattable, parsePosition);
         decimalFormat->setParseIntegerOnly(true);
-    }
-    else
+    } else {
         decimalFormat->parse(str, formattable, parsePosition);
+    }
+
     if (parsePosition.getIndex() < str.length()) {
-        if (ok != NULL)
+        if (ok)
             *ok = false;
         return (float(0.0));
-    }
-    else {
+    } else {
         UErrorCode status = U_ZERO_ERROR;
         result = formattable.getDouble(status);
         if (!U_SUCCESS(status)) {
-            if (ok != NULL)
+            if (ok)
                 *ok = false;
             return (float(0.0));
-        }
-        else {
+        } else {
             if (qAbs(result) > FLT_MAX) {
-                if (ok != NULL)
+                if (ok)
                     *ok = false;
                 return (float(0.0));
-            }
-            else {
-                if (ok != NULL)
+            } else {
+                if (ok)
                     *ok = true;
                 return (float(result));
             }
@@ -2779,9 +2742,9 @@ void MLocalePrivate::swapPostAndPrefixOfFormattedNumber(QString *formattedNumber
             while (i < newPostfix.size() && (newPostfix.at(i).isLetter() || newPostfix.at(i).isPunct()))
                 ++i;
             newPostfix.insert(i, formattedNumber->at(0));
-        }
-        else
+        } else {
             newPostfix.prepend(formattedNumber->at(0));
+        }
         formattedNumber->remove(0,1);
     }
     while (!formattedNumber->isEmpty()
@@ -2792,9 +2755,9 @@ void MLocalePrivate::swapPostAndPrefixOfFormattedNumber(QString *formattedNumber
             while (i > 0 && (newPrefix.at(i-1).isLetter() || newPrefix.at(i-1).isPunct()))
                 --i;
             newPrefix.insert(i, formattedNumber->right(1).at(0));
-        }
-        else
+        } else {
             newPrefix.append(formattedNumber->right(1).at(0));
+        }
         formattedNumber->remove(formattedNumber->size()-1,1);
     }
     formattedNumber->prepend(newPrefix);
@@ -2990,8 +2953,7 @@ QString MLocale::formatDateTime(const QDateTime &dateTime,
 
     // convert QDateTime to MCalendar and format
 
-    if ( ! d->_pDateTimeCalendar )
-    {
+    if (!d->_pDateTimeCalendar) {
         const_cast<MLocalePrivate *>(d)->_pDateTimeCalendar = new MCalendar( *this );
     }
 
@@ -3012,8 +2974,7 @@ QString MLocale::formatDateTimeICU(const QDateTime &dateTime,
 
     // convert QDateTime to MCalendar and format
 
-    if ( ! d->_pDateTimeCalendar )
-    {
+    if (!d->_pDateTimeCalendar) {
         const_cast<MLocalePrivate *>(d)->_pDateTimeCalendar = new MCalendar( *this );
     }
 
@@ -3038,11 +2999,13 @@ QString MLocale::formatDateTimeICU(const MCalendar &mCalendar,
         .arg(categoryNameTime)
         .arg(categoryNameNumeric)
         .arg(categoryNameMessages);
+
     categoryNameTime = d->fixCategoryNameForNumbers(
         MIcuConversions::setCalendarOption(categoryNameTime, mCalendar.type()));
     categoryNameMessages = d->fixCategoryNameForNumbers(
         MIcuConversions::setCalendarOption(categoryNameMessages, mCalendar.type()));
     icu::SimpleDateFormat *formatter;
+
     if (d->_simpleDateFormatCache.contains(key)) {
         formatter = d->_simpleDateFormatCache.object(key);
     } else {
@@ -3050,21 +3013,23 @@ QString MLocale::formatDateTimeICU(const MCalendar &mCalendar,
         formatter = new icu::SimpleDateFormat(
             MIcuConversions::qStringToUnicodeString(formatString),
             icu::Locale(qPrintable(categoryNameTime)), status);
+
         if (U_FAILURE(status)) {
-            qWarning() << "icu::SimpleDateFormat() failed with error"
-                       << u_errorName(status);
-            formatter = NULL;
+            qWarning() << "icu::SimpleDateFormat() failed with error" << u_errorName(status);
+            formatter = nullptr;
         }
+
         if (formatter && d->mixingSymbolsWanted(categoryNameMessages, categoryNameTime)) {
             // mixing in symbols like month name and weekday name from the message locale
             DateFormatSymbols *dfs =
                 MLocalePrivate::createDateFormatSymbols(
                     icu::Locale(qPrintable(categoryNameMessages)));
             formatter->adoptDateFormatSymbols(dfs);
-         }
+        }
         if (formatter)
             d->_simpleDateFormatCache.insert(key, formatter);
     }
+
     if (!formatter) {
         return QString();
     } else {
@@ -3121,8 +3086,7 @@ QString MLocale::formatDateTime(const MCalendar &mCalendar,
 
     QString icuFormat;
 
-    if ( ! d->_icuFormatStringCache.contains( formatString ) )
-    {
+    if (!d->_icuFormatStringCache.contains( formatString)) {
         // determine if we can cache this format string, or if
         // we have to add something to it that is a part of a date or time.
         bool canCacheIcuFormat = true;
@@ -3145,7 +3109,6 @@ QString MLocale::formatDateTime(const MCalendar &mCalendar,
                 }
 
                 switch (next.unicode()) {
-
                     case 'a':
                         // abbreviated weekday name
                         icuFormat.append("ccc");
@@ -3458,15 +3421,12 @@ QString MLocale::formatDateTime(const MCalendar &mCalendar,
 
         // save formatString -> icuFormat pair for future use,
         // if it does not contain content from the input date or time
-        if ( canCacheIcuFormat )
-        {
+        if (canCacheIcuFormat) {
             QString* value = new QString( icuFormat );
 
             d->_icuFormatStringCache.insert( formatString, value );
         }
-    }
-    else
-    {
+    } else {
         // formatString does exist in hash
         icuFormat = *d->_icuFormatStringCache[ formatString ];
     }
@@ -3591,16 +3551,12 @@ QString MLocale::weekdayName(const MCalendar &mCalendar, int weekday,
     QString categoryName = d->categoryName(MLcTime);
     if (d->mixingSymbolsWanted(categoryNameMessages, categoryName))
         categoryName = categoryNameMessages;
+
     categoryName = MIcuConversions::setCalendarOption(categoryName, mCalendar.type());
     icu::Locale symbolLocale = icu::Locale(qPrintable(categoryName));
-
     icu::DateFormatSymbols *dfs = MLocalePrivate::createDateFormatSymbols(symbolLocale);
-
-    icu::DateFormatSymbols::DtContextType icuContext
-    = MIcuConversions::mDateContextToIcu(context);
-
-    icu::DateFormatSymbols::DtWidthType icuWidth
-    = MIcuConversions::mDateWidthToIcu(symbolLength);
+    icu::DateFormatSymbols::DtContextType icuContext = MIcuConversions::mDateContextToIcu(context);
+    icu::DateFormatSymbols::DtWidthType icuWidth = MIcuConversions::mDateWidthToIcu(symbolLength);
 
     int len = -1;
     const UnicodeString *weekdayNames = dfs->getWeekdays(len, icuContext, icuWidth);
@@ -3680,8 +3636,7 @@ QString MLocale::countryEndonym() const
 QString MLocalePrivate::numberingSystem(const QString &localeName) const
 {
 #ifdef HAVE_ICU
-    QString numberingSystem
-        = MIcuConversions::parseOption(localeName, "numbers");
+    QString numberingSystem = MIcuConversions::parseOption(localeName, "numbers");
     // if the numbers option is there in the locale name, trust it
     // and return it, don’t test whether the requested numbering
     // system actually exists for this locale:
@@ -3921,12 +3876,11 @@ QStringList MLocale::exemplarCharactersIndex() const
     charStr.remove(']');
     charStr.remove('{');
     charStr.remove('}');
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    exemplarCharactersIndex = charStr.split(QLatin1String(" "),
-                                            Qt::SkipEmptyParts);
+    exemplarCharactersIndex = charStr.split(QLatin1String(" "), Qt::SkipEmptyParts);
 #else
-    exemplarCharactersIndex = charStr.split(QLatin1String(" "),
-                                            QString::SkipEmptyParts);
+    exemplarCharactersIndex = charStr.split(QLatin1String(" "), QString::SkipEmptyParts);
 #endif
 
     // Special hack for the last Japanese bucket:
@@ -3941,8 +3895,7 @@ QStringList MLocale::exemplarCharactersIndex() const
     if (exemplarCharactersIndex.last() == QString::fromUtf8("Z") &&
         (collationLocaleName.contains(QLatin1String("collation=pinyin"))
          || collationLocaleName.startsWith(QLatin1String("zh_CN"))
-         || collationLocaleName.startsWith(QLatin1String("zh_SG")))
-        ) {
+         || collationLocaleName.startsWith(QLatin1String("zh_SG")))) {
         charStr = QString::fromUtf8("ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ ｉ ｊ ｋ ｌ ｍ ｎ ｏ ｐ ｑ ｒ ｓ ｔ ｕ ｖ ｗ ｘ ｙ ｚ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z");
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
         return charStr.split(QLatin1String(" "), Qt::SkipEmptyParts);
@@ -4108,7 +4061,6 @@ void MLocale::copyCatalogsFrom(const MLocale &other)
         d->_trTranslations.append(QExplicitlySharedDataPointer<MTranslationCatalog>(tempCatalog));
 
     }
-
 }
 
 void MLocale::installTrCatalog(const QString &name)
@@ -4147,9 +4099,9 @@ void MLocale::removeTrCatalog(const QString &name)
             // object if the reference count became 0:
             (*it).reset();
             it = d->_trTranslations.erase(it);
-        }
-        else
+        } else {
             ++it;
+        }
     }
 }
 
@@ -4499,7 +4451,7 @@ Qt::LayoutDirection MLocale::directionForText(const QString & text)
 
     for ( QString::const_iterator it = text.constBegin(); it != textEnd; ++it ) {
         // Taken from qtextobject.cpp
-        switch(QChar::direction(it->unicode()))
+        switch (QChar::direction(it->unicode()))
         {
             case QChar::DirL:
                 return Qt::LeftToRight;
@@ -4747,14 +4699,13 @@ QString groupedInternationalString( const QString& phoneNumber )
     }
 }
 
-QString MLocalePrivate::formatPhoneNumber( const QString& phoneNumber,
-    MLocale::PhoneNumberGrouping grouping ) const
+QString MLocalePrivate::formatPhoneNumber(const QString& phoneNumber,
+                                          MLocale::PhoneNumberGrouping grouping) const
 {
     // first do sanity check of the input string
-    QRegularExpression rx( "^\\+?\\d*$" );
+    QRegularExpression rx("^\\+?\\d*$");
     if (!rx.match( phoneNumber ).hasMatch()) {
-        qWarning( "MLocale::formatPhoneNumber: cannot understand number: %s",
-                 qPrintable( phoneNumber ) );
+        qWarning("MLocale::formatPhoneNumber: cannot understand number: %s", qPrintable(phoneNumber));
         return phoneNumber;
     }
 
